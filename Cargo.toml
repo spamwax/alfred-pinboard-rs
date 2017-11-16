@@ -1,0 +1,8 @@
+[package]
+name = "alfred-pinboard-rs"
+version = "0.1.0"
+authors = ["Hamid Ghadyani <hamid@hamid.cc>"]
+
+[dependencies]
+rusty-pin = { git = "ssh://git@git.hamid.cc:22/rust/rusty-pin.git", branch = "lib" }
+alfred = "4.0.1"
