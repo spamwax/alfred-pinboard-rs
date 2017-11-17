@@ -517,7 +517,7 @@ dependencies = [
 [[package]]
 name = "rusty-pin"
 version = "0.1.0"
-source = "git+ssh://git@git.hamid.cc:22/rust/rusty-pin.git?branch=lib#4259a196b5f139480d858fb8362177cb7bc25d3b"
+source = "git+ssh://git@git.hamid.cc:22/rust/rusty-pin.git?branch=lib#d660ce584563872e0f2554a6f61cc111855aff06"
 dependencies = [
  "chrono 0.4.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "reqwest 0.8.1 (registry+https://github.com/rust-lang/crates.io-index)",

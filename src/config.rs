@@ -2,12 +2,12 @@ use std::path::{PathBuf, Path};
 
 use serde_json;
 
-#[derive(Default,Debug,Serialize,Deserialize)]
+#[derive(Default, Debug, Serialize, Deserialize)]
 pub struct Config {
-//    /// Folder to store volatile data of the workflow
-//    workflow_cache_dir: PathBuf,
-//    /// Folder to store data of the workflow
-//    workflow_data_dir: PathBuf,
+    //    /// Folder to store volatile data of the workflow
+    //    workflow_cache_dir: PathBuf,
+    //    /// Folder to store data of the workflow
+    //    workflow_data_dir: PathBuf,
     /// Which version of Alfred we are being executed under
     alfred_version: String,
     /// Number of bookmarks to show in Alfred
@@ -36,5 +36,4 @@ impl Config {
     pub fn read_from<P: AsRef<Path>>(&mut self, p: P) -> Result<Config, String> {
         Ok(Config::new())
     }
-
 }
