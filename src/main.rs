@@ -18,6 +18,7 @@ mod config;
 
 use config::Config;
 
+//TODO: Use 'semver' crate to compare Alfred's version
 fn main() {
     let mut cache_dir = alfred::env::workflow_cache().unwrap_or_else(|| {
         let mut dir = env::home_dir().unwrap_or(PathBuf::from(""));
