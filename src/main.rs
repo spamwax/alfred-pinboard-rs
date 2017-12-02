@@ -24,13 +24,24 @@ use rustypin::pinboard;
 mod config;
 mod commands;
 
-use commands::Commands;
+use commands::{Opt, SubCommand};
 use config::Config;
 
 
 //TODO: Use 'semver' crate to compare Alfred's version
 fn main() {
-    let opt = Commands::from_args();
+
+    let config = setup().unwrap_or_else(|err| {
+        eprintln!("Problem parsing arguments: {}", err);
+        process::exit(1);
+    });
+
+    println!("{:?}", config);
+}
+
+fn setup() -> Result<Config, String> {
+
+    let opt = Opt::from_args();
     println!("{:?}", opt);
 
     let mut cache_dir = alfred::env::workflow_cache().unwrap_or_else(|| {
@@ -48,10 +59,5 @@ fn main() {
     println!("{:?}", cache_dir);
     data_dir.push("settings.json");
 
-    let mut config = Config::new().read_from(data_dir);
-    if let Err(_) = config {
-        process::exit(1);
-    } else {
-        println!("{:?}", config);
-    }
+    Config::new().read_from(data_dir)
 }

@@ -3,15 +3,15 @@ use structopt::StructOpt;
 #[derive(StructOpt, Debug)]
 #[structopt(name = "alfred-pinboard")]
 /// the stupid content tracker
-pub struct Commands {
+pub struct Opt {
     #[structopt(name = "debug", default_value = "1", required = false, long = "debug")]
-    debug_level: i8,
+    pub debug_level: i8,
     #[structopt(subcommand)]
-    cmd: Command,
+    pub cmd: SubCommand,
 }
 
 #[derive(StructOpt, Debug)]
-enum Command {
+pub enum SubCommand {
     #[structopt(name = "config")]
     /// Configure options and settings of interacting with API and searching items.
     Config {
@@ -29,20 +29,20 @@ enum Command {
         #[structopt(long = "tag-numbers", short = "l")]
         number_tags: Option<u8>,
         /// By default, make all new bookmarks public/shared.
-        #[structopt(name = "shared", short = "s", long = "shared")]
-        shared: bool,
+        #[structopt(name = "shared", short = "s", long = "shared", possible_values_raw = "&[\"true\", \"false\"]")]
+        shared: Option<bool>,
         /// When searching tags/bookmarks, enable 'fuzzy' searching. (similar to `selecta`)
-        #[structopt(name = "fuzzy", short = "f", long = "fuzzy")]
-        fuzzy: bool,
+        #[structopt(name = "fuzzy", short = "f", long = "fuzzy", possible_values_raw = "&[\"true\", \"false\"]")]
+        fuzzy: Option<bool>,
         /// When searching, only look up query in 'tag' field of bookmarks.
-        #[structopt(name = "tags-only", short = "t", long = "tags-only")]
-        tags_only: bool,
+        #[structopt(name = "tags_only", short = "t", long = "tags-only", possible_values_raw = "&[\"true\", \"false\"]")]
+        tags_only: Option<bool>,
         /// After posting a bookmark to Pinboard, update the local cache files.
-        #[structopt(name = "auto-update", short = "u", long = "auto-update")]
-        auto_update: bool,
+        #[structopt(name = "auto-update", short = "u", long = "auto-update", possible_values_raw = "&[\"true\", \"false\"]")]
+        auto_update: Option<bool>,
         /// When posting a new bookmark, show 3 popular tags for the URL (if available).
-        #[structopt(name = "suggest_tags", short = "o", long = "suggest-tags")]
-        suggest_tags: bool,
+        #[structopt(name = "suggest_tags", short = "o", long = "suggest-tags", possible_values_raw = "&[\"true\", \"false\"]")]
+        suggest_tags: Option<bool>,
     },
 //    #[structopt(name = "sparkle")]
 //    /// Add magical sparkles -- the secret ingredient!
