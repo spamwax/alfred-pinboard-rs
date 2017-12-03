@@ -44,7 +44,7 @@ fn setup() -> Result<Config, String> {
     let opt = Opt::from_args();
     println!("{:?}", opt);
 
-    let mut cache_dir = alfred::env::workflow_cache().unwrap_or_else(|| {
+    let cache_dir = alfred::env::workflow_cache().unwrap_or_else(|| {
         let mut dir = env::home_dir().unwrap_or(PathBuf::from(""));
         dir.push(".cache");
         dir.push("alfred-pinboard-rs");
