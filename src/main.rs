@@ -12,7 +12,6 @@ extern crate rusty_pin as rustypin;
 extern crate alfred;
 
 use std::io;
-use std::path::{Path, PathBuf};
 use std::env;
 use std::fs::File;
 use std::process;
@@ -23,6 +22,7 @@ use rustypin::pinboard;
 
 mod config;
 mod commands;
+mod runners;
 
 use commands::{Opt, SubCommand};
 use config::Config;
@@ -31,33 +31,12 @@ use config::Config;
 //TODO: Use 'semver' crate to compare Alfred's version
 fn main() {
 
-    let config = setup().unwrap_or_else(|err| {
-        eprintln!("Problem parsing arguments: {}", err);
-        process::exit(1);
-    });
+    let opt: Opt = Opt::from_args();
+    //    println!("{:?}\n", opt);
 
-    println!("{:?}", config);
-}
+    match opt.cmd {
+        SubCommand::Config { .. } => runners::config(opt.cmd),
+        _ => println!("<<>> EMPTY?!"),
+    }
 
-fn setup() -> Result<Config, String> {
-
-    let opt = Opt::from_args();
-    println!("{:?}", opt);
-
-    let cache_dir = alfred::env::workflow_cache().unwrap_or_else(|| {
-        let mut dir = env::home_dir().unwrap_or(PathBuf::from(""));
-        dir.push(".cache");
-        dir.push("alfred-pinboard-rs");
-        dir
-    });
-    let mut data_dir = alfred::env::workflow_data().unwrap_or_else(|| {
-        let mut dir = env::home_dir().unwrap_or(PathBuf::from(""));
-        dir.push(".config");
-        dir.push("alfred-pinboard-rs");
-        dir
-    });
-    println!("{:?}", cache_dir);
-    data_dir.push("settings.json");
-
-    Config::new().read_from(data_dir)
 }
