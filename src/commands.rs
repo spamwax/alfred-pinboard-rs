@@ -35,6 +35,11 @@ pub enum SubCommand {
                     possible_values_raw = "&[\"true\", \"false\"]")]
         shared: Option<bool>,
 
+        /// By default, set all new bookmarks' toread flag.
+        #[structopt(name = "toread", short = "r", long = "toread", default_value = "false",
+        possible_values_raw = "&[\"true\", \"false\"]")]
+        toread: Option<bool>,
+
         /// When searching tags/bookmarks, enable 'fuzzy' searching. (similar to `selecta`)
         #[structopt(name = "fuzzy", short = "f", long = "fuzzy", default_value = "false",
                     possible_values_raw = "&[\"true\", \"false\"]")]
