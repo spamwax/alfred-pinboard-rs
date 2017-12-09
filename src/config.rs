@@ -48,27 +48,8 @@ impl Config {
         Default::default()
     }
 
-    pub fn discover_dirs(&mut self) {
-        let cache_dir = alfred::env::workflow_cache().unwrap_or_else(|| {
-            let mut dir = env::home_dir().unwrap_or(PathBuf::from(""));
-            dir.push(".cache");
-            dir.push("alfred-pinboard-rs");
-            dir
-        });
-        let mut data_dir = alfred::env::workflow_data().unwrap_or_else(|| {
-            let mut dir = env::home_dir().unwrap_or(PathBuf::from(""));
-            dir.push(".config");
-            dir.push("alfred-pinboard-rs");
-            dir
-        });
-        println!("cache_dir: {:?}", cache_dir);
-        self.data_dir = data_dir;
-        self.cache_dir = cache_dir;
-    }
-
     pub fn setup() -> Result<Config, String> {
-        let config = Config::read()?;
-        Ok(config)
+        Config::read()
     }
     pub fn read() -> Result<Config, String> {
         // If config file exists read settings
@@ -109,4 +90,23 @@ impl Config {
                 fp.write_all(content.as_ref()).map_err(|e| e.to_string())
             })
     }
+
+    pub fn discover_dirs(&mut self) {
+        let cache_dir = alfred::env::workflow_cache().unwrap_or_else(|| {
+            let mut dir = env::home_dir().unwrap_or(PathBuf::from(""));
+            dir.push(".cache");
+            dir.push("alfred-pinboard-rs");
+            dir
+        });
+        let mut data_dir = alfred::env::workflow_data().unwrap_or_else(|| {
+            let mut dir = env::home_dir().unwrap_or(PathBuf::from(""));
+            dir.push(".config");
+            dir.push("alfred-pinboard-rs");
+            dir
+        });
+        println!("cache_dir: {:?}", cache_dir);
+        self.data_dir = data_dir;
+        self.cache_dir = cache_dir;
+    }
+
 }
