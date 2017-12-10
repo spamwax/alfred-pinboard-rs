@@ -1,4 +1,4 @@
-use std::fs::File;
+use std::fs::{File, create_dir_all};
 use std::path::{PathBuf, Path};
 use std::env;
 
@@ -8,6 +8,7 @@ use alfred;
 
 use std::io::{Read, Write};
 
+const CONFIG_FILE_NAME: &str = "settings.json";
 
 #[derive(Default, Debug, Serialize, Deserialize)]
 pub struct Config {
@@ -40,7 +41,6 @@ pub struct Config {
     data_dir: PathBuf,
     // Cache dir
     cache_dir: PathBuf,
-
 }
 
 impl Config {
@@ -53,20 +53,22 @@ impl Config {
     }
     pub fn read() -> Result<Config, String> {
         // If config file exists read settings
-        let mut _config = Config::new();
-        _config.discover_dirs();
-        let p = &_config.data_dir;
+        let mut p = Config::get_workflow_dirs().0;
+        p.push(CONFIG_FILE_NAME);
         if p.exists() {
-            let mut config: Config =
-                File::open(p)
-                    .map_err(|e| e.to_string())
-                    .and_then(|mut f| {
-                        let mut content = String::new();
-                        f.read_to_string(&mut content)
-                            .map_err(|e| e.to_string())
-                            .and_then(|_| Ok(content))
+            let mut config: Config = File::open(p)
+                .map_err(|e| e.to_string())
+                .and_then(|mut f| {
+                    let mut content = String::new();
+                    f.read_to_string(&mut content)
+                        .map_err(|e| e.to_string())
+                        .and_then(|_| Ok(content))
+                })
+                .and_then(|inp| {
+                    serde_json::from_str(&inp).map_err(|e| {
+                        format!("Bad settings file: {}\n{}", CONFIG_FILE_NAME, e.to_string())
                     })
-                    .and_then(|inp| serde_json::from_str(&inp).map_err(|e| e.to_string()))?;
+                })?;
             config.discover_dirs();
             Ok(config)
         } else {
@@ -79,9 +81,11 @@ impl Config {
     }
 
     pub fn save(&self) -> Result<(), String> {
+        create_dir_all(&self.data_dir).map_err(|e| e.to_string())?;
+
         let mut settings_fn = self.data_dir.clone();
-        settings_fn.push("settings.json");
-        println!("{:?}", settings_fn);
+        settings_fn.push(CONFIG_FILE_NAME);
+        println!("->> {:?}", settings_fn);
         let mut fp = File::create(settings_fn).map_err(|e| e.to_string())?;
         serde_json::to_string(self)
             .map_err(|e| e.to_string())
@@ -92,21 +96,25 @@ impl Config {
     }
 
     pub fn discover_dirs(&mut self) {
+        let dirs = Config::get_workflow_dirs();
+        self.data_dir = dirs.0;
+        self.cache_dir = dirs.1;
+    }
+
+    fn get_workflow_dirs() -> (PathBuf, PathBuf) {
         let cache_dir = alfred::env::workflow_cache().unwrap_or_else(|| {
             let mut dir = env::home_dir().unwrap_or(PathBuf::from(""));
             dir.push(".cache");
             dir.push("alfred-pinboard-rs");
             dir
         });
-        let mut data_dir = alfred::env::workflow_data().unwrap_or_else(|| {
+        let data_dir = alfred::env::workflow_data().unwrap_or_else(|| {
             let mut dir = env::home_dir().unwrap_or(PathBuf::from(""));
             dir.push(".config");
             dir.push("alfred-pinboard-rs");
             dir
         });
         println!("cache_dir: {:?}", cache_dir);
-        self.data_dir = data_dir;
-        self.cache_dir = cache_dir;
+        (data_dir, cache_dir)
     }
-
 }

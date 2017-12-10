@@ -46,13 +46,13 @@ pub fn config(x: SubCommand) {
                 config
             }
             _ => {
-                show_error_alfred("First config command should provide auth. token!");
+                show_error_alfred("First-time config command should provide authorization token!");
                 process::exit(1);
             }
         }
     });
 
-    config.save();
+    config.save().unwrap();
 
 }
 
