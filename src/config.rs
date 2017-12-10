@@ -12,10 +12,6 @@ const CONFIG_FILE_NAME: &str = "settings.json";
 
 #[derive(Default, Debug, Serialize, Deserialize)]
 pub struct Config {
-    //    /// Folder to store volatile data of the workflow
-    //    workflow_cache_dir: PathBuf,
-    //    /// Folder to store data of the workflow
-    //    workflow_data_dir: PathBuf,
     /// Which version of Alfred we are being executed under
     pub alfred_version: String,
     /// Number of bookmarks to show in Alfred
@@ -37,15 +33,28 @@ pub struct Config {
     /// Authentication Token
     pub auth_token: String,
 
-    // Data dir
-    data_dir: PathBuf,
-    // Cache dir
-    cache_dir: PathBuf,
+    /// Folder to store volatile data of the workflow
+    workflow_data_dir: PathBuf,
+    /// Folder to store data of the workflow
+    workflow_cache_dir: PathBuf,
 }
 
 impl Config {
     pub fn new() -> Self {
-        Default::default()
+        Config {
+            alfred_version: String::new(),
+            pins_to_show: 10,
+            tags_to_show: 10,
+            tag_only_search: false,
+            fuzzy_search: false,
+            private_new_pin: true,
+            toread_new_pin: false,
+            suggest_tags: true,
+            auto_update_cache: true,
+            auth_token: String::new(),
+            workflow_data_dir: PathBuf::default(),
+            workflow_cache_dir: PathBuf::default(),
+        }
     }
 
     pub fn setup() -> Result<Config, String> {
@@ -81,9 +90,9 @@ impl Config {
     }
 
     pub fn save(&self) -> Result<(), String> {
-        create_dir_all(&self.data_dir).map_err(|e| e.to_string())?;
+        create_dir_all(&self.workflow_data_dir).map_err(|e| e.to_string())?;
 
-        let mut settings_fn = self.data_dir.clone();
+        let mut settings_fn = self.workflow_data_dir.clone();
         settings_fn.push(CONFIG_FILE_NAME);
         println!("->> {:?}", settings_fn);
         let mut fp = File::create(settings_fn).map_err(|e| e.to_string())?;
@@ -97,8 +106,8 @@ impl Config {
 
     pub fn discover_dirs(&mut self) {
         let dirs = Config::get_workflow_dirs();
-        self.data_dir = dirs.0;
-        self.cache_dir = dirs.1;
+        self.workflow_data_dir = dirs.0;
+        self.workflow_cache_dir = dirs.1;
     }
 
     fn get_workflow_dirs() -> (PathBuf, PathBuf) {

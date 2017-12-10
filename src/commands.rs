@@ -22,42 +22,42 @@ pub enum SubCommand {
         #[structopt(name = "auth", long = "authorization", short = "a")]
         auth_token: Option<String>,
 
-        /// Number of bookmarks to show in Alfred's window.
-        #[structopt(long = "bookmark-numbers", short = "p", default_value = "10")]
+        /// Number of bookmarks to show in Alfred's window. [default: 10]
+        #[structopt(long = "bookmark-numbers", short = "p")]
         number_pins: Option<u8>,
 
-        /// Number of tags to show in Alfred's window.
-        #[structopt(long = "tag-numbers", short = "l", default_value = "10")]
+        /// Number of tags to show in Alfred's window. [default: 10]
+        #[structopt(long = "tag-numbers", short = "l")]
         number_tags: Option<u8>,
 
-        /// By default, make all new bookmarks public/shared.
-        #[structopt(name = "shared", short = "s", long = "shared", default_value = "false",
+        /// By default, make all new bookmarks public/shared. [default: false]
+        #[structopt(name = "shared", short = "s", long = "shared",
                     possible_values_raw = "&[\"true\", \"false\"]")]
         shared: Option<bool>,
 
-        /// By default, set all new bookmarks' toread flag.
-        #[structopt(name = "toread", short = "r", long = "toread", default_value = "false",
+        /// By default, set all new bookmarks' toread flag. [default: false]
+        #[structopt(name = "toread", short = "r", long = "toread",
         possible_values_raw = "&[\"true\", \"false\"]")]
         toread: Option<bool>,
 
-        /// When searching tags/bookmarks, enable 'fuzzy' searching. (similar to `selecta`)
-        #[structopt(name = "fuzzy", short = "f", long = "fuzzy", default_value = "false",
+        /// When searching tags/bookmarks, enable 'fuzzy' searching. (similar to `selecta`) [default: false]
+        #[structopt(name = "fuzzy", short = "f", long = "fuzzy",
                     possible_values_raw = "&[\"true\", \"false\"]")]
         fuzzy: Option<bool>,
 
-        /// When searching, only look up query in 'tag' field of bookmarks.
-        #[structopt(name = "tags_only", short = "t", long = "tags-only", default_value = "false",
+        /// When searching, only look up query in 'tag' field of bookmarks. [default: false]
+        #[structopt(name = "tags_only", short = "t", long = "tags-only",
                     possible_values_raw = "&[\"true\", \"false\"]")]
         tags_only: Option<bool>,
 
-        /// After posting a bookmark to Pinboard, update the local cache files.
+        /// After posting a bookmark to Pinboard, update the local cache files. [default: true]
         #[structopt(name = "auto_update", short = "u", long = "auto-update",
-                    default_value = "true", possible_values_raw = "&[\"true\", \"false\"]")]
+                    possible_values_raw = "&[\"true\", \"false\"]")]
         auto_update: Option<bool>,
 
-        /// When posting a new bookmark, show 3 popular tags for the URL (if available).
+        /// When posting a new bookmark, show 3 popular tags for the URL (if available). [default: true]
         #[structopt(name = "suggest_tags", short = "o", long = "suggest-tags",
-                    default_value = "true", possible_values_raw = "&[\"true\", \"false\"]")]
+                    possible_values_raw = "&[\"true\", \"false\"]")]
         suggest_tags: Option<bool>,
     },
     #[structopt(name = "list")]

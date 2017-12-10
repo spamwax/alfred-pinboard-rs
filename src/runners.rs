@@ -43,6 +43,7 @@ pub fn config(x: SubCommand) {
                     }
                     _ => (),
                 }
+                config.save().unwrap();
                 config
             }
             _ => {
@@ -52,7 +53,7 @@ pub fn config(x: SubCommand) {
         }
     });
 
-    config.save().unwrap();
+    println!("{:?}", config);
 
 }
 
@@ -61,7 +62,7 @@ fn show_error_alfred(s: &str) {
         .subtitle(s)
         .icon_file("error.png")
         .into_item();
-    alfred::json::write_items(io::stdout(), &[item]);
+    alfred::json::write_items(io::stdout(), &[item]).unwrap();
 }
 
 //let config = setup().unwrap_or_else(|err| {
