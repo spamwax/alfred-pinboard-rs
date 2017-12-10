@@ -123,7 +123,6 @@ impl Config {
             dir.push("alfred-pinboard-rs");
             dir
         });
-        println!("cache_dir: {:?}", cache_dir);
         (data_dir, cache_dir)
     }
 }
