@@ -18,14 +18,15 @@ use std::process;
 
 use structopt::StructOpt;
 
-mod config;
+mod workflow_config;
 mod commands;
 mod runners;
 
 use commands::{Opt, SubCommand};
-use config::Config;
+use workflow_config::Config;
 use rusty_pin::Pinboard;
 
+use runners::{config, update};
 
 //TODO: Use 'semver' crate to compare Alfred's version
 fn main() {
@@ -34,8 +35,8 @@ fn main() {
     //    println!("{:?}\n", opt);
 
     match opt.cmd {
-        SubCommand::Config { .. } => runners::config(opt.cmd),
-        SubCommand::Update => runners::update_cache(),
+        SubCommand::Config { .. } =>  config::run(opt.cmd),
+        SubCommand::Update => update::run(),
         _ => unimplemented!(),
     }
 
