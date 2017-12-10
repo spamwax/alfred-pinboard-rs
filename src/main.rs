@@ -1,6 +1,7 @@
 #![feature(attr_literals)]
 extern crate serde;
 extern crate serde_json;
+extern crate semver;
 #[macro_use]
 extern crate serde_derive;
 
