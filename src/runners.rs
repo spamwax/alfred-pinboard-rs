@@ -9,7 +9,8 @@ use config::Config;
 
 
 pub fn config(x: SubCommand) {
-    let mut config: Config = Config::setup().unwrap_or_else(|err| {
+    let mut print_config = false;
+    let mut config: Config = Config::read().unwrap_or_else(|err| {
         if !err.contains("authorization token") {
             show_error_alfred(&err);
             process::exit(1);
@@ -30,6 +31,7 @@ pub fn config(x: SubCommand) {
                         ref auto_update,
                         ref suggest_tags,
                     } => {
+                        print_config = *display;
                         config.auth_token = auth_token.as_ref().unwrap().clone();
                         number_pins.map(|val| config.pins_to_show = val);
                         number_tags.map(|val| config.tags_to_show = val);
@@ -43,7 +45,6 @@ pub fn config(x: SubCommand) {
                     }
                     _ => (),
                 }
-                config.save().unwrap();
                 config
             }
             _ => {
@@ -66,6 +67,7 @@ pub fn config(x: SubCommand) {
             auto_update,
             suggest_tags,
         } => {
+            print_config = display;
             auth_token.map(|val| config.auth_token = val);
             number_pins.map(|val| config.pins_to_show = val);
             number_tags.map(|val| config.tags_to_show = val);
@@ -79,8 +81,11 @@ pub fn config(x: SubCommand) {
         _ => unreachable!(),
     }
 
-    println!("  ***-- {:?}", config);
     config.save().unwrap();
+
+    if print_config {
+        println!("{:?}", config);
+    }
 
 }
 
