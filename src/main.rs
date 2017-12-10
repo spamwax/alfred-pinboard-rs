@@ -8,7 +8,7 @@ extern crate structopt;
 #[macro_use]
 extern crate structopt_derive;
 
-extern crate rusty_pin as rustypin;
+extern crate rusty_pin;
 extern crate alfred;
 
 use std::io;
@@ -18,14 +18,13 @@ use std::process;
 
 use structopt::StructOpt;
 
-use rustypin::pinboard;
-
 mod config;
 mod commands;
 mod runners;
 
 use commands::{Opt, SubCommand};
 use config::Config;
+use rusty_pin::Pinboard;
 
 
 //TODO: Use 'semver' crate to compare Alfred's version
@@ -36,7 +35,8 @@ fn main() {
 
     match opt.cmd {
         SubCommand::Config { .. } => runners::config(opt.cmd),
-        _ => println!("<<>> EMPTY?!"),
+        SubCommand::Update => runners::update_cache(),
+        _ => unimplemented!(),
     }
 
 }

@@ -3,10 +3,24 @@ use std::io;
 use std::{process, env};
 use std::path::{Path, PathBuf};
 use alfred;
+use std::io::{Read, Write};
 
 use commands::{Opt, SubCommand};
 use config::Config;
 
+use rusty_pin::pinboard::Pinboard;
+
+pub fn update_cache() {
+    let (config, pinboard) = Config::setup().unwrap_or_else(|err| {
+        show_error_alfred(&err);
+        process::exit(1);
+    });
+
+    pinboard.update_cache().unwrap_or_else(|err| {
+        show_error_alfred(&err);
+    });
+    io::stdout().write(b"Successfully update cache files!").unwrap();
+}
 
 pub fn config(x: SubCommand) {
     let mut print_config = false;

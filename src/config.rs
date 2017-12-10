@@ -1,16 +1,17 @@
 use std::fs::{File, create_dir_all};
 use std::path::{PathBuf, Path};
+use std::io::{Read, Write};
 use std::env;
 
 use serde;
 use serde_json;
 use alfred;
 
-use std::io::{Read, Write};
+use rusty_pin::Pinboard;
 
 const CONFIG_FILE_NAME: &str = "settings.json";
 
-#[derive(Default, Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct Config {
     /// Which version of Alfred we are being executed under
     pub alfred_version: String,
@@ -57,9 +58,15 @@ impl Config {
         }
     }
 
-    pub fn setup() -> Result<Config, String> {
-        Config::read()
+    pub fn setup() -> Result<(Config, Pinboard), String> {
+        let config = Config::read()?;
+        let mut pinboard = Pinboard::new(&config.auth_token)?;
+        pinboard.set_cache_dir(&config.workflow_cache_dir)?;
+        pinboard.enable_fuzzy_search(config.fuzzy_search);
+        pinboard.enable_tag_only_search(config.tag_only_search);
+        Ok((config, pinboard))
     }
+
     pub fn read() -> Result<Config, String> {
         // If config file exists read settings
         let mut p = Config::get_workflow_dirs().0;
@@ -94,12 +101,10 @@ impl Config {
 
         let mut settings_fn = self.workflow_data_dir.clone();
         settings_fn.push(CONFIG_FILE_NAME);
-        println!("->> {:?}", settings_fn);
         let mut fp = File::create(settings_fn).map_err(|e| e.to_string())?;
         serde_json::to_string(self)
             .map_err(|e| e.to_string())
             .and_then(|content| {
-                println!("\n{:?}\n", content);
                 fp.write_all(content.as_ref()).map_err(|e| e.to_string())
             })
     }

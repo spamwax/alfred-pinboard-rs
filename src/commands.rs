@@ -97,7 +97,12 @@ pub enum SubCommand {
         /// returned.
         #[structopt(name = "query")]
         query: Vec<String>,
-    }, //    #[structopt(name = "sparkle")]
+    },
+
+    /// Update Workflow's cache by doing a full download from Pinboard.
+    #[structopt(name = "update")]
+    Update,
+    //    #[structopt(name = "sparkle")]
        //    /// Add magical sparkles -- the secret ingredient!
        //    Sparkle {
        //        #[structopt(name = "gooz", short = "g", required = false)]
