@@ -16,7 +16,7 @@ pub mod update;
 fn show_error_alfred(s: &str) {
     let item = alfred::ItemBuilder::new("Error")
         .subtitle(s)
-        .icon_file("error.png")
+        .icon_path("error.png")
         .into_item();
     alfred::json::write_items(io::stdout(), &[item]).unwrap();
 }

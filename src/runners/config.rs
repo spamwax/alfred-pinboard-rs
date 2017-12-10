@@ -76,8 +76,46 @@ pub fn run(x: SubCommand) {
     config.save().unwrap();
 
     if print_config {
-        println!("{:?}", config);
+        show_config(&config);
     }
 
+}
+
+fn show_config(config: &Config) {
+    use alfred::{ItemBuilder, Item};
+    alfred::json::Builder::with_items(&[
+        ItemBuilder::new("Automatically update cache")
+            .subtitle(format!("{:?}", config.auto_update_cache))
+            .arg("pset auto")
+            .icon_path("auto_update.png").into_item(),
+        ItemBuilder::new("Suggest popular tags for open browser tab")
+            .subtitle(format!("{:?}", config.suggest_tags))
+            .arg("pset suggest_tags")
+            .icon_path("suggest.png").into_item(),
+        ItemBuilder::new("Mark new bookmarks as 'toread'")
+            .subtitle(format!("{:?}", config.toread_new_pin))
+            .arg("pset toread")
+            .icon_path("toread.png").into_item(),
+        ItemBuilder::new("Mark new bookmarks as private")
+            .subtitle(format!("{:?}", config.private_new_pin))
+            .arg("pset shared")
+            .icon_path("private.png").into_item(),
+        ItemBuilder::new("Use fuzzy search")
+            .subtitle(format!("{:?}", config.fuzzy_search))
+            .arg("pset fuzzy")
+            .icon_path("fuzzy.png").into_item(),
+        ItemBuilder::new("Only search tags")
+            .subtitle(format!("{:?}", config.tag_only_search))
+            .arg("pset tagonly")
+            .icon_path("tags_only.png").into_item(),
+        ItemBuilder::new("Number of tags to show")
+            .subtitle(format!("{:?}", config.tags_to_show))
+            .arg("pset tags")
+            .icon_path("tag.png").into_item(),
+        ItemBuilder::new("Number of bookmarks to show")
+            .subtitle(format!("{:?}", config.pins_to_show))
+            .arg("pset bookmarks")
+            .icon_path("pins.png").into_item()])
+        .write(io::stdout()).unwrap();
 }
 
