@@ -40,7 +40,7 @@ pub struct Config {
     workflow_cache_dir: PathBuf,
 }
 
-impl Config {
+impl<'a> Config {
     pub fn new() -> Self {
         Config {
             alfred_version: String::new(),
@@ -58,13 +58,9 @@ impl Config {
         }
     }
 
-    pub fn setup() -> Result<(Config, Pinboard), String> {
+    pub fn setup() -> Result<Config, String> {
         let config = Config::read()?;
-        let mut pinboard = Pinboard::new(&config.auth_token)?;
-        pinboard.set_cache_dir(&config.workflow_cache_dir)?;
-        pinboard.enable_fuzzy_search(config.fuzzy_search);
-        pinboard.enable_tag_only_search(config.tag_only_search);
-        Ok((config, pinboard))
+        Ok((config))
     }
 
     pub fn read() -> Result<Config, String> {

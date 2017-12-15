@@ -10,10 +10,11 @@ use semver::VersionReq;
 use commands::{Opt, SubCommand};
 use workflow_config::Config;
 
-use rusty_pin::pinboard::Pinboard;
+use rusty_pin::{Pinboard, Pin, PinBuilder, Tag};
 
 pub mod config;
 pub mod update;
+pub mod list;
 
 fn show_error_alfred(s: &str) {
     let item = alfred::ItemBuilder::new("Error")

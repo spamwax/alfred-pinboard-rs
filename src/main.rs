@@ -25,9 +25,8 @@ mod runners;
 
 use commands::{Opt, SubCommand};
 use workflow_config::Config;
-use rusty_pin::Pinboard;
 
-use runners::{config, update};
+use runners::{config, update, list};
 
 //TODO: Use 'semver' crate to compare Alfred's version
 fn main() {
@@ -38,6 +37,7 @@ fn main() {
     match opt.cmd {
         SubCommand::Config { .. } =>  config::run(opt.cmd),
         SubCommand::Update => update::run(),
+        SubCommand::List { .. } => list::run(opt.cmd),
         _ => unimplemented!(),
     }
 
