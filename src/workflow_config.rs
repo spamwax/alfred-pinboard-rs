@@ -42,7 +42,7 @@ pub struct Config {
 
 impl<'a> Config {
     pub fn new() -> Self {
-        Config {
+        let mut cfg = Config {
             alfred_version: String::new(),
             pins_to_show: 10,
             tags_to_show: 10,
@@ -55,7 +55,9 @@ impl<'a> Config {
             auth_token: String::new(),
             workflow_data_dir: PathBuf::default(),
             workflow_cache_dir: PathBuf::default(),
-        }
+        };
+        cfg.discover_dirs();
+        cfg
     }
 
     pub fn setup() -> Result<Config, String> {
