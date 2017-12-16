@@ -81,11 +81,10 @@ pub enum SubCommand {
         description: Option<String>,
         /// Mark this bookmark shared/private (overrides user's settings)
         #[structopt(name = "shared", long = "shared", possible_values_raw = "&[\"true\", \"false\"]")]
-
-        shared: bool,
+        shared: Option<bool>,
         /// Mark this bookmark as toread (overrides user's settings)
         #[structopt(name = "toread", long = "toread", possible_values_raw = "&[\"true\", \"false\"]")]
-        toread: bool,
+        toread: Option<bool>,
     },
     #[structopt(name = "search")]
     /// Searches bookmarks.
