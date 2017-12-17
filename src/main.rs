@@ -19,6 +19,8 @@ use std::process;
 
 use structopt::StructOpt;
 
+use rusty_pin::Pinboard;
+
 mod workflow_config;
 mod commands;
 mod runners;
@@ -36,9 +38,32 @@ fn main() {
 
     match opt.cmd {
         SubCommand::Config { .. } =>  config::run(opt.cmd),
-        SubCommand::Update => update::run(),
-        SubCommand::List { .. } => list::run(opt.cmd),
-        _ => unimplemented!(),
+        _ => {
+            // If user is not configuring, we will abort upon any errors.
+            let (config, mut pinboard) = setup().unwrap_or_else(|err| {
+                show_error_alfred(&err);
+                process::exit(1);
+            });
+            match opt.cmd {
+                SubCommand::Update => update::run(pinboard),
+                SubCommand::List { .. } => list::run(opt.cmd),
+                _ => unimplemented!(),
+            }
+        }
     }
 
+}
+
+fn setup<'a>() -> Result<(Config, Pinboard<'a>), String> {
+    let config = Config::setup()?;
+    let pinboard = Pinboard::new(config.auth_token.clone())?;
+    Ok((config, pinboard))
+}
+
+fn show_error_alfred(s: &str) {
+    let item = alfred::ItemBuilder::new("Error")
+        .subtitle(s)
+        .icon_path("erroricon.icns")
+        .into_item();
+    alfred::json::write_items(io::stdout(), &[item]).unwrap();
 }

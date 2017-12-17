@@ -2,7 +2,7 @@ use super::*;
 
 pub fn run(cmd: SubCommand) {
     let config = Config::setup().unwrap_or_else(|err| {
-        show_error_alfred(&err);
+        ::show_error_alfred(&err);
         process::exit(1);
     });
 
@@ -10,16 +10,12 @@ pub fn run(cmd: SubCommand) {
         SubCommand::List {bookmarks, tags} => process(config, bookmarks, tags),
         _ => unreachable!(),
     }
-//    pinboard.update_cache().unwrap_or_else(|err| {
-//        show_error_alfred(&err);
-//    });
-//    io::stdout().write(b"Successfully listed all shit!").unwrap();
 }
 
 
 fn process(config: Config, bookmarks: bool, tags: bool) {
     let mut pinboard = Pinboard::new(config.auth_token.as_ref()).unwrap_or_else(|err| {
-        show_error_alfred(&err);
+        ::show_error_alfred(&err);
         process::exit(1);
     });
 

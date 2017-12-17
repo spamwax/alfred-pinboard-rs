@@ -16,10 +16,3 @@ pub mod config;
 pub mod update;
 pub mod list;
 
-fn show_error_alfred(s: &str) {
-    let item = alfred::ItemBuilder::new("Error")
-        .subtitle(s)
-        .icon_path("erroricon.icns")
-        .into_item();
-    alfred::json::write_items(io::stdout(), &[item]).unwrap();
-}
