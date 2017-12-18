@@ -46,7 +46,7 @@ fn main() {
             });
             match opt.cmd {
                 SubCommand::Update => update::run(pinboard),
-                SubCommand::List { .. } => list::run(opt.cmd),
+                SubCommand::List { .. } => list::run(opt.cmd, config, pinboard),
                 _ => unimplemented!(),
             }
         }

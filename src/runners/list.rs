@@ -1,24 +1,14 @@
 use super::*;
 
-pub fn run(cmd: SubCommand) {
-    let config = Config::setup().unwrap_or_else(|err| {
-        ::show_error_alfred(&err);
-        process::exit(1);
-    });
-
+pub fn run<'a>(cmd: SubCommand, config: Config, pinboard: Pinboard<'a>) {
     match cmd {
-        SubCommand::List {bookmarks, tags} => process(config, bookmarks, tags),
+        SubCommand::List {bookmarks, tags} => process(config, pinboard, bookmarks, tags),
         _ => unreachable!(),
     }
 }
 
 
-fn process(config: Config, bookmarks: bool, tags: bool) {
-    let mut pinboard = Pinboard::new(config.auth_token.as_ref()).unwrap_or_else(|err| {
-        ::show_error_alfred(&err);
-        process::exit(1);
-    });
-
+fn process<'a>(config: Config, pinboard: Pinboard<'a>, bookmarks: bool, tags: bool) {
     let mut items: Vec<alfred::Item> = Vec::new();
 
     items = pinboard.list_bookmarks()
