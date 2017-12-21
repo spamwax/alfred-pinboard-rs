@@ -617,7 +617,7 @@ dependencies = [
 [[package]]
 name = "rusty-pin"
 version = "0.1.0"
-source = "git+ssh://git@git.hamid.cc:22/rust/rusty-pin.git?branch=lib#a960fba6918c310c57751092606eae2ced76a665"
+source = "git+ssh://git@git.hamid.cc:22/rust/rusty-pin.git?branch=lib#80bf94c5831b1ee3c8d550d41435cdb31be0f9c6"
 dependencies = [
  "chrono 0.4.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "regex 0.2.3 (registry+https://github.com/rust-lang/crates.io-index)",

@@ -96,11 +96,9 @@ pub enum SubCommand {
         #[structopt(name = "title", long = "title", short = "T")]
         title: bool,
 
-        /*
         /// Only search within url field, can be combined with -T and/or -t.
         #[structopt(name = "url", long = "url", short = "u")]
         url: bool,
-        */
 
         /// Query string to look for in all fields of bookmarks, unless modified by -t, -T or -u
         /// flags (space delimited). Bookmarks that have all of query strings will be

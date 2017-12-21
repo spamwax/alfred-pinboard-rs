@@ -28,7 +28,7 @@ mod runners;
 use commands::{Opt, SubCommand};
 use workflow_config::Config;
 
-use runners::{config, update, list};
+use runners::{config, update, list, search};
 
 //TODO: Use 'semver' crate to compare Alfred's version
 fn main() {
@@ -47,6 +47,7 @@ fn main() {
             match opt.cmd {
                 SubCommand::Update => update::run(pinboard),
                 SubCommand::List { .. } => list::run(opt.cmd, config, pinboard),
+                SubCommand::Search {..} => search::run(opt.cmd, config, pinboard),
                 _ => unimplemented!(),
             }
         }
@@ -56,7 +57,12 @@ fn main() {
 
 fn setup<'a>() -> Result<(Config, Pinboard<'a>), String> {
     let config = Config::setup()?;
-    let pinboard = Pinboard::new(config.auth_token.clone())?;
+    let mut pinboard = Pinboard::new(config.auth_token.clone())?;
+    pinboard.enable_fuzzy_search(config.fuzzy_search);
+    pinboard.enable_tag_only_search(config.tag_only_search);
+    pinboard.enable_private_new_pin(config.private_new_pin);
+    pinboard.enable_toread_new_pin(config.toread_new_pin);
+
     Ok((config, pinboard))
 }
 

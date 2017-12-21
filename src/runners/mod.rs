@@ -15,4 +15,5 @@ use rusty_pin::{Pinboard, Pin, PinBuilder, Tag};
 pub mod config;
 pub mod update;
 pub mod list;
+pub mod search;
 

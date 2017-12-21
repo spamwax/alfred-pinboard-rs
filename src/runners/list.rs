@@ -1,4 +1,5 @@
 use super::*;
+use alfred::{ItemBuilder, Item};
 
 pub fn run<'a>(cmd: SubCommand, config: Config, pinboard: Pinboard<'a>) {
     match cmd {
@@ -25,7 +26,6 @@ fn process<'a>(config: Config, pinboard: Pinboard<'a>, bookmarks: bool, tags: bo
 
 }
 
-use alfred::{ItemBuilder, Item};
 pub struct MyItem<'a>(Item<'a>);
 use std::iter::FromIterator;
 
