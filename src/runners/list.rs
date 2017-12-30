@@ -11,7 +11,20 @@ pub fn run<'a>(cmd: SubCommand, config: Config, pinboard: Pinboard<'a>) {
 
 fn process<'a>(config: Config, pinboard: Pinboard<'a>, tags: bool, q: Option<String>) {
     if tags {
+        let mut popular_tags = vec![];
         let mut alfred_items = vec![];
+
+        // First try to get list of popular tags from Pinboard
+        if config.suggest_tags {
+            if let Ok(tab_info) = browser_info::get() {
+                let tags = match pinboard.popular_tags(&tab_info.url) {
+                    Err(e) => vec![String::from("ERROR: fetching popular tags!")],
+                    Ok(tags) => tags,
+                };
+                popular_tags = tags.into_iter().map(|t| Tag(t, 0)).collect::<Vec<Tag>>();
+            }
+        }
+
         // Search the tags using the last 'word' in 'q'
         let queries = q.unwrap_or(String::new());
         let query_words: Vec<&str> = queries.split_whitespace().collect();
@@ -30,11 +43,16 @@ fn process<'a>(config: Config, pinboard: Pinboard<'a>, tags: bool, q: Option<Str
                         if query_words.len() > 1 {
                             prev_tags = queries.get(0..queries.rfind(' ').unwrap() + 1).unwrap()
                         }
-                        items
-                            .into_iter()
+                        popular_tags
+                            .iter()
+                            .chain(items.into_iter())
                             .map(|tag| {
                                 ItemBuilder::new(tag.0.as_ref())
-                                    .subtitle(tag.1.to_string())
+                                    .subtitle(if tag.1 != 0 {
+                                        tag.1.to_string()
+                                    } else {
+                                        String::from("Popular")
+                                    })
                                     .autocomplete([prev_tags, &tag.0].concat())
                                     .arg(String::from(prev_tags) + &tag.0)
                                     .into_item()

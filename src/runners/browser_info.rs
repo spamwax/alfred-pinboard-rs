@@ -2,6 +2,7 @@ use super::*;
 
 use std::process::Command;
 
+#[derive(Debug)]
 pub struct BrowserActiveTabInfo {
     pub url: String,
     pub title: String,
