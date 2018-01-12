@@ -41,11 +41,13 @@ fn process<'a>(config: Config, pinboard: Pinboard<'a>, tags: bool, q: Option<Str
                     Some(items) => {
                         let mut prev_tags: &str = "";
                         if query_words.len() > 1 {
+                            // User has already searched for other tags, we should include those in the
+                            // 'autocomplete' field of the AlfredItem
                             prev_tags = queries.get(0..queries.rfind(' ').unwrap() + 1).unwrap()
                         }
                         popular_tags
                             .iter()
-                            .chain(items.into_iter())
+                            .chain(items.into_iter().take(config.tags_to_show))
                             .map(|tag| {
                                 ItemBuilder::new(tag.0.as_ref())
                                     .subtitle(if tag.1 != 0 {
@@ -65,7 +67,7 @@ fn process<'a>(config: Config, pinboard: Pinboard<'a>, tags: bool, q: Option<Str
         ::write_to_alfred(alfred_items, config);
     } else {
         if q.is_some() && !q.unwrap().is_empty() {
-            eprintln!("Ignoring search query, will spit out all bookmakrs.")
+            eprintln!("Ignoring search query, will spit out all bookmarks.")
         }
         let items = pinboard
             .list_bookmarks()

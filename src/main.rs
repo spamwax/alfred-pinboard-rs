@@ -82,7 +82,7 @@ where
 {
     let output_items = items
         .into_iter()
-        .take(config.pins_to_show as usize)
+        // .take(config.pins_to_show as usize)
         .collect::<Vec<alfred::Item>>();
 
     let v = Version::parse("3.0.0").unwrap();
