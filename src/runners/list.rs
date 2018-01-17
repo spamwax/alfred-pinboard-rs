@@ -11,6 +11,10 @@ pub fn run<'a>(cmd: SubCommand, config: Config, pinboard: Pinboard<'a>) {
 
 fn process<'a>(config: Config, pinboard: Pinboard<'a>, tags: bool, q: Option<String>) {
     if tags {
+        // Search the tags using the last 'word' in 'q'
+        let queries = q.unwrap_or(String::new());
+        let query_words: Vec<&str> = queries.split_whitespace().collect();
+
         let mut popular_tags = vec![];
         let mut alfred_items = vec![];
 
@@ -25,19 +29,15 @@ fn process<'a>(config: Config, pinboard: Pinboard<'a>, tags: bool, q: Option<Str
             }
         }
 
-        // Search the tags using the last 'word' in 'q'
-        let queries = q.unwrap_or(String::new());
-        let query_words: Vec<&str> = queries.split_whitespace().collect();
-
         match pinboard.search_list_of_tags(query_words.last().unwrap_or(&String::new().as_str())) {
             Err(e) => ::show_error_alfred(&e),
             Ok(results) => {
                 alfred_items = match results {
                     None => {
                         assert!(!query_words.is_empty());
-                        let last_query_word = query_words.last().unwrap().to_string();
+                        let last_query_word = *query_words.last().unwrap();
                         vec![
-                            ItemBuilder::new(last_query_word.clone())
+                            ItemBuilder::new(last_query_word)
                                 .subtitle("NEW TAG")
                                 .autocomplete(last_query_word)
                                 .icon_path("tag.png")
