@@ -57,7 +57,7 @@ fn process(query: Vec<String>, search_fields: &[SearchType], pins_to_show: u8, p
                         ItemBuilder::new(pin.title.as_ref())
                             .subtitle(pin.url.as_ref())
                             .arg(pin.url.as_ref())
-                            .icon_path("bookmarks.icns")
+                            .icon_path("bookmarks.png")
                             .into_item()
                     })
                     .collect::<Vec<Item>>(),

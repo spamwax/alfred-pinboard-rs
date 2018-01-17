@@ -111,7 +111,7 @@ fn show_config(config: &Config) {
             ItemBuilder::new("Automatically update cache")
                 .subtitle(format!("{:?}", config.auto_update_cache))
                 .arg("pset auto")
-                .icon_path("auto_update.png")
+                .icon_path("auto_update_cache.png")
                 .into_item(),
             ItemBuilder::new("Suggest popular tags for open browser tab")
                 .subtitle(format!("{:?}", config.suggest_tags))

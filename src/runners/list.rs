@@ -63,6 +63,7 @@ fn process<'a>(config: Config, pinboard: Pinboard<'a>, tags: bool, q: Option<Str
                                     })
                                     .autocomplete([prev_tags, &tag.0].concat())
                                     .arg(String::from(prev_tags) + &tag.0)
+                                    .icon_path("tag.png")
                                     .into_item()
                             })
                             .collect::<Vec<Item>>()

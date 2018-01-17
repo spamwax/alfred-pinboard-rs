@@ -55,5 +55,9 @@ pub fn run(cmd: SubCommand, mut config: Config, pinboard: Pinboard) {
                 io_err.description()
             );
         }
+        if config.auto_update_cache {
+            update::run(config, pinboard);
+        }
     }
+
 }
