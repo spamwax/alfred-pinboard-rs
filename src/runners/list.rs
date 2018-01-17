@@ -33,11 +33,15 @@ fn process<'a>(config: Config, pinboard: Pinboard<'a>, tags: bool, q: Option<Str
             Err(e) => ::show_error_alfred(&e),
             Ok(results) => {
                 alfred_items = match results {
-                    None => vec![
-                        ItemBuilder::new("No bookmarks found!")
-                            .icon_path("no_result.icns")
-                            .into_item(),
-                    ],
+                    None => {
+                        assert!(!query_words.is_empty());
+                        let last_query_word = query_words.last().unwrap().to_string();
+                        vec![ItemBuilder::new(last_query_word.clone())
+                            .subtitle("NEW TAG")
+                             .autocomplete(last_query_word)
+                            .icon_path("tag.png")
+                            .into_item(),]
+                    },
                     Some(items) => {
                         let mut prev_tags: &str = "";
                         if query_words.len() > 1 {
@@ -47,7 +51,7 @@ fn process<'a>(config: Config, pinboard: Pinboard<'a>, tags: bool, q: Option<Str
                         }
                         popular_tags
                             .iter()
-                            .chain(items.into_iter().take(config.tags_to_show))
+                            .chain(items.into_iter().take(config.tags_to_show as usize))
                             .map(|tag| {
                                 ItemBuilder::new(tag.0.as_ref())
                                     .subtitle(if tag.1 != 0 {

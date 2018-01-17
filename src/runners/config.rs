@@ -89,8 +89,9 @@ fn show_config(config: &Config) {
     // TODO: Move this to top-level module so we can check which version we have
     let r = VersionReq::parse("~3").unwrap();
     let mut v = Version::parse("3.0.0").unwrap();
-    if alfred::env::version().is_some() {
-        v = Version::parse(&alfred::env::version().unwrap()).unwrap();
+
+    if let Some(version_env) = alfred::env::version() {
+        v = Version::parse(&version_env).unwrap();
     }
 
     // If Using Alfred Version >=3
@@ -100,7 +101,7 @@ fn show_config(config: &Config) {
             ItemBuilder::new("Only search tags")
                 .subtitle(format!("{:?}", config.tag_only_search))
                 .arg("pset tagonly")
-                .icon_path("chrome.icns")
+                .icon_path("tagonly.png")
                 .into_item(),
             ItemBuilder::new("Use fuzzy search")
                 .subtitle(format!("{:?}", config.fuzzy_search))
@@ -130,12 +131,12 @@ fn show_config(config: &Config) {
             ItemBuilder::new("Number of tags to show")
                 .subtitle(format!("{:?}", config.tags_to_show))
                 .arg("pset tags")
-                .icon_path("tag.png")
+                .icon_path("no_of_tags.png")
                 .into_item(),
             ItemBuilder::new("Number of bookmarks to show")
                 .subtitle(format!("{:?}", config.pins_to_show))
                 .arg("pset bookmarks")
-                .icon_path("pins.png")
+                .icon_path("no_of_pins.png")
                 .into_item(),
             ItemBuilder::new("Latest cache update")
                 .subtitle(format!("{:?}", config.update_time))
