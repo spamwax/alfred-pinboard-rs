@@ -36,12 +36,14 @@ fn process<'a>(config: Config, pinboard: Pinboard<'a>, tags: bool, q: Option<Str
                     None => {
                         assert!(!query_words.is_empty());
                         let last_query_word = query_words.last().unwrap().to_string();
-                        vec![ItemBuilder::new(last_query_word.clone())
-                            .subtitle("NEW TAG")
-                             .autocomplete(last_query_word)
-                            .icon_path("tag.png")
-                            .into_item(),]
-                    },
+                        vec![
+                            ItemBuilder::new(last_query_word.clone())
+                                .subtitle("NEW TAG")
+                                .autocomplete(last_query_word)
+                                .icon_path("tag.png")
+                                .into_item(),
+                        ]
+                    }
                     Some(items) => {
                         let mut prev_tags: &str = "";
                         if query_words.len() > 1 {
