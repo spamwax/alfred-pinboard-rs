@@ -19,6 +19,7 @@ fn process<'a>(config: Config, pinboard: Pinboard<'a>, tags: bool, q: Option<Str
             let pin_info = queries.splitn(2, ';').collect::<Vec<&str>>();
             let item = ItemBuilder::new("Hit Return to bookmark the page!")
                 .icon_path("upload.png")
+                .arg(queries.as_ref())
                 .variable("tags", pin_info[0].trim())
                 .variable("description", pin_info[1].trim())
                 .into_item();
