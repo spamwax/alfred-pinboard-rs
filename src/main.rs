@@ -82,6 +82,8 @@ where
 {
     let output_items = items.into_iter().collect::<Vec<alfred::Item>>();
 
+    let exec_counter = env::var("apr_execution_counter").unwrap_or("1".to_string());
+
     let v = Version::parse("3.0.0").unwrap();
     // TODO: Comment above and uncomment next line for release builds
     //let v = config.alfred_version;
@@ -89,7 +91,9 @@ where
     // Depending on alfred version use either json or xml output.
     let r = VersionReq::parse("~3").unwrap();
     if r.matches(&v) {
-        alfred::json::write_items(io::stdout(), &output_items).map_err(|e| e.to_string())
+        alfred::json::Builder::with_items(output_items.as_slice())
+            .variable("apr_execution_counter", exec_counter.as_str())
+            .write(io::stdout()).map_err(|e| e.to_string())
     } else {
         alfred::xml::write_items(io::stdout(), &output_items).map_err(|e| e.to_string())
     }

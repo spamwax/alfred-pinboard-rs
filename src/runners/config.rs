@@ -138,8 +138,8 @@ fn show_config(config: &Config) {
                 .arg("pset bookmarks")
                 .icon_path("no_of_pins.png")
                 .into_item(),
-            ItemBuilder::new("Latest cache update")
-                .subtitle(format!("{:?}", config.update_time))
+            ItemBuilder::new(format!("{:?}", config.update_time))
+                .subtitle("Latest cache update")
                 .icon_path("auto_update.png")
                 .into_item(),
         ]).write(io::stdout())

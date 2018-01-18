@@ -127,6 +127,14 @@ impl<'a> Config {
         self.workflow_cache_dir = dirs.1;
     }
 
+    pub fn cache_dir(&self) -> PathBuf {
+        self.workflow_cache_dir.to_path_buf()
+    }
+
+    pub fn data_dir(&self) -> PathBuf {
+        self.workflow_data_dir.to_path_buf()
+    }
+
     fn get_workflow_dirs() -> (PathBuf, PathBuf) {
         let cache_dir = alfred::env::workflow_cache().unwrap_or_else(|| {
             let mut dir = env::home_dir().unwrap_or(PathBuf::from(""));
