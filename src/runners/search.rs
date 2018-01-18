@@ -1,8 +1,9 @@
 use super::*;
-use alfred::{Item, ItemBuilder};
+use alfred::{Item, ItemBuilder, Modifier};
 
 use rusty_pin::pinboard::SearchType;
 
+// TODO: Investigate why content of text_copy is not used within Alfred when user presses ⌘-C
 pub fn run(cmd: SubCommand, config: Config, pinboard: Pinboard) {
     match cmd {
         SubCommand::Search {
@@ -57,6 +58,10 @@ fn process(query: Vec<String>, search_fields: &[SearchType], pins_to_show: u8, p
                         ItemBuilder::new(pin.title.as_ref())
                             .subtitle(pin.url.as_ref())
                             .arg(pin.url.as_ref())
+                            .subtitle_mod(Modifier::Command, pin.tags.as_ref())
+                            .quicklook_url(pin.url.as_ref())
+                            .text_large_type(pin.title.as_ref())
+                            .text_copy(pin.url.as_ref())
                             .icon_path("bookmarks.png")
                             .into_item()
                     })

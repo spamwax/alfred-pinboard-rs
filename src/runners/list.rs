@@ -62,6 +62,7 @@ fn process<'a>(config: Config, pinboard: Pinboard<'a>, tags: bool, q: Option<Str
                                         String::from("Popular")
                                     })
                                     .autocomplete([prev_tags, &tag.0].concat())
+                                    .valid(false)
                                     .arg(String::from(prev_tags) + &tag.0)
                                     .icon_path("tag.png")
                                     .into_item()
