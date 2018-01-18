@@ -16,15 +16,18 @@ fn process<'a>(config: Config, pinboard: Pinboard<'a>, tags: bool, q: Option<Str
         // Check if user has entered ';' which indicates they are providing a description.
         // So no need to search for tags!
         if queries.contains(';') {
-            let pin_info = queries.splitn(2, ';').collect::<Vec<&str>>();
+            let pin_info = queries
+                .splitn(2, ';')
+                .map(|s| s.trim())
+                .collect::<Vec<&str>>();
             let item = ItemBuilder::new("Hit Return to bookmark the page!")
                 .icon_path("upload.png")
                 .arg(queries.as_ref())
-                .variable("tags", pin_info[0].trim())
-                .variable("description", pin_info[1].trim())
+                .variable("tags", pin_info[0])
+                .variable("description", pin_info[1])
                 .into_item();
             ::write_to_alfred(vec![item], config);
-            return
+            return;
         }
 
         let query_words: Vec<&str> = queries.split_whitespace().collect();

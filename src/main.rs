@@ -80,9 +80,7 @@ fn write_to_alfred<'a, I>(items: I, config: Config) -> Result<(), String>
 where
     I: IntoIterator<Item = alfred::Item<'a>>,
 {
-    let output_items = items
-        .into_iter()
-        .collect::<Vec<alfred::Item>>();
+    let output_items = items.into_iter().collect::<Vec<alfred::Item>>();
 
     let v = Version::parse("3.0.0").unwrap();
     // TODO: Comment above and uncomment next line for release builds

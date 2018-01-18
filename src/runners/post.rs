@@ -59,5 +59,4 @@ pub fn run(cmd: SubCommand, mut config: Config, pinboard: Pinboard) {
             update::run(config, pinboard);
         }
     }
-
 }
