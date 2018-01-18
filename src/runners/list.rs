@@ -8,7 +8,6 @@ pub fn run<'a>(cmd: SubCommand, config: Config, pinboard: Pinboard<'a>) {
     }
 }
 
-
 // TODO: Do not show tags that are alread autocompleted or present in user's query
 fn process<'a>(config: Config, pinboard: Pinboard<'a>, tags: bool, q: Option<String>) {
     if tags {
@@ -111,10 +110,14 @@ fn process<'a>(config: Config, pinboard: Pinboard<'a>, tags: bool, q: Option<Str
 }
 
 /// Retrieves popular tags from a Web API call for first run and caches them for subsequent runs.
-fn retrieve_popular_tags<'a>(config: &Config, pinboard: &Pinboard<'a>, exec_counter: usize) -> Vec<Tag> {
+fn retrieve_popular_tags<'a>(
+    config: &Config,
+    pinboard: &Pinboard<'a>,
+    exec_counter: usize,
+) -> Vec<Tag> {
     use std::env;
     use std::fs;
-    use std::io::{BufReader, BufWriter, BufRead};
+    use std::io::{BufRead, BufReader, BufWriter};
 
     let ptags_fn = config.cache_dir().join("popular.tags.cache");
     let mut popular_tags = vec![];
@@ -136,7 +139,10 @@ fn retrieve_popular_tags<'a>(config: &Config, pinboard: &Pinboard<'a>, exec_coun
         eprintln!("reading tags from cache file: {:?}", ptags_fn);
         let fp = fs::File::open(ptags_fn).unwrap();
         let reader = BufReader::with_capacity(1024, fp);
-        popular_tags = reader.lines().map(|l| Tag(l.unwrap(), 0)).collect::<Vec<Tag>>();
+        popular_tags = reader
+            .lines()
+            .map(|l| Tag(l.unwrap(), 0))
+            .collect::<Vec<Tag>>();
     }
     popular_tags
 }

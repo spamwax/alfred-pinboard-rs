@@ -93,7 +93,8 @@ where
     if r.matches(&v) {
         alfred::json::Builder::with_items(output_items.as_slice())
             .variable("apr_execution_counter", exec_counter.as_str())
-            .write(io::stdout()).map_err(|e| e.to_string())
+            .write(io::stdout())
+            .map_err(|e| e.to_string())
     } else {
         alfred::xml::write_items(io::stdout(), &output_items).map_err(|e| e.to_string())
     }
