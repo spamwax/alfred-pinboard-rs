@@ -9,6 +9,7 @@ pub fn run(cmd: SubCommand, config: Config, pinboard: Pinboard) {
         SubCommand::Search {
             tags,
             title,
+            description,
             url,
             query,
         } => {
@@ -21,6 +22,9 @@ pub fn run(cmd: SubCommand, config: Config, pinboard: Pinboard) {
             }
             if url {
                 search_fields.push(SearchType::UrlOnly);
+            }
+            if description {
+                search_fields.push(SearchType::DescriptionOnly);
             }
             // If user is not asking explicitly for search fields, then search based on
             // configuration set by user

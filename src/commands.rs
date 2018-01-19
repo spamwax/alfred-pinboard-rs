@@ -90,14 +90,19 @@ pub enum SubCommand {
     #[structopt(name = "search")]
     /// Searches bookmarks.
     Search {
-        /// Only search within tags, can be combined with -T .
+        /// Only search within tags, can be combined with other flags.
         #[structopt(name = "tags", long = "tags", short = "t")]
         tags: bool,
-        /// Only search within title field, can be combined with -t.
+
+        /// Only search within title field, can be combined with other flags.
         #[structopt(name = "title", long = "title", short = "T")]
         title: bool,
 
-        /// Only search within url field, can be combined with -T and/or -t.
+        /// Only search within description field, can be combined with other flags.
+        #[structopt(name = "description", long = "description", short = "d")]
+        description: bool,
+
+        /// Only search within url field, can be combined with other flags.
         #[structopt(name = "url", long = "url", short = "u")]
         url: bool,
 
