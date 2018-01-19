@@ -78,8 +78,15 @@ fn process<'a>(config: Config, pinboard: Pinboard<'a>, tags: bool, q: Option<Str
                             .chain(items.into_iter().take(config.tags_to_show as usize))
                             // Remove tags that user has aleady selected
                             .filter(|tag| {
-                                !query_words.as_slice()[0..query_words.len() - 1]
-                                    .contains(&tag.0.as_str())
+                                if !query_words.is_empty() {
+                                    let upper = query_words.len() - 1;
+                                    !query_words
+                                        .as_slice()[0..upper]
+                                        .iter()
+                                        .any(|q| q == &tag.0.as_str())
+                                } else {
+                                    true
+                                }
                             })
                             // transform tags to Alfred items
                             .map(|tag| {
