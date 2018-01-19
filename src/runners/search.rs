@@ -49,7 +49,7 @@ fn process(query: Vec<String>, search_fields: &[SearchType], pins_to_show: u8, p
             let alfred_items = match r {
                 None => vec![
                     ItemBuilder::new("No bookmarks found!")
-                        .icon_path("no_result.icns")
+                        .icon_path("no_result.png")
                         .into_item(),
                 ],
                 Some(pins) => pins.iter()
