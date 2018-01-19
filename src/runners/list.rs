@@ -8,7 +8,6 @@ pub fn run<'a>(cmd: SubCommand, config: Config, pinboard: Pinboard<'a>) {
     }
 }
 
-// TODO: Do not show tags that are alread autocompleted or present in user's query
 fn process<'a>(config: Config, pinboard: Pinboard<'a>, tags: bool, q: Option<String>) {
     if tags {
         // Search the tags using the last 'word' in 'q'
