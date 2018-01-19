@@ -43,7 +43,11 @@ fn process<'a>(config: Config, pinboard: Pinboard<'a>, tags: bool, q: Option<Str
                 .unwrap_or("1".to_string())
                 .parse::<usize>()
                 .unwrap_or(1);
-            popular_tags = retrieve_popular_tags(&config, &pinboard, exec_counter);
+            let r = retrieve_popular_tags(&config, &pinboard, exec_counter);
+            match r {
+                Ok(_) => popular_tags = r.unwrap(),
+                Err(e) => eprintln!("retrieve_popular_tags: {:?}", e),
+            }
         }
 
         match pinboard.search_list_of_tags(query_words.last().unwrap_or(&String::new().as_str())) {
@@ -114,7 +118,7 @@ fn retrieve_popular_tags<'a>(
     config: &Config,
     pinboard: &Pinboard<'a>,
     exec_counter: usize,
-) -> Vec<Tag> {
+) -> Result<Vec<Tag>, String> {
     use std::env;
     use std::fs;
     use std::io::{BufRead, BufReader, BufWriter};
@@ -129,22 +133,28 @@ fn retrieve_popular_tags<'a>(
                 Err(e) => vec![String::from("ERROR: fetching popular tags!")],
                 Ok(tags) => tags,
             };
-            fs::File::create(ptags_fn).and_then(|fp| {
-                let mut writer = BufWriter::with_capacity(1024, fp);
-                writer.write_all(&tags.join("\n").as_bytes())
-            });
+            fs::File::create(ptags_fn)
+                .and_then(|fp| {
+                    let mut writer = BufWriter::with_capacity(1024, fp);
+                    writer.write_all(&tags.join("\n").as_bytes())
+                })
+                .map_err(|e| e.to_string())?;
             popular_tags = tags.into_iter().map(|t| Tag(t, 0)).collect::<Vec<Tag>>();
         }
     } else {
         eprintln!("reading tags from cache file: {:?}", ptags_fn);
-        let fp = fs::File::open(ptags_fn).unwrap();
-        let reader = BufReader::with_capacity(1024, fp);
-        popular_tags = reader
-            .lines()
-            .map(|l| Tag(l.unwrap(), 0))
-            .collect::<Vec<Tag>>();
+        fs::File::open(ptags_fn)
+            .and_then(|fp| {
+                let reader = BufReader::with_capacity(1024, fp);
+                popular_tags = reader
+                    .lines()
+                    .map(|l| Tag(l.unwrap(), 0))
+                    .collect::<Vec<Tag>>();
+                Ok(())
+            })
+            .map_err(|e| e.to_string())?;
     }
-    popular_tags
+    Ok(popular_tags)
 }
 
 pub struct MyItem<'a>(Item<'a>);
