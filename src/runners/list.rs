@@ -74,7 +74,14 @@ fn process<'a>(config: Config, pinboard: Pinboard<'a>, tags: bool, q: Option<Str
                         }
                         popular_tags
                             .iter()
+                            // Combine popular tags and returned tags from cache
                             .chain(items.into_iter().take(config.tags_to_show as usize))
+                            // Remove tags that user has aleady selected
+                            .filter(|tag| {
+                                !query_words.as_slice()[0..query_words.len() - 1]
+                                    .contains(&tag.0.as_str())
+                            })
+                            // transform tags to Alfred items
                             .map(|tag| {
                                 ItemBuilder::new(tag.0.as_ref())
                                     .subtitle(if tag.1 != 0 {
