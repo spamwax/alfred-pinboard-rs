@@ -13,9 +13,7 @@ pub fn run(mut config: Config, mut pinboard: Pinboard) {
                 if let Err(_) = config.save() {
                     ::show_error_alfred("Couldn't save to workflow's config file!");
                 }
-                io::stdout()
-                    .write(b"Successfully update cache files!")
-                    .unwrap();
+                io::stdout().write(b"Updated cache files!").unwrap();
             } else {
                 io::stdout().write(b"Cache is already up-to-date!").unwrap();
             }

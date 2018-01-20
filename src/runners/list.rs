@@ -69,8 +69,9 @@ fn process<'a>(config: Config, pinboard: Pinboard<'a>, tags: bool, q: Option<Str
                         if query_words.len() > 1 {
                             // User has already searched for other tags, we should include those in the
                             // 'autocomplete' field of the AlfredItem
-                            prev_tags = queries.get(0..queries.rfind(' ').unwrap() + 1).unwrap()
+                            prev_tags = queries.get(0..queries.rfind(' ').unwrap() + 1).unwrap();
                         }
+                        let prev_tags_len = prev_tags.len();
                         popular_tags
                             .iter()
                             // Combine popular tags and returned tags from cache
@@ -87,21 +88,25 @@ fn process<'a>(config: Config, pinboard: Pinboard<'a>, tags: bool, q: Option<Str
                                     true
                                 }
                             })
-                            // transform tags to Alfred items
-                            .map(|tag| {
-                                ItemBuilder::new(tag.0.as_ref())
-                                    .subtitle(if tag.1 != 0 {
-                                        tag.1.to_string()
-                                    } else {
-                                        String::from("Popular")
-                                    })
-                                    .autocomplete([prev_tags, &tag.0].concat())
-                                    .valid(true)
-                                    .arg(String::from(prev_tags) + &tag.0)
-                                    .icon_path("tag.png")
-                                    .into_item()
-                            })
-                            .collect::<Vec<Item>>()
+                        // transform tags to Alfred items
+                        .map(|tag| {
+                            let mut _args = String::with_capacity(prev_tags_len + tag.0.len());
+                            _args.push_str(prev_tags);
+                            _args.push_str(&tag.0);
+                            ItemBuilder::new(tag.0.as_ref())
+                                .subtitle(if tag.1 != 0 {
+                                    tag.1.to_string()
+                                } else {
+                                    String::from("Popular")
+                                })
+                                .autocomplete(_args.clone())
+                                .variable("tags", _args.clone())
+                                .arg(_args)
+                                .valid(true)
+                                .icon_path("tag.png")
+                                .into_item()
+                        })
+                        .collect::<Vec<Item>>()
                     }
                 };
             }
