@@ -24,12 +24,12 @@ use rusty_pin::Pinboard;
 
 mod workflow_config;
 mod cli;
-mod runners;
+mod commands;
 
 use cli::{Opt, SubCommand};
 use workflow_config::Config;
 
-use runners::{config, list, post, search, update};
+use commands::{config, list, post, search, update};
 
 // TODO: Use 'semver' crate to compare Alfred's version
 // TODO: Improve performance, maybe use toml format for saving config. Look into how manytimes when
