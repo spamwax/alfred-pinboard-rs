@@ -25,7 +25,7 @@ pub fn run(cmd: SubCommand, mut config: Config, pinboard: Pinboard) {
     }
 
     let browser_tab_info = browser_info::get().unwrap_or_else(|e| {
-        ::show_error_alfred(e.as_ref());
+        io::stdout().write(format!("Error: {}", e).as_ref());
         process::exit(1);
     });
 
