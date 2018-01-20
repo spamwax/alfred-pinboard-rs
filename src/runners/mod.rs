@@ -7,7 +7,7 @@ use std::io::{Read, Write};
 use semver::Version;
 use semver::VersionReq;
 
-use commands::{Opt, SubCommand};
+use cli::SubCommand;
 use workflow_config::Config;
 
 use rusty_pin::{Pin, PinBuilder, Pinboard, Tag};

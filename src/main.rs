@@ -23,10 +23,10 @@ use semver::{Version, VersionReq};
 use rusty_pin::Pinboard;
 
 mod workflow_config;
-mod commands;
+mod cli;
 mod runners;
 
-use commands::{Opt, SubCommand};
+use cli::{Opt, SubCommand};
 use workflow_config::Config;
 
 use runners::{config, list, post, search, update};
