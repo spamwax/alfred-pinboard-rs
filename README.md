@@ -133,6 +133,14 @@ On top of using `pconf`, you can directly type following commands to also adjust
 - `pset tags`: Set number of tags to show: `pset tags 25`
 - `pset bookmarks`: Set number of bookmarks to show: `pset bookmarks 12`
 
+## Misc.
+- This workflow tries to show some helpful errors in different cases.
+![image](./res/images/error-1.png)
+![image](./res/images/error-2.png)
+- If you want to change some behavior take a look at Alfred's workflow page:
+
+
+![image](./res/images/workflow-screenshot.png)
 
 ## TODO / Missing features
 
