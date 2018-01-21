@@ -4,8 +4,7 @@
 pub struct Opt {
     #[structopt(name = "debug", default_value = "1", required = false, long = "debug")]
     pub debug_level: i8,
-    #[structopt(subcommand)]
-    pub cmd: SubCommand,
+    #[structopt(subcommand)] pub cmd: SubCommand,
 }
 
 #[derive(StructOpt, Debug)]
@@ -37,7 +36,7 @@ pub enum SubCommand {
 
         /// By default, set all new bookmarks' toread flag. [default: false]
         #[structopt(name = "toread", short = "r", long = "toread",
-        possible_values_raw = "&[\"true\", \"false\"]")]
+                    possible_values_raw = "&[\"true\", \"false\"]")]
         toread: Option<bool>,
 
         /// When searching tags/bookmarks, enable 'fuzzy' searching. (similar to `selecta`) [default: false]
@@ -61,14 +60,14 @@ pub enum SubCommand {
         suggest_tags: Option<bool>,
     },
     #[structopt(name = "list")]
-    /// Lists bookmarks or tags.
+    /// Lists all bookmarks (default) or tags.
     List {
-        /// Only list bookmarks (default)
-        #[structopt(name = "bookmarks", long = "bookmarks", short = "b")]
-        bookmarks: bool,
         /// Only list tags
         #[structopt(name = "tags", long = "tags", short = "t")]
         tags: bool,
+        /// Optional query word used to narrow the output list.
+        /// Only works with --tags option! To narrow down bookmarks, use `search` sub-command
+        query: Option<String>,
     },
     #[structopt(name = "post")]
     /// Creates a bookmark for the current page of the active browser.
@@ -79,24 +78,31 @@ pub enum SubCommand {
         /// Extra description note for the url
         #[structopt(name = "description", long = "description", short = "d")]
         description: Option<String>,
-        /// Mark this bookmark shared/private (overrides user's settings)
-        #[structopt(name = "shared", long = "shared", possible_values_raw = "&[\"true\", \"false\"]")]
+        /// Mark this bookmark shared (overrides user's settings)
+        #[structopt(name = "shared", long = "shared", short = "s",
+                    possible_values_raw = "&[\"true\", \"false\"]")]
         shared: Option<bool>,
         /// Mark this bookmark as toread (overrides user's settings)
-        #[structopt(name = "toread", long = "toread", possible_values_raw = "&[\"true\", \"false\"]")]
+        #[structopt(name = "toread", long = "toread", short = "b",
+                    possible_values_raw = "&[\"true\", \"false\"]")]
         toread: Option<bool>,
     },
     #[structopt(name = "search")]
     /// Searches bookmarks.
     Search {
-        /// Only search within tags, can be combined with -T .
+        /// Only search within tags, can be combined with other flags.
         #[structopt(name = "tags", long = "tags", short = "t")]
         tags: bool,
-        /// Only search within title field, can be combined with -t.
+
+        /// Only search within title field, can be combined with other flags.
         #[structopt(name = "title", long = "title", short = "T")]
         title: bool,
 
-        /// Only search within url field, can be combined with -T and/or -t.
+        /// Only search within description field, can be combined with other flags.
+        #[structopt(name = "description", long = "description", short = "d")]
+        description: bool,
+
+        /// Only search within url field, can be combined with other flags.
         #[structopt(name = "url", long = "url", short = "u")]
         url: bool,
 
@@ -110,32 +116,4 @@ pub enum SubCommand {
     /// Update Workflow's cache by doing a full download from Pinboard.
     #[structopt(name = "update")]
     Update,
-    //    #[structopt(name = "sparkle")]
-       //    /// Add magical sparkles -- the secret ingredient!
-       //    Sparkle {
-       //        #[structopt(name = "gooz", short = "g", required = false)]
-       //        gooz: String,
-       //        #[structopt(short = "m")]
-       //        magicality: bool,
-       //        #[structopt(name = "color")]
-       //        color: Option<String>,
-       //        #[structopt(name = "zard")]
-       //        zard: Option<String>,
-       //    },
-       //    /// Some help
-       //    #[structopt(name = "finish")]
-       //    Finish {
-       //        #[structopt(short = "t")]
-       //        time: u32,
-       //        #[structopt(subcommand)] // Note that we mark a field as a subcommand
-       //        mtype: FinishType,
-       //    }
 }
-
-//#[derive(StructOpt, Debug)]
-//enum FinishType {
-//    #[structopt(name = "glaze")]
-//    Glaze { applications: u32 },
-//    #[structopt(name = "powder")]
-//    Powder { flavor: String, dips: Option<u32> },
-//}

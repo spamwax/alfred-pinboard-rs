@@ -1,20 +1,25 @@
-use std::fs::{File, create_dir_all};
-use std::path::{PathBuf, Path};
+use std::fs::{create_dir_all, File};
+use std::path::{Path, PathBuf};
 use std::io::{Read, Write};
+use std::io::{BufReader, BufWriter};
 use std::env;
+use chrono::prelude::*;
 
 use serde;
 use serde_json;
 use alfred;
 
+use semver::Version;
 use rusty_pin::Pinboard;
 
 const CONFIG_FILE_NAME: &str = "settings.json";
+const FILE_BUF_SIZE: usize = 4 * 1024 * 1024;
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Config {
     /// Which version of Alfred we are being executed under
-    pub alfred_version: String,
+    #[serde(skip, default = "get_alfred_version")]
+    pub alfred_version: Version,
     /// Number of bookmarks to show in Alfred
     pub pins_to_show: u8,
     /// Number of tags to show in Alfred
@@ -33,6 +38,9 @@ pub struct Config {
     pub auto_update_cache: bool,
     /// Authentication Token
     pub auth_token: String,
+    /// Last time cache was updated
+    #[serde(default = "get_epoch")]
+    pub update_time: DateTime<Utc>,
 
     /// Folder to store volatile data of the workflow
     workflow_data_dir: PathBuf,
@@ -43,7 +51,7 @@ pub struct Config {
 impl<'a> Config {
     pub fn new() -> Self {
         let mut cfg = Config {
-            alfred_version: String::new(),
+            alfred_version: get_alfred_version(),
             pins_to_show: 10,
             tags_to_show: 10,
             tag_only_search: false,
@@ -53,6 +61,7 @@ impl<'a> Config {
             suggest_tags: true,
             auto_update_cache: true,
             auth_token: String::new(),
+            update_time: get_epoch(),
             workflow_data_dir: PathBuf::default(),
             workflow_cache_dir: PathBuf::default(),
         };
@@ -72,9 +81,11 @@ impl<'a> Config {
         if p.exists() {
             let mut config: Config = File::open(p)
                 .map_err(|e| e.to_string())
-                .and_then(|mut f| {
+                .and_then(|f| {
                     let mut content = String::new();
-                    f.read_to_string(&mut content)
+                    let mut reader = BufReader::with_capacity(FILE_BUF_SIZE, f);
+                    reader
+                        .read_to_string(&mut content)
                         .map_err(|e| e.to_string())
                         .and_then(|_| Ok(content))
                 })
@@ -88,7 +99,7 @@ impl<'a> Config {
         } else {
             Err(String::from(format!(
                 "Can't find Workflow's setting file:\n{:?}\n\
-                    Have you added your authorization token?",
+                 Have you added your authorization token?",
                 p
             )))
         }
@@ -99,11 +110,14 @@ impl<'a> Config {
 
         let mut settings_fn = self.workflow_data_dir.clone();
         settings_fn.push(CONFIG_FILE_NAME);
-        let mut fp = File::create(settings_fn).map_err(|e| e.to_string())?;
+        let fp = File::create(settings_fn).map_err(|e| e.to_string())?;
         serde_json::to_string(self)
             .map_err(|e| e.to_string())
             .and_then(|content| {
-                fp.write_all(content.as_ref()).map_err(|e| e.to_string())
+                let mut writer = BufWriter::with_capacity(FILE_BUF_SIZE, fp);
+                writer
+                    .write_all(content.as_ref())
+                    .map_err(|e| e.to_string())
             })
     }
 
@@ -111,6 +125,14 @@ impl<'a> Config {
         let dirs = Config::get_workflow_dirs();
         self.workflow_data_dir = dirs.0;
         self.workflow_cache_dir = dirs.1;
+    }
+
+    pub fn cache_dir(&self) -> &PathBuf {
+        &self.workflow_cache_dir
+    }
+
+    pub fn data_dir(&self) -> &PathBuf {
+        &self.workflow_data_dir
     }
 
     fn get_workflow_dirs() -> (PathBuf, PathBuf) {
@@ -128,4 +150,14 @@ impl<'a> Config {
         });
         (data_dir, cache_dir)
     }
+}
+
+fn get_alfred_version() -> Version {
+    alfred::env::version().map_or(Version::parse("0.0.0").unwrap(), |ref s| {
+        Version::parse(s).unwrap_or(Version::parse("0.0.0").unwrap())
+    })
+}
+
+fn get_epoch() -> DateTime<Utc> {
+    "1970-01-01T23:00:00Z".parse::<DateTime<Utc>>().unwrap()
 }

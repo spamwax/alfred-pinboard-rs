@@ -8,7 +8,10 @@ pub fn run(x: SubCommand) {
             process::exit(1);
         }
         match &x {
-            &SubCommand::Config { auth_token: Some(_), .. } => {
+            &SubCommand::Config {
+                auth_token: Some(_),
+                ..
+            } => {
                 let mut config = Config::new();
                 match &x {
                     &SubCommand::Config {
@@ -40,7 +43,9 @@ pub fn run(x: SubCommand) {
                 config
             }
             _ => {
-                ::show_error_alfred("First-time config command should provide authorization token!");
+                ::show_error_alfred(
+                    "First-time config command should provide authorization token!",
+                );
                 process::exit(1);
             }
         }
@@ -78,55 +83,66 @@ pub fn run(x: SubCommand) {
     if print_config {
         show_config(&config);
     }
-
 }
 
 fn show_config(config: &Config) {
-
     // TODO: Move this to top-level module so we can check which version we have
     let r = VersionReq::parse("~3").unwrap();
     let mut v = Version::parse("3.0.0").unwrap();
-    if alfred::env::version().is_some() {
-        v = Version::parse(&alfred::env::version().unwrap()).unwrap();
+
+    if let Some(version_env) = alfred::env::version() {
+        v = Version::parse(&version_env).unwrap();
     }
 
     // If Using Alfred Version >=3
     if r.matches(&v) {
-        use alfred::{ItemBuilder, Item};
+        use alfred::{Item, ItemBuilder};
         alfred::json::Builder::with_items(&[
             ItemBuilder::new("Only search tags")
                 .subtitle(format!("{:?}", config.tag_only_search))
                 .arg("pset tagonly")
-                .icon_path("chrome.icns").into_item(),
+                .icon_path("tagonly.png")
+                .into_item(),
             ItemBuilder::new("Use fuzzy search")
                 .subtitle(format!("{:?}", config.fuzzy_search))
                 .arg("pset fuzzy")
-                .icon_path("fuzzy.png").into_item(),
+                .icon_path("fuzzy.png")
+                .into_item(),
             ItemBuilder::new("Automatically update cache")
                 .subtitle(format!("{:?}", config.auto_update_cache))
                 .arg("pset auto")
-                .icon_path("auto_update.png").into_item(),
+                .icon_path("auto_update_cache.png")
+                .into_item(),
             ItemBuilder::new("Suggest popular tags for open browser tab")
                 .subtitle(format!("{:?}", config.suggest_tags))
                 .arg("pset suggest_tags")
-                .icon_path("suggest.png").into_item(),
+                .icon_path("suggest.png")
+                .into_item(),
             ItemBuilder::new("Mark new bookmarks as toread")
                 .subtitle(format!("{:?}", config.toread_new_pin))
                 .arg("pset toread")
-                .icon_path("toread.png").into_item(),
+                .icon_path("toread.png")
+                .into_item(),
             ItemBuilder::new("Mark new bookmarks as private")
                 .subtitle(format!("{:?}", config.private_new_pin))
                 .arg("pset shared")
-                .icon_path("private.png").into_item(),
+                .icon_path("private.png")
+                .into_item(),
             ItemBuilder::new("Number of tags to show")
                 .subtitle(format!("{:?}", config.tags_to_show))
                 .arg("pset tags")
-                .icon_path("tag.png").into_item(),
+                .icon_path("no_of_tags.png")
+                .into_item(),
             ItemBuilder::new("Number of bookmarks to show")
                 .subtitle(format!("{:?}", config.pins_to_show))
                 .arg("pset bookmarks")
-                .icon_path("pins.png").into_item()])
-            .write(io::stdout()).unwrap();
+                .icon_path("no_of_pins.png")
+                .into_item(),
+            ItemBuilder::new(format!("{:?}", config.update_time))
+                .subtitle("Latest cache update")
+                .icon_path("auto_update.png")
+                .into_item(),
+        ]).write(io::stdout())
+            .unwrap();
     }
 }
-
