@@ -51,14 +51,24 @@ fn process(query: Vec<String>, search_fields: &[SearchType], pins_to_show: u8, p
         Err(e) => ::show_error_alfred(&e),
         Ok(r) => {
             let alfred_items = match r {
+                // No result was found.
                 None => vec![
                     ItemBuilder::new("No bookmarks found!")
                         .icon_path("no_result.png")
                         .into_item(),
                 ],
+                // Some results were found
                 Some(pins) => pins.iter()
+                    // Only take pins_to_show of them to show
                     .take(pins_to_show as usize)
+                    // Create Alfred items that support:
+                    // - quicklook
+                    // - opening bookmark in a browser
+                    // - showing large text
+                    // - holding modifiers to
+                    //   show extended text, tags or open the link in https://pinboard.in
                     .map(|pin| {
+                        let _none: Option<String> = None;
                         ItemBuilder::new(pin.title.as_ref())
                             .subtitle(pin.url.as_ref())
                             .arg(pin.url.as_ref())
@@ -67,11 +77,41 @@ fn process(query: Vec<String>, search_fields: &[SearchType], pins_to_show: u8, p
                             .text_large_type(pin.title.as_ref())
                             .text_copy(pin.url.as_ref())
                             .icon_path("bookmarks.png")
+                            // Hold Control: Show extended description of bookmark.
+                            .modifier(Modifier::Control,
+                                      pin.extended.clone(), _none, true, None)
+                            // Hold Option: Pressing Enter opens the bookmark on Pinboard
+                            .modifier(
+                                Modifier::Option,
+                                // subtitle
+                                Some("Show bookmark in https://pinboard.in"),
+                                // Only show alphanumeric/ascii characters as searching on
+                                // Pinboard's website currently doesn't like extra stuff.
+                                // arg
+                                Some(
+                                    pin.title
+                                        .split_whitespace()
+                                        .filter(|s| s.len() != 1)
+                                        .map(|s| {
+                                            s.chars()
+                                                .map(|c: char| match c {
+                                                    ch if ch.is_alphanumeric() || ch.is_ascii() => {
+                                                        ch
+                                                    }
+                                                    _ => ' ',
+                                                })
+                                                .collect::<String>()
+                                        })
+                                        .collect::<Vec<String>>()
+                                        .join(" "),
+                                ),
+                                true,
+                                None,
+                            )
                             .into_item()
                     })
                     .collect::<Vec<Item>>(),
             };
-            //            ::write_to_alfred(alfred_items, config);
             alfred::json::write_items(io::stdout(), alfred_items.as_ref());
         }
     }
