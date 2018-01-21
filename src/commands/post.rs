@@ -40,15 +40,15 @@ pub fn run(cmd: SubCommand, mut config: Config, pinboard: Pinboard) {
     }
 
     if let Err(e) = pinboard.add_pin(pin_builder.into_pin()) {
-        if let Err(io_err) = io::stdout().write(e.as_ref()) {
+        if let Err(io_err) = io::stdout().write(format!("Error: {}", e).as_ref()) {
             eprintln!(
                 "Failed to post to Pinboard AND to notify user: {}",
                 io_err.description()
             );
         }
     } else {
-        if let Err(io_err) =
-            io::stdout().write(format!("Successfully posted: {}", browser_tab_info.title).as_ref())
+        if let Err(io_err) = io::stdout()
+            .write(format!("Successfully posted: {}\n", browser_tab_info.title).as_ref())
         {
             eprintln!(
                 "Failed to notify user about posting to Pinboard successfully: {}",

@@ -6,7 +6,7 @@ pub fn run(mut config: Config, mut pinboard: Pinboard) {
         Err(err) => {
             io::stdout().write(format!("Error: {}", err).as_ref());
             process::exit(1);
-        },
+        }
         Ok(needs_update) => {
             if needs_update {
                 pinboard.update_cache().unwrap_or_else(|err| {
@@ -15,11 +15,18 @@ pub fn run(mut config: Config, mut pinboard: Pinboard) {
                 });
                 config.update_time = Utc::now();
                 if let Err(_) = config.save() {
-                    io::stdout().write(b"Error: Couldn't save update time to workflow's config file!");
+                    io::stdout().write(
+                        format!("Error: Couldn't save update time to workflow's config file!")
+                            .as_ref(),
+                    );
                 }
-                io::stdout().write(b"Updated cache files!").unwrap();
+                io::stdout()
+                    .write(format!("Updated cache files!").as_ref())
+                    .unwrap();
             } else {
-                io::stdout().write(b"Cache is already up-to-date!").unwrap();
+                io::stdout()
+                    .write(format!("Cache is already up-to-date!").as_ref())
+                    .unwrap();
             }
         }
     }
