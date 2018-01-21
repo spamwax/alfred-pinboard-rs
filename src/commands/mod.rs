@@ -17,5 +17,6 @@ pub mod update;
 pub mod list;
 pub mod search;
 pub mod post;
+pub mod delete;
 
 mod browser_info;

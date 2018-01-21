@@ -29,7 +29,7 @@ mod commands;
 use cli::{Opt, SubCommand};
 use workflow_config::Config;
 
-use commands::{config, list, post, search, update};
+use commands::{config, list, post, search, update, delete};
 
 // TODO: Use 'semver' crate to compare Alfred's version
 // TODO: Improve performance, maybe use toml format for saving config. Look into how manytimes when
@@ -51,6 +51,7 @@ fn main() {
                 SubCommand::List { .. } => list::run(opt.cmd, config, pinboard),
                 SubCommand::Search { .. } => search::run(opt.cmd, config, pinboard),
                 SubCommand::Post { .. } => post::run(opt.cmd, config, pinboard),
+                SubCommand::Delete { .. } => delete::run(opt.cmd, config, pinboard),
                 _ => unimplemented!(),
             }
         }

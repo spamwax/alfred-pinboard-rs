@@ -1,6 +1,6 @@
 # Alfred Workflow for Pinboard
 
-Manage your bookmarks on [Pinboard](https://pinboard.in) right from within [Alfred app](https://www.alfredapp.com).
+Manage, post and **preview** your bookmarks on [Pinboard](https://pinboard.in) right from within [Alfred app](https://www.alfredapp.com).
 ## Features
 Pinboard is a great and reliable bookmarking service. Its [front page](https://pinboard.in) sums it all:
 "**Social Bookmarking for Introverts. Pinboard is a fast, no-nonsense bookmarking site.**"
@@ -19,7 +19,7 @@ This plugin will let you:
   - Tap <kbd>Control</kbd> to show current item's extended notes/descriptioin.
 - Many options that can be easily adjusted. (see below)
 
-For posting you just need to enter the Workflow's keyword ( <kbd>`p`</kbd> ) into Alfred's window and follow it with couple of tags and an optional description. The workflow will then post a bookmark for the window/tab of the active browser to Pinboard.
+For posting you just need to enter the Workflow's keyword ( `p` ) into Alfred's window and follow it with couple of tags and an optional description. The workflow will then post a bookmark for the window/tab of the active browser to Pinboard.
 
 ### Supported Browsers:
 - Safari
@@ -30,7 +30,7 @@ For posting you just need to enter the Workflow's keyword ( <kbd>`p`</kbd> ) int
 - Firefox Dev. Edition
 - Safari Tech. Preview
 
-For searching, use ( <kbd>`ps`</kbd> ) and then type the search keywords.
+For searching, use ( `ps` ) and then type the search keywords.
 
 ## Installation / Setup
 After [downloading](https://github.com/spamwax/alfred-pinboard-rs/releases/latest) the latest version of the workflow and installing it in Alfred, you need to do a one-time setup to authenticate the Workflow. This Workflow only uses username/token method so you won't need to enter your password. (This is the *suggested* way of using Pinboard's API).
@@ -45,8 +45,6 @@ This workflow will keep a local cache of the tags and bookmarks that you have in
 To manually update the cache, you need to issue the ***`pu`*** command:
 
 ![image](./res/images/update.png)
-
-Use this command once in while to keep the local cache up-to-date.
 
 ## Usage (post a bookmark):
 The syntax to post a bookmark to Pinboard is :
@@ -100,7 +98,6 @@ You can hold down modifiers to enable different behavior:
 
 ![image](./res/images/quicklook-preview.png)
 
-you can
 
 ## Settings<a name="config"></a>
 
@@ -147,10 +144,12 @@ On top of using `pconf`, you can directly type following commands to also adjust
 I wish to add the following in the coming releases:
 
 - Let users delete a selected bookmark from witin Alfred.
+- Add a proper logging facility to Rust code.
+- Use a better error mechanism (maybe [failure](https://crates.io/crates/failure)?)
 
 
 ## Feedback / Bugs
-This is my first non-trivial project using Rust language so so your [feedback or bug](https://github.com/spamwax/alfred-pinboard-rs) reports are greatly appreciated.
+This is my first non-trivial project using Rust language so so your [feedback or bug](https://github.com/spamwax/alfred-pinboard-rs/compare) reports are greatly appreciated.
 
 ## License
 This open source software is licensed under [MIT License](./LICENSE.md).
