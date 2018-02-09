@@ -29,7 +29,7 @@ mod commands;
 use cli::{Opt, SubCommand};
 use workflow_config::Config;
 
-use commands::{config, list, post, search, update, delete};
+use commands::{config, delete, list, post, search, update};
 
 // TODO: Use 'semver' crate to compare Alfred's version
 // TODO: Improve performance, maybe use toml format for saving config. Look into how manytimes when
@@ -87,7 +87,7 @@ where
 
     let v = Version::parse("3.0.0").unwrap();
     // TODO: Comment above and uncomment next line for release builds
-    //let v = config.alfred_version;
+    // let v = config.alfred_version;
 
     // Depending on alfred version use either json or xml output.
     let r = VersionReq::parse("~3").unwrap();

@@ -9,7 +9,7 @@ use serde;
 use serde_json;
 use alfred;
 
-use semver::Version;
+use semver::{Version, VersionReq};
 use rusty_pin::Pinboard;
 
 const CONFIG_FILE_NAME: &str = "settings.json";
@@ -135,6 +135,15 @@ impl<'a> Config {
         &self.workflow_data_dir
     }
 
+    pub fn is_alfred_v3(&self) -> bool {
+        let r = VersionReq::parse("~3").unwrap();
+        if r.matches(&self.alfred_version) {
+            true
+        } else {
+            false
+        }
+    }
+
     fn get_workflow_dirs() -> (PathBuf, PathBuf) {
         let cache_dir = alfred::env::workflow_cache().unwrap_or_else(|| {
             let mut dir = env::home_dir().unwrap_or(PathBuf::from(""));
@@ -153,9 +162,18 @@ impl<'a> Config {
 }
 
 fn get_alfred_version() -> Version {
-    alfred::env::version().map_or(Version::parse("0.0.0").unwrap(), |ref s| {
-        Version::parse(s).unwrap_or(Version::parse("0.0.0").unwrap())
-    })
+    alfred::env::version().map_or(
+        Version::parse("2.0.0").expect("Parsing 2.0.0 shouldn't fail"),
+        |ref s| {
+            Version::parse(s).unwrap_or_else(|_| {
+                if s.starts_with("3.") {
+                    Version::parse("3.0.0").expect("Parsing 3.0.0 shouldn't fail")
+                } else {
+                    Version::parse("2.0.0").expect("Parsing 2.0.0 shouldn't fail")
+                }
+            })
+        },
+    )
 }
 
 fn get_epoch() -> DateTime<Utc> {

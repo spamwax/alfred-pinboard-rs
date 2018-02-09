@@ -86,16 +86,9 @@ pub fn run(x: SubCommand) {
 }
 
 fn show_config(config: &Config) {
-    // TODO: Move this to top-level module so we can check which version we have
-    let r = VersionReq::parse("~3").unwrap();
-    let mut v = Version::parse("3.0.0").unwrap();
-
-    if let Some(version_env) = alfred::env::version() {
-        v = Version::parse(&version_env).unwrap();
-    }
-
+    // TODO: Add support for Alfred 2 by returning XML <09-02-18, Hamid> //
     // If Using Alfred Version >=3
-    if r.matches(&v) {
+    if config.is_alfred_v3() {
         use alfred::{Item, ItemBuilder};
         alfred::json::Builder::with_items(&[
             ItemBuilder::new("Only search tags")
