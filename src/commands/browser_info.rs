@@ -14,7 +14,7 @@ pub fn get() -> Result<BrowserActiveTabInfo, String> {
         .arg("so")
         .arg("get-current-url.applescript")
         .output()
-        .map_err(|e| e.to_string())?;
+        .map_err(|e| e.to_string() + ": osascript")?;
     if !output.status.success() {
         return Err(format!("osascript error: code {}", output.status));
     }
