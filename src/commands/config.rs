@@ -2,7 +2,7 @@ use super::*;
 
 pub fn run(x: SubCommand) {
     let mut print_config = false;
-    let mut config: Config = Config::read().unwrap_or_else(|err| {
+    let mut config: Config = Config::setup().unwrap_or_else(|err| {
         if !err.contains("authorization token") {
             ::show_error_alfred(&err);
             process::exit(1);

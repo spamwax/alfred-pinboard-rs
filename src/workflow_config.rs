@@ -74,7 +74,7 @@ impl<'a> Config {
         Ok((config))
     }
 
-    pub fn read() -> Result<Config, String> {
+    fn read() -> Result<Config, String> {
         // If config file exists read settings
         let mut p = Config::get_workflow_dirs().0;
         p.push(CONFIG_FILE_NAME);
