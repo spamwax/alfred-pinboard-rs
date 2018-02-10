@@ -10,16 +10,18 @@ extern crate structopt;
 #[macro_use]
 extern crate structopt_derive;
 
+extern crate env_logger;
+#[macro_use]
+extern crate log;
+
 extern crate alfred;
 extern crate rusty_pin;
 
 use std::io;
 use std::env;
-use std::fs::File;
 use std::process;
 
 use structopt::StructOpt;
-use semver::{Version, VersionReq};
 use rusty_pin::Pinboard;
 
 mod workflow_config;
@@ -35,9 +37,13 @@ use commands::{config, delete, list, post, search, update};
 // TODO: Improve performance, maybe use toml format for saving config. Look into how manytimes when
 // read cache files when initiating the binary.
 fn main() {
+    env_logger::init();
+
+    info!("Parsing input arguments.");
     let opt: Opt = Opt::from_args();
     //    println!("{:?}\n", opt);
 
+    info!("Deciding on which command branch");
     match opt.cmd {
         SubCommand::Config { .. } => config::run(opt.cmd),
         _ => {
@@ -59,6 +65,7 @@ fn main() {
 }
 
 fn setup<'a>() -> Result<(Config, Pinboard<'a>), String> {
+    info!("Starting in setup");
     let config = Config::setup()?;
     let mut pinboard = Pinboard::new(config.auth_token.clone(), alfred::env::workflow_cache())?;
     pinboard.enable_fuzzy_search(config.fuzzy_search);
@@ -70,28 +77,25 @@ fn setup<'a>() -> Result<(Config, Pinboard<'a>), String> {
 }
 
 fn show_error_alfred(s: &str) {
+    info!("Starting in show_error_alfred");
     let item = alfred::ItemBuilder::new("Error")
         .subtitle(s)
         .icon_path("erroricon.icns")
         .into_item();
-    alfred::json::write_items(io::stdout(), &[item]).unwrap();
+    alfred::json::write_items(io::stdout(), &[item]).expect("Can't write to stdout");
 }
 
 fn write_to_alfred<'a, I>(items: I, config: Config) -> Result<(), String>
 where
     I: IntoIterator<Item = alfred::Item<'a>>,
 {
+    info!("Starting in write_to_alfred");
     let output_items = items.into_iter().collect::<Vec<alfred::Item>>();
 
     let exec_counter = env::var("apr_execution_counter").unwrap_or("1".to_string());
 
-    let v = Version::parse("3.0.0").unwrap();
-    // TODO: Comment above and uncomment next line for release builds
-    // let v = config.alfred_version;
-
     // Depending on alfred version use either json or xml output.
-    let r = VersionReq::parse("~3").unwrap();
-    if r.matches(&v) {
+    if config.is_alfred_v3() {
         alfred::json::Builder::with_items(output_items.as_slice())
             .variable("apr_execution_counter", exec_counter.as_str())
             .write(io::stdout())

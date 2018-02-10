@@ -17,3 +17,6 @@ structopt = "0.1.6"
 structopt-derive = "0.1.6"
 
 semver = "0.7.0"
+
+log = "0.4"
+env_logger = "0.5.3"

@@ -5,6 +5,7 @@ use rusty_pin::pinboard::SearchType;
 
 // TODO: Investigate why content of text_copy is not used within Alfred when user presses ⌘-C
 pub fn run(cmd: SubCommand, config: Config, pinboard: Pinboard) {
+    info!("Starting in search::run");
     match cmd {
         SubCommand::Search {
             tags,
@@ -47,6 +48,7 @@ pub fn run(cmd: SubCommand, config: Config, pinboard: Pinboard) {
 }
 
 fn process(query: Vec<String>, search_fields: &[SearchType], pins_to_show: u8, pinboard: Pinboard) {
+    info!("Starting in search::process");
     match pinboard.search(&query, search_fields) {
         Err(e) => ::show_error_alfred(&e),
         Ok(r) => {
@@ -112,7 +114,7 @@ fn process(query: Vec<String>, search_fields: &[SearchType], pins_to_show: u8, p
                     })
                     .collect::<Vec<Item>>(),
             };
-            alfred::json::write_items(io::stdout(), alfred_items.as_ref());
+            alfred::json::write_items(io::stdout(), alfred_items.as_ref()).expect("Couldn't write to stdout");
         }
     }
 }

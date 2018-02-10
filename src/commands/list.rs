@@ -1,4 +1,5 @@
 use super::*;
+use std::io::Write;
 use alfred::{Item, ItemBuilder};
 
 pub fn run<'a>(cmd: SubCommand, config: Config, pinboard: Pinboard<'a>) {
@@ -9,6 +10,7 @@ pub fn run<'a>(cmd: SubCommand, config: Config, pinboard: Pinboard<'a>) {
 }
 
 fn process<'a>(config: Config, pinboard: Pinboard<'a>, tags: bool, q: Option<String>) {
+    info!("Starting in list::process");
     if tags {
         // Search the tags using the last 'word' in 'q'
         let queries = q.unwrap_or(String::new());
@@ -26,7 +28,7 @@ fn process<'a>(config: Config, pinboard: Pinboard<'a>, tags: bool, q: Option<Str
                 .variable("tags", pin_info[0])
                 .variable("description", pin_info[1])
                 .into_item();
-            ::write_to_alfred(vec![item], config);
+            ::write_to_alfred(vec![item], config).expect("Couldn't write to Alfred");
             return;
         }
 
@@ -35,7 +37,7 @@ fn process<'a>(config: Config, pinboard: Pinboard<'a>, tags: bool, q: Option<Str
         let mut popular_tags = vec![];
         let mut alfred_items = vec![];
 
-        let mut exec_counter = 1;
+        let exec_counter;
         // First try to get list of popular tags from Pinboard
         if config.suggest_tags {
             exec_counter = env::var("apr_execution_counter")
@@ -111,7 +113,7 @@ fn process<'a>(config: Config, pinboard: Pinboard<'a>, tags: bool, q: Option<Str
                 };
             }
         }
-        ::write_to_alfred(alfred_items, config);
+        ::write_to_alfred(alfred_items, config).expect("Couldn't write to Alfred");
     } else {
         if q.is_some() && !q.unwrap().is_empty() {
             eprintln!("Ignoring search query, will spit out all bookmarks.")
@@ -127,7 +129,7 @@ fn process<'a>(config: Config, pinboard: Pinboard<'a>, tags: bool, q: Option<Str
                     .arg(pin.url.as_ref())
                     .into_item()
             });
-        ::write_to_alfred(items, config);
+        ::write_to_alfred(items, config).expect("Couldn't write to Alfred");
     }
 }
 
@@ -137,7 +139,7 @@ fn retrieve_popular_tags<'a>(
     pinboard: &Pinboard<'a>,
     exec_counter: usize,
 ) -> Result<Vec<Tag>, String> {
-    use std::env;
+    info!("Starting in retrieve_popular_tags");
     use std::fs;
     use std::io::{BufRead, BufReader, BufWriter};
 
@@ -148,7 +150,7 @@ fn retrieve_popular_tags<'a>(
         eprintln!("Retrieving popular tags.");
         if let Ok(tab_info) = browser_info::get() {
             let tags = match pinboard.popular_tags(&tab_info.url) {
-                Err(e) => vec![String::from("ERROR: fetching popular tags!")],
+                Err(e) => vec![format!("ERROR: fetching popular tags: {:?}", e)],
                 Ok(tags) => tags,
             };
             fs::File::create(ptags_fn)
@@ -175,11 +177,12 @@ fn retrieve_popular_tags<'a>(
     Ok(popular_tags)
 }
 
-pub struct MyItem<'a>(Item<'a>);
-use std::iter::FromIterator;
+// pub struct MyItem<'a>(Item<'a>);
+// use std::iter::FromIterator;
 
 //impl<'a> FromIterator<Pin> for MyItem<'a> {
 //    fn from_iter(p: Pin) -> Self {
+//    info!("Starting in from_iter");
 //        MyItem(alfred::ItemBuilder::new(p.title)
 //            .subtitle(p.url.as_ref())
 //            .into_item())

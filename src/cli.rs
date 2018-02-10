@@ -4,7 +4,8 @@
 pub struct Opt {
     #[structopt(name = "debug", default_value = "1", required = false, long = "debug")]
     pub debug_level: i8,
-    #[structopt(subcommand)] pub cmd: SubCommand,
+    #[structopt(subcommand)]
+    pub cmd: SubCommand,
 }
 
 #[derive(StructOpt, Debug)]

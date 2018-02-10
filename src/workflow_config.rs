@@ -1,16 +1,14 @@
 use std::fs::{create_dir_all, File};
-use std::path::{Path, PathBuf};
+use std::path::PathBuf;
 use std::io::{Read, Write};
 use std::io::{BufReader, BufWriter};
 use std::env;
 use chrono::prelude::*;
 
-use serde;
 use serde_json;
 use alfred;
 
 use semver::{Version, VersionReq};
-use rusty_pin::Pinboard;
 
 const CONFIG_FILE_NAME: &str = "settings.json";
 const FILE_BUF_SIZE: usize = 4 * 1024 * 1024;
@@ -50,6 +48,7 @@ pub struct Config {
 
 impl<'a> Config {
     pub fn new() -> Self {
+        info!("Starting in new");
         let mut cfg = Config {
             alfred_version: get_alfred_version(),
             pins_to_show: 10,
@@ -70,11 +69,13 @@ impl<'a> Config {
     }
 
     pub fn setup() -> Result<Config, String> {
+        info!("Starting in setup");
         let config = Config::read()?;
-        Ok((config))
+        Ok(config)
     }
 
     fn read() -> Result<Config, String> {
+        info!("Starting in read");
         // If config file exists read settings
         let mut p = Config::get_workflow_dirs().0;
         p.push(CONFIG_FILE_NAME);
@@ -106,6 +107,7 @@ impl<'a> Config {
     }
 
     pub fn save(&self) -> Result<(), String> {
+        info!("Starting in save");
         create_dir_all(&self.workflow_data_dir).map_err(|e| e.to_string())?;
 
         let mut settings_fn = self.workflow_data_dir.clone();
@@ -122,6 +124,7 @@ impl<'a> Config {
     }
 
     pub fn discover_dirs(&mut self) {
+        info!("Starting in discover_dirs");
         let dirs = Config::get_workflow_dirs();
         self.workflow_data_dir = dirs.0;
         self.workflow_cache_dir = dirs.1;
@@ -136,6 +139,7 @@ impl<'a> Config {
     }
 
     pub fn is_alfred_v3(&self) -> bool {
+        info!("Starting in is_alfred_v3");
         let r = VersionReq::parse("~3").unwrap();
         if r.matches(&self.alfred_version) {
             true
@@ -145,6 +149,7 @@ impl<'a> Config {
     }
 
     fn get_workflow_dirs() -> (PathBuf, PathBuf) {
+        info!("Starting in get_workflow_dirs");
         let cache_dir = alfred::env::workflow_cache().unwrap_or_else(|| {
             let mut dir = env::home_dir().unwrap_or(PathBuf::from(""));
             dir.push(".cache");
@@ -162,6 +167,7 @@ impl<'a> Config {
 }
 
 fn get_alfred_version() -> Version {
+    info!("Starting in get_alfred_version");
     alfred::env::version().map_or(
         Version::parse("2.0.0").expect("Parsing 2.0.0 shouldn't fail"),
         |ref s| {
@@ -177,5 +183,6 @@ fn get_alfred_version() -> Version {
 }
 
 fn get_epoch() -> DateTime<Utc> {
+    info!("Starting in get_epoch");
     "1970-01-01T23:00:00Z".parse::<DateTime<Utc>>().unwrap()
 }

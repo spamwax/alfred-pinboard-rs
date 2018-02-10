@@ -1,5 +1,3 @@
-use super::*;
-
 use std::process::Command;
 
 #[derive(Debug)]
@@ -9,6 +7,7 @@ pub struct BrowserActiveTabInfo {
 }
 
 pub fn get() -> Result<BrowserActiveTabInfo, String> {
+    info!("Starting in browser_info::get");
     let output = Command::new("osascript")
         .arg("-s")
         .arg("so")

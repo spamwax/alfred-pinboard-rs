@@ -1,12 +1,13 @@
 use super::*;
+use std::io::Write;
 use std::error::Error;
 
 use super::browser_info;
-use super::browser_info::BrowserActiveTabInfo;
 
 // TODO: Honor auto_update flag.
 
 pub fn run(cmd: SubCommand, mut config: Config, pinboard: Pinboard) {
+    info!("Starting in run");
     let input_tags: Vec<String>;
     let input_desc;
     match cmd {
@@ -25,7 +26,7 @@ pub fn run(cmd: SubCommand, mut config: Config, pinboard: Pinboard) {
     }
 
     let browser_tab_info = browser_info::get().unwrap_or_else(|e| {
-        io::stdout().write(format!("Error: {}", e).as_ref());
+        io::stdout().write(format!("Error: {}", e).as_ref()).expect("Couldn't write to stdout");
         process::exit(1);
     });
 
