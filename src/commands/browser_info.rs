@@ -6,8 +6,10 @@ pub struct BrowserActiveTabInfo {
     pub title: String,
 }
 
+const OSASCRIPT_OUTPUT_SPECIAL_SEPERATOR: &'static str = " fd850fc2e63511e79f720023dfdf24ec ";
+
 pub fn get() -> Result<BrowserActiveTabInfo, String> {
-    info!("Starting in browser_info::get");
+    debug!("Starting in browser_info::get");
     let output = Command::new("osascript")
         .arg("-s")
         .arg("so")
@@ -25,7 +27,7 @@ pub fn get() -> Result<BrowserActiveTabInfo, String> {
     let trim_chars: &[_] = &['{', '}', '\n'];
     let tab_info: Vec<&str> = osascript_result
         .trim_matches(trim_chars)
-        .split(" fd850fc2e63511e79f720023dfdf24ec ")
+        .split(OSASCRIPT_OUTPUT_SPECIAL_SEPERATOR)
         .map(|s| s.trim().trim_matches('"').trim())
         .collect();
     assert_eq!(2, tab_info.len());

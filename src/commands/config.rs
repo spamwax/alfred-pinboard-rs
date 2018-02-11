@@ -2,7 +2,7 @@ use super::*;
 use AlfredError;
 
 pub fn run(x: SubCommand) {
-    info!("Starting in run");
+    debug!("Starting in run");
     let mut print_config = false;
     let mut config: Config = Config::setup().unwrap_or_else(|err| {
         // Check if error in setting up Config is related to missing file.
@@ -103,7 +103,7 @@ pub fn run(x: SubCommand) {
 }
 
 fn show_config(config: &Config) {
-    info!("Starting in show_config");
+    debug!("Starting in show_config");
     // TODO: Add support for Alfred 2 by returning XML <09-02-18, Hamid> //
     // If Using Alfred Version >=3
     if config.is_alfred_v3() {

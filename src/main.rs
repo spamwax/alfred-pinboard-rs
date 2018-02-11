@@ -53,11 +53,11 @@ pub enum AlfredError {
 fn main() {
     env_logger::init();
 
-    info!("Parsing input arguments.");
+    debug!("Parsing input arguments.");
     let opt: Opt = Opt::from_args();
     //    println!("{:?}\n", opt);
 
-    info!("Deciding on which command branch");
+    debug!("Deciding on which command branch");
     match opt.cmd {
         SubCommand::Config { .. } => config::run(opt.cmd),
         _ => {
@@ -79,7 +79,7 @@ fn main() {
 }
 
 fn setup<'a>() -> Result<(Config, Pinboard<'a>), Error> {
-    info!("Starting in setup");
+    debug!("Starting in setup");
     let config = Config::setup()?;
     let mut pinboard = Pinboard::new(config.auth_token.clone(), alfred::env::workflow_cache())?;
     pinboard.enable_fuzzy_search(config.fuzzy_search);
@@ -91,7 +91,7 @@ fn setup<'a>() -> Result<(Config, Pinboard<'a>), Error> {
 }
 
 fn show_error_alfred<'a, T: Into<Cow<'a, str>>>(s: T) {
-    info!("Starting in show_error_alfred");
+    debug!("Starting in show_error_alfred");
     let item = alfred::ItemBuilder::new("Error")
         .subtitle(s)
         .icon_path("erroricon.icns")
@@ -103,7 +103,7 @@ fn write_to_alfred<'a, I>(items: I, config: Config) -> Result<(), String>
 where
     I: IntoIterator<Item = alfred::Item<'a>>,
 {
-    info!("Starting in write_to_alfred");
+    debug!("Starting in write_to_alfred");
     let output_items = items.into_iter().collect::<Vec<alfred::Item>>();
 
     let exec_counter = env::var("apr_execution_counter").unwrap_or("1".to_string());

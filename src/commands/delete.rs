@@ -4,7 +4,7 @@ use super::browser_info;
 
 pub fn run(cmd: SubCommand, config: Config, pinboard: Pinboard) {
     let _ = config; // To silent compiler.
-    info!("Starting in run");
+    debug!("Starting in run");
     let tag = match cmd {
         SubCommand::Delete { tag } => tag,
         _ => unreachable!(),

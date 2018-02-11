@@ -10,7 +10,7 @@ pub fn run<'a>(cmd: SubCommand, config: Config, pinboard: Pinboard<'a>) {
 }
 
 fn process<'a>(config: Config, pinboard: Pinboard<'a>, tags: bool, q: Option<String>) {
-    info!("Starting in list::process");
+    debug!("Starting in list::process");
     if tags {
         // Search the tags using the last 'word' in 'q'
         let queries = q.unwrap_or(String::new());
@@ -47,7 +47,7 @@ fn process<'a>(config: Config, pinboard: Pinboard<'a>, tags: bool, q: Option<Str
             let r = retrieve_popular_tags(&config, &pinboard, exec_counter);
             match r {
                 Ok(_) => popular_tags = r.unwrap(),
-                Err(e) => eprintln!("retrieve_popular_tags: {:?}", e),
+                Err(e) => error!("retrieve_popular_tags: {:?}", e),
             }
         }
 
@@ -67,6 +67,7 @@ fn process<'a>(config: Config, pinboard: Pinboard<'a>, tags: bool, q: Option<Str
                         ]
                     }
                     Some(items) => {
+                        debug!("Found {} tags.", items.len());
                         let mut prev_tags: &str = "";
                         if query_words.len() > 1 {
                             // User has already searched for other tags, we should include those in the
@@ -116,7 +117,10 @@ fn process<'a>(config: Config, pinboard: Pinboard<'a>, tags: bool, q: Option<Str
         ::write_to_alfred(alfred_items, config).expect("Couldn't write to Alfred");
     } else {
         if q.is_some() && !q.unwrap().is_empty() {
-            eprintln!("Ignoring search query, will spit out all bookmarks.")
+            warn!(
+                "Ignoring search query, will spit out {} of bookmarks.",
+                config.pins_to_show
+            )
         }
         let items = pinboard
             .list_bookmarks()
@@ -139,7 +143,7 @@ fn retrieve_popular_tags<'a>(
     pinboard: &Pinboard<'a>,
     exec_counter: usize,
 ) -> Result<Vec<Tag>, String> {
-    info!("Starting in retrieve_popular_tags");
+    debug!("Starting in retrieve_popular_tags");
     use std::fs;
     use std::io::{BufRead, BufReader, BufWriter};
 
@@ -147,7 +151,7 @@ fn retrieve_popular_tags<'a>(
     let mut popular_tags = vec![];
 
     if exec_counter == 1 {
-        eprintln!("Retrieving popular tags.");
+        info!("Retrieving popular tags.");
         if let Ok(tab_info) = browser_info::get() {
             let tags = match pinboard.popular_tags(&tab_info.url) {
                 Err(e) => vec![format!("ERROR: fetching popular tags: {:?}", e)],
@@ -162,7 +166,7 @@ fn retrieve_popular_tags<'a>(
             popular_tags = tags.into_iter().map(|t| Tag(t, 0)).collect::<Vec<Tag>>();
         }
     } else {
-        eprintln!("reading tags from cache file: {:?}", ptags_fn);
+        info!("reading suggested tags from cache file: {:?}", ptags_fn);
         fs::File::open(ptags_fn)
             .and_then(|fp| {
                 let reader = BufReader::with_capacity(1024, fp);
@@ -176,15 +180,3 @@ fn retrieve_popular_tags<'a>(
     }
     Ok(popular_tags)
 }
-
-// pub struct MyItem<'a>(Item<'a>);
-// use std::iter::FromIterator;
-
-//impl<'a> FromIterator<Pin> for MyItem<'a> {
-//    fn from_iter(p: Pin) -> Self {
-//    info!("Starting in from_iter");
-//        MyItem(alfred::ItemBuilder::new(p.title)
-//            .subtitle(p.url.as_ref())
-//            .into_item())
-//    }
-//}

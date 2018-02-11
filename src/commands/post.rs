@@ -6,7 +6,7 @@ use super::browser_info;
 // TODO: Honor auto_update flag.
 
 pub fn run(cmd: SubCommand, mut config: Config, pinboard: Pinboard) {
-    info!("Starting in run");
+    debug!("Starting in run");
     let input_tags: Vec<String>;
     let input_desc;
     match cmd {
@@ -43,7 +43,7 @@ pub fn run(cmd: SubCommand, mut config: Config, pinboard: Pinboard) {
 
     if let Err(e) = pinboard.add_pin(pin_builder.into_pin()) {
         if let Err(io_err) = io::stdout().write(format!("Error: {}", e).as_ref()) {
-            eprintln!(
+            error!(
                 "Failed to post to Pinboard AND to notify user: {}",
                 io_err.to_string()
             );
@@ -52,7 +52,7 @@ pub fn run(cmd: SubCommand, mut config: Config, pinboard: Pinboard) {
         if let Err(io_err) = io::stdout()
             .write(format!("Successfully posted: {}\n", browser_tab_info.title).as_ref())
         {
-            eprintln!(
+            error!(
                 "Failed to notify user about posting to Pinboard successfully: {}",
                 io_err.to_string()
             );
