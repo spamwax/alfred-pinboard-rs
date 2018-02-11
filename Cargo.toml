@@ -5,7 +5,7 @@ authors = ["Hamid Ghadyani <hamid@hamid.cc>"]
 
 [dependencies]
 # rusty-pin = { git = "ssh://git@github.com:22/spamwax/rusty-pin.git", branch = "lib" }
-rusty-pin = { git = "ssh://git@git.hamid.cc:22/rust/rusty-pin.git", branch = "feature/failure" }
+rusty-pin = { git = "ssh://git@git.hamid.cc:22/rust/rusty-pin.git", branch = "lib" }
 alfred = "4.0.1"
 chrono = { version = "0.4", features = ["serde"] }
 
