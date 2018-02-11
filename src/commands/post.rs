@@ -1,6 +1,5 @@
 use super::*;
 use std::io::Write;
-use std::error::Error;
 
 use super::browser_info;
 
@@ -26,7 +25,9 @@ pub fn run(cmd: SubCommand, mut config: Config, pinboard: Pinboard) {
     }
 
     let browser_tab_info = browser_info::get().unwrap_or_else(|e| {
-        io::stdout().write(format!("Error: {}", e).as_ref()).expect("Couldn't write to stdout");
+        io::stdout()
+            .write(format!("Error: {}", e).as_ref())
+            .expect("Couldn't write to stdout");
         process::exit(1);
     });
 
@@ -44,7 +45,7 @@ pub fn run(cmd: SubCommand, mut config: Config, pinboard: Pinboard) {
         if let Err(io_err) = io::stdout().write(format!("Error: {}", e).as_ref()) {
             eprintln!(
                 "Failed to post to Pinboard AND to notify user: {}",
-                io_err.description()
+                io_err.to_string()
             );
         }
     } else {
@@ -53,7 +54,7 @@ pub fn run(cmd: SubCommand, mut config: Config, pinboard: Pinboard) {
         {
             eprintln!(
                 "Failed to notify user about posting to Pinboard successfully: {}",
-                io_err.description()
+                io_err.to_string()
             );
         }
         if config.auto_update_cache {

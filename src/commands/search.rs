@@ -50,7 +50,7 @@ pub fn run(cmd: SubCommand, config: Config, pinboard: Pinboard) {
 fn process(query: Vec<String>, search_fields: &[SearchType], pins_to_show: u8, pinboard: Pinboard) {
     info!("Starting in search::process");
     match pinboard.search(&query, search_fields) {
-        Err(e) => ::show_error_alfred(&e),
+        Err(e) => ::show_error_alfred(e.to_string()),
         Ok(r) => {
             let alfred_items = match r {
                 // No result was found.
@@ -114,7 +114,8 @@ fn process(query: Vec<String>, search_fields: &[SearchType], pins_to_show: u8, p
                     })
                     .collect::<Vec<Item>>(),
             };
-            alfred::json::write_items(io::stdout(), alfred_items.as_ref()).expect("Couldn't write to stdout");
+            alfred::json::write_items(io::stdout(), alfred_items.as_ref())
+                .expect("Couldn't write to stdout");
         }
     }
 }

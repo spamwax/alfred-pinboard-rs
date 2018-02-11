@@ -52,7 +52,7 @@ fn process<'a>(config: Config, pinboard: Pinboard<'a>, tags: bool, q: Option<Str
         }
 
         match pinboard.search_list_of_tags(query_words.last().unwrap_or(&String::new().as_str())) {
-            Err(e) => ::show_error_alfred(&e),
+            Err(e) => ::show_error_alfred(e.to_string()),
             Ok(results) => {
                 alfred_items = match results {
                     None => {

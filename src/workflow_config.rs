@@ -5,10 +5,13 @@ use std::io::{BufReader, BufWriter};
 use std::env;
 use chrono::prelude::*;
 
+use failure::Error;
 use serde_json;
 use alfred;
 
 use semver::{Version, VersionReq};
+
+use AlfredError;
 
 const CONFIG_FILE_NAME: &str = "settings.json";
 const FILE_BUF_SIZE: usize = 4 * 1024 * 1024;
@@ -68,41 +71,42 @@ impl<'a> Config {
         cfg
     }
 
-    pub fn setup() -> Result<Config, String> {
+    pub fn setup() -> Result<Config, Error> {
         info!("Starting in setup");
         let config = Config::read()?;
         Ok(config)
     }
 
-    fn read() -> Result<Config, String> {
+    fn read() -> Result<Config, Error> {
         info!("Starting in read");
         // If config file exists read settings
         let mut p = Config::get_workflow_dirs().0;
         p.push(CONFIG_FILE_NAME);
         if p.exists() {
             let mut config: Config = File::open(p)
-                .map_err(|e| e.to_string())
+                .map_err(|e| {
+                    let _err: Error = From::from(e);
+                    _err
+                })
                 .and_then(|f| {
                     let mut content = String::new();
                     let mut reader = BufReader::with_capacity(FILE_BUF_SIZE, f);
-                    reader
-                        .read_to_string(&mut content)
-                        .map_err(|e| e.to_string())
-                        .and_then(|_| Ok(content))
+                    reader.read_to_string(&mut content).map_err(|e| {
+                        let _err: Error = From::from(e);
+                        _err
+                    })?;
+                    Ok(content)
                 })
                 .and_then(|inp| {
-                    serde_json::from_str(&inp).map_err(|e| {
-                        format!("Bad settings file: {}\n{}", CONFIG_FILE_NAME, e.to_string())
+                    serde_json::from_str(&inp).map_err(|_| {
+                        let workflow_err: Error = From::from(AlfredError::ConfigFileErr);
+                        workflow_err
                     })
                 })?;
             config.discover_dirs();
             Ok(config)
         } else {
-            Err(String::from(format!(
-                "Can't find Workflow's setting file:\n{:?}\n\
-                 Have you added your authorization token?",
-                p
-            )))
+            Err(From::from(AlfredError::MissingConfigFile))
         }
     }
 

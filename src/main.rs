@@ -1,5 +1,7 @@
 #![feature(attr_literals)]
 extern crate chrono;
+#[macro_use]
+extern crate failure;
 extern crate semver;
 extern crate serde;
 #[macro_use]
@@ -20,7 +22,9 @@ extern crate rusty_pin;
 use std::io;
 use std::env;
 use std::process;
+use std::borrow::Cow;
 
+use failure::Error;
 use structopt::StructOpt;
 use rusty_pin::Pinboard;
 
@@ -32,6 +36,16 @@ use cli::{Opt, SubCommand};
 use workflow_config::Config;
 
 use commands::{config, delete, list, post, search, update};
+
+#[derive(Debug, Fail)]
+pub enum AlfredError {
+    #[fail(display = "Config file may be corrupted")]
+    ConfigFileErr,
+    #[fail(display = "Missing config file (did you set API token?)")]
+    MissingConfigFile,
+    #[fail(display = "What did you do?")]
+    Other,
+}
 
 // TODO: Use 'semver' crate to compare Alfred's version
 // TODO: Improve performance, maybe use toml format for saving config. Look into how manytimes when
@@ -49,7 +63,7 @@ fn main() {
         _ => {
             // If user is not configuring, we will abort upon any errors.
             let (config, mut pinboard) = setup().unwrap_or_else(|err| {
-                show_error_alfred(&err);
+                show_error_alfred(err.to_string());
                 process::exit(1);
             });
             match opt.cmd {
@@ -64,7 +78,7 @@ fn main() {
     }
 }
 
-fn setup<'a>() -> Result<(Config, Pinboard<'a>), String> {
+fn setup<'a>() -> Result<(Config, Pinboard<'a>), Error> {
     info!("Starting in setup");
     let config = Config::setup()?;
     let mut pinboard = Pinboard::new(config.auth_token.clone(), alfred::env::workflow_cache())?;
@@ -76,7 +90,7 @@ fn setup<'a>() -> Result<(Config, Pinboard<'a>), String> {
     Ok((config, pinboard))
 }
 
-fn show_error_alfred(s: &str) {
+fn show_error_alfred<'a, T: Into<Cow<'a, str>>>(s: T) {
     info!("Starting in show_error_alfred");
     let item = alfred::ItemBuilder::new("Error")
         .subtitle(s)
