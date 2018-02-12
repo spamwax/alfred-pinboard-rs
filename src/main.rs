@@ -1,3 +1,6 @@
+#![warn(cast_possible_truncation, cast_possible_wrap, cast_precision_loss, cast_sign_loss,
+        mut_mut, non_ascii_literal, result_unwrap_used, shadow_reuse, shadow_same,
+        unicode_not_nfc, wrong_self_convention, wrong_pub_self_convention)]
 #![feature(attr_literals)]
 extern crate chrono;
 #[macro_use]
@@ -47,8 +50,7 @@ pub enum AlfredError {
     Other,
 }
 
-// TODO: Use 'semver' crate to compare Alfred's version
-// TODO: Improve performance, maybe use toml format for saving config. Look into how manytimes when
+// TODO: Improve performance, maybe use toml format for saving config. Look into how many times when
 // read cache files when initiating the binary.
 fn main() {
     env_logger::init();

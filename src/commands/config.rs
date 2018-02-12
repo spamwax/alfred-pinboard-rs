@@ -93,7 +93,7 @@ pub fn run(x: SubCommand) {
         _ => unreachable!(),
     }
 
-    config.save().unwrap();
+    config.save().expect("Couldn't save config file");
 
     if print_config {
         show_config(&config);
@@ -152,6 +152,6 @@ fn show_config(config: &Config) {
                 .icon_path("auto_update.png")
                 .into_item(),
         ]).write(io::stdout())
-            .unwrap();
+            .expect("Couldn't build alfred items");
     }
 }

@@ -45,9 +45,10 @@ fn process<'a>(config: &Config, pinboard: &Pinboard<'a>, tags: bool, q: Option<S
                 .parse::<usize>()
                 .unwrap_or(1);
             let r = retrieve_popular_tags(config, pinboard, exec_counter);
-            match r {
-                Ok(_) => popular_tags = r.unwrap(),
-                Err(e) => error!("retrieve_popular_tags: {:?}", e),
+            if let Ok(pt) = r {
+                popular_tags = pt;
+            } else {
+                error!("retrieve_popular_tags: {:?}", r);
             }
         }
 
@@ -173,7 +174,7 @@ fn retrieve_popular_tags<'a>(
                 let reader = BufReader::with_capacity(1024, fp);
                 popular_tags = reader
                     .lines()
-                    .map(|l| Tag(l.unwrap(), 0))
+                    .map(|l| Tag(l.expect("bad popular tags cache file?"), 0))
                     .collect::<Vec<Tag>>();
                 Ok(())
             })

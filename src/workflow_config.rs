@@ -144,7 +144,7 @@ impl<'a> Config {
 
     pub fn is_alfred_v3(&self) -> bool {
         debug!("Starting in is_alfred_v3");
-        let r = VersionReq::parse("~3").unwrap();
+        let r = VersionReq::parse("~3").expect("Couldn't parse ~3 version string");
         r.matches(&self.alfred_version)
     }
 
@@ -184,5 +184,7 @@ fn get_alfred_version() -> Version {
 
 fn get_epoch() -> DateTime<Utc> {
     debug!("Starting in get_epoch");
-    "1970-01-01T23:00:00Z".parse::<DateTime<Utc>>().unwrap()
+    "1970-01-01T23:00:00Z"
+        .parse::<DateTime<Utc>>()
+        .expect("Couldn't create UTC epoch time")
 }
