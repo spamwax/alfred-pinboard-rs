@@ -25,7 +25,7 @@ pub fn run(cmd: SubCommand, mut config: Config, pinboard: Pinboard) {
     }
 
     let browser_tab_info = browser_info::get().unwrap_or_else(|e| {
-        io::stdout()
+        let _ = io::stdout()
             .write(format!("Error: {}", e).as_ref())
             .expect("Couldn't write to stdout");
         process::exit(1);

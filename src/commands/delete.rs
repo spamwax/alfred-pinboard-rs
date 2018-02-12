@@ -17,13 +17,13 @@ pub fn run(cmd: SubCommand, config: Config, pinboard: Pinboard) {
         );
     } else {
         let browser_tab_info = browser_info::get().unwrap_or_else(|e| {
-            io::stdout()
+            let _ = io::stdout()
                 .write(format!("Error: {}", e).as_ref())
                 .expect("Couldn't write to stdout");
             process::exit(1);
         });
         if let Err(e) = pinboard.delete(&browser_tab_info.url) {
-            io::stdout()
+            let _ = io::stdout()
                 .write(format!("Error: {}", e).as_ref())
                 .expect("Couldn't write to stdout");
             process::exit(1);

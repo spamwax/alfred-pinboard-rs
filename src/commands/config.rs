@@ -21,32 +21,30 @@ pub fn run(x: SubCommand) {
                         ..
                     } => {
                         let mut config = Config::new();
-                        match &x {
-                            &SubCommand::Config {
-                                ref display,
-                                ref auth_token,
-                                ref number_pins,
-                                ref number_tags,
-                                ref shared,
-                                ref toread,
-                                ref fuzzy,
-                                ref tags_only,
-                                ref auto_update,
-                                ref suggest_tags,
-                            } => {
-                                print_config = *display;
-                                config.auth_token = auth_token.as_ref().unwrap().clone();
-                                number_pins.map(|val| config.pins_to_show = val);
-                                number_tags.map(|val| config.tags_to_show = val);
-                                shared.map(|val| config.private_new_pin = !val);
-                                toread.map(|val| config.toread_new_pin = val);
-                                fuzzy.map(|val| config.fuzzy_search = val);
-                                tags_only.map(|val| config.tag_only_search = val);
-                                auto_update.map(|val| config.auto_update_cache = val);
-                                suggest_tags.map(|val| config.suggest_tags = val);
-                                config.discover_dirs();
-                            }
-                            _ => (),
+                        if let SubCommand::Config {
+                            ref display,
+                            ref auth_token,
+                            ref number_pins,
+                            ref number_tags,
+                            ref shared,
+                            ref toread,
+                            ref fuzzy,
+                            ref tags_only,
+                            ref auto_update,
+                            ref suggest_tags,
+                        } = x
+                        {
+                            print_config = *display;
+                            config.auth_token = auth_token.as_ref().unwrap().clone();
+                            number_pins.map(|val| config.pins_to_show = val);
+                            number_tags.map(|val| config.tags_to_show = val);
+                            shared.map(|val| config.private_new_pin = !val);
+                            toread.map(|val| config.toread_new_pin = val);
+                            fuzzy.map(|val| config.fuzzy_search = val);
+                            tags_only.map(|val| config.tag_only_search = val);
+                            auto_update.map(|val| config.auto_update_cache = val);
+                            suggest_tags.map(|val| config.suggest_tags = val);
+                            config.discover_dirs();
                         }
                         config
                     }
