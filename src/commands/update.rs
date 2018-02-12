@@ -22,18 +22,15 @@ pub fn run(mut config: Config, mut pinboard: Pinboard) {
                 config.update_time = Utc::now();
                 if config.save().is_err() {
                     let _ = io::stdout()
-                        .write(
-                            format!("Error: Couldn't save update time to workflow's config file!")
-                                .as_ref(),
-                        )
+                        .write(b"Error: Couldn't save update time to workflow's config file!")
                         .expect("Couldn't write to stdout");
                 }
                 let _ = io::stdout()
-                    .write(format!("Updated cache files!").as_ref())
+                    .write(b"Updated cache files!")
                     .expect("Couldn't write to stdout");
             } else {
                 let _ = io::stdout()
-                    .write(format!("Cache is already up-to-date!").as_ref())
+                    .write(b"Cache is already up-to-date!")
                     .expect("Couldn't write to stdout");
             }
         }

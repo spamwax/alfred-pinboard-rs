@@ -4,7 +4,7 @@ use alfred::{Item, ItemBuilder, Modifier};
 use rusty_pin::pinboard::SearchType;
 
 // TODO: Investigate why content of text_copy is not used within Alfred when user presses ⌘-C
-pub fn run(cmd: SubCommand, config: Config, pinboard: Pinboard) {
+pub fn run(cmd: SubCommand, config: &Config, pinboard: &Pinboard) {
     debug!("Starting in search::run");
     match cmd {
         SubCommand::Search {
@@ -48,7 +48,12 @@ pub fn run(cmd: SubCommand, config: Config, pinboard: Pinboard) {
 }
 
 // TODO: Write this function using From<Iterator> trait. <11-02-18, Hamid> //
-fn process(query: Vec<String>, search_fields: &[SearchType], pins_to_show: u8, pinboard: Pinboard) {
+fn process(
+    query: Vec<String>,
+    search_fields: &[SearchType],
+    pins_to_show: u8,
+    pinboard: &Pinboard,
+) {
     debug!("Starting in search::process");
     match pinboard.search(&query, search_fields) {
         Err(e) => ::show_error_alfred(e.to_string()),

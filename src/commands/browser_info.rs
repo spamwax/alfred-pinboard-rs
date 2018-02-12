@@ -6,7 +6,7 @@ pub struct BrowserActiveTabInfo {
     pub title: String,
 }
 
-const OSASCRIPT_OUTPUT_SPECIAL_SEPERATOR: &'static str = " fd850fc2e63511e79f720023dfdf24ec ";
+const OSASCRIPT_OUTPUT_SPECIAL_SEPERATOR: &str = " fd850fc2e63511e79f720023dfdf24ec ";
 
 pub fn get() -> Result<BrowserActiveTabInfo, String> {
     debug!("Starting in browser_info::get");

@@ -2,18 +2,18 @@ use super::*;
 use std::io::Write;
 use alfred::{Item, ItemBuilder};
 
-pub fn run<'a>(cmd: SubCommand, config: Config, pinboard: Pinboard<'a>) {
+pub fn run<'a>(cmd: SubCommand, config: &Config, pinboard: &Pinboard<'a>) {
     match cmd {
         SubCommand::List { tags, query } => process(config, pinboard, tags, query),
         _ => unreachable!(),
     }
 }
 
-fn process<'a>(config: Config, pinboard: Pinboard<'a>, tags: bool, q: Option<String>) {
+fn process<'a>(config: &Config, pinboard: &Pinboard<'a>, tags: bool, q: Option<String>) {
     debug!("Starting in list::process");
     if tags {
         // Search the tags using the last 'word' in 'q'
-        let queries = q.unwrap_or(String::new());
+        let queries = q.unwrap_or_else(String::new);
 
         // Check if user has entered ';' which indicates they are providing a description.
         // So no need to search for tags!
@@ -41,10 +41,10 @@ fn process<'a>(config: Config, pinboard: Pinboard<'a>, tags: bool, q: Option<Str
         // First try to get list of popular tags from Pinboard
         if config.suggest_tags {
             exec_counter = env::var("apr_execution_counter")
-                .unwrap_or("1".to_string())
+                .unwrap_or_else(|_| "1".to_string())
                 .parse::<usize>()
                 .unwrap_or(1);
-            let r = retrieve_popular_tags(&config, &pinboard, exec_counter);
+            let r = retrieve_popular_tags(config, pinboard, exec_counter);
             match r {
                 Ok(_) => popular_tags = r.unwrap(),
                 Err(e) => error!("retrieve_popular_tags: {:?}", e),
@@ -68,12 +68,13 @@ fn process<'a>(config: Config, pinboard: Pinboard<'a>, tags: bool, q: Option<Str
                     }
                     Some(items) => {
                         debug!("Found {} tags.", items.len());
-                        let mut prev_tags: &str = "";
-                        if query_words.len() > 1 {
+                        let prev_tags = if query_words.len() > 1 {
                             // User has already searched for other tags, we should include those in the
                             // 'autocomplete' field of the AlfredItem
-                            prev_tags = queries.get(0..queries.rfind(' ').unwrap() + 1).unwrap();
-                        }
+                            queries.get(0..queries.rfind(' ').unwrap() + 1).unwrap()
+                        } else {
+                            ""
+                        };
                         let prev_tags_len = prev_tags.len();
                         popular_tags
                             .iter()
@@ -124,7 +125,7 @@ fn process<'a>(config: Config, pinboard: Pinboard<'a>, tags: bool, q: Option<Str
         }
         let items = pinboard
             .list_bookmarks()
-            .unwrap_or(vec![])
+            .unwrap_or_else(|| vec![])
             .into_iter()
             .take(config.pins_to_show as usize)
             .map(|pin| {
@@ -160,7 +161,7 @@ fn retrieve_popular_tags<'a>(
             fs::File::create(ptags_fn)
                 .and_then(|fp| {
                     let mut writer = BufWriter::with_capacity(1024, fp);
-                    writer.write_all(&tags.join("\n").as_bytes())
+                    writer.write_all(tags.join("\n").as_bytes())
                 })
                 .map_err(|e| e.to_string())?;
             popular_tags = tags.into_iter().map(|t| Tag(t, 0)).collect::<Vec<Tag>>();

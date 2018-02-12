@@ -2,7 +2,7 @@ use super::*;
 use std::io::Write;
 use super::browser_info;
 
-pub fn run(cmd: SubCommand, config: Config, pinboard: Pinboard) {
+pub fn run(cmd: SubCommand, config: &Config, pinboard: &Pinboard) {
     let _ = config; // To silent compiler.
     debug!("Starting in run");
     let tag = match cmd {

@@ -13,10 +13,10 @@ pub fn run(x: SubCommand) {
         // If Config set up error is not related to missign file (maybe file is there
         // but corrupted) show appropriate message and exit.
         if let Some(t) = err.cause().downcast_ref::<AlfredError>() {
-            match t {
-                &AlfredError::MissingConfigFile => match &x {
+            match *t {
+                AlfredError::MissingConfigFile => match x {
                     // Is user setting up auth_token?
-                    &SubCommand::Config {
+                    SubCommand::Config {
                         auth_token: Some(_),
                         ..
                     } => {

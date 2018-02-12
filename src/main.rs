@@ -68,10 +68,10 @@ fn main() {
             });
             match opt.cmd {
                 SubCommand::Update => update::run(config, pinboard),
-                SubCommand::List { .. } => list::run(opt.cmd, config, pinboard),
-                SubCommand::Search { .. } => search::run(opt.cmd, config, pinboard),
+                SubCommand::List { .. } => list::run(opt.cmd, &config, &pinboard),
+                SubCommand::Search { .. } => search::run(opt.cmd, &config, &pinboard),
                 SubCommand::Post { .. } => post::run(opt.cmd, config, pinboard),
-                SubCommand::Delete { .. } => delete::run(opt.cmd, config, pinboard),
+                SubCommand::Delete { .. } => delete::run(opt.cmd, &config, &pinboard),
                 _ => unimplemented!(),
             }
         }
@@ -99,14 +99,14 @@ fn show_error_alfred<'a, T: Into<Cow<'a, str>>>(s: T) {
     alfred::json::write_items(io::stdout(), &[item]).expect("Can't write to stdout");
 }
 
-fn write_to_alfred<'a, I>(items: I, config: Config) -> Result<(), String>
+fn write_to_alfred<'a, I>(items: I, config: &Config) -> Result<(), String>
 where
     I: IntoIterator<Item = alfred::Item<'a>>,
 {
     debug!("Starting in write_to_alfred");
     let output_items = items.into_iter().collect::<Vec<alfred::Item>>();
 
-    let exec_counter = env::var("apr_execution_counter").unwrap_or("1".to_string());
+    let exec_counter = env::var("apr_execution_counter").unwrap_or_else(|_| "1".to_string());
 
     // Depending on alfred version use either json or xml output.
     if config.is_alfred_v3() {

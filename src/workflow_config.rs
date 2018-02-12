@@ -145,23 +145,19 @@ impl<'a> Config {
     pub fn is_alfred_v3(&self) -> bool {
         debug!("Starting in is_alfred_v3");
         let r = VersionReq::parse("~3").unwrap();
-        if r.matches(&self.alfred_version) {
-            true
-        } else {
-            false
-        }
+        r.matches(&self.alfred_version)
     }
 
     fn get_workflow_dirs() -> (PathBuf, PathBuf) {
         debug!("Starting in get_workflow_dirs");
         let cache_dir = alfred::env::workflow_cache().unwrap_or_else(|| {
-            let mut dir = env::home_dir().unwrap_or(PathBuf::from(""));
+            let mut dir = env::home_dir().unwrap_or_else(|| PathBuf::from(""));
             dir.push(".cache");
             dir.push("alfred-pinboard-rs");
             dir
         });
         let data_dir = alfred::env::workflow_data().unwrap_or_else(|| {
-            let mut dir = env::home_dir().unwrap_or(PathBuf::from(""));
+            let mut dir = env::home_dir().unwrap_or_else(|| PathBuf::from(""));
             dir.push(".config");
             dir.push("alfred-pinboard-rs");
             dir
