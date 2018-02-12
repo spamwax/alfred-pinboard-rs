@@ -5,7 +5,6 @@
                  cast_sign_loss, mut_mut, non_ascii_literal, result_unwrap_used, shadow_reuse,
                  shadow_same, unicode_not_nfc, wrong_self_convention, wrong_pub_self_convention))]
 #![cfg_attr(feature = "dev", allow(string_extend_chars))]
-#![feature(attr_literals)]
 extern crate chrono;
 #[macro_use]
 extern crate failure;
