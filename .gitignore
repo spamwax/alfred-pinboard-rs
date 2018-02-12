@@ -1,10 +1,8 @@
-
 /target/
 **/*.rs.bk
 cmake-build-debug
 CMakeLists.txt
 auth_token.txt
 .rustfmt.toml
-0
 build.log
 AlfredPinboardRust.alfredworkflow
