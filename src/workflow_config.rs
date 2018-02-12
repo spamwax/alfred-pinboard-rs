@@ -73,17 +73,18 @@ impl<'a> Config {
 
     pub fn setup() -> Result<Config, Error> {
         debug!("Starting in setup");
-        let config = Config::read()?;
+        let (data_dir, cache_dir) = Config::get_workflow_dirs();
+        let config = Config::read(data_dir, cache_dir)?;
         Ok(config)
     }
 
-    fn read() -> Result<Config, Error> {
+    fn read(mut data_dir: PathBuf, cached_dir: PathBuf) -> Result<Config, Error> {
         debug!("Starting in read");
         // If config file exists read settings
-        let mut p = Config::get_workflow_dirs().0;
-        p.push(CONFIG_FILE_NAME);
-        if p.exists() {
-            let mut config: Config = File::open(p)
+        // let mut p = Config::get_workflow_dirs().0;
+        data_dir.push(CONFIG_FILE_NAME);
+        if data_dir.exists() {
+            let mut config: Config = File::open(&data_dir)
                 .map_err(|e| {
                     let _err: Error = From::from(e);
                     _err
@@ -103,7 +104,10 @@ impl<'a> Config {
                         workflow_err
                     })
                 })?;
-            config.discover_dirs();
+            assert!(data_dir.pop());
+            config.workflow_data_dir = data_dir;
+            config.workflow_cache_dir = cached_dir;
+            // config.discover_dirs();
             Ok(config)
         } else {
             Err(From::from(AlfredError::MissingConfigFile))

@@ -44,7 +44,6 @@ pub fn run(x: SubCommand) {
                             tags_only.map(|val| config.tag_only_search = val);
                             auto_update.map(|val| config.auto_update_cache = val);
                             suggest_tags.map(|val| config.suggest_tags = val);
-                            config.discover_dirs();
                         }
                         config
                     }
@@ -93,7 +92,9 @@ pub fn run(x: SubCommand) {
         _ => unreachable!(),
     }
 
-    config.save().expect("Couldn't save config file");
+    if let Err(e) = config.save() {
+        error!("Couldn't save config file: {:?}", e);
+    };
 
     if print_config {
         show_config(&config);
