@@ -1,6 +1,10 @@
-#![warn(cast_possible_truncation, cast_possible_wrap, cast_precision_loss, cast_sign_loss,
-        mut_mut, non_ascii_literal, result_unwrap_used, shadow_reuse, shadow_same,
-        unicode_not_nfc, wrong_self_convention, wrong_pub_self_convention)]
+#![cfg_attr(feature = "dev", feature(plugin))]
+#![cfg_attr(feature = "dev", plugin(clippy))]
+#![cfg_attr(feature = "dev",
+            warn(cast_possible_truncation, cast_possible_wrap, cast_precision_loss,
+                 cast_sign_loss, mut_mut, non_ascii_literal, result_unwrap_used, shadow_reuse,
+                 shadow_same, unicode_not_nfc, wrong_self_convention, wrong_pub_self_convention))]
+#![cfg_attr(feature = "dev", allow(string_extend_chars))]
 #![feature(attr_literals)]
 extern crate chrono;
 #[macro_use]
