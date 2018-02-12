@@ -41,21 +41,24 @@ pub fn run(cmd: SubCommand, config: &Config, pinboard: &Pinboard) {
                 }
             }
 
-            process(query, &search_fields, config.pins_to_show, pinboard);
+            process(&query, &search_fields, config.pins_to_show, pinboard);
         }
         _ => unreachable!(),
     }
 }
 
 // TODO: Write this function using From<Iterator> trait. <11-02-18, Hamid> //
-fn process(
-    query: Vec<String>,
+fn process<'b, I, S>(
+    query: &'b I,
     search_fields: &[SearchType],
     pins_to_show: u8,
     pinboard: &Pinboard,
-) {
+) where
+    &'b I: IntoIterator<Item = S>,
+    S: AsRef<str>,
+{
     debug!("Starting in search::process");
-    match pinboard.search(&query, search_fields) {
+    match pinboard.search(query, search_fields) {
         Err(e) => ::show_error_alfred(e.to_string()),
         Ok(r) => {
             let alfred_items = match r {

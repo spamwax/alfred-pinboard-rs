@@ -60,7 +60,6 @@ fn main() {
 
     debug!("Parsing input arguments.");
     let opt: Opt = Opt::from_args();
-    //    println!("{:?}\n", opt);
 
     debug!("Deciding on which command branch");
     match opt.cmd {
