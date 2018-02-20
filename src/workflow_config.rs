@@ -116,7 +116,7 @@ impl<'a> Config {
 
     pub fn save(&self) -> Result<(), String> {
         debug!("Starting in save");
-        create_dir_all(&self.workflow_data_dir).map_err(|e| e.to_string())?;
+        create_dir_all(&self.data_dir()).map_err(|e| e.to_string())?;
 
         let mut settings_fn = self.workflow_data_dir.clone();
         settings_fn.push(CONFIG_FILE_NAME);
