@@ -28,6 +28,7 @@ dependencies = [
  "clippy 0.0.186 (registry+https://github.com/rust-lang/crates.io-index)",
  "env_logger 0.5.3 (registry+https://github.com/rust-lang/crates.io-index)",
  "failure 0.1.1 (registry+https://github.com/rust-lang/crates.io-index)",
+ "if_chain 0.1.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "log 0.4.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "rusty-pin 0.1.0 (git+ssh://git@git.hamid.cc:22/rust/rusty-pin.git?branch=lib)",
  "semver 0.7.0 (registry+https://github.com/rust-lang/crates.io-index)",

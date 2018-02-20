@@ -5,6 +5,83 @@ pub fn run(x: SubCommand) {
     debug!("Starting in run");
     let mut print_config = false;
     let mut config: Config = Config::setup().unwrap_or_else(|err| {
+        if_chain!{
+            if let Some(t) = err.cause().downcast_ref::<AlfredError>();
+            if let AlfredError::MissingConfigFile = *t;
+            if let SubCommand::Config { auth_token: Some(_), .. } = x;
+            then {
+                let mut config = Config::new();
+                if let SubCommand::Config {
+                    ref display,
+                    ref auth_token,
+                    ref number_pins,
+                    ref number_tags,
+                    ref shared,
+                    ref toread,
+                    ref fuzzy,
+                    ref tags_only,
+                    ref auto_update,
+                    ref suggest_tags,
+                } = x
+                {
+                    print_config = *display;
+                    config.auth_token = auth_token.as_ref().unwrap().clone();
+                    number_pins.map(|val| config.pins_to_show = val);
+                    number_tags.map(|val| config.tags_to_show = val);
+                    shared.map(|val| config.private_new_pin = !val);
+                    toread.map(|val| config.toread_new_pin = val);
+                    fuzzy.map(|val| config.fuzzy_search = val);
+                    tags_only.map(|val| config.tag_only_search = val);
+                    auto_update.map(|val| config.auto_update_cache = val);
+                    suggest_tags.map(|val| config.suggest_tags = val);
+                }
+                config
+            } else {
+                ::show_error_alfred(err.to_string());
+                process::exit(1);
+            }
+        }
+    });
+
+    match x {
+        SubCommand::Config {
+            display,
+            auth_token,
+            number_pins,
+            number_tags,
+            shared,
+            toread,
+            fuzzy,
+            tags_only,
+            auto_update,
+            suggest_tags,
+        } => {
+            print_config = display;
+            auth_token.map(|val| config.auth_token = val);
+            number_pins.map(|val| config.pins_to_show = val);
+            number_tags.map(|val| config.tags_to_show = val);
+            shared.map(|val| config.private_new_pin = !val);
+            toread.map(|val| config.toread_new_pin = val);
+            fuzzy.map(|val| config.fuzzy_search = val);
+            tags_only.map(|val| config.tag_only_search = val);
+            auto_update.map(|val| config.auto_update_cache = val);
+            suggest_tags.map(|val| config.suggest_tags = val);
+        }
+        _ => unreachable!(),
+    }
+
+    if let Err(e) = config.save() {
+        error!("Couldn't save config file: {:?}", e);
+    };
+
+    if print_config {
+        show_config(&config);
+    }
+}
+pub fn run1(x: SubCommand) {
+    debug!("Starting in run");
+    let mut print_config = false;
+    let mut config: Config = Config::setup().unwrap_or_else(|err| {
         // Check if error in setting up Config is related to missing file.
         // If the file missing see if user is trying to run 'config' command to do
         // initial setup. If user is trying to do that, create a new config, return it

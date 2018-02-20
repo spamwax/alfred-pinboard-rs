@@ -22,6 +22,9 @@ extern crate env_logger;
 #[macro_use]
 extern crate log;
 
+#[macro_use]
+extern crate if_chain;
+
 extern crate alfred;
 extern crate rusty_pin;
 
