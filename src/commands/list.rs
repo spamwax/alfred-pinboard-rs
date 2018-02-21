@@ -39,6 +39,7 @@ fn process<'a>(config: &Config, pinboard: &Pinboard<'a>, tags: bool, q: Option<S
 
         let exec_counter;
         // First try to get list of popular tags from Pinboard
+        // TODO: Run popular_tag fetching in a different thread <21-02-18, Hamid> //
         if config.suggest_tags {
             exec_counter = env::var("apr_execution_counter")
                 .unwrap_or_else(|_| "1".to_string())
@@ -77,6 +78,8 @@ fn process<'a>(config: &Config, pinboard: &Pinboard<'a>, tags: bool, q: Option<S
                             ""
                         };
                         let prev_tags_len = prev_tags.len();
+                        // Show the tag with highest frequency matching the last query before popular/suggested tags.
+                        popular_tags.insert(0, items[0].clone());
                         popular_tags
                             .iter()
                             // Combine popular tags and returned tags from cache
