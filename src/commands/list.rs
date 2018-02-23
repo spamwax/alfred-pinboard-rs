@@ -103,7 +103,7 @@ fn process<'a>(config: &Config, pinboard: &Pinboard<'a>, tags: bool, q: Option<S
                         popular_tags
                             .iter()
                             // Combine popular tags and returned tags from cache
-                            .chain(items.into_iter().take(config.tags_to_show as usize))
+                            .chain(items.into_iter().skip(1).take(config.tags_to_show as usize))
                             // Remove tags that user has aleady selected
                             .filter(|tag| {
                                 if !query_words.is_empty() {
