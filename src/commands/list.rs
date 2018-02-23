@@ -37,40 +37,14 @@ fn process<'a>(config: &Config, pinboard: &Pinboard<'a>, tags: bool, q: Option<S
 
         let query_words: Vec<&str> = queries.split_whitespace().collect();
 
-        let mut popular_tags = vec![];
+        let mut popular_tags;
         let mut alfred_items = vec![];
 
-        let exec_counter;
         // First try to get list of popular tags from Pinboard
-        // TODO: Run popular_tag fetching in a different thread <21-02-18, Hamid> //
         if config.suggest_tags {
-            exec_counter = env::var("apr_execution_counter")
-                .unwrap_or_else(|_| "1".to_string())
-                .parse::<usize>()
-                .unwrap_or(1);
-
-            use std::sync::mpsc;
-            let (tx, rx) = mpsc::channel();
-            thread::spawn(move || {
-                warn!("inside spawn thread, about to call get_suggested_tags");
-                let r = retrieve_popular_tags(exec_counter);
-                if let Ok(pt) = r {
-                    let tx_result = tx.send(pt);
-                    if tx_result.is_ok() {
-                        warn!("Sent the popular tags from child thread");
-                    } else {
-                        warn!("Failed to send popular tags: {:?}", tx_result.unwrap_err());
-                    }
-                } else {
-                    warn!("get_suggested_tags: {:?}", r);
-                }
-            });
-            thread::sleep(time::Duration::from_millis(800));
-            warn!("outside: waited 200");
-            if let Ok(pt) = rx.try_recv() {
-                warn!("received popular tags from child: {:?}", pt);
-                popular_tags = pt;
-            }
+            popular_tags = suggest_tags();
+        } else {
+            popular_tags = vec![];
         }
 
         match pinboard.search_list_of_tags(query_words.last().unwrap_or(&String::new().as_str())) {
@@ -162,16 +136,60 @@ fn process<'a>(config: &Config, pinboard: &Pinboard<'a>, tags: bool, q: Option<S
     }
 }
 
+fn suggest_tags() -> Vec<Tag> {
+    let mut popular_tags = vec![];
+            let exec_counter = env::var("apr_execution_counter")
+                .unwrap_or_else(|_| "1".to_string())
+                .parse::<usize>()
+                .unwrap_or(1);
+
+            use std::sync::mpsc;
+            let (tx, rx) = mpsc::channel();
+            let thread_handle = thread::spawn(move || {
+                warn!("inside spawn thread, about to call get_suggested_tags");
+                let r = retrieve_popular_tags(exec_counter);
+                if let Ok(pt) = r {
+                    let tx_result = tx.send(pt);
+                    if tx_result.is_ok() {
+                        warn!("Sent the popular tags from child thread");
+                    } else {
+                        warn!("Failed to send popular tags: {:?}", tx_result.unwrap_err());
+                    }
+                } else {
+                    warn!("get_suggested_tags: {:?}", r);
+                }
+            });
+            if exec_counter == 1 {
+                thread::sleep(time::Duration::from_millis(1000));
+                if let Ok(pt) = rx.try_recv() {
+                    warn!("* received popular tags from child: {:?}", pt);
+                    popular_tags = pt;
+                } else {
+                    warn!("outside: waited 1000 with no response.");
+                }
+            } else {
+                if thread_handle.join().is_ok() {
+                    if let Ok(pt) = rx.try_recv() {
+                        warn!("** received popular tags from child: {:?}", pt);
+                        popular_tags = pt;
+                    } else {
+                        warn!("couldn't get popular tags from cache");
+                    }
+                }
+            }
+            popular_tags
+}
 /// Retrieves popular tags from a Web API call for first run and caches them for subsequent runs.
 fn retrieve_popular_tags(exec_counter: usize) -> Result<Vec<Tag>, Error> {
     debug!("Starting in get_suggested_tags");
     use std::fs;
     use std::io::{BufRead, BufReader, BufWriter};
 
+    // use failure::err_msg;
     // let wait_time = time::Duration::from_millis(300);
     // thread::sleep(wait_time);
     // return Ok(vec![Tag("Hamid".to_string(), 42)]);
-    // // return Err("fake error".to_string());
+    // // return Err(err_msg("fake error"));
 
     // FIXME: If run from outside Alfred (say terminal), the cache folder for 'config' and 'pinboard' will be different.
     let config = Config::setup()?;
