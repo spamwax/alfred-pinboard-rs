@@ -138,46 +138,46 @@ fn process<'a>(config: &Config, pinboard: &Pinboard<'a>, tags: bool, q: Option<S
 
 fn suggest_tags() -> Vec<Tag> {
     let mut popular_tags = vec![];
-            let exec_counter = env::var("apr_execution_counter")
-                .unwrap_or_else(|_| "1".to_string())
-                .parse::<usize>()
-                .unwrap_or(1);
+    let exec_counter = env::var("apr_execution_counter")
+        .unwrap_or_else(|_| "1".to_string())
+        .parse::<usize>()
+        .unwrap_or(1);
 
-            use std::sync::mpsc;
-            let (tx, rx) = mpsc::channel();
-            let thread_handle = thread::spawn(move || {
-                warn!("inside spawn thread, about to call get_suggested_tags");
-                let r = retrieve_popular_tags(exec_counter);
-                if let Ok(pt) = r {
-                    let tx_result = tx.send(pt);
-                    if tx_result.is_ok() {
-                        warn!("Sent the popular tags from child thread");
-                    } else {
-                        warn!("Failed to send popular tags: {:?}", tx_result.unwrap_err());
-                    }
-                } else {
-                    warn!("get_suggested_tags: {:?}", r);
-                }
-            });
-            if exec_counter == 1 {
-                thread::sleep(time::Duration::from_millis(1000));
-                if let Ok(pt) = rx.try_recv() {
-                    warn!("* received popular tags from child: {:?}", pt);
-                    popular_tags = pt;
-                } else {
-                    warn!("outside: waited 1000 with no response.");
-                }
+    use std::sync::mpsc;
+    let (tx, rx) = mpsc::channel();
+    let thread_handle = thread::spawn(move || {
+        warn!("inside spawn thread, about to call get_suggested_tags");
+        let r = retrieve_popular_tags(exec_counter);
+        if let Ok(pt) = r {
+            let tx_result = tx.send(pt);
+            if tx_result.is_ok() {
+                warn!("Sent the popular tags from child thread");
             } else {
-                if thread_handle.join().is_ok() {
-                    if let Ok(pt) = rx.try_recv() {
-                        warn!("** received popular tags from child: {:?}", pt);
-                        popular_tags = pt;
-                    } else {
-                        warn!("couldn't get popular tags from cache");
-                    }
-                }
+                warn!("Failed to send popular tags: {:?}", tx_result.unwrap_err());
             }
-            popular_tags
+        } else {
+            warn!("get_suggested_tags: {:?}", r);
+        }
+    });
+    if exec_counter == 1 {
+        thread::sleep(time::Duration::from_millis(1000));
+        if let Ok(pt) = rx.try_recv() {
+            warn!("* received popular tags from child: {:?}", pt);
+            popular_tags = pt;
+        } else {
+            warn!("outside: waited 1000 with no response.");
+        }
+    } else {
+        if thread_handle.join().is_ok() {
+            if let Ok(pt) = rx.try_recv() {
+                warn!("** received popular tags from child: {:?}", pt);
+                popular_tags = pt;
+            } else {
+                warn!("couldn't get popular tags from cache");
+            }
+        }
+    }
+    popular_tags
 }
 /// Retrieves popular tags from a Web API call for first run and caches them for subsequent runs.
 fn retrieve_popular_tags(exec_counter: usize) -> Result<Vec<Tag>, Error> {
