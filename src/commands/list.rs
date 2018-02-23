@@ -1,5 +1,8 @@
 use super::*;
 use std::io::Write;
+use std::{thread, time};
+
+use failure::Error;
 use alfred::{Item, ItemBuilder};
 
 pub fn run<'a>(cmd: SubCommand, config: &Config, pinboard: &Pinboard<'a>) {
@@ -45,11 +48,28 @@ fn process<'a>(config: &Config, pinboard: &Pinboard<'a>, tags: bool, q: Option<S
                 .unwrap_or_else(|_| "1".to_string())
                 .parse::<usize>()
                 .unwrap_or(1);
-            let r = retrieve_popular_tags(config, pinboard, exec_counter);
-            if let Ok(pt) = r {
-                popular_tags = pt;
-            } else {
-                error!("retrieve_popular_tags: {:?}", r);
+
+            use std::sync::mpsc;
+            let (tx, rx) = mpsc::channel();
+            thread::spawn(move || {
+                warn!("inside spawn thread, about to call get_suggested_tags");
+                let r = retrieve_popular_tags(exec_counter);
+                if let Ok(pt) = r {
+                    let tx_result = tx.send(pt);
+                    if tx_result.is_ok() {
+                        warn!("Sent the popular tags from child thread");
+                    } else {
+                        warn!("Failed to send popular tags: {:?}", tx_result.unwrap_err());
+                    }
+                } else {
+                    warn!("get_suggested_tags: {:?}", r);
+                }
+            });
+            thread::sleep(time::Duration::from_millis(800));
+            warn!("outside: waited 200");
+            if let Ok(pt) = rx.try_recv() {
+                    warn!("received popular tags from child: {:?}", pt);
+                    popular_tags = pt;
             }
         }
 
@@ -143,35 +163,42 @@ fn process<'a>(config: &Config, pinboard: &Pinboard<'a>, tags: bool, q: Option<S
 }
 
 /// Retrieves popular tags from a Web API call for first run and caches them for subsequent runs.
-fn retrieve_popular_tags<'a>(
-    config: &Config,
-    pinboard: &Pinboard<'a>,
-    exec_counter: usize,
-) -> Result<Vec<Tag>, String> {
-    debug!("Starting in retrieve_popular_tags");
+fn retrieve_popular_tags(exec_counter: usize) -> Result<Vec<Tag>, Error> {
+    debug!("Starting in get_suggested_tags");
     use std::fs;
     use std::io::{BufRead, BufReader, BufWriter};
+
+    // let wait_time = time::Duration::from_millis(300);
+    // thread::sleep(wait_time);
+    // return Ok(vec![Tag("Hamid".to_string(), 42)]);
+    // // return Err("fake error".to_string());
+
+    // FIXME: If run from outside Alfred (say terminal), the cache folder for 'config' and 'pinboard' will be different.
+    let config = Config::setup()?;
+    let pinboard = Pinboard::new(config.auth_token.clone(), alfred::env::workflow_cache())?;
 
     let ptags_fn = config.cache_dir().join("popular.tags.cache");
     let mut popular_tags = vec![];
 
     if exec_counter == 1 {
-        info!("Retrieving popular tags.");
+        warn!("Retrieving popular tags.");
         if let Ok(tab_info) = browser_info::get() {
+            warn!("tab_info.url: {:?}", tab_info.url);
             let tags = match pinboard.popular_tags(&tab_info.url) {
                 Err(e) => vec![format!("ERROR: fetching popular tags: {:?}", e)],
                 Ok(tags) => tags,
             };
+            warn!("tags: {:?}", tags);
+            warn!("tags: {:?}", ptags_fn);
             fs::File::create(ptags_fn)
                 .and_then(|fp| {
                     let mut writer = BufWriter::with_capacity(1024, fp);
                     writer.write_all(tags.join("\n").as_bytes())
-                })
-                .map_err(|e| e.to_string())?;
+                })?;
             popular_tags = tags.into_iter().map(|t| Tag(t, 0)).collect::<Vec<Tag>>();
         }
     } else {
-        info!("reading suggested tags from cache file: {:?}", ptags_fn);
+        warn!("reading suggested tags from cache file: {:?}", ptags_fn);
         fs::File::open(ptags_fn)
             .and_then(|fp| {
                 let reader = BufReader::with_capacity(1024, fp);
@@ -180,8 +207,7 @@ fn retrieve_popular_tags<'a>(
                     .map(|l| Tag(l.expect("bad popular tags cache file?"), 0))
                     .collect::<Vec<Tag>>();
                 Ok(())
-            })
-            .map_err(|e| e.to_string())?;
+            })?;
     }
     Ok(popular_tags)
 }

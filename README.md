@@ -8,7 +8,7 @@ Pinboard is a great and reliable bookmarking service. Its [front page](https://p
 This plugin will let you:
 
 - _**post**_ a bookmark to Pinboard right from Alfred, with:
-  - Fetching boookmark information from active browser's window
+  - Fetching bookmark information from active browser's window
   - _tag_ auto-completion to show your current tags.
   - _popular_ tags for the current _url_
   - and more ...
@@ -34,7 +34,7 @@ For searching, use ( `ps` ) and then type the search keywords.
 
 ## Installation / Setup
 After [downloading](https://github.com/spamwax/alfred-pinboard-rs/releases/latest) the latest version of the workflow and installing it in Alfred, you need to do a one-time setup to authenticate the Workflow. This Workflow only uses username/token method so you won't need to enter your password. (This is the *suggested* way of using Pinboard's API).
-If you don't have a token, get one from Pinbaord's [settings page](https://pinboard.in/settings/password).
+If you don't have a token, get one from Pinbaord's [setting's page](https://pinboard.in/settings/password).
 
 Then invoke Alfred and enter your username:token after the ***"pa"*** keyword:
 
