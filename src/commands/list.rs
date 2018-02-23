@@ -68,8 +68,8 @@ fn process<'a>(config: &Config, pinboard: &Pinboard<'a>, tags: bool, q: Option<S
             thread::sleep(time::Duration::from_millis(800));
             warn!("outside: waited 200");
             if let Ok(pt) = rx.try_recv() {
-                    warn!("received popular tags from child: {:?}", pt);
-                    popular_tags = pt;
+                warn!("received popular tags from child: {:?}", pt);
+                popular_tags = pt;
             }
         }
 
@@ -190,24 +190,22 @@ fn retrieve_popular_tags(exec_counter: usize) -> Result<Vec<Tag>, Error> {
             };
             warn!("tags: {:?}", tags);
             warn!("tags: {:?}", ptags_fn);
-            fs::File::create(ptags_fn)
-                .and_then(|fp| {
-                    let mut writer = BufWriter::with_capacity(1024, fp);
-                    writer.write_all(tags.join("\n").as_bytes())
-                })?;
+            fs::File::create(ptags_fn).and_then(|fp| {
+                let mut writer = BufWriter::with_capacity(1024, fp);
+                writer.write_all(tags.join("\n").as_bytes())
+            })?;
             popular_tags = tags.into_iter().map(|t| Tag(t, 0)).collect::<Vec<Tag>>();
         }
     } else {
         warn!("reading suggested tags from cache file: {:?}", ptags_fn);
-        fs::File::open(ptags_fn)
-            .and_then(|fp| {
-                let reader = BufReader::with_capacity(1024, fp);
-                popular_tags = reader
-                    .lines()
-                    .map(|l| Tag(l.expect("bad popular tags cache file?"), 0))
-                    .collect::<Vec<Tag>>();
-                Ok(())
-            })?;
+        fs::File::open(ptags_fn).and_then(|fp| {
+            let reader = BufReader::with_capacity(1024, fp);
+            popular_tags = reader
+                .lines()
+                .map(|l| Tag(l.expect("bad popular tags cache file?"), 0))
+                .collect::<Vec<Tag>>();
+            Ok(())
+        })?;
     }
     Ok(popular_tags)
 }
