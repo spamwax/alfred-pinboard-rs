@@ -44,6 +44,6 @@ pub fn run(cmd: SubCommand, config: &Config, pinboard: &Pinboard) {
                     .into_item()
             }
         };
-        ::write_to_alfred(vec![item], config);
+        ::write_to_alfred(vec![item], config).expect("Couldn't write to Alfred");
     }
 }
