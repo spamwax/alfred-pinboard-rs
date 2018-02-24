@@ -200,20 +200,19 @@ fn retrieve_popular_tags(exec_counter: usize) -> Result<Vec<Tag>, Error> {
 
     if exec_counter == 1 {
         warn!("Retrieving popular tags.");
-        if let Ok(tab_info) = browser_info::get() {
-            warn!("tab_info.url: {:?}", tab_info.url);
-            let tags = match pinboard.popular_tags(&tab_info.url) {
-                Err(e) => vec![format!("ERROR: fetching popular tags: {:?}", e)],
-                Ok(tags) => tags,
-            };
-            warn!("tags: {:?}", tags);
-            warn!("tags: {:?}", ptags_fn);
-            fs::File::create(ptags_fn).and_then(|fp| {
-                let mut writer = BufWriter::with_capacity(1024, fp);
-                writer.write_all(tags.join("\n").as_bytes())
-            })?;
-            popular_tags = tags.into_iter().map(|t| Tag(t, 0)).collect::<Vec<Tag>>();
-        }
+        let tab_info = browser_info::get()?;
+        warn!("tab_info.url: {:?}", tab_info.url);
+        let tags = match pinboard.popular_tags(&tab_info.url) {
+            Err(e) => vec![format!("ERROR: fetching popular tags: {:?}", e)],
+            Ok(tags) => tags,
+        };
+        warn!("tags: {:?}", tags);
+        warn!("tags: {:?}", ptags_fn);
+        fs::File::create(ptags_fn).and_then(|fp| {
+            let mut writer = BufWriter::with_capacity(1024, fp);
+            writer.write_all(tags.join("\n").as_bytes())
+        })?;
+        popular_tags = tags.into_iter().map(|t| Tag(t, 0)).collect::<Vec<Tag>>();
     } else {
         warn!("reading suggested tags from cache file: {:?}", ptags_fn);
         fs::File::open(ptags_fn).and_then(|fp| {

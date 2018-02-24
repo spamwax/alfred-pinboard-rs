@@ -1,4 +1,5 @@
 use std::process::Command;
+use failure::{err_msg, Error};
 
 #[derive(Debug)]
 pub struct BrowserActiveTabInfo {
@@ -9,19 +10,19 @@ pub struct BrowserActiveTabInfo {
 const OSASCRIPT_OUTPUT_SPECIAL_SEPERATOR: &str = " fd850fc2e63511e79f720023dfdf24ec ";
 
 // FIXME: Return failure::Error instead of String.
-pub fn get() -> Result<BrowserActiveTabInfo, String> {
+pub fn get() -> Result<BrowserActiveTabInfo, Error> {
     debug!("Starting in browser_info::get");
     let output = Command::new("osascript")
         .arg("-s")
         .arg("so")
         .arg("get-current-url.applescript")
         .output()
-        .map_err(|e| e.to_string() + ": osascript")?;
+        .map_err(|e| err_msg(format!("{:?}: osascript", e)))?;
     if !output.status.success() {
-        return Err(format!("osascript error: code {}", output.status));
+        return Err(err_msg(format!("osascript error: code {}", output.status)));
     }
     // Get output of above command
-    let osascript_result = String::from_utf8(output.stdout).map_err(|e| e.to_string())?;
+    let osascript_result = String::from_utf8(output.stdout)?;
 
     // Extract theURL and theTitle from output (assumed they are separated
     // by ' fd850fc2e63511e79f720023dfdf24ec ' (note spaces))
@@ -35,7 +36,7 @@ pub fn get() -> Result<BrowserActiveTabInfo, String> {
 
     // If theTitle is missing use theURL for title as well.
     match (tab_info[0].is_empty(), tab_info[1].is_empty()) {
-        (true, _) => Err("Cannot get browser's URL".to_string()),
+        (true, _) => Err(err_msg("Cannot get browser's URL")),
         (_, true) => Ok(BrowserActiveTabInfo {
             url: tab_info[0].to_string(),
             title: tab_info[0].to_string(),

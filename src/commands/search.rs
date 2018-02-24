@@ -92,6 +92,9 @@ fn process<'b, I, S>(
                             .modifier(Modifier::Control,
                                       pin.extended.clone(), _none, true, None)
                             // Hold Option: Pressing Enter opens the bookmark on Pinboard
+                            // FIXME: There should be a better way of locating an item on
+                            // Pinboard's website. Pinboard, however currently doesn't
+                            // provide a direct way of doing that!
                             .modifier(
                                 Modifier::Option,
                                 // subtitle
