@@ -83,9 +83,10 @@ pub enum SubCommand {
     #[structopt(name = "delete")]
     /// Deletes a bookmark for the current page of the active browser, or a given tag.
     Delete {
-        /// Tag to be deleted. If not given, the bookmark for active browser's tab will be deleted.
-        #[structopt(name = "tag")]
-        tag: Option<String>,
+        /// Url/bookmark to be deleted.
+        /// If not given, the bookmark for active browser's tab will be returned.
+        #[structopt(name = "url")]
+        url: Option<String>,
     },
     #[structopt(name = "search")]
     /// Searches bookmarks.
