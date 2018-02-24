@@ -106,7 +106,7 @@ fn show_error_alfred<'a, T: Into<Cow<'a, str>>>(s: T) {
     alfred::json::write_items(io::stdout(), &[item]).expect("Can't write to stdout");
 }
 
-fn write_to_alfred<'a, I>(items: I, config: &Config) -> Result<(), String>
+fn write_to_alfred<'a, I>(items: I, config: &Config) -> Result<(), Error>
 where
     I: IntoIterator<Item = alfred::Item<'a>>,
 {
@@ -119,9 +119,9 @@ where
     if config.is_alfred_v3() {
         alfred::json::Builder::with_items(output_items.as_slice())
             .variable("apr_execution_counter", exec_counter.as_str())
-            .write(io::stdout())
-            .map_err(|e| e.to_string())
+            .write(io::stdout())?
     } else {
-        alfred::xml::write_items(io::stdout(), &output_items).map_err(|e| e.to_string())
+        alfred::xml::write_items(io::stdout(), &output_items)?
     }
+    Ok(())
 }
