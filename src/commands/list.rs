@@ -167,8 +167,7 @@ fn suggest_tags() -> Vec<Tag> {
         } else {
             warn!("outside: waited 1000 with no response.");
         }
-    } else {
-        if thread_handle.join().is_ok() {
+    } else if thread_handle.join().is_ok() {
             if let Ok(pt) = rx.try_recv() {
                 warn!("** received popular tags from child: {:?}", pt);
                 popular_tags = pt;
@@ -176,7 +175,6 @@ fn suggest_tags() -> Vec<Tag> {
                 warn!("couldn't get popular tags from cache");
             }
         }
-    }
     popular_tags
 }
 /// Retrieves popular tags from a Web API call for first run and caches them for subsequent runs.
@@ -196,9 +194,7 @@ fn retrieve_popular_tags(exec_counter: usize) -> Result<Vec<Tag>, Error> {
     let pinboard = Pinboard::new(config.auth_token.clone(), alfred::env::workflow_cache())?;
 
     let ptags_fn = config.cache_dir().join("popular.tags.cache");
-    let mut popular_tags = vec![];
-
-    if exec_counter == 1 {
+    let popular_tags = if exec_counter == 1 {
         warn!("Retrieving popular tags.");
         let tab_info = browser_info::get()?;
         warn!("tab_info.url: {:?}", tab_info.url);
@@ -212,17 +208,16 @@ fn retrieve_popular_tags(exec_counter: usize) -> Result<Vec<Tag>, Error> {
             let mut writer = BufWriter::with_capacity(1024, fp);
             writer.write_all(tags.join("\n").as_bytes())
         })?;
-        popular_tags = tags.into_iter().map(|t| Tag(t, 0)).collect::<Vec<Tag>>();
+        tags.into_iter().map(|t| Tag(t, 0)).collect::<Vec<Tag>>()
     } else {
         warn!("reading suggested tags from cache file: {:?}", ptags_fn);
         fs::File::open(ptags_fn).and_then(|fp| {
             let reader = BufReader::with_capacity(1024, fp);
-            popular_tags = reader
+            Ok(reader
                 .lines()
                 .map(|l| Tag(l.expect("bad popular tags cache file?"), 0))
-                .collect::<Vec<Tag>>();
-            Ok(())
-        })?;
-    }
+                .collect::<Vec<Tag>>())
+        })?
+    };
     Ok(popular_tags)
 }
