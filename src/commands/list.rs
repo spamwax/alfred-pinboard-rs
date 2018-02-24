@@ -168,13 +168,13 @@ fn suggest_tags() -> Vec<Tag> {
             warn!("outside: waited 1000 with no response.");
         }
     } else if thread_handle.join().is_ok() {
-            if let Ok(pt) = rx.try_recv() {
-                warn!("** received popular tags from child: {:?}", pt);
-                popular_tags = pt;
-            } else {
-                warn!("couldn't get popular tags from cache");
-            }
+        if let Ok(pt) = rx.try_recv() {
+            warn!("** received popular tags from child: {:?}", pt);
+            popular_tags = pt;
+        } else {
+            warn!("couldn't get popular tags from cache");
         }
+    }
     popular_tags
 }
 /// Retrieves popular tags from a Web API call for first run and caches them for subsequent runs.

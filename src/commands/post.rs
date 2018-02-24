@@ -3,8 +3,6 @@ use std::io::Write;
 
 use super::browser_info;
 
-// TODO: Honor auto_update flag.
-
 pub fn run(cmd: SubCommand, mut config: Config, pinboard: Pinboard) {
     debug!("Starting in run");
     let input_tags: Vec<String>;

@@ -9,7 +9,6 @@ pub struct BrowserActiveTabInfo {
 
 const OSASCRIPT_OUTPUT_SPECIAL_SEPERATOR: &str = " fd850fc2e63511e79f720023dfdf24ec ";
 
-// FIXME: Return failure::Error instead of String.
 pub fn get() -> Result<BrowserActiveTabInfo, Error> {
     debug!("Starting in browser_info::get");
     let output = Command::new("osascript")
