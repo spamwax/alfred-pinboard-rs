@@ -6,10 +6,12 @@
                  shadow_same, unicode_not_nfc, wrong_self_convention, wrong_pub_self_convention))]
 #![cfg_attr(feature = "dev", allow(string_extend_chars))]
 extern crate chrono;
+
 #[macro_use]
 extern crate failure;
 extern crate semver;
 extern crate serde;
+
 #[macro_use]
 extern crate serde_derive;
 extern crate serde_json;
@@ -19,6 +21,7 @@ extern crate structopt;
 extern crate structopt_derive;
 
 extern crate env_logger;
+
 #[macro_use]
 extern crate log;
 

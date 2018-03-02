@@ -41,11 +41,11 @@ fn process<'a>(config: &Config, pinboard: &Pinboard<'a>, tags: bool, q: Option<S
         let mut alfred_items = vec![];
 
         // First try to get list of popular tags from Pinboard
-        if config.suggest_tags {
-            popular_tags = suggest_tags();
+        popular_tags = if config.suggest_tags {
+            suggest_tags()
         } else {
-            popular_tags = vec![];
-        }
+            vec![]
+        };
 
         match pinboard.search_list_of_tags(query_words.last().unwrap_or(&String::new().as_str())) {
             Err(e) => ::show_error_alfred(e.to_string()),
@@ -161,20 +161,17 @@ fn suggest_tags() -> Vec<Tag> {
     });
     if exec_counter == 1 {
         thread::sleep(time::Duration::from_millis(1000));
-        if let Ok(pt) = rx.try_recv() {
-            warn!("* received popular tags from child: {:?}", pt);
-            popular_tags = pt;
-        } else {
-            warn!("outside: waited 1000 with no response.");
-        }
-    } else if thread_handle.join().is_ok() {
-        if let Ok(pt) = rx.try_recv() {
-            warn!("** received popular tags from child: {:?}", pt);
-            popular_tags = pt;
-        } else {
-            warn!("couldn't get popular tags from cache");
-        }
+    } else {
+        thread_handle.join().expect("Child thread terminated");
     }
+
+    if let Ok(pt) = rx.try_recv() {
+        warn!("* received popular tags from child: {:?}", pt);
+        popular_tags = pt;
+    } else {
+        warn!("child didn't produce usable result.");
+    }
+
     popular_tags
 }
 /// Retrieves popular tags from a Web API call for first run and caches them for subsequent runs.
