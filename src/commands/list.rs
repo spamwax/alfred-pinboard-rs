@@ -5,7 +5,7 @@ use std::{thread, time};
 use failure::Error;
 use alfred::{Item, ItemBuilder};
 
-pub fn run<'a>(cmd: SubCommand, config: &Config, pinboard: &Pinboard<'a>) {
+pub fn run(cmd: SubCommand, config: &Config, pinboard: &Pinboard) {
     match cmd {
         SubCommand::List {
             tags,

@@ -5,6 +5,7 @@
                  cast_sign_loss, mut_mut, non_ascii_literal, result_unwrap_used, shadow_reuse,
                  shadow_same, unicode_not_nfc, wrong_self_convention, wrong_pub_self_convention))]
 #![cfg_attr(feature = "dev", allow(string_extend_chars))]
+
 extern crate chrono;
 
 #[macro_use]
@@ -72,7 +73,7 @@ fn main() {
         SubCommand::Config { .. } => config::run(opt.cmd),
         _ => {
             // If user is not configuring, we will abort upon any errors.
-            let (config, mut pinboard) = setup().unwrap_or_else(|err| {
+            let (config, pinboard) = setup().unwrap_or_else(|err| {
                 show_error_alfred(err.to_string());
                 process::exit(1);
             });
