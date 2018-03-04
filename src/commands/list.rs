@@ -7,12 +7,22 @@ use alfred::{Item, ItemBuilder};
 
 pub fn run<'a>(cmd: SubCommand, config: &Config, pinboard: &Pinboard<'a>) {
     match cmd {
-        SubCommand::List { tags, query } => process(config, pinboard, tags, query),
+        SubCommand::List {
+            tags,
+            suggest,
+            query,
+        } => process(config, pinboard, tags, suggest, query),
         _ => unreachable!(),
     }
 }
 
-fn process<'a>(config: &Config, pinboard: &Pinboard<'a>, tags: bool, q: Option<String>) {
+fn process<'a>(
+    config: &Config,
+    pinboard: &Pinboard<'a>,
+    tags: bool,
+    suggest: Option<bool>,
+    q: Option<String>,
+) {
     debug!("Starting in list::process");
     if tags {
         // Search the tags using the last 'word' in 'q'
@@ -41,7 +51,7 @@ fn process<'a>(config: &Config, pinboard: &Pinboard<'a>, tags: bool, q: Option<S
         let mut alfred_items = vec![];
 
         // First try to get list of popular tags from Pinboard
-        popular_tags = if config.suggest_tags {
+        popular_tags = if suggest.unwrap_or(config.suggest_tags) {
             suggest_tags()
         } else {
             vec![]

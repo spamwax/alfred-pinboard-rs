@@ -60,6 +60,10 @@ pub enum SubCommand {
         /// Only list tags
         #[structopt(name = "tags", long = "tags", short = "t")]
         tags: bool,
+        /// Retrieve suggestion for tags from Pinboard API. Will be ignored if user is not listing
+        /// tags.
+        #[structopt(name = "suggest", long = "suggest", short = "s")]
+        suggest: Option<bool>,
         /// Optional query word used to narrow the output list.
         /// Only works with --tags option! To narrow down bookmarks, use `search` sub-command
         query: Option<String>,
