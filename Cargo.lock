@@ -749,7 +749,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 [[package]]
 name = "rusty-pin"
 version = "0.1.0"
-source = "git+ssh://git@git.hamid.cc:22/rust/rusty-pin.git?branch=lib#7220ed164885d40ef0324923abba4bc9bfcf9d00"
+source = "git+ssh://git@git.hamid.cc:22/rust/rusty-pin.git?branch=lib#a997f03b746a74580a039340b2ffd1d08bb1f99f"
 dependencies = [
  "chrono 0.4.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "env_logger 0.5.3 (registry+https://github.com/rust-lang/crates.io-index)",
