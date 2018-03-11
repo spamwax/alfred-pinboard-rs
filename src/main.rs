@@ -52,12 +52,9 @@ use commands::{config, delete, list, post, search, update};
 
 #[derive(Debug, Fail)]
 pub enum AlfredError {
-    #[fail(display = "Config file may be corrupted")]
-    ConfigFileErr,
-    #[fail(display = "Missing config file (did you set API token?)")]
-    MissingConfigFile,
-    #[fail(display = "What did you do?")]
-    Other,
+    #[fail(display = "Config file may be corrupted")] ConfigFileErr,
+    #[fail(display = "Missing config file (did you set API token?)")] MissingConfigFile,
+    #[fail(display = "What did you do?")] Other,
 }
 
 // TODO: Improve performance, maybe use toml format for saving config. Look into how many times when

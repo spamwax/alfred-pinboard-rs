@@ -2,10 +2,8 @@
 #[structopt(name = "alfred-pinboard")]
 /// Command line component of Alfred Workflow for Pinboard (Written in Rust!)
 pub struct Opt {
-    #[structopt(name = "debug", default_value = "0", long = "debug")]
-    pub debug_level: i8,
-    #[structopt(subcommand)]
-    pub cmd: SubCommand,
+    #[structopt(name = "debug", default_value = "0", long = "debug")] pub debug_level: i8,
+    #[structopt(subcommand)] pub cmd: SubCommand,
 }
 
 #[derive(StructOpt, Debug)]

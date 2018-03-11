@@ -190,26 +190,18 @@ fn retrieve_popular_tags(exec_counter: usize) -> Result<Vec<Tag>, Error> {
     use std::fs;
     use std::io::{BufRead, BufReader, BufWriter};
 
-    // use failure::err_msg;
-    // let wait_time = time::Duration::from_millis(300);
-    // thread::sleep(wait_time);
-    // return Ok(vec![Tag("Hamid".to_string(), 42)]);
-    // // return Err(err_msg("fake error"));
-
     // FIXME: If run from outside Alfred (say terminal), the cache folder for 'config' and 'pinboard' will be different.
     let config = Config::setup()?;
     let pinboard = Pinboard::new(config.auth_token.clone(), alfred::env::workflow_cache())?;
 
     let ptags_fn = config.cache_dir().join("popular.tags.cache");
     let popular_tags = if exec_counter == 1 {
-        warn!("Retrieving popular tags.");
         let tab_info = browser_info::get()?;
         warn!("tab_info.url: {:?}", tab_info.url);
         let tags = match pinboard.popular_tags(&tab_info.url) {
             Err(e) => vec![format!("ERROR: fetching popular tags: {:?}", e)],
             Ok(tags) => tags,
         };
-        warn!("tags: {:?}", tags);
         warn!("tags: {:?}", ptags_fn);
         fs::File::create(ptags_fn).and_then(|fp| {
             let mut writer = BufWriter::with_capacity(1024, fp);
