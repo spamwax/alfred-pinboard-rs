@@ -101,8 +101,10 @@ fn process<'b, I, S>(
                                 Modifier::Option,
                                 // subtitle
                                 Some("Show bookmark in https://pinboard.in"),
-                                // Only show alphanumeric/ascii characters as searching on
-                                // Pinboard's website currently doesn't like extra stuff.
+                                // Pinboard's website currently doesn't like extra stuff in
+                                // search query's string.
+                                // Workaround: Search for item's all tags plus strictly
+                                // ascii words in its title.
                                 // arg
                                 Some(
                                     [
