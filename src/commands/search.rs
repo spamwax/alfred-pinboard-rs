@@ -83,6 +83,7 @@ fn process<'b, I, S>(
                         ItemBuilder::new(pin.title.as_ref())
                             .subtitle(pin.url.as_ref())
                             .arg(pin.url.as_ref())
+                            .variable("tags", pin.tags.as_ref())
                             .subtitle_mod(Modifier::Command, pin.tags.as_ref())
                             .quicklook_url(pin.url.as_ref())
                             .text_large_type(pin.title.as_ref())
@@ -104,21 +105,16 @@ fn process<'b, I, S>(
                                 // Pinboard's website currently doesn't like extra stuff.
                                 // arg
                                 Some(
+                                    [
+                                    pin.tags.as_ref(),
+                                    " ",
                                     pin.title
                                         .split_whitespace()
                                         .filter(|s| s.len() != 1)
-                                        .map(|s| {
-                                            s.chars()
-                                                .map(|c: char| match c {
-                                                    ch if ch.is_alphanumeric() || ch.is_ascii() => {
-                                                        ch
-                                                    }
-                                                    _ => ' ',
-                                                })
-                                                .collect::<String>()
-                                        })
-                                        .collect::<Vec<String>>()
-                                        .join(" "),
+                                        .filter(|s| s.chars().all(|c| c.is_alphanumeric()))
+                                        .collect::<Vec<&str>>()
+                                        .join(" ").as_str()
+                                    ].concat()
                                 ),
                                 true,
                                 None,
