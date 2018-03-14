@@ -91,7 +91,7 @@ fn process<'b, I, S>(
                             .icon_path("bookmarks.png")
                             // Hold Control: Show extended description of bookmark.
                             .modifier(Modifier::Control,
-                                      pin.extended.as_ref().map(|s| s.as_str()),
+                                      pin.extended.clone(),
                                       Some(pin.url.as_ref()), true, None)
                             // Hold Option: Pressing Enter opens the bookmark on Pinboard
                             // FIXME: There should be a better way of locating an item on

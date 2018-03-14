@@ -2,7 +2,7 @@ use super::*;
 use std::io::Write;
 use chrono::prelude::*;
 
-pub fn run(mut config: Config, mut pinboard: Pinboard) {
+pub fn run<'a>(mut config: Config, mut pinboard: Pinboard<'a, 'a>) {
     info!("Starting in run");
     match pinboard.is_cache_outdated(config.update_time) {
         Err(err) => {

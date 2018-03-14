@@ -52,9 +52,12 @@ use commands::{config, delete, list, post, search, update};
 
 #[derive(Debug, Fail)]
 pub enum AlfredError {
-    #[fail(display = "Config file may be corrupted")] ConfigFileErr,
-    #[fail(display = "Missing config file (did you set API token?)")] MissingConfigFile,
-    #[fail(display = "What did you do?")] Other,
+    #[fail(display = "Config file may be corrupted")]
+    ConfigFileErr,
+    #[fail(display = "Missing config file (did you set API token?)")]
+    MissingConfigFile,
+    #[fail(display = "What did you do?")]
+    Other,
 }
 
 // TODO: Improve performance, maybe use toml format for saving config. Look into how many times when
@@ -76,7 +79,7 @@ fn main() {
             });
             match opt.cmd {
                 SubCommand::Update => update::run(config, pinboard),
-                SubCommand::List { .. } => list::run(opt.cmd, &config, &pinboard),
+                SubCommand::List { .. } => list::run(opt.cmd, &config, pinboard),
                 SubCommand::Search { .. } => search::run(opt.cmd, &config, &pinboard),
                 SubCommand::Post { .. } => post::run(opt.cmd, config, pinboard),
                 SubCommand::Delete { .. } => delete::run(opt.cmd, &config, &pinboard),
@@ -86,7 +89,7 @@ fn main() {
     }
 }
 
-fn setup<'a>() -> Result<(Config, Pinboard<'a>), Error> {
+fn setup<'a, 'p>() -> Result<(Config, Pinboard<'a, 'p>), Error> {
     debug!("Starting in setup");
     let config = Config::setup()?;
     let mut pinboard = Pinboard::new(config.auth_token.clone(), alfred::env::workflow_cache())?;
