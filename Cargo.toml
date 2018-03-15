@@ -4,8 +4,9 @@ version = "0.1.0"
 authors = ["Hamid Ghadyani <hamid@hamid.cc>"]
 
 [dependencies]
-# rusty-pin = { git = "ssh://git@github.com:22/spamwax/rusty-pin.git", branch = "master" }
-rusty-pin = { path = "../rusty-pin" }
+# We'll use git until rusty-pin is published as a crate (if ever?!)
+rusty-pin = { git = "ssh://git@github.com:22/spamwax/rusty-pin.git", branch = "master" }
+# rusty-pin = { path = "../rusty-pin" }
 alfred = "4.0.1"
 chrono = { version = "0.4", features = ["serde"] }
 
