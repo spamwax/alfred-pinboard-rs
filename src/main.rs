@@ -80,9 +80,9 @@ fn main() {
             match opt.cmd {
                 SubCommand::Update => update::run(config, pinboard),
                 SubCommand::List { .. } => list::run(opt.cmd, &config, pinboard),
-                SubCommand::Search { .. } => search::run(opt.cmd, &config, &pinboard),
+                SubCommand::Search { .. } => search::run(opt.cmd, &config, pinboard),
                 SubCommand::Post { .. } => post::run(opt.cmd, config, pinboard),
-                SubCommand::Delete { .. } => delete::run(opt.cmd, &config, &pinboard),
+                SubCommand::Delete { .. } => delete::run(opt.cmd, &config, pinboard),
                 _ => unimplemented!(),
             }
         }
