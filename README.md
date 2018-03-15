@@ -19,7 +19,9 @@ This plugin will let you:
   - Tap <kbd>Control</kbd> to show current item's extended notes/descriptioin.
 - Many options that can be easily adjusted. (see below)
 
-For posting you just need to enter the Workflow's keyword ( `p` ) into Alfred's window and follow it with couple of tags and an optional description. The workflow will then post a bookmark for the window/tab of the active browser to Pinboard.
+-- For posting you just need to enter the Workflow's keyword ( `p` ) into Alfred's window and follow it with couple of tags and an optional description. The workflow will then post a bookmark for the window/tab of the active browser to Pinboard.
+
+-- For searching, use ( `ps` ) and then type the search keywords.
 
 ### Supported Browsers:
 - Safari
@@ -29,8 +31,6 @@ For posting you just need to enter the Workflow's keyword ( `p` ) into Alfred's 
 - Vivaldi
 - Firefox Dev. Edition
 - Safari Tech. Preview
-
-For searching, use ( `ps` ) and then type the search keywords.
 
 ## Installation / Setup
 After [downloading](https://github.com/spamwax/alfred-pinboard-rs/releases/latest) the latest version of the workflow and installing it in Alfred, you need to do a one-time setup to authenticate the Workflow. This Workflow only uses username/token method so you won't need to enter your password. (This is the *suggested* way of using Pinboard's API).
@@ -108,7 +108,12 @@ You can hold down modifiers to enable different behavior:
 ---
 
 ## Usage (delete a bookmark):
+```
+pind
+```
+
 To delete a bookmark, just make sure it is opened in your current broweser's window. Then use `pind`.
+Proposed workflow for deleting a bookmark is to first open it in browser (search for it using this workflow's keyword `ps`, and hit enter) and then use `pind` keyword followed by enter.
 
 ![image](./res/images/delete-pin.png)
 
@@ -149,6 +154,7 @@ Most of configuration settings are self-explanatory.
 - This workflow tries to show some helpful errors in different cases.
 ![image](./res/images/error-1.png)
 ![image](./res/images/error-2.png)
+![image](./res/images/error-3.png)
 - If you want to change some behavior take a look at Alfred's workflow page:
 
 
@@ -158,6 +164,7 @@ Most of configuration settings are self-explanatory.
 
 ## Known Issues
 - Posting bookmark from Firefox while tag suggestions is enabled is broken. Alfred intercepts <kbd>Command ⌘-L</kbd> used in AppleScript to focus location bar of Firefox. This is needed to get url and other info out of Firefox. Unfortunately Firefox does not offer any better way of interacting with it from outside world programatically.
+- This workflow is setup to work with Aflred 3. It may or may not work with previous version as it has not been tested for them.
 
 ## TODO
 
