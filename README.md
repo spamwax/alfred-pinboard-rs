@@ -46,6 +46,8 @@ To manually update the cache, you need to issue the ***`pu`*** command:
 
 ![image](./res/images/update.png)
 
+---
+
 ## Usage (post a bookmark):
 The syntax to post a bookmark to Pinboard is :
 
@@ -55,12 +57,14 @@ p tag1 tag2 tag3 ; some optional note
 
 The workflow will show a list of your current tags as you are typing:
 
-![image](./res/images/tag-suggestion-1.png)
+![image](./res/images/non-fuzzy-search-tags.png)
 
 The number below each tag shows how many times you have used it in Pinboard bookmarks.
 You can move Alfred's highlighter to the desired tag and hit '**Tab**' to **autocomplete** it.
 
 To finish the process just press Enter.
+
+- If tag suggestion feature is enabled (see `pset seggess_tags`), 3 popular tags based on current active webpage will be added to the list of your tags. The list is fetched from Pinboard's API and is often helpful. However this feature will add a 1 second delay to showing the tag list after first keystroke. This delay is disabled for consequent keystrokes as the fetched popular tags are cached. ![image](./res/images/popular-tags.png)
 
 #### Modifiers (<kbd>Control ⌃, Option ⌥</kbd>)
 You can hold down modifiers to one-time change some of your settings:
@@ -94,10 +98,14 @@ You can hold down modifiers to enable different behavior:
 - <kbd>Control ⌃</kbd> : will show the extended description of selected bookmark.
 - <kbd>Command ⌘</kbd> : will show tags of selected bookmark.
 - <kbd>Option ⌥</kbd> : Holding `⌥` and pressing enter will open the bookmark in [Pinboard's website](https://pinboard.in).
-- <kbd>Shift ⇧</kbd>: Tap ⇧ to load a preview of bookmark without opening your browser 😎
+- <kbd>Shift ⇧</kbd>: **Tap** ⇧ to load a preview of bookmark without opening your browser 😎 ⤵︎
 
 ![image](./res/images/quicklook-preview.png)
 
+## Usage (delete a bookmark):
+To delete a bookmark, just make sure it is opened in your current broweser's window. Then use `pind`.
+
+![image](./res/images/delete-pin.png)
 
 ## Settings<a name="config"></a>
 
@@ -108,16 +116,6 @@ You can configure the behavior of workflow by entering `pconf` in Alfred:
 Selecting each setting and hitting ⏎ (<kbd>Enter</kbd>) will let you adjust it:
 
 ![image](./res/images/set-fuzzy.png)
-
-Most of configuration settings are self-explanatory, however `fuzzy` search may need a demo:
-
-When fuzzy search is enabled, the tags/bookmarks that contain the query letters in the given order are displayed:
-
-![image](./res/images/fuzzy-search-tags.png)
-
-Otherwise, _normal_ search will search for consecutive characters in query:
-
-![image](./res/images/tag-suggestion-1.png)
 
 On top of using `pconf`, you can directly type following commands to also adjust the settings:
 
@@ -130,6 +128,17 @@ On top of using `pconf`, you can directly type following commands to also adjust
 - `pset tags`: Set number of tags to show: `pset tags 25`
 - `pset bookmarks`: Set number of bookmarks to show: `pset bookmarks 12`
 
+Most of configuration settings are self-explanatory.
+
+- However `fuzzy` search may need a demo: When fuzzy search is enabled, the tags/bookmarks that contain the query letters in the given order are displayed:
+ 
+  ![image](./res/images/fuzzy-search-tags.png)
+
+  Otherwise, _normal_ search will search for consecutive characters in query:
+  
+  ![image](./res/images/non-fuzzy-search-tags.png)
+
+
 ## Misc.
 - This workflow tries to show some helpful errors in different cases.
 ![image](./res/images/error-1.png)
@@ -139,13 +148,16 @@ On top of using `pconf`, you can directly type following commands to also adjust
 
 ![image](./res/images/workflow-screenshot.png)
 
-## TODO / Missing features
+## Known Issues
+- Posting bookmark from Firefox while tag suggestions is enabled is broken. Alfred intercepts <kbd>Command-L</kbd> used in AppleScript to focus location bar of Firefox. This is needed to get url and other info out of Firefox. Unfortunately Firefox does not offer any better way of interacting with it from outside world programatically.
+
+## TODO
 
 I wish to add the following in the coming releases:
 
-- Let users delete a selected bookmark from witin Alfred.
-- Add a proper logging facility to Rust code.
-- Use a better error mechanism (maybe [failure](https://crates.io/crates/failure)?)
+- ~~Let users delete a selected bookmark from witin Alfred.~~
+- ~~Add a proper logging facility to Rust code.~~ (uses log_env)
+- ~~Use a better error mechanism (maybe [failure](https://crates.io/crates/failure)?)~~
 
 
 ## Feedback / Bugs

@@ -36,7 +36,7 @@ on run
     set theURL to item 1 of theResult
     set theText to item 2 of theResult
 
-  else if theApplication is "Safari Technology Preview.app" and appIsRunning("Safari Technology Preview") then
+  else if {"Safari Technology Preview.app", "SafariTechnologyPreview.app"} contains theApplication and appIsRunning("Safari Technology Preview") then
     set theResult to run script "tell application id \"com.apple.SafariTechnologyPreview\"
       set theTab to front document
       set theText to name of theTab
@@ -78,7 +78,7 @@ on run
     set theURL to item 1 of theResult
     set theText to item 2 of theResult
 
-  else if theApplication is "FirefoxDeveloperEdition.app" and appIsRunning("Firefox") then
+  else if {"Firefox Developer Edition.app", "FirefoxDeveloperEdition.app"} contains theApplication and appIsRunning("Firefox") then
     set theResult to run script "tell application id \"org.mozilla.firefoxdeveloperedition\"
       activate
       set w to item 1 of window 1
