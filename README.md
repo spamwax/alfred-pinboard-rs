@@ -64,7 +64,9 @@ You can move Alfred's highlighter to the desired tag and hit '**Tab**' to **auto
 
 To finish the process just press Enter.
 
-- If tag suggestion feature is enabled (see `pset seggess_tags`), 3 popular tags based on current active webpage will be added to the list of your tags. The list is fetched from Pinboard's API and is often helpful. However this feature will add a 1 second delay to showing the tag list after first keystroke. This delay is disabled for consequent keystrokes as the fetched popular tags are cached. ![image](./res/images/popular-tags.png)
+- If tag suggestion feature is enabled (see `pset suggest_tags`), 3 popular tags based on current active webpage will be added to the list of your tags. The list is fetched from Pinboard's API and is often helpful. However this feature will add a 1 second delay to showing the tag list after first keystroke. This delay is disabled for consequent keystrokes as the fetched popular tags are cached.
+  
+  ![image](./res/images/popular-tags.png)
 
 #### Modifiers (<kbd>Control ⌃, Option ⌥</kbd>)
 You can hold down modifiers to one-time change some of your settings:
@@ -76,6 +78,7 @@ If you want to add extra description to the bookmark you can add it after a semi
 
 ![image](./res/images/adding-notes.png)
 
+---
 
 ## Usage (search bookmarks):
 Searching your bookmarks is easy.
@@ -102,6 +105,8 @@ You can hold down modifiers to enable different behavior:
 
 ![image](./res/images/quicklook-preview.png)
 
+---
+
 ## Usage (delete a bookmark):
 To delete a bookmark, just make sure it is opened in your current broweser's window. Then use `pind`.
 
@@ -120,7 +125,7 @@ Selecting each setting and hitting ⏎ (<kbd>Enter</kbd>) will let you adjust it
 On top of using `pconf`, you can directly type following commands to also adjust the settings:
 
 - `pset fuzzy`: Enable/disable fuzzy search.
-- `pset seggess_tags`: When posting a new bookmark, list popular tags for the active page. Note that this information is fetched from Pinboard and sometimes is not very _accurate_.
+- `pset suggest_tags`: When posting a new bookmark, list popular tags for the active page. Note that this information is fetched from Pinboard and sometimes is not very _accurate_.
 - `pset shared`: Mark all new bookmarks as _shared_.
 - `pset toread`: Mark all new bookmarks as _toread_.
 - `pset tagonly`: Only search within _tag_ field while doing any look-up.
@@ -138,6 +143,7 @@ Most of configuration settings are self-explanatory.
   
   ![image](./res/images/non-fuzzy-search-tags.png)
 
+---
 
 ## Misc.
 - This workflow tries to show some helpful errors in different cases.
@@ -148,8 +154,10 @@ Most of configuration settings are self-explanatory.
 
 ![image](./res/images/workflow-screenshot.png)
 
+---
+
 ## Known Issues
-- Posting bookmark from Firefox while tag suggestions is enabled is broken. Alfred intercepts <kbd>Command-L</kbd> used in AppleScript to focus location bar of Firefox. This is needed to get url and other info out of Firefox. Unfortunately Firefox does not offer any better way of interacting with it from outside world programatically.
+- Posting bookmark from Firefox while tag suggestions is enabled is broken. Alfred intercepts <kbd>Command ⌘-L</kbd> used in AppleScript to focus location bar of Firefox. This is needed to get url and other info out of Firefox. Unfortunately Firefox does not offer any better way of interacting with it from outside world programatically.
 
 ## TODO
 
@@ -158,7 +166,6 @@ I wish to add the following in the coming releases:
 - ~~Let users delete a selected bookmark from witin Alfred.~~
 - ~~Add a proper logging facility to Rust code.~~ (uses log_env)
 - ~~Use a better error mechanism (maybe [failure](https://crates.io/crates/failure)?)~~
-
 
 ## Feedback / Bugs
 This is my first non-trivial project using Rust language so so your [feedback or bug](https://github.com/spamwax/alfred-pinboard-rs/compare) reports are greatly appreciated.
