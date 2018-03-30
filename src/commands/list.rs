@@ -190,7 +190,8 @@ fn retrieve_popular_tags(exec_counter: usize) -> Result<Vec<Tag>, Error> {
     use std::fs;
     use std::io::{BufRead, BufReader, BufWriter};
 
-    // FIXME: If run from outside Alfred (say terminal), the cache folder for 'config' and 'pinboard' will be different.
+    // FIXME: If run from outside Alfred (say terminal),
+    // the cache folder for 'config' and 'pinboard' will be different.
     let config = Config::setup()?;
     let pinboard = Pinboard::new(config.auth_token.clone(), alfred::env::workflow_cache())?;
 

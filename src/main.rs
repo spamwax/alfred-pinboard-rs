@@ -60,8 +60,6 @@ pub enum AlfredError {
     Other,
 }
 
-// TODO: Improve performance, maybe use toml format for saving config. Look into how many times when
-// read cache files when initiating the binary.
 fn main() {
     env_logger::init();
 
