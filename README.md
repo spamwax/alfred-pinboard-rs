@@ -13,7 +13,7 @@ This plugin will let you:
   - _popular_ tags for the current _url_
   - and more ...
 - _**search**_ your current bookmarks
-  - Tap <kbd>Shit</kbd> to show a preview of selected item without opening browser.
+  - Tap <kbd>Shift</kbd> to show a preview of selected item without opening browser.
   - Tap <kbd>Command+L</kbd> to show _Large_ toast of title
   - Tap <kbd>Command</kbd> to show current item's _tags_
   - Tap <kbd>Control</kbd> to show current item's extended notes/descriptioin.
