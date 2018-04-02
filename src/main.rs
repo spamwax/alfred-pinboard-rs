@@ -32,18 +32,18 @@ extern crate if_chain;
 extern crate alfred;
 extern crate rusty_pin;
 
-use std::io;
-use std::env;
-use std::process;
 use std::borrow::Cow;
+use std::env;
+use std::io;
+use std::process;
 
 use failure::Error;
-use structopt::StructOpt;
 use rusty_pin::Pinboard;
+use structopt::StructOpt;
 
-mod workflow_config;
 mod cli;
 mod commands;
+mod workflow_config;
 
 use cli::{Opt, SubCommand};
 use workflow_config::Config;
@@ -77,10 +77,10 @@ fn main() {
             });
             match opt.cmd {
                 SubCommand::Update => update::run(config, pinboard),
-                SubCommand::List { .. } => list::run(opt.cmd, &config, pinboard),
-                SubCommand::Search { .. } => search::run(opt.cmd, &config, pinboard),
+                SubCommand::List { .. } => list::run(opt.cmd, &config, &pinboard),
+                SubCommand::Search { .. } => search::run(opt.cmd, &config, &pinboard),
                 SubCommand::Post { .. } => post::run(opt.cmd, config, pinboard),
-                SubCommand::Delete { .. } => delete::run(opt.cmd, &config, pinboard),
+                SubCommand::Delete { .. } => delete::run(opt.cmd, &config, &pinboard),
                 _ => unimplemented!(),
             }
         }

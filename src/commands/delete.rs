@@ -1,9 +1,9 @@
-use super::*;
-use std::io::Write;
 use super::browser_info;
+use super::*;
 use alfred::ItemBuilder;
+use std::io::Write;
 
-pub fn run(cmd: SubCommand, config: &Config, pinboard: Pinboard) {
+pub fn run(cmd: SubCommand, config: &Config, pinboard: &Pinboard) {
     let _ = config; // To silent compiler.
     debug!("Starting in run");
     let url = match cmd {
