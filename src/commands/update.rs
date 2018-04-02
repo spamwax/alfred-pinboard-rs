@@ -13,7 +13,7 @@ pub fn run<'a>(mut config: Config, mut pinboard: Pinboard<'a, 'a>) {
         }
         Ok(needs_update) => {
             if needs_update {
-                info!("cache is outdated");
+                debug!("  cache neeeds updating.");
                 pinboard.update_cache().unwrap_or_else(|err| {
                     let _ = io::stdout()
                         .write(format!("Error: {}", err).as_ref())
@@ -30,7 +30,7 @@ pub fn run<'a>(mut config: Config, mut pinboard: Pinboard<'a, 'a>) {
                     .write(b"Updated cache files!")
                     .expect("Couldn't write to stdout");
             } else {
-                info!("cache is up-to-date");
+                debug!("  cache is up-to-date.");
                 let _ = io::stdout()
                     .write(b"Cache is already up-to-date!")
                     .expect("Couldn't write to stdout");

@@ -2,10 +2,10 @@ use super::*;
 use std::io::Write;
 use std::{thread, time};
 
-use failure::Error;
 use alfred::{Item, ItemBuilder};
+use failure::Error;
 
-pub fn run(cmd: SubCommand, config: &Config, pinboard: Pinboard) {
+pub fn run(cmd: SubCommand, config: &Config, pinboard: &Pinboard) {
     match cmd {
         SubCommand::List {
             tags,
@@ -18,7 +18,7 @@ pub fn run(cmd: SubCommand, config: &Config, pinboard: Pinboard) {
 
 fn process<'a>(
     config: &Config,
-    pinboard: Pinboard<'a, 'a>,
+    pinboard: &Pinboard<'a, 'a>,
     tags: bool,
     suggest: Option<bool>,
     q: Option<String>,
