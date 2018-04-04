@@ -43,11 +43,11 @@ build_release() {
 
     # echo "Copying executable to workflow's folder..."
     cp "$src/target/$TARGET/release/alfred-pinboard-rs" "$stage"
-    cp "$res_dir"/* "$stage"  || echo
+    cp "$res_dir"/* "$stage"
 
     # echo "Creating the workflow bundle..."
     cd "$stage" || exit
-    strip ./alfred-pinboard-rs || echo
+    strip ./alfred-pinboard-rs || true
     rm -f AlfredPinboardRust.alfredworkflow
 
     zip -r AlfredPinboardRust.alfredworkflow ./*
