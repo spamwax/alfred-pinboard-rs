@@ -6,13 +6,14 @@ set -ex
 main() {
     # cross build --target "$TARGET"
     # cross build --target "$TARGET" --release
+    cargo test --target "$TARGET" --release -- --test-threads=1
 
     if [ ! -z "$DISABLE_TESTS" ]; then
         return
     fi
 
     # cross test --target $TARGET
-    cross test --target "$TARGET" --release -- --test-threads=1
+    cross test --target "$TARGET" --release -- --test-threads=1 || return
 
 }
 
