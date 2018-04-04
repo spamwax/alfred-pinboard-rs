@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/spamwax/alfred-pinboard-rs.svg?branch=master)](https://travis-ci.org/spamwax/alfred-pinboard-rs)
+
 # Alfred Workflow for Pinboard
 
 Manage, post and **preview** your bookmarks on [Pinboard](https://pinboard.in) right from within [Alfred app](https://www.alfredapp.com).
