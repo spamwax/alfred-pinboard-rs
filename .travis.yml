@@ -112,7 +112,7 @@ deploy:
   file_glob: true
   file:
     - $TARGET-$CRATE_NAME-$TRAVIS_TAG.*
-    - AlfredPinboardRust-$TRAVIS_TAG.alfredworkflow
+    - alfred-pinboard-rust-$TRAVIS_TAG.alfredworkflow
   on:
     # TODO Here you can pick which targets will generate binary releases
     # In this example, there are some targets that are tested using the stable

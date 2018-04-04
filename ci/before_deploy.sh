@@ -55,7 +55,7 @@ build_release() {
     cd "$stage"
     case $TARGET in
         x86_64-apple-darwin)
-            cp ./AlfredPinboardRust.alfredworkflow "$src/AlfredPinboardRust-$TRAVIS_TAG.alfredworkflow"
+            cp ./AlfredPinboardRust.alfredworkflow "$src/alfred-pinboard-rust-$TRAVIS_TAG.alfredworkflow"
             ;;
         i686-apple-darwin)
             tar czf "$src/$TARGET-$CRATE_NAME-$TRAVIS_TAG.tar.gz" ./AlfredPinboardRust.alfredworkflow
