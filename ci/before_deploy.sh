@@ -47,12 +47,23 @@ build_release() {
 
     # echo "Creating the workflow bundle..."
     cd "$stage" || exit
+    strip ./alfred-pinboard-rs || echo
     rm -f AlfredPinboardRust.alfredworkflow
 
     zip -r AlfredPinboardRust.alfredworkflow ./*
 
     cd "$stage"
-    tar czf "$src/$CRATE_NAME-$TRAVIS_TAG-$TARGET.tar.gz" ./AlfredPinboardRust.alfredworkflow
+    case $TARGET in
+        x86_64-apple-darwin)
+            cp ./AlfredPinboardRust.alfredworkflow "$src/AlfredPinboardRust-$TRAVIS_TAG.alfredworkflow"
+            ;;
+        i686-apple-darwin)
+            tar czf "$src/$CRATE_NAME-$TRAVIS_TAG-$TARGET.tar.gz" ./AlfredPinboardRust.alfredworkflow
+            ;;
+        *)
+            return
+            ;;
+    esac
     cd "$src"
 
     rm -rf "$stage"
