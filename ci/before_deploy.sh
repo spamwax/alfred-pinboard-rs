@@ -24,20 +24,22 @@ main() {
     res_dir="$src/res/workflow"
 
     # echo "Copying executable to workflow's folder..."
-    ls "$src"/*
-    ls "$src/$TARGET"/*
-    ls "$src/$TARGET"/relaese/*
-    cp "$src/$TARGET/release/alfred-pinboard-rs" "$stage"
-    cp "$res_dir"/* "$stage"
+    ls -l "$src" || echo
+    ls -l "$src/target/$TARGET"  || echo
+    ls -l "$src/$TARGET"  || echo
+    ls -l "$src/target/$TARGET"/relaese  || echo
+    ls -l "$src/$TARGET"/relaese  || echo
+    cp -l "$src/$TARGET/release/alfred-pinboard-rs" "$stage"  || echo
+    cp -l "$res_dir"/* "$stage"  || echo
 
     # echo "Creating the workflow bundle..."
     cd "$stage" || exit
-    rm -f AlfredPinboardRust.alfredworkflow
+    rm -f AlfredPinboardRust.alfredworkflow  || echo
 
-    zip -r AlfredPinboardRust.alfredworkflow ./*
+    zip -r AlfredPinboardRust.alfredworkflow ./*  || echo
 
     cd "$stage"
-    tar czf "$src/$CRATE_NAME-$TRAVIS_TAG-$TARGET.tar.gz" ./AlfredPinboardRust.alfredworkflow
+    tar czf "$src/$CRATE_NAME-$TRAVIS_TAG-$TARGET.tar.gz" ./AlfredPinboardRust.alfredworkflow  || echo
     cd "$src"
 
     rm -rf "$stage"
