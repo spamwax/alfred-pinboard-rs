@@ -15,6 +15,7 @@ main() {
             ;;
     esac
 
+    # only build for macOS
     case $TARGET in
         x86_64-apple-darwin)
             build_release "$src" "$stage"
