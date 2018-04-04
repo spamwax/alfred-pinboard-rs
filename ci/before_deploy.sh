@@ -58,7 +58,7 @@ build_release() {
             cp ./AlfredPinboardRust.alfredworkflow "$src/AlfredPinboardRust-$TRAVIS_TAG.alfredworkflow"
             ;;
         i686-apple-darwin)
-            tar czf "$src/$CRATE_NAME-$TRAVIS_TAG-$TARGET.tar.gz" ./AlfredPinboardRust.alfredworkflow
+            tar czf "$src/$TARGET-$CRATE_NAME-$TRAVIS_TAG.tar.gz" ./AlfredPinboardRust.alfredworkflow
             ;;
         *)
             return
