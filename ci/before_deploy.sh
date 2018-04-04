@@ -18,7 +18,7 @@ main() {
     test -f Cargo.lock || cargo generate-lockfile
 
     # TODO Update this to build the artifacts that matter to you
-    rustc --target "$TARGET" --release -- -C lto
+    cross rustc --target "$TARGET" --release -- -C -lto
 
     # TODO Update this to package the right artifacts
     create_workflow "$stage"
