@@ -15,6 +15,23 @@ main() {
             ;;
     esac
 
+    case $TARGET in
+        x86_64-apple-darwin)
+            build_release "$src" "$stage"
+            ;;
+        i686-apple-darwin)
+            build_release "$src" "$stage"
+            ;;
+        *)
+            return
+            ;;
+    esac
+
+}
+
+build_release() {
+    src=$1
+    stage=$2
     test -f Cargo.lock || cargo generate-lockfile
 
     # TODO Update this to build the artifacts that matter to you
@@ -24,25 +41,21 @@ main() {
     res_dir="$src/res/workflow"
 
     # echo "Copying executable to workflow's folder..."
-    ls -l "$src" || echo
-    ls -l "$src/target/$TARGET"  || echo
-    ls -l "$src/$TARGET"  || echo
-    ls -l "$src/target/$TARGET"/relaese  || echo
-    ls -l "$src/$TARGET"/relaese  || echo
-    cp -l "$src/$TARGET/release/alfred-pinboard-rs" "$stage"  || echo
-    cp -l "$res_dir"/* "$stage"  || echo
+    cp "$src/target/$TARGET/release/alfred-pinboard-rs" "$stage"
+    cp "$res_dir"/* "$stage"  || echo
 
     # echo "Creating the workflow bundle..."
     cd "$stage" || exit
-    rm -f AlfredPinboardRust.alfredworkflow  || echo
+    rm -f AlfredPinboardRust.alfredworkflow
 
-    zip -r AlfredPinboardRust.alfredworkflow ./*  || echo
+    zip -r AlfredPinboardRust.alfredworkflow ./*
 
     cd "$stage"
-    tar czf "$src/$CRATE_NAME-$TRAVIS_TAG-$TARGET.tar.gz" ./AlfredPinboardRust.alfredworkflow  || echo
+    tar czf "$src/$CRATE_NAME-$TRAVIS_TAG-$TARGET.tar.gz" ./AlfredPinboardRust.alfredworkflow
     cd "$src"
 
     rm -rf "$stage"
+
 }
 
 main
