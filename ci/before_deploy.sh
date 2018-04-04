@@ -24,7 +24,10 @@ main() {
     res_dir="$src/res/workflow"
 
     # echo "Copying executable to workflow's folder..."
-    cp "$src/target/release/alfred-pinboard-rs" "$stage"
+    ls "$src"/*
+    ls "$src/$TARGET"/*
+    ls "$src/$TARGET"/relaese/*
+    cp "$src/$TARGET/release/alfred-pinboard-rs" "$stage"
     cp "$res_dir"/* "$stage"
 
     # echo "Creating the workflow bundle..."
