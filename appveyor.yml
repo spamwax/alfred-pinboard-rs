@@ -38,7 +38,7 @@ test_script:
   # we don't run the "test phase" when doing deploys
   - if [%APPVEYOR_REPO_TAG%]==[false] (
       cargo build --target %TARGET% &&
-      cargo run --target %TARGET% &&
+      cargo run --target %TARGET% -- config --authorization hamid:12345 &&
       cargo test --target %TARGET% -- --nocapture --test-threads=1
     )
 
