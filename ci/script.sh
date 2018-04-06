@@ -12,6 +12,7 @@ main() {
     fi
 
     # cross test --target $TARGET
+    export alfred_debug=1
     cross test --target "$TARGET" --release -- --test-threads=1 || return
 
 }
