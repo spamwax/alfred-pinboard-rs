@@ -61,6 +61,13 @@ pub enum AlfredError {
 }
 
 fn main() {
+    // If user has Alfred's debug panel open, print all debug info
+    // by setting RUST_LOG environment variable.
+    if alfred::env::is_debug() {
+        env::set_var("RUST_LOG", "rusty_pin=debug,alfred_pinboard_rs=debug");
+        eprintln!("Set var RUST_LOG to: {:?}", env::var("RUST_LOG"));
+    }
+
     env_logger::init();
 
     debug!("Parsing input arguments.");
