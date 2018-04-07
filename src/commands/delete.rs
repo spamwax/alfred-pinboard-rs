@@ -33,7 +33,7 @@ pub fn run(cmd: SubCommand, config: &Config, pinboard: &Pinboard) {
                     .quicklook_url(tab_info.url.as_ref())
                     .text_large_type(tab_info.title.as_ref())
                     .text_copy(tab_info.url.as_ref())
-                    .icon_path("bookmarks.png")
+                    .icon_path("bookmark-delete.png")
                     .into_item()
             }
             Err(e) => {
