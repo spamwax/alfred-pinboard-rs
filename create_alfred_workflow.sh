@@ -1,6 +1,13 @@
 #!/bin/bash
 
 set -x
+version_tag=$1
+
+if [ -z "$version_tag" ]; then
+    echo "You need to provide a semver tag: v0.9.10"
+    exit
+fi
+
 alfred_pinboard_rs=$(pwd)
 workflow_dir="$HOME/Dropbox/Alfred/Alfred.alfredpreferences/workflows/user.workflow.665EAB20-5141-463D-8C5A-90093EEAA756"
 res_dir="$alfred_pinboard_rs/res/workflow"
@@ -17,8 +24,8 @@ strip target/release/alfred-pinboard-rs
 cp target/release/alfred-pinboard-rs "$res_dir"
 
 echo "Updating version in info.plist"
-version=$(git describe --tags --abbrev=0)
-defaults write "$res_dir"/info.plist version "$version"
+# version_tag=$(git describe --tags --abbrev=0)
+defaults write "$res_dir"/info.plist version "$version_tag"
 plutil -convert xml1 "$res_dir"/info.plist
 
 echo "Creating the workflow bundle..."
@@ -30,3 +37,6 @@ zip -r AlfredPinboardRust.alfredworkflow ./*
 echo "Moving bundle to executable folder..."
 mv AlfredPinboardRust.alfredworkflow "$alfred_pinboard_rs"
 rm alfred-pinboard-rs
+
+git commit -a -m "Bump release: $version_tag"
+git tag "$version_tag"
