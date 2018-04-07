@@ -179,18 +179,7 @@
 			</dict>
 		</array>
 		<key>453D2BA7-92D6-4AD0-821B-132AF0365147</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>D4769E77-4D89-4B89-B236-FC7C785C3446</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
+		<array/>
 		<key>46667F34-E27E-4FBA-83B5-4A55C6FA2FD6</key>
 		<array>
 			<dict>
@@ -648,19 +637,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>6BA4C470-B64F-4BE2-9346-38ADACABCCBA</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>D4769E77-4D89-4B89-B236-FC7C785C3446</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>F81D31D0-06D4-4A6E-A6F0-4E43B08D71BA</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -1861,27 +1837,6 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>Rusty Pinboard</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>F81D31D0-06D4-4A6E-A6F0-4E43B08D71BA</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -1924,29 +1879,6 @@ fi</string>
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
 			<string>D5939049-C73A-4872-9625-87A9F9BE886C</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>[ ! -z "$1" ] &amp;&amp; echo "$1"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>D4769E77-4D89-4B89-B236-FC7C785C3446</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -3094,15 +3026,6 @@ Raashid.A</string>
 			<key>ypos</key>
 			<integer>80</integer>
 		</dict>
-		<key>D4769E77-4D89-4B89-B236-FC7C785C3446</key>
-		<dict>
-			<key>note</key>
-			<string>Filter empty outputs.</string>
-			<key>xpos</key>
-			<integer>470</integer>
-			<key>ypos</key>
-			<integer>1650</integer>
-		</dict>
 		<key>D52A87C2-E602-4F4F-A20E-DD9202A461E9</key>
 		<dict>
 			<key>note</key>
@@ -3187,16 +3110,9 @@ Raashid.A</string>
 			<key>ypos</key>
 			<integer>490</integer>
 		</dict>
-		<key>F81D31D0-06D4-4A6E-A6F0-4E43B08D71BA</key>
-		<dict>
-			<key>xpos</key>
-			<integer>650</integer>
-			<key>ypos</key>
-			<integer>1650</integer>
-		</dict>
 	</dict>
 	<key>version</key>
-	<string>0.9.10</string>
+	<string>v0.10.10</string>
 	<key>webaddress</key>
 	<string>https://github.com/spamwax/alfred-pinboard-rs</string>
 </dict>

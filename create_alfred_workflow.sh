@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -x
+# set -x
 version_tag=$1
 
 if [ -z "$version_tag" ]; then
