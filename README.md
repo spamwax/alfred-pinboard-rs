@@ -55,7 +55,7 @@ To manually update the cache, you need to issue the ***`pu`*** command:
 The syntax to post a bookmark to Pinboard is :
 
 ```
-p tag1 tag2 tag3 ; some optional note
+p tag1 tag2 tag3 ; some optional note (semi-colon & note are optional)
 ```
 
 The workflow will show a list of your current tags as you are typing:
@@ -77,6 +77,8 @@ You can hold down modifiers to one-time change some of your settings:
 - <kbd>Control ⌃</kbd> : will mark the bookmark as `toread` (regardless of settings)
 - <kbd>Option ⌥</kbd> : will mark the bookmark as `shared` (regardless of settings)
 
+
+After entering last desired tag, you can hit enter to post the bookmark.
 If you want to add extra description to the bookmark you can add it after a semi-colon:
 
 ![image](./res/images/adding-notes.png)
