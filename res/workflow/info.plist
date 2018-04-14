@@ -922,10 +922,9 @@ echo "Posted: $title"</string>
 				<key>runningsubtext</key>
 				<string>Fetching popular tags...</string>
 				<key>script</key>
-				<string>input={query}
-apr_execution_counter=$((apr_execution_counter + 1)) ./alfred-pinboard-rs list -t "{query}"</string>
+				<string>apr_execution_counter=$((apr_execution_counter + 1)) ./alfred-pinboard-rs list -t "$1"</string>
 				<key>scriptargtype</key>
-				<integer>0</integer>
+				<integer>1</integer>
 				<key>scriptfile</key>
 				<string></string>
 				<key>subtext</key>

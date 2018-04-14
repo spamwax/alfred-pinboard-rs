@@ -31,16 +31,20 @@ fn process<'a>(
         // Check if user has entered ';' which indicates they are providing a description.
         // So no need to search for tags!
         if queries.contains(';') {
+            let trim_chars: &[_] = &['\t', ' ', '\\', '\n'];
             let pin_info = queries
                 .splitn(2, ';')
-                .map(|s| s.trim())
+                .map(|s| s.trim_matches(trim_chars))
                 .collect::<Vec<&str>>();
-            let item = ItemBuilder::new("Hit Return to bookmark the page!")
+            debug!("  pin_info: {:?}", pin_info);
+            let mut item = ItemBuilder::new("Hit Return to bookmark the page!")
                 .icon_path("upload.png")
                 .arg(queries.as_ref())
-                .variable("tags", pin_info[0])
-                .variable("description", pin_info[1])
-                .into_item();
+                .variable("tags", pin_info[0]);
+            if !pin_info[1].is_empty() {
+                item = item.variable("description", pin_info[1])
+            }
+            let item = item.into_item();
             ::write_to_alfred(vec![item], config).expect("Couldn't write to Alfred");
             return;
         }

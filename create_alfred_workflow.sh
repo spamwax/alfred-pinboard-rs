@@ -12,6 +12,8 @@ alfred_pinboard_rs=$(pwd)
 workflow_dir="$HOME/Dropbox/Alfred/Alfred.alfredpreferences/workflows/user.workflow.665EAB20-5141-463D-8C5A-90093EEAA756"
 res_dir="$alfred_pinboard_rs/res/workflow"
 
+git checkout master || exit
+
 echo "Building new release..."
 cd "$alfred_pinboard_rs" || exit
 cargo build --release > build.log 2>&1
@@ -40,3 +42,4 @@ rm alfred-pinboard-rs
 
 git commit -a -m "Bump release: $version_tag"
 git tag "$version_tag"
+git push --tags

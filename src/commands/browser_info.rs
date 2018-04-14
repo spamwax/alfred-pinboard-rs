@@ -1,5 +1,5 @@
-use std::process::Command;
 use failure::{err_msg, Error};
+use std::process::Command;
 
 #[derive(Debug)]
 pub struct BrowserActiveTabInfo {
