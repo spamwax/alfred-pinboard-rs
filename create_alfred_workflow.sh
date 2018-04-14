@@ -40,6 +40,6 @@ echo "Moving bundle to executable folder..."
 mv AlfredPinboardRust.alfredworkflow "$alfred_pinboard_rs"
 rm alfred-pinboard-rs
 
-git commit -a -m "Bump release: $version_tag"
+git commit -a -m "Bump release to $version_tag"
 git tag "$version_tag"
 git push --tags
