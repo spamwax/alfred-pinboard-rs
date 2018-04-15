@@ -44,10 +44,7 @@ test_phase() {
     # cross test --target $TARGET
     export alfred_debug=1
     cross test --target "$TARGET" --release -- --test-threads=1 || return
-
-    # only run for macOS
-    case $TARGET in
-    esac
+    run_phase
 }
 
 # we don't run the "test phase" when doing deploys
