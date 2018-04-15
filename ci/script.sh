@@ -39,6 +39,9 @@ test_phase() {
         i686-apple-darwin)
             run_phase
             ;;
+        armv7-linux-androideabi)
+            run_phase
+            ;;
         *)
             return
             ;;
