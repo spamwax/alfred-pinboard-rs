@@ -10,11 +10,25 @@ run_phase() {
         x86_64-unknown-linux-gnu)
             cargo test --target "$TARGET" -- --nocapture --test-threads=1
             ;;
-        *)
+        x86_64-apple-darwin)
             export alfred_debug=1
             cross run --target "$TARGET" -- config --authorization hamid:12345
             export alfred_versioin=3.6
             cross run --target "$TARGET" -- config -d
+            ;;
+        i686-apple-darwin)
+            export alfred_debug=1
+            cross run --target "$TARGET" -- config --authorization hamid:12345
+            export alfred_versioin=3.6
+            cross run --target "$TARGET" -- config -d
+            ;;
+        armv7-linux-androideabi)
+            export alfred_debug=1
+            cross run --target "$TARGET" -- config --authorization hamid:12345
+            ;;
+        *)
+            return
+            ;;
     esac
 
 }
@@ -33,18 +47,6 @@ test_phase() {
 
     # only run for macOS
     case $TARGET in
-        x86_64-apple-darwin)
-            run_phase
-            ;;
-        i686-apple-darwin)
-            run_phase
-            ;;
-        armv7-linux-androideabi)
-            run_phase
-            ;;
-        *)
-            return
-            ;;
     esac
 }
 
