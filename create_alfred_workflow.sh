@@ -29,6 +29,7 @@ echo "Updating version in info.plist"
 # version_tag=$(git describe --tags --abbrev=0)
 defaults write "$res_dir"/info.plist version "$version_tag"
 plutil -convert xml1 "$res_dir"/info.plist
+cp "$res_dir"/info.plist "$workflow_dir"
 
 echo "Creating the workflow bundle..."
 cd "$res_dir" || exit
@@ -42,4 +43,4 @@ rm alfred-pinboard-rs
 
 git commit -a -m "Bump release to $version_tag"
 git tag "$version_tag"
-git push --tags
+git push && git push --tags

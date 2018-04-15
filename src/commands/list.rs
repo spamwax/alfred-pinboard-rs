@@ -51,6 +51,7 @@ fn process<'a>(
 
         let query_words: Vec<&str> = queries.split_whitespace().collect();
 
+        let last_query_word_tag;
         let mut popular_tags;
         let mut alfred_items = vec![];
 
@@ -61,34 +62,38 @@ fn process<'a>(
             vec![]
         };
 
-        match pinboard.search_list_of_tags(query_words.last().unwrap_or(&String::new().as_str())) {
+        let last_query_word = query_words.last().unwrap_or(&"");
+
+        match pinboard.search_list_of_tags(last_query_word) {
             Err(e) => ::show_error_alfred(e.to_string()),
             Ok(results) => {
-                alfred_items = match results {
+                let prev_tags = if query_words.len() > 1 {
+                    // User has already searched for other tags, we should include those in the
+                    // 'autocomplete' field of the AlfredItem
+                    queries.get(0..queries.rfind(' ').unwrap() + 1).unwrap()
+                } else {
+                    ""
+                };
+
+                // No result means, we couldn't find a tag using the given query
+                // Some result mean we found tags even though the query was empty as
+                // search_list_of_tags returns all tags for empty queries.
+                let items = match results {
+                    Some(i) => {
+                        debug!("Found {} tags.", i.len());
+                        i
+                    }
                     None => {
                         assert!(!query_words.is_empty());
-                        let last_query_word = *query_words.last().unwrap();
-                        vec![
-                            ItemBuilder::new(last_query_word)
-                                .subtitle("NEW TAG")
-                                .autocomplete(last_query_word)
-                                .icon_path("tag.png")
-                                .into_item(),
-                        ]
+                        debug!("Didn't find any tag for `{}`", last_query_word);
+                        last_query_word_tag = Tag::new(last_query_word.to_string(), 0).set_new();
+                        vec![&last_query_word_tag]
                     }
-                    Some(items) => {
-                        debug!("Found {} tags.", items.len());
-                        let prev_tags = if query_words.len() > 1 {
-                            // User has already searched for other tags, we should include those in the
-                            // 'autocomplete' field of the AlfredItem
-                            queries.get(0..queries.rfind(' ').unwrap() + 1).unwrap()
-                        } else {
-                            ""
-                        };
-                        let prev_tags_len = prev_tags.len();
-                        // Show the tag with highest frequency matching the last query before popular/suggested tags.
-                        popular_tags.insert(0, items[0].clone());
-                        popular_tags
+                };
+                let prev_tags_len = prev_tags.len();
+                // Show the tag with highest frequency matching the last query before popular/suggested tags.
+                popular_tags.insert(0, items[0].clone());
+                alfred_items = popular_tags
                             .iter()
                             // Combine popular tags and returned tags from cache
                             .chain(items.into_iter().skip(1).take(config.tags_to_show as usize))
@@ -110,11 +115,7 @@ fn process<'a>(
                             _args.push_str(prev_tags);
                             _args.push_str(&tag.0);
                             ItemBuilder::new(tag.0.as_ref())
-                                .subtitle(if tag.1 != 0 {
-                                    tag.1.to_string()
-                                } else {
-                                    String::from("Popular")
-                                })
+                                .subtitle(tag.1.to_string())
                                 .autocomplete(_args.clone())
                                 .variable("tags", _args.clone())
                                 .arg(_args)
@@ -122,9 +123,7 @@ fn process<'a>(
                                 .icon_path("tag.png")
                                 .into_item()
                         })
-                        .collect::<Vec<Item>>()
-                    }
-                };
+                        .collect::<Vec<Item>>();
             }
         }
         ::write_to_alfred(alfred_items, config).expect("Couldn't write to Alfred");
@@ -194,6 +193,8 @@ fn retrieve_popular_tags(exec_counter: usize) -> Result<Vec<Tag>, Error> {
     use std::fs;
     use std::io::{BufRead, BufReader, BufWriter};
 
+    // TODO: Don't create another pinboard instance. use the one list.rs receives to shared with
+    // the thread that runs this function.
     // FIXME: If run from outside Alfred (say terminal),
     // the cache folder for 'config' and 'pinboard' will be different.
     let config = Config::setup()?;
@@ -212,14 +213,16 @@ fn retrieve_popular_tags(exec_counter: usize) -> Result<Vec<Tag>, Error> {
             let mut writer = BufWriter::with_capacity(1024, fp);
             writer.write_all(tags.join("\n").as_bytes())
         })?;
-        tags.into_iter().map(|t| Tag(t, 0)).collect::<Vec<Tag>>()
+        tags.into_iter()
+            .map(|t| Tag::new(t, 0).set_popular())
+            .collect::<Vec<Tag>>()
     } else {
         warn!("reading suggested tags from cache file: {:?}", ptags_fn);
         fs::File::open(ptags_fn).and_then(|fp| {
             let reader = BufReader::with_capacity(1024, fp);
             Ok(reader
                 .lines()
-                .map(|l| Tag(l.expect("bad popular tags cache file?"), 0))
+                .map(|l| Tag::new(l.expect("bad popular tags cache file?"), 0).set_popular())
                 .collect::<Vec<Tag>>())
         })?
     };
