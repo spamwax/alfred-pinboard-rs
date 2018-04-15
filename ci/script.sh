@@ -21,7 +21,6 @@ run_phase() {
 
 # TODO This is the "test phase", tweak it as you see fit
 test_phase() {
-    # cross build --target "$TARGET" --release
 
     if [ ! -z "$DISABLE_TESTS" ]; then
         cross build --target "$TARGET"
@@ -32,8 +31,18 @@ test_phase() {
     export alfred_debug=1
     cross test --target "$TARGET" --release -- --test-threads=1 || return
 
-    run_phase
-
+    # only run for macOS
+    case $TARGET in
+        x86_64-apple-darwin)
+            run_phase
+            ;;
+        i686-apple-darwin)
+            run_phase
+            ;;
+        *)
+            return
+            ;;
+    esac
 }
 
 # we don't run the "test phase" when doing deploys
