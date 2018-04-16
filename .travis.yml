@@ -19,7 +19,7 @@ matrix:
   # don't need
   include:
     # Android
-    - env: TARGET=armv7-linux-androideabi
+    # - env: TARGET=armv7-linux-androideabi
     # - env: TARGET=i686-linux-android DISABLE_TESTS=1
     # - env: TARGET=x86_64-linux-android DISABLE_TESTS=1
 
@@ -31,11 +31,11 @@ matrix:
 
     # Linux
     - env: TARGET=x86_64-unknown-linux-gnu
-    - env: TARGET=i686-unknown-linux-gnu
+    # - env: TARGET=i686-unknown-linux-gnu
 
     # OSX
-    - env: TARGET=i686-apple-darwin
-      os: osx
+    # - env: TARGET=i686-apple-darwin
+      # os: osx
     - env: TARGET=x86_64-apple-darwin
       os: osx
 
@@ -84,7 +84,7 @@ deploy:
     secure: jr5wObeu13+vB664jOvl9Sc5azbHoCuXyn7ME28Bf/BbAMb/P80C5izzkSlGLaEu4W581GgRUvivUeYRqxP2aBZkyCqptgV+yeQdt6u+o/FPe5DW9oJij/23zbg7TLbO/lbGDfD9vJhN4MPRYoRm2/ldlpBBibeAIOowSlxF6Ks6MZQIsRM/6h6zvDBZEYYbU9R0nftYefsklfTH3m6OfJ9tzeVBE2X6mUvwRz3ZCDyNWO1bzJqndP/7LxkjSVbp+/L5IcHONwmbS8fDSSDReiNLRAlXp3RCUieHFU3tytVwQJrk+MqbpRLqmP35rb3w1Yl9g1iSg6Xq+Gc2XD+UPH6YcHlxAP04jhPmYaq6E/tFfTbTP7RIOTKCJvhrmhnksWbes9RWMj6r6C6jrs0PS7PzJ0o1b5d2Xx5l35JJ+A5nnmsV+G014pKhsKIFUHdNNXoFTaORphEcILn7tVjfNilvj3h9UIOlqai+s6pmqGNRjG79HN34C+4JP7m0Q8IpgBs18Y/Ldeku7IeZNbY0ZQcmbhOrWBsfW367uG0WyoBHBGO7DW6ygSYpTh7QbbT2LoRhOi6zfnWjA2ozq4C8v+idGOmVHC2YJzG1J7sG/DRSbOFtvYr3adWz7v6SzGUJrI/IVSUFMxVy7ANJcl9ppiMtqkc8s/1MPNShPmZSbjI=
   file_glob: true
   file:
-    - $TARGET-$CRATE_NAME-$TRAVIS_TAG.*
+    # - $TARGET-$CRATE_NAME-$TRAVIS_TAG.*
     - alfred-pinboard-rust-$TRAVIS_TAG.alfredworkflow
   on:
     # TODO Here you can pick which targets will generate binary releases

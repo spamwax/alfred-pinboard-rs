@@ -20,9 +20,9 @@ main() {
         x86_64-apple-darwin)
             build_release "$src" "$stage"
             ;;
-        i686-apple-darwin)
-            build_release "$src" "$stage"
-            ;;
+        # i686-apple-darwin)
+            # build_release "$src" "$stage"
+            # ;;
         *)
             return
             ;;
