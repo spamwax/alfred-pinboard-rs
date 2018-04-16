@@ -43,11 +43,7 @@ Then invoke Alfred and enter your username:token after the ***"pa"*** keyword:
 
 ![image](./res/images/authentication.png)
 
-This workflow will keep a local cache of the tags and bookmarks that you have in Pinboard.
-
-To manually update the cache, you need to issue the ***`pu`*** command:
-
-![image](./res/images/update.png)
+This workflow will keep a local cache of the tags and bookmarks that you have in Pinboard, and, by default, automatically update the cache. (See [manual updates](#cache_update) )
 
 ---
 
@@ -92,7 +88,7 @@ Searching your bookmarks is easy.
 ps query1 query2 query3 ...
 ```
 
-Workflow will use the text you enter in Alfred and show list of bookmarks that contain **all** of the search keywords in any of the bookmarks information (Desrciption of bookmark, its tags and url and its extended notes, search fields can be adjusted, see [settings](#config).
+Workflow will use the text you enter in Alfred and show list of bookmarks that contain **all** of the search keywords in any of the bookmarks information (Desrciption of bookmark, its tags, its url and its extended notes). However, these search fields can be adjusted, see [settings](#config).
 
 So **the more** search keywords you enter **the less** results will be displayed as it tries to find the bookmarks that contain ***all*** of the keywords.
 
@@ -117,7 +113,7 @@ You can hold down modifiers to enable different behavior:
 pind
 ```
 
-To delete a bookmark, just make sure it is opened in your current broweser's window. Then use `pind`.
+To delete a bookmark, just make sure it is opened in your current browser's window. Then use `pind`.
 Proposed workflow for deleting a bookmark is to first open it in browser (search for it using this workflow's keyword `ps`, and hit enter) and then use `pind` keyword followed by enter.
 
 ![image](./res/images/delete-pin.png)
@@ -142,6 +138,14 @@ On top of using `pconf`, you can directly type following commands to also adjust
 - `pset auto`: After posting a new bookmark, automatically update the local cache.
 - `pset tags`: Set number of tags to show: `pset tags 25`
 - `pset bookmarks`: Set number of bookmarks to show: `pset bookmarks 12`
+
+### Manual cache update<a name="cache_update"></a>
+
+To manually update the cache, you need to issue the ***`pu`*** command:
+
+![image](./res/images/update.png)
+
+---
 
 Most of configuration settings are self-explanatory.
 
