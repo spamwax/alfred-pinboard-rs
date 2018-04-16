@@ -916,11 +916,11 @@ echo "Posted: $title"</string>
 				<key>queuedelayimmediatelyinitially</key>
 				<false/>
 				<key>queuedelaymode</key>
-				<integer>1</integer>
+				<integer>0</integer>
 				<key>queuemode</key>
 				<integer>1</integer>
 				<key>runningsubtext</key>
-				<string>Fetching popular tags...</string>
+				<string>Fetching tags...</string>
 				<key>script</key>
 				<string>apr_execution_counter=$((apr_execution_counter + 1)) ./alfred-pinboard-rs list -t "$1"</string>
 				<key>scriptargtype</key>

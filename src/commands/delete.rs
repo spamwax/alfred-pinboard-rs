@@ -3,8 +3,10 @@ use super::*;
 use alfred::ItemBuilder;
 use std::io::Write;
 
-pub fn run(cmd: SubCommand, config: &Config, pinboard: &Pinboard) {
-    let _ = config; // To silent compiler.
+/// Providing this command with a URL will try to remove the related bookmark from Pinboard.
+/// If no URL is provided, this command will fetch browser's tab info and show and Alfred item that
+/// can be used for deletion in next step.
+pub fn run(cmd: SubCommand, config: Config, pinboard: Pinboard) {
     debug!("Starting in run");
     let url = match cmd {
         SubCommand::Delete { url } => url,
@@ -21,6 +23,9 @@ pub fn run(cmd: SubCommand, config: &Config, pinboard: &Pinboard) {
             let _ = io::stdout()
                 .write(b"Successfully deleted bookmark.")
                 .expect("Couldn't write to stdout");
+            if config.auto_update_cache {
+                update::run(config, pinboard);
+            }
         }
     } else {
         let tab_info;
@@ -44,6 +49,6 @@ pub fn run(cmd: SubCommand, config: &Config, pinboard: &Pinboard) {
                     .into_item()
             }
         };
-        ::write_to_alfred(vec![item], config).expect("Couldn't write to Alfred");
+        ::write_to_alfred(vec![item], &config).expect("Couldn't write to Alfred");
     }
 }
