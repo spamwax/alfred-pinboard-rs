@@ -32,6 +32,7 @@ plutil -convert xml1 "$res_dir"/info.plist
 cp "$res_dir"/info.plist "$workflow_dir"
 
 echo "Creating the workflow bundle..."
+rm -f AlfredPinboardRust.alfredworkflow
 cd "$res_dir" || exit
 rm -f AlfredPinboardRust.alfredworkflow
 
