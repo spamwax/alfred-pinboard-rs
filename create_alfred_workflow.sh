@@ -43,7 +43,9 @@ mv AlfredPinboardRust.alfredworkflow "$alfred_pinboard_rs"
 rm alfred-pinboard-rs
 
 commit_msg="Bump version to $version_tag"
-[ ! -z "$2" ] && commit_msg="$commit_msg\n$2"
+[ ! -z "$2" ] && commit_msg="$commit_msg
+
+$2"
 git commit -a -m "$commit_msg"
 git tag "$version_tag"
 git push && git push --tags
