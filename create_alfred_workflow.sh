@@ -50,4 +50,4 @@ git commit -a -m "$commit_msg"
 git tag "$version_tag"
 git push
 sleep 5
-git push --tags --all
+git push --tags
