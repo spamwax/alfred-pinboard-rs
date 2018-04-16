@@ -21,7 +21,7 @@ dependencies = [
 
 [[package]]
 name = "alfred-pinboard-rs"
-version = "0.11.2"
+version = "0.11.3"
 dependencies = [
  "alfred 4.0.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "chrono 0.4.2 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -851,7 +851,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 [[package]]
 name = "rusty-pin"
 version = "0.3.0"
-source = "git+https://github.com/spamwax/rusty-pin#2c864ed9ffba2f00bc5feb0ed6a05d9183158cba"
+source = "git+https://github.com/spamwax/rusty-pin#c93c53d79445cedbf3f239b4a60f141df361e2f7"
 dependencies = [
  "chrono 0.4.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "env_logger 0.5.7 (registry+https://github.com/rust-lang/crates.io-index)",

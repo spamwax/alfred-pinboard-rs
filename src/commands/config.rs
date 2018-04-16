@@ -1,5 +1,6 @@
 use super::*;
 use AlfredError;
+use chrono::prelude::Local;
 
 pub fn run(x: SubCommand) {
     debug!("Starting in run");
@@ -104,8 +105,13 @@ fn show_config(config: &Config) {
                 .arg("pset bookmarks")
                 .icon_path("no_of_pins.png")
                 .into_item(),
-            ItemBuilder::new(format!("{:?}", config.update_time))
-                .subtitle("Latest cache update")
+            ItemBuilder::new(
+                config
+                    .update_time
+                    .with_timezone(&Local)
+                    .format("%Y-%m-%d %H:%M:%S")
+                    .to_string(),
+            ).subtitle("Latest cache update")
                 .icon_path("auto_update.png")
                 .into_item(),
         ]).write(io::stdout())

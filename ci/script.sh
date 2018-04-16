@@ -7,9 +7,6 @@ run_phase() {
     #     return
     # fi
     case "$TARGET" in
-        x86_64-unknown-linux-gnu)
-            cargo test --target "$TARGET" -- --nocapture --test-threads=1
-            ;;
         x86_64-apple-darwin)
             export alfred_debug=1
             cross run --target "$TARGET" -- config --authorization hamid:12345
@@ -41,9 +38,7 @@ test_phase() {
         return
     fi
 
-    # cross test --target $TARGET
-    export alfred_debug=1
-    cross test --target "$TARGET" --release -- --test-threads=1 || return
+    cargo test --target "$TARGET" -- --nocapture --test-threads=1 || return
     run_phase
 }
 

@@ -38,7 +38,7 @@ pub fn run(cmd: SubCommand, config: &Config, pinboard: &Pinboard) {
             }
             Err(e) => {
                 warn!("Couldn't get browser info: {:?}", e);
-                ItemBuilder::new("Couldn't get browrer info!")
+                ItemBuilder::new("Couldn't get browser's info!")
                     .subtitle("Error")
                     .icon_path("erroricon.icns")
                     .into_item()
