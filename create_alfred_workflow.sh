@@ -48,4 +48,4 @@ commit_msg="Bump version to $version_tag"
 $2"
 git commit -a -m "$commit_msg"
 git tag "$version_tag"
-git push && git push --tags
+git push --tags

@@ -44,5 +44,6 @@ test_phase() {
 
 # we don't run the "test phase" when doing deploys
 if [ -z "$TRAVIS_TAG" ]; then
+    echo "Non tag commit, running only tests."
     test_phase
 fi

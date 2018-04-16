@@ -70,4 +70,5 @@ build_release() {
 
 }
 
+echo "This is a tagged commit, running before_deploy"
 main
