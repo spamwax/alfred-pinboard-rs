@@ -22,9 +22,11 @@ This plugin will let you:
   - Tap <kbd>Control</kbd> to show current item's extended notes/descriptioin.
 - Many options that can be easily adjusted. (see below)
 
--- For posting you just need to enter the Workflow's keyword ( `p` ) into Alfred's window and follow it with couple of tags and an optional description. The workflow will then post a bookmark for the window/tab of the active browser to Pinboard.
+### TLDR;
+After initial [setup](#installation--setup):
+- For posting you just need to enter the Workflow's keyword ( `p` ) into Alfred's window and follow it with couple of tags and an optional description. The workflow will then post a bookmark for the window/tab of the active browser to Pinboard.
 
--- For searching, use ( `ps` ) and then type the search keywords.
+- For searching, use ( `ps` ) and then type the search keywords.
 
 ### Supported Browsers:
 - Safari
