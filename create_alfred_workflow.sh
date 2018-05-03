@@ -46,6 +46,7 @@ commit_msg="Bump version to $version_tag"
 [ ! -z "$2" ] && commit_msg="$commit_msg
 
 $2"
+git pull origin master
 git commit -a -m "$commit_msg"
 git tag "$version_tag"
 git push

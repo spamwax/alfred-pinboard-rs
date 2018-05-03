@@ -3243,7 +3243,7 @@ Raashid.A</string>
 		</dict>
 	</dict>
 	<key>version</key>
-	<string>0.13.0</string>
+	<string>0.13.1</string>
 	<key>webaddress</key>
 	<string>https://github.com/spamwax/alfred-pinboard-rs</string>
 </dict>
