@@ -1,6 +1,6 @@
 use super::*;
-use AlfredError;
 use chrono::prelude::Local;
+use AlfredError;
 
 pub fn run(x: SubCommand) {
     debug!("Starting in run");
@@ -112,6 +112,7 @@ fn show_config(config: &Config) {
                     .format("%Y-%m-%d %H:%M:%S")
                     .to_string(),
             ).subtitle("Latest cache update")
+                .arg("pu")
                 .icon_path("auto_update.png")
                 .into_item(),
         ]).write(io::stdout())

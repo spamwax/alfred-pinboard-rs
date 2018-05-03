@@ -1,13 +1,13 @@
-use std::fs::{create_dir_all, File};
-use std::path::PathBuf;
-use std::io::{Read, Write};
-use std::io::{BufReader, BufWriter};
-use std::env;
 use chrono::prelude::*;
+use std::env;
+use std::fs::{create_dir_all, File};
+use std::io::{BufReader, BufWriter};
+use std::io::{Read, Write};
+use std::path::PathBuf;
 
+use alfred;
 use failure::Error;
 use serde_json;
-use alfred;
 
 use semver::{Version, VersionReq};
 
