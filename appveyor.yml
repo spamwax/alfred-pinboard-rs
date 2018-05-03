@@ -52,7 +52,7 @@ cache:
 branches:
   only:
     # Release tags
-    - /^v\d+\.\d+\.\d+.*$/
+    - /^v?\d+\.\d+\.\d+.*$/
     - master
 
 notifications:
