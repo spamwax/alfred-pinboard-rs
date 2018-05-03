@@ -112,7 +112,7 @@ fn show_config(config: &Config) {
                     .format("%Y-%m-%d %H:%M:%S")
                     .to_string(),
             ).subtitle("Latest cache update")
-                .arg("pu")
+                .arg("pupdate")
                 .icon_path("auto_update.png")
                 .into_item(),
         ]).write(io::stdout())
