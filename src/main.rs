@@ -39,8 +39,10 @@ extern crate rusty_pin;
 use std::borrow::Cow;
 use std::env;
 use std::io;
+use std::path::PathBuf;
 use std::process;
 
+use alfred::Updater;
 use failure::Error;
 use rusty_pin::Pinboard;
 use structopt::StructOpt;
@@ -54,6 +56,9 @@ use workflow_config::Config;
 
 use commands::{config, delete, list, post, search, update};
 
+// TODO: add modifiers to delete commands output //
+// TODO: parse Alfred preferences and get number of visible items? //
+
 #[derive(Debug, Fail)]
 pub enum AlfredError {
     #[fail(display = "Config file may be corrupted")]
@@ -65,6 +70,11 @@ pub enum AlfredError {
 }
 
 fn main() {
+    env::set_var("alfred_workflow_data", "/Volumes/Home/hamid/tmp/rust");
+    env::set_var("alfred_workflow_cache", "/Volumes/Home/hamid/tmp/rust");
+    env::set_var("alfred_workflow_uid", "hamid63");
+    env::set_var("alfred_version", "3.6");
+    env::set_var("RUST_LOG", "rusty_pin=debug,alfred_pinboard_rs=debug");
     // If user has Alfred's debug panel open, print all debug info
     // by setting RUST_LOG environment variable.
     if alfred::env::is_debug() {
@@ -73,6 +83,12 @@ fn main() {
     }
 
     env_logger::init();
+
+    let mut updater = Updater::gh("spamwax/alfred-pinboard-rs").unwrap();
+    updater.set_version("0.0.1");
+    updater.set_interval(800);
+    let rx = updater.update_ready_async().expect("couldn't spawn thread");
+    info!("received handle to rx");
 
     debug!("Parsing input arguments.");
     let opt: Opt = Opt::from_args();
@@ -95,6 +111,27 @@ fn main() {
                 _ => unimplemented!(),
             }
         }
+    }
+    use std::thread;
+    thread::sleep_ms(1000);
+    match rx.try_recv() {
+        Ok(msg) => {
+            if let Ok(update) = msg {
+                if update {
+                    info!("start downloading");
+                    let filename = updater.download_latest();
+                    info!("got downloading result");
+                    let filename = filename.unwrap();
+                    info!("saved file to {:#?}", filename);
+                } else if !update {
+                    info!("no update *AVAILABLE*");
+                }
+                updater.save();
+            } else {
+                error!("couldn't get server response: {:#?}", msg.unwrap_err());
+            }
+        }
+        Err(e) => error!("problem: {:#?}", e),
     }
 }
 
