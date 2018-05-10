@@ -85,10 +85,9 @@ fn main() {
     env_logger::init();
 
     let mut updater = Updater::gh("spamwax/alfred-pinboard-rs").unwrap();
-    updater.set_version("0.0.1");
-    updater.set_interval(800);
-    let rx = updater.update_ready_async().expect("couldn't spawn thread");
-    info!("received handle to rx");
+    updater.set_version("0.13.2");
+    updater.set_interval(200);
+    updater.init().unwrap();
 
     debug!("Parsing input arguments.");
     let opt: Opt = Opt::from_args();
@@ -113,22 +112,19 @@ fn main() {
         }
     }
     use std::thread;
-    thread::sleep_ms(1000);
-    match rx.try_recv() {
-        Ok(msg) => {
-            if let Ok(update) = msg {
-                if update {
-                    info!("start downloading");
-                    let filename = updater.download_latest();
-                    info!("got downloading result");
-                    let filename = filename.unwrap();
-                    info!("saved file to {:#?}", filename);
-                } else if !update {
-                    info!("no update *AVAILABLE*");
-                }
-                updater.save();
-            } else {
-                error!("couldn't get server response: {:#?}", msg.unwrap_err());
+    thread::sleep_ms(1);
+    let r = updater.try_update_ready(); //.expect("couldn't spawn thread");
+
+    match r {
+        Ok(update) => {
+            if update {
+                info!("start downloading");
+                let filename = updater.download_latest();
+                info!("got downloading result");
+                let filename = filename.unwrap();
+                info!("saved file to {:#?}", filename);
+            } else if !update {
+                info!("no update *AVAILABLE*");
             }
         }
         Err(e) => error!("problem: {:#?}", e),
