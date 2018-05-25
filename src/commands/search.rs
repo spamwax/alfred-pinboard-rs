@@ -4,7 +4,11 @@ use alfred::{Item, ItemBuilder, Modifier};
 use rusty_pin::pinboard::SearchType;
 
 // TODO: Investigate why content of text_copy is not used within Alfred when user presses ⌘-C
-pub fn run(cmd: SubCommand, config: &Config, pinboard: &Pinboard) {
+pub fn run<'a, 'b>(
+    cmd: SubCommand,
+    config: &Config,
+    pinboard: &'a Pinboard,
+) -> impl IntoIterator<Item = Item<'a>> {
     debug!("Starting in search::run");
     match cmd {
         SubCommand::Search {
@@ -40,26 +44,22 @@ pub fn run(cmd: SubCommand, config: &Config, pinboard: &Pinboard) {
                     ];
                 }
             }
-
-            process(&query, &search_fields, config.pins_to_show, pinboard);
+            process(query, &search_fields, config.pins_to_show, pinboard)
         }
         _ => unreachable!(),
     }
 }
 
 // TODO: Write this function using From<Iterator> trait. <11-02-18, Hamid> //
-fn process<'b, I, S>(
-    query: &'b I,
+fn process<'a, 'b>(
+    query: Vec<String>,
     search_fields: &[SearchType],
     pins_to_show: u8,
-    pinboard: &Pinboard,
-) where
-    &'b I: IntoIterator<Item = S>,
-    S: AsRef<str>,
-{
+    pinboard: &'a Pinboard<'a, 'a>,
+) -> impl IntoIterator<Item = Item<'a>> {
     debug!("Starting in search::process");
-    match pinboard.search(query, search_fields) {
-        Err(e) => ::show_error_alfred(e.to_string()),
+    match pinboard.search(&query, search_fields) {
+        Err(e) => vec![::alfred_error(e.to_string())],
         Ok(r) => {
             let alfred_items = match r {
                 // No result was found.
@@ -125,8 +125,9 @@ fn process<'b, I, S>(
                     })
                     .collect::<Vec<Item>>(),
             };
-            alfred::json::write_items(io::stdout(), alfred_items.as_ref())
-                .expect("Couldn't write to stdout");
+            alfred_items
+            // alfred::json::write_items(io::stdout(), alfred_items.as_ref())
+            //     .expect("Couldn't write to stdout");
         }
     }
 }

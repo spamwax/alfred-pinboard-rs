@@ -1,14 +1,14 @@
-#![cfg_attr(feature = "dev", feature(plugin))]
-#![cfg_attr(feature = "dev", plugin(clippy))]
-#![cfg_attr(
-    feature = "dev",
-    warn(
-        cast_possible_truncation, cast_possible_wrap, cast_precision_loss, cast_sign_loss, mut_mut,
-        non_ascii_literal, result_unwrap_used, shadow_reuse, shadow_same, unicode_not_nfc,
-        wrong_self_convention, wrong_pub_self_convention
-    )
-)]
-#![cfg_attr(feature = "dev", allow(string_extend_chars))]
+// #![cfg_attr(feature = "dev", feature(plugin))]
+// #![cfg_attr(feature = "dev", plugin(clippy))]
+// #![cfg_attr(
+//     feature = "dev",
+//     warn(
+//         cast_possible_truncation, cast_possible_wrap, cast_precision_loss, cast_sign_loss, mut_mut,
+//         non_ascii_literal, result_unwrap_used, shadow_reuse, shadow_same, unicode_not_nfc,
+//         wrong_self_convention, wrong_pub_self_convention
+//     )
+// )]
+// #![cfg_attr(feature = "dev", allow(string_extend_chars))]
 
 extern crate chrono;
 
@@ -34,6 +34,7 @@ extern crate log;
 extern crate if_chain;
 
 extern crate alfred;
+extern crate alfred_rs;
 extern crate rusty_pin;
 
 use std::borrow::Cow;
@@ -42,7 +43,8 @@ use std::io;
 use std::path::PathBuf;
 use std::process;
 
-use alfred::Updater;
+use alfred_rs::Data;
+use alfred_rs::Updater;
 use failure::Error;
 use rusty_pin::Pinboard;
 use structopt::StructOpt;
@@ -92,21 +94,38 @@ fn main() {
     debug!("Parsing input arguments.");
     let opt: Opt = Opt::from_args();
 
+    let pinboard;
+    let config;
+    let mut items: Vec<alfred::Item> = Vec::new();
     debug!("Deciding on which command branch");
     match opt.cmd {
         SubCommand::Config { .. } => config::run(opt.cmd),
         _ => {
             // If user is not configuring, we will abort upon any errors.
-            let (config, pinboard) = setup().unwrap_or_else(|err| {
+            let s = setup().unwrap_or_else(|err| {
                 show_error_alfred(err.to_string());
                 process::exit(1);
             });
+            pinboard = s.1;
+            config = s.0;
             match opt.cmd {
                 SubCommand::Update => update::run(config, pinboard),
-                SubCommand::List { .. } => list::run(opt.cmd, &config, &pinboard),
-                SubCommand::Search { .. } => search::run(opt.cmd, &config, &pinboard),
-                SubCommand::Post { .. } => post::run(opt.cmd, config, pinboard),
-                SubCommand::Delete { .. } => delete::run(opt.cmd, config, pinboard),
+                SubCommand::List { .. } => {
+                    list::run(opt.cmd, &config, &pinboard);
+                }
+                SubCommand::Search { .. } => {
+                    let mut search_items: Vec<alfred::Item> = search::run(
+                        opt.cmd, &config, &pinboard,
+                    ).into_iter()
+                        .collect();
+                    items.extend(search_items);
+                }
+                SubCommand::Post { .. } => {
+                    post::run(opt.cmd, config, pinboard);
+                }
+                SubCommand::Delete { .. } => {
+                    delete::run(opt.cmd, config, pinboard);
+                }
                 _ => unimplemented!(),
             }
         }
@@ -150,6 +169,14 @@ fn show_error_alfred<'a, T: Into<Cow<'a, str>>>(s: T) {
         .icon_path("erroricon.icns")
         .into_item();
     alfred::json::write_items(io::stdout(), &[item]).expect("Can't write to stdout");
+}
+
+fn alfred_error<'a, T: Into<Cow<'a, str>>>(s: T) -> alfred::Item<'a> {
+    debug!("Starting in show_error_alfred");
+    alfred::ItemBuilder::new("Error")
+        .subtitle(s)
+        .icon_path("erroricon.icns")
+        .into_item()
 }
 
 fn write_to_alfred<'a, I>(items: I, config: &Config) -> Result<(), Error>

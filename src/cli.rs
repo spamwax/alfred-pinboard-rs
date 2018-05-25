@@ -121,4 +121,16 @@ pub enum SubCommand {
     /// Update Workflow's cache by doing a full download from Pinboard.
     #[structopt(name = "update")]
     Update,
+
+    /// Check for or download the latest version of this workflow
+    #[structopt(name = "self")]
+    SelfUpdate {
+        /// Check if a new version is available
+        #[structopt(name = "check", short = "c")]
+        check: bool,
+
+        /// Download the latest version of thir workflow and save it to its cache folder
+        #[structopt(name = "download", short = "d")]
+        download: bool,
+    },
 }

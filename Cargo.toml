@@ -5,10 +5,11 @@ authors = ["Hamid Ghadyani <hamid@hamid.cc>"]
 
 [dependencies]
 # We'll use git until rusty-pin is published as a crate (if ever?!)
-rusty-pin = { git = "https://github.com/spamwax/rusty-pin", branch = "master" }
-# rusty-pin = { path = "../rusty-pin" }
+# rusty-pin = { git = "https://github.com/spamwax/rusty-pin", branch = "master" }
+rusty-pin = { path = "../rusty-pin" }
 alfred = "4.0.1"
 # alfred = { path = "../alfred-rs" , features = ["updater"]}
+alfred-rs = { path = "../alfred-workflow" }
 chrono = { version = "0.4", features = ["serde"] }
 
 serde = "1.0"
@@ -26,8 +27,8 @@ if_chain = "0.1.2"
 log = "0.4"
 env_logger = "0.5.3"
 
-clippy = { version = "*", optional = true }
+# clippy = { version = "*", optional = true }
 
 [features]
-dev = ["clippy"]
+# dev = ["clippy"]
 
