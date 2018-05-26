@@ -4,49 +4,52 @@ use alfred::{Item, ItemBuilder, Modifier};
 use rusty_pin::pinboard::SearchType;
 
 // TODO: Investigate why content of text_copy is not used within Alfred when user presses ⌘-C
-pub fn run<'a, 'b>(
-    cmd: SubCommand,
-    config: &Config,
-    pinboard: &'a Pinboard,
-) -> impl IntoIterator<Item = Item<'a>> {
-    debug!("Starting in search::run");
-    match cmd {
-        SubCommand::Search {
-            tags,
-            title,
-            description,
-            url,
-            query,
-        } => {
-            let mut search_fields = vec![];
-            if tags {
-                search_fields.push(SearchType::TagOnly);
-            }
-            if title {
-                search_fields.push(SearchType::TitleOnly);
-            }
-            if url {
-                search_fields.push(SearchType::UrlOnly);
-            }
-            if description {
-                search_fields.push(SearchType::DescriptionOnly);
-            }
-            // If user is not asking explicitly for search fields, then search based on
-            // configuration set by user
-            if search_fields.is_empty() {
-                if config.tag_only_search {
+impl<'api, 'pin> Runner<'api, 'pin> {
+    pub fn search<'a, 'b>(&mut self, cmd: SubCommand) {
+        debug!("Starting in search::run");
+        match cmd {
+            SubCommand::Search {
+                tags,
+                title,
+                description,
+                url,
+                query,
+            } => {
+                let mut search_fields = vec![];
+                if tags {
                     search_fields.push(SearchType::TagOnly);
-                } else {
-                    search_fields = vec![
-                        SearchType::TagOnly,
-                        SearchType::TitleOnly,
-                        SearchType::DescriptionOnly,
-                    ];
                 }
+                if title {
+                    search_fields.push(SearchType::TitleOnly);
+                }
+                if url {
+                    search_fields.push(SearchType::UrlOnly);
+                }
+                if description {
+                    search_fields.push(SearchType::DescriptionOnly);
+                }
+                // If user is not asking explicitly for search fields, then search based on
+                // configuration set by user
+                if search_fields.is_empty() {
+                    if self.config.as_ref().unwrap().tag_only_search {
+                        search_fields.push(SearchType::TagOnly);
+                    } else {
+                        search_fields = vec![
+                            SearchType::TagOnly,
+                            SearchType::TitleOnly,
+                            SearchType::DescriptionOnly,
+                        ];
+                    }
+                }
+                process(
+                    query,
+                    &search_fields,
+                    self.config.as_ref().unwrap().pins_to_show,
+                    self.pinboard.as_ref().unwrap(),
+                );
             }
-            process(query, &search_fields, config.pins_to_show, pinboard)
+            _ => unreachable!(),
         }
-        _ => unreachable!(),
     }
 }
 
@@ -56,10 +59,10 @@ fn process<'a, 'b>(
     search_fields: &[SearchType],
     pins_to_show: u8,
     pinboard: &'a Pinboard<'a, 'a>,
-) -> impl IntoIterator<Item = Item<'a>> {
+) {
     debug!("Starting in search::process");
     match pinboard.search(&query, search_fields) {
-        Err(e) => vec![::alfred_error(e.to_string())],
+        Err(e) => ::show_error_alfred(e.to_string()),
         Ok(r) => {
             let alfred_items = match r {
                 // No result was found.
@@ -125,9 +128,8 @@ fn process<'a, 'b>(
                     })
                     .collect::<Vec<Item>>(),
             };
-            alfred_items
-            // alfred::json::write_items(io::stdout(), alfred_items.as_ref())
-            //     .expect("Couldn't write to stdout");
+            alfred::json::write_items(io::stdout(), alfred_items.as_ref())
+                .expect("Couldn't write to stdout");
         }
     }
 }

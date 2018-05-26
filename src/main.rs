@@ -56,7 +56,9 @@ mod workflow_config;
 use cli::{Opt, SubCommand};
 use workflow_config::Config;
 
-use commands::{config, delete, list, post, search, update};
+use commands::Runner;
+// use commands::{config, delete, list, post, search, update};
+use commands::config;
 
 // TODO: add modifiers to delete commands output //
 // TODO: parse Alfred preferences and get number of visible items? //
@@ -96,7 +98,6 @@ fn main() {
 
     let pinboard;
     let config;
-    let mut items: Vec<alfred::Item> = Vec::new();
     debug!("Deciding on which command branch");
     match opt.cmd {
         SubCommand::Config { .. } => config::run(opt.cmd),
@@ -108,46 +109,49 @@ fn main() {
             });
             pinboard = s.1;
             config = s.0;
+            let mut runner = Runner {
+                config: Some(config),
+                pinboard: Some(pinboard),
+                updater: Some(updater),
+            };
             match opt.cmd {
-                SubCommand::Update => update::run(config, pinboard),
+                SubCommand::Update => {
+                    runner.update_cache();
+                }
                 SubCommand::List { .. } => {
-                    list::run(opt.cmd, &config, &pinboard);
+                    runner.list(opt.cmd);
                 }
                 SubCommand::Search { .. } => {
-                    let mut search_items: Vec<alfred::Item> = search::run(
-                        opt.cmd, &config, &pinboard,
-                    ).into_iter()
-                        .collect();
-                    items.extend(search_items);
+                    runner.search(opt.cmd);
                 }
                 SubCommand::Post { .. } => {
-                    post::run(opt.cmd, config, pinboard);
+                    runner.post(opt.cmd);
                 }
                 SubCommand::Delete { .. } => {
-                    delete::run(opt.cmd, config, pinboard);
+                    runner.delete(opt.cmd);
                 }
                 _ => unimplemented!(),
             }
         }
     }
-    use std::thread;
-    thread::sleep_ms(1);
-    let r = updater.try_update_ready(); //.expect("couldn't spawn thread");
+    // use std::thread;
+    // thread::sleep_ms(1);
+    // let r = updater.try_update_ready(); //.expect("couldn't spawn thread");
 
-    match r {
-        Ok(update) => {
-            if update {
-                info!("start downloading");
-                let filename = updater.download_latest();
-                info!("got downloading result");
-                let filename = filename.unwrap();
-                info!("saved file to {:#?}", filename);
-            } else if !update {
-                info!("no update *AVAILABLE*");
-            }
-        }
-        Err(e) => error!("problem: {:#?}", e),
-    }
+    // match r {
+    //     Ok(update) => {
+    //         if update {
+    //             info!("start downloading");
+    //             let filename = updater.download_latest();
+    //             info!("got downloading result");
+    //             let filename = filename.unwrap();
+    //             info!("saved file to {:#?}", filename);
+    //         } else if !update {
+    //             info!("no update *AVAILABLE*");
+    //         }
+    //     }
+    //     Err(e) => error!("problem: {:#?}", e),
+    // }
 }
 
 fn setup<'a, 'p>() -> Result<(Config, Pinboard<'a, 'p>), Error> {
@@ -177,6 +181,26 @@ fn alfred_error<'a, T: Into<Cow<'a, str>>>(s: T) -> alfred::Item<'a> {
         .subtitle(s)
         .icon_path("erroricon.icns")
         .into_item()
+}
+
+fn prepare_output_items<'a, I>(items: I, config: &Config) -> Result<(), Error>
+where
+    I: IntoIterator<Item = alfred::Item<'a>>,
+{
+    debug!("Starting in write_to_alfred");
+    let output_items = items.into_iter().collect::<Vec<alfred::Item>>();
+
+    let exec_counter = env::var("apr_execution_counter").unwrap_or_else(|_| "1".to_string());
+
+    // Depending on alfred version use either json or xml output.
+    if config.is_alfred_v3() {
+        alfred::json::Builder::with_items(output_items.as_slice())
+            .variable("apr_execution_counter", exec_counter.as_str())
+            .write(io::stdout())?
+    } else {
+        alfred::xml::write_items(io::stdout(), &output_items)?
+    }
+    Ok(())
 }
 
 fn write_to_alfred<'a, I>(items: I, config: &Config) -> Result<(), Error>

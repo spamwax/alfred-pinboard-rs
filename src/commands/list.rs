@@ -5,14 +5,22 @@ use std::{thread, time};
 use alfred::{Item, ItemBuilder};
 use failure::Error;
 
-pub fn run(cmd: SubCommand, config: &Config, pinboard: &Pinboard) {
-    match cmd {
-        SubCommand::List {
-            tags,
-            suggest,
-            query,
-        } => process(config, pinboard, tags, suggest, query),
-        _ => unreachable!(),
+impl<'api, 'pin> Runner<'api, 'pin> {
+    pub fn list(&self, cmd: SubCommand) {
+        match cmd {
+            SubCommand::List {
+                tags,
+                suggest,
+                query,
+            } => process(
+                self.config.as_ref().unwrap(),
+                self.pinboard.as_ref().unwrap(),
+                tags,
+                suggest,
+                query,
+            ),
+            _ => unreachable!(),
+        }
     }
 }
 
