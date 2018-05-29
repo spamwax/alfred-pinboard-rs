@@ -31,7 +31,7 @@ After initial [setup](#installation--setup):
 ### Supported Browsers:
 - Safari
 - Chromium
-- Firefox (See [known issues](https://github.com/spamwax/alfred-pinboard-rs#known-issues) )
+- Firefox (See [known issues](#known_issues) )
 - Chrome
 - Vivaldi
 - Firefox Dev. Edition
@@ -173,7 +173,7 @@ Most of configuration settings are self-explanatory.
 
 ---
 
-## Known Issues
+## Known Issues<a name="known_issues"></a>
 - Posting bookmark from Firefox while tag suggestions is enabled is broken. Also deleting bookmarks using `pind` won't work when Firefox is your active browser. Reason: Alfred intercepts <kbd>Command ⌘-L</kbd> that's used in AppleScript to focus location bar of Firefox. This focus is needed to get url and other info out of Firefox. Unfortunately Firefox does not offer any better way of interacting with it from outside world programatically.
 - This workflow is setup to work with Aflred 3. It may or may not work with previous version as it has not been tested for them.
 
