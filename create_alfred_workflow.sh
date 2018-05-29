@@ -42,7 +42,7 @@ echo "Moving bundle to executable folder..."
 mv AlfredPinboardRust.alfredworkflow "$alfred_pinboard_rs"
 rm alfred-pinboard-rs
 
-commit_msg="Bump version to $version_tag"
+commit_msg="Release version $version_tag"
 [ ! -z "$2" ] && commit_msg="$commit_msg
 
 $2"
