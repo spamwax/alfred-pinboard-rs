@@ -12,96 +12,94 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                 tags,
                 suggest,
                 query,
-            } => process(
-                self.config.as_ref().unwrap(),
-                self.pinboard.as_ref().unwrap(),
-                tags,
-                suggest,
-                query,
-            ),
+            } => self.process(tags, suggest, query),
             _ => unreachable!(),
         }
     }
-}
 
-fn process<'a>(
-    config: &Config,
-    pinboard: &Pinboard<'a, 'a>,
-    tags: bool,
-    suggest: Option<bool>,
-    q: Option<String>,
-) {
-    debug!("Starting in list::process");
-    if tags {
-        // Search the tags using the last 'word' in 'q'
-        let queries = q.unwrap_or_else(String::new);
+    fn process<'a>(
+        &self,
+        // config: &Config,
+        // pinboard: &Pinboard<'a, 'a>,
+        tags: bool,
+        suggest: Option<bool>,
+        q: Option<String>,
+    ) {
+        debug!("Starting in list::process");
+        let config = self.config.as_ref().unwrap();
+        let pinboard = self.pinboard.as_ref().unwrap();
+        if tags {
+            // Search the tags using the last 'word' in 'q'
+            let queries = q.unwrap_or_else(String::new);
 
-        // Check if user has entered ';' which indicates they are providing a description.
-        // So no need to search for tags!
-        if queries.contains(';') {
-            let trim_chars: &[_] = &['\t', ' ', '\\', '\n'];
-            let pin_info = queries
-                .splitn(2, ';')
-                .map(|s| s.trim_matches(trim_chars))
-                .collect::<Vec<&str>>();
-            debug!("  pin_info: {:?}", pin_info);
-            let mut item = ItemBuilder::new("Hit Return to bookmark the page!")
-                .icon_path("upload.png")
-                .arg(queries.as_ref())
-                .variable("tags", pin_info[0]);
-            if !pin_info[1].is_empty() {
-                item = item.variable("description", pin_info[1])
+            // Check if user has entered ';' which indicates they are providing a description.
+            // So no need to search for tags!
+            if queries.contains(';') {
+                let trim_chars: &[_] = &['\t', ' ', '\\', '\n'];
+                let pin_info = queries
+                    .splitn(2, ';')
+                    .map(|s| s.trim_matches(trim_chars))
+                    .collect::<Vec<&str>>();
+                debug!("  pin_info: {:?}", pin_info);
+                let mut item = ItemBuilder::new("Hit Return to bookmark the page!")
+                    .icon_path("upload.png")
+                    .arg(queries.as_str())
+                    .variable("tags", pin_info[0]);
+                if !pin_info[1].is_empty() {
+                    item = item.variable("description", pin_info[1])
+                }
+                let item = vec![item.into_item()];
+                if let Err(e) = self.write_output_items(item) {
+                    error!("list: Couldn't write to Alfred: {:?}", e);
+                }
             }
-            let item = item.into_item();
-            ::write_to_alfred(vec![item], config).expect("Couldn't write to Alfred");
-            return;
-        }
 
-        let query_words: Vec<&str> = queries.split_whitespace().collect();
+            let query_words: Vec<&str> = queries.split_whitespace().collect();
 
-        let last_query_word_tag;
-        let mut popular_tags;
-        let mut alfred_items = vec![];
+            let last_query_word_tag;
+            let mut popular_tags;
+            let mut alfred_items = vec![];
 
-        // First try to get list of popular tags from Pinboard
-        popular_tags = if suggest.unwrap_or(config.suggest_tags) {
-            suggest_tags()
-        } else {
-            vec![]
-        };
+            // First try to get list of popular tags from Pinboard
+            popular_tags = if suggest.unwrap_or(config.suggest_tags) {
+                suggest_tags()
+            } else {
+                vec![]
+            };
 
-        let last_query_word = query_words.last().unwrap_or(&"");
+            let last_query_word = query_words.last().unwrap_or(&"");
 
-        match pinboard.search_list_of_tags(last_query_word) {
-            Err(e) => ::show_error_alfred(e.to_string()),
-            Ok(results) => {
-                let prev_tags = if query_words.len() > 1 {
-                    // User has already searched for other tags, we should include those in the
-                    // 'autocomplete' field of the AlfredItem
-                    queries.get(0..queries.rfind(' ').unwrap() + 1).unwrap()
-                } else {
-                    ""
-                };
+            match pinboard.search_list_of_tags(last_query_word) {
+                Err(e) => ::show_error_alfred(e.to_string()),
+                Ok(results) => {
+                    let prev_tags = if query_words.len() > 1 {
+                        // User has already searched for other tags, we should include those in the
+                        // 'autocomplete' field of the AlfredItem
+                        queries.get(0..queries.rfind(' ').unwrap() + 1).unwrap()
+                    } else {
+                        ""
+                    };
 
-                // No result means, we couldn't find a tag using the given query
-                // Some result mean we found tags even though the query was empty as
-                // search_list_of_tags returns all tags for empty queries.
-                let items = match results {
-                    Some(i) => {
-                        debug!("Found {} tags.", i.len());
-                        i
-                    }
-                    None => {
-                        assert!(!query_words.is_empty());
-                        debug!("Didn't find any tag for `{}`", last_query_word);
-                        last_query_word_tag = Tag::new(last_query_word.to_string(), 0).set_new();
-                        vec![&last_query_word_tag]
-                    }
-                };
-                let prev_tags_len = prev_tags.len();
-                // Show the tag with highest frequency matching the last query before popular/suggested tags.
-                popular_tags.insert(0, items[0].clone());
-                alfred_items = popular_tags
+                    // No result means, we couldn't find a tag using the given query
+                    // Some result mean we found tags even though the query was empty as
+                    // search_list_of_tags returns all tags for empty queries.
+                    let items = match results {
+                        Some(i) => {
+                            debug!("Found {} tags.", i.len());
+                            i
+                        }
+                        None => {
+                            assert!(!query_words.is_empty());
+                            debug!("Didn't find any tag for `{}`", last_query_word);
+                            last_query_word_tag =
+                                Tag::new(last_query_word.to_string(), 0).set_new();
+                            vec![&last_query_word_tag]
+                        }
+                    };
+                    let prev_tags_len = prev_tags.len();
+                    // Show the tag with highest frequency matching the last query before popular/suggested tags.
+                    popular_tags.insert(0, items[0].clone());
+                    alfred_items = popular_tags
                             .iter()
                             // Combine popular tags and returned tags from cache
                             .chain(items.into_iter().skip(1).take(config.tags_to_show as usize))
@@ -122,7 +120,7 @@ fn process<'a>(
                             let mut _args = String::with_capacity(prev_tags_len + tag.0.len());
                             _args.push_str(prev_tags);
                             _args.push_str(&tag.0);
-                            ItemBuilder::new(tag.0.as_ref())
+                            ItemBuilder::new(tag.0.as_str())
                                 .subtitle(tag.1.to_string())
                                 .autocomplete(_args.clone())
                                 .variable("tags", _args.clone())
@@ -132,28 +130,34 @@ fn process<'a>(
                                 .into_item()
                         })
                         .collect::<Vec<Item>>();
+                }
+            }
+            if let Err(e) = self.write_output_items(alfred_items) {
+                error!("list: Couldn't write to Alfred: {:?}", e);
+            }
+        } else {
+            if q.is_some() && !q.unwrap().is_empty() {
+                warn!(
+                    "Ignoring search query, will spit out {} of bookmarks.",
+                    config.pins_to_show
+                )
+            }
+            let items = pinboard
+                .list_bookmarks()
+                .unwrap_or_else(|| vec![])
+                .into_iter()
+                .take(config.pins_to_show as usize)
+                .map(|pin| {
+                    ItemBuilder::new(pin.title.as_ref())
+                        .subtitle(pin.url.as_ref())
+                        .arg(pin.url.as_ref())
+                        .into_item()
+                })
+                .collect::<Vec<Item>>();
+            if let Err(e) = self.write_output_items(items) {
+                error!("list: Couldn't write to Alfred: {:?}", e);
             }
         }
-        ::write_to_alfred(alfred_items, config).expect("Couldn't write to Alfred");
-    } else {
-        if q.is_some() && !q.unwrap().is_empty() {
-            warn!(
-                "Ignoring search query, will spit out {} of bookmarks.",
-                config.pins_to_show
-            )
-        }
-        let items = pinboard
-            .list_bookmarks()
-            .unwrap_or_else(|| vec![])
-            .into_iter()
-            .take(config.pins_to_show as usize)
-            .map(|pin| {
-                ItemBuilder::new(pin.title.as_ref())
-                    .subtitle(pin.url.as_ref())
-                    .arg(pin.url.as_ref())
-                    .into_item()
-            });
-        ::write_to_alfred(items, config).expect("Couldn't write to Alfred");
     }
 }
 

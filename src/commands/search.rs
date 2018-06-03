@@ -41,12 +41,12 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                         ];
                     }
                 }
-                process(
-                    query,
-                    &search_fields,
-                    self.config.as_ref().unwrap().pins_to_show,
-                    self.pinboard.as_ref().unwrap(),
-                );
+                let pins_to_show = self.config.as_ref().unwrap().pins_to_show;
+                let pinboard = self.pinboard.as_ref().unwrap();
+                let items = process(query, &search_fields, pins_to_show, pinboard);
+                if let Err(e) = self.write_output_items(items) {
+                    error!("search: Couldn't write to Alfred: {:?}", e);
+                }
             }
             _ => unreachable!(),
         }
@@ -59,12 +59,13 @@ fn process<'a, 'b>(
     search_fields: &[SearchType],
     pins_to_show: u8,
     pinboard: &'a Pinboard<'a, 'a>,
-) {
+) -> Vec<Item<'a>> {
     debug!("Starting in search::process");
     match pinboard.search(&query, search_fields) {
-        Err(e) => ::show_error_alfred(e.to_string()),
+        // Err(e) => ::show_error_alfred(e.to_string()),
+        Err(e) => vec![::alfred_error(e.to_string())],
         Ok(r) => {
-            let alfred_items = match r {
+            match r {
                 // No result was found.
                 None => vec![
                     ItemBuilder::new("No bookmarks found!")
@@ -127,9 +128,9 @@ fn process<'a, 'b>(
                             .into_item()
                     })
                     .collect::<Vec<Item>>(),
-            };
-            alfred::json::write_items(io::stdout(), alfred_items.as_ref())
-                .expect("Couldn't write to stdout");
+            }
+            // alfred::json::write_items(io::stdout(), alfred_items.as_ref())
+            //     .expect("Couldn't write to stdout");
         }
     }
 }

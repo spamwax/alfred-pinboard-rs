@@ -10,13 +10,14 @@ use std::io::Write;
 
 impl<'api, 'pin> Runner<'api, 'pin> {
     pub fn delete(&mut self, cmd: SubCommand) {
-        debug!("Starting in run");
+        debug!("Starting in delete");
         let url = match cmd {
             SubCommand::Delete { url } => url,
             _ => unreachable!(),
         };
 
         if let Some(url) = url {
+            debug!("  url: {}", url);
             if let Err(e) = self.pinboard.as_ref().unwrap().delete(&url) {
                 let _ = io::stdout()
                     .write(format!("Error: {}", e).as_ref())
@@ -27,10 +28,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                     .write(b"Successfully deleted bookmark.")
                     .expect("Couldn't write to stdout");
                 if self.config.as_ref().unwrap().auto_update_cache {
-                    let config = self.config.take().unwrap();
-                    let pinboard = self.pinboard.take().unwrap();
                     self.update_cache();
-                    // update::run(config, pinboard);
                 }
             }
         } else {
@@ -55,8 +53,9 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                         .into_item()
                 }
             };
-            ::write_to_alfred(vec![item], self.config.as_ref().unwrap())
-                .expect("Couldn't write to Alfred");
+            if let Err(e) = self.write_output_items(vec![item]) {
+                error!("delete: Couldn't write to Alfred: {:?}", e);
+            }
         }
     }
 }

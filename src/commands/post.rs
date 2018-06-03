@@ -20,10 +20,10 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                 input_tags = tags;
                 input_desc = description;
                 toread.map(|f| self.config.as_mut().map(|config| config.toread_new_pin = f));
-                toread.map(|f| {
+                shared.map(|f| {
                     self.config
                         .as_mut()
-                        .map(|config| config.private_new_pin = f)
+                        .map(|config| config.private_new_pin = !f)
                 });
             }
             _ => unreachable!(),

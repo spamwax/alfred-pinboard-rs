@@ -2,7 +2,6 @@ use chrono::prelude::*;
 use std::env;
 use std::fs::{create_dir_all, File};
 use std::io::{BufReader, BufWriter};
-use std::io::{Read, Write};
 use std::path::PathBuf;
 
 use alfred;
@@ -89,21 +88,31 @@ impl<'a> Config {
                     let _err: Error = From::from(e);
                     _err
                 })
-                .and_then(|f| {
-                    let mut content = String::new();
-                    let mut reader = BufReader::with_capacity(FILE_BUF_SIZE, f);
-                    reader.read_to_string(&mut content).map_err(|e| {
-                        let _err: Error = From::from(e);
-                        _err
-                    })?;
-                    Ok(content)
-                })
-                .and_then(|inp| {
-                    serde_json::from_str(&inp).map_err(|_| {
-                        let workflow_err: Error = From::from(AlfredError::ConfigFileErr);
-                        workflow_err
-                    })
+                .and_then(|fp| {
+                    let buf_reader = BufReader::with_capacity(FILE_BUF_SIZE, fp);
+                    serde_json::from_reader(buf_reader)
+                        .map_err(|_| From::from(AlfredError::ConfigFileErr))
                 })?;
+            // let mut config: Config = File::open(&data_dir)
+            //     .map_err(|e| {
+            //         let _err: Error = From::from(e);
+            //         _err
+            //     })
+            //     .and_then(|f| {
+            //         let mut content = String::new();
+            //         let mut reader = BufReader::with_capacity(FILE_BUF_SIZE, f);
+            //         reader.read_to_string(&mut content).map_err(|e| {
+            //             let _err: Error = From::from(e);
+            //             _err
+            //         })?;
+            //         Ok(content)
+            //     })
+            //     .and_then(|inp| {
+            //         serde_json::from_str(&inp).map_err(|_| {
+            //             let workflow_err: Error = From::from(AlfredError::ConfigFileErr);
+            //             workflow_err
+            //         })
+            //     })?;
             assert!(data_dir.pop());
             config.workflow_data_dir = data_dir;
             config.workflow_cache_dir = cached_dir;
@@ -114,20 +123,19 @@ impl<'a> Config {
         }
     }
 
-    pub fn save(&self) -> Result<(), String> {
+    pub fn save(&self) -> Result<(), Error> {
         debug!("Starting in save");
-        create_dir_all(&self.data_dir()).map_err(|e| e.to_string())?;
+        create_dir_all(&self.data_dir())?;
 
         let mut settings_fn = self.workflow_data_dir.clone();
         settings_fn.push(CONFIG_FILE_NAME);
-        let fp = File::create(settings_fn).map_err(|e| e.to_string())?;
-        serde_json::to_string(self)
-            .map_err(|e| e.to_string())
-            .and_then(|content| {
-                let mut writer = BufWriter::with_capacity(FILE_BUF_SIZE, fp);
-                writer
-                    .write_all(content.as_ref())
-                    .map_err(|e| e.to_string())
+
+        File::create(settings_fn)
+            .map_err(|e| e.into())
+            .and_then(|fp| {
+                let buf_writer = BufWriter::with_capacity(FILE_BUF_SIZE, fp);
+                serde_json::to_writer(buf_writer, self)?;
+                Ok(())
             })
     }
 

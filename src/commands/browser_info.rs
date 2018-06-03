@@ -22,6 +22,7 @@ pub fn get() -> Result<BrowserActiveTabInfo, Error> {
     }
     // Get output of above command
     let osascript_result = String::from_utf8(output.stdout)?;
+    debug!("  osascript_result: {}", osascript_result);
 
     // Extract theURL and theTitle from output (assumed they are separated
     // by ' fd850fc2e63511e79f720023dfdf24ec ' (note spaces))
@@ -34,9 +35,9 @@ pub fn get() -> Result<BrowserActiveTabInfo, Error> {
     assert_eq!(2, tab_info.len());
 
     // If theTitle is missing use theURL for title as well.
-    match (tab_info[0].is_empty(), tab_info[1].is_empty()) {
+    let tab_info = match (tab_info[0].is_empty(), tab_info[1].is_empty()) {
         (true, _) => Err(err_msg("Cannot get browser's URL")),
-        (_, true) => Ok(BrowserActiveTabInfo {
+        (false, true) => Ok(BrowserActiveTabInfo {
             url: tab_info[0].to_string(),
             title: tab_info[0].to_string(),
         }),
@@ -44,5 +45,11 @@ pub fn get() -> Result<BrowserActiveTabInfo, Error> {
             url: tab_info[0].to_string(),
             title: tab_info[1].to_string(),
         }),
-    }
+    };
+    debug!(
+        "  tab_info: {} --- {}",
+        tab_info.as_ref().unwrap().url,
+        tab_info.as_ref().unwrap().title
+    );
+    tab_info
 }

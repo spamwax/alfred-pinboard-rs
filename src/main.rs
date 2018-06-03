@@ -40,7 +40,6 @@ extern crate rusty_pin;
 use std::borrow::Cow;
 use std::env;
 use std::io;
-use std::path::PathBuf;
 use std::process;
 
 use alfred_rs::Data;
@@ -77,6 +76,7 @@ fn main() {
     env::set_var("alfred_workflow_data", "/Volumes/Home/hamid/tmp/rust");
     env::set_var("alfred_workflow_cache", "/Volumes/Home/hamid/tmp/rust");
     env::set_var("alfred_workflow_uid", "hamid63");
+    env::set_var("alfred_workflow_name", "alfred-pinboard-rs");
     env::set_var("alfred_version", "3.6");
     env::set_var("RUST_LOG", "rusty_pin=debug,alfred_pinboard_rs=debug");
     // If user has Alfred's debug panel open, print all debug info
@@ -87,11 +87,6 @@ fn main() {
     }
 
     env_logger::init();
-
-    let mut updater = Updater::gh("spamwax/alfred-pinboard-rs").unwrap();
-    updater.set_version("0.13.2");
-    updater.set_interval(200);
-    updater.init().unwrap();
 
     debug!("Parsing input arguments.");
     let opt: Opt = Opt::from_args();
@@ -107,6 +102,12 @@ fn main() {
                 show_error_alfred(err.to_string());
                 process::exit(1);
             });
+
+            let mut updater = Updater::gh("spamwax/alfred-pinboard-rs").unwrap();
+            updater.set_version("0.13.1");
+            updater.set_interval(60);
+            updater.init().unwrap();
+
             pinboard = s.1;
             config = s.0;
             let mut runner = Runner {
@@ -134,24 +135,6 @@ fn main() {
             }
         }
     }
-    // use std::thread;
-    // thread::sleep_ms(1);
-    // let r = updater.try_update_ready(); //.expect("couldn't spawn thread");
-
-    // match r {
-    //     Ok(update) => {
-    //         if update {
-    //             info!("start downloading");
-    //             let filename = updater.download_latest();
-    //             info!("got downloading result");
-    //             let filename = filename.unwrap();
-    //             info!("saved file to {:#?}", filename);
-    //         } else if !update {
-    //             info!("no update *AVAILABLE*");
-    //         }
-    //     }
-    //     Err(e) => error!("problem: {:#?}", e),
-    // }
 }
 
 fn setup<'a, 'p>() -> Result<(Config, Pinboard<'a, 'p>), Error> {
@@ -176,49 +159,9 @@ fn show_error_alfred<'a, T: Into<Cow<'a, str>>>(s: T) {
 }
 
 fn alfred_error<'a, T: Into<Cow<'a, str>>>(s: T) -> alfred::Item<'a> {
-    debug!("Starting in show_error_alfred");
+    debug!("Starting in alfred_error");
     alfred::ItemBuilder::new("Error")
         .subtitle(s)
         .icon_path("erroricon.icns")
         .into_item()
-}
-
-fn prepare_output_items<'a, I>(items: I, config: &Config) -> Result<(), Error>
-where
-    I: IntoIterator<Item = alfred::Item<'a>>,
-{
-    debug!("Starting in write_to_alfred");
-    let output_items = items.into_iter().collect::<Vec<alfred::Item>>();
-
-    let exec_counter = env::var("apr_execution_counter").unwrap_or_else(|_| "1".to_string());
-
-    // Depending on alfred version use either json or xml output.
-    if config.is_alfred_v3() {
-        alfred::json::Builder::with_items(output_items.as_slice())
-            .variable("apr_execution_counter", exec_counter.as_str())
-            .write(io::stdout())?
-    } else {
-        alfred::xml::write_items(io::stdout(), &output_items)?
-    }
-    Ok(())
-}
-
-fn write_to_alfred<'a, I>(items: I, config: &Config) -> Result<(), Error>
-where
-    I: IntoIterator<Item = alfred::Item<'a>>,
-{
-    debug!("Starting in write_to_alfred");
-    let output_items = items.into_iter().collect::<Vec<alfred::Item>>();
-
-    let exec_counter = env::var("apr_execution_counter").unwrap_or_else(|_| "1".to_string());
-
-    // Depending on alfred version use either json or xml output.
-    if config.is_alfred_v3() {
-        alfred::json::Builder::with_items(output_items.as_slice())
-            .variable("apr_execution_counter", exec_counter.as_str())
-            .write(io::stdout())?
-    } else {
-        alfred::xml::write_items(io::stdout(), &output_items)?
-    }
-    Ok(())
 }
