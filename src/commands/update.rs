@@ -4,7 +4,7 @@ use std::io::Write;
 
 impl<'api, 'pin> Runner<'api, 'pin> {
     pub fn update_cache(&mut self) {
-        info!("Starting in run");
+        info!("Starting in update_cache");
         match self
             .pinboard
             .as_ref()

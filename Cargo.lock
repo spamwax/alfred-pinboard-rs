@@ -24,7 +24,7 @@ name = "alfred-pinboard-rs"
 version = "0.13.0"
 dependencies = [
  "alfred 4.0.1 (registry+https://github.com/rust-lang/crates.io-index)",
- "alfred-rs 0.3.1",
+ "alfred-rs 0.4.0",
  "chrono 0.4.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "env_logger 0.5.10 (registry+https://github.com/rust-lang/crates.io-index)",
  "failure 0.1.1 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -40,7 +40,7 @@ dependencies = [
 
 [[package]]
 name = "alfred-rs"
-version = "0.3.1"
+version = "0.4.0"
 dependencies = [
  "alfred 4.0.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "chrono 0.4.2 (registry+https://github.com/rust-lang/crates.io-index)",

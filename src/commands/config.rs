@@ -105,6 +105,10 @@ fn show_config(config: &Config) {
                 .arg("pset bookmarks")
                 .icon_path("no_of_pins.png")
                 .into_item(),
+            ItemBuilder::new("Click to check for Workflow updates.")
+                .arg("pcheck")
+                .icon_path("check_update.png")
+                .into_item(),
             ItemBuilder::new(
                 config
                     .update_time

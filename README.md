@@ -20,6 +20,7 @@ This plugin will let you:
   - Tap <kbd>Command+L</kbd> to show _Large_ toast of title
   - Tap <kbd>Command</kbd> to show current item's _tags_
   - Tap <kbd>Control</kbd> to show current item's extended notes/descriptioin.
+- Automatic [updates](#misc) of workflow
 - Many options that can be easily adjusted. (see below)
 
 ### TLDR;
@@ -149,9 +150,9 @@ To manually update the cache, you need to issue the ***`pu`*** command:
 
 ---
 
-Most of configuration settings are self-explanatory.
+Most of configuration settings are self-explanatory. However `fuzzy` search may need a demo.
 
-- However `fuzzy` search may need a demo: When fuzzy search is enabled, the tags/bookmarks that contain the query letters in the given order are displayed:
+When fuzzy search is enabled, the tags/bookmarks that contain the query letters in the given order are displayed:
  
   ![image](./res/images/fuzzy-search-tags.png)
 
@@ -161,13 +162,18 @@ Most of configuration settings are self-explanatory.
 
 ---
 
-## Misc.
+## Misc.<a name="misc"></a>
+- Workflow will check for newever version of itself every 24 hours. This check only takes place when you actually use one of its keywords (no background service is ever used). You can also manually check for updates through the options from `pconf`.
+
+![image](./res/images/upgrade_available.png)
+
 - This workflow tries to show some helpful errors in different cases.
+
 ![image](./res/images/error-1.png)
 ![image](./res/images/error-2.png)
 ![image](./res/images/error-3.png)
-- If you want to change some behavior take a look at Alfred's workflow page:
 
+- If you want to change some behavior take a look at Alfred's workflow page:
 
 ![image](./res/images/workflow-screenshot.png)
 

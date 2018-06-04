@@ -46,10 +46,6 @@ pub fn get() -> Result<BrowserActiveTabInfo, Error> {
             title: tab_info[1].to_string(),
         }),
     };
-    debug!(
-        "  tab_info: {} --- {}",
-        tab_info.as_ref().unwrap().url,
-        tab_info.as_ref().unwrap().title
-    );
+    debug!("  tab_info: {:?}", tab_info);
     tab_info
 }

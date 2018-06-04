@@ -98,7 +98,7 @@ fn main() {
         SubCommand::Config { .. } => config::run(opt.cmd),
         _ => {
             // If user is not configuring, we will abort upon any errors.
-            let s = setup().unwrap_or_else(|err| {
+            let setup = setup().unwrap_or_else(|err| {
                 show_error_alfred(err.to_string());
                 process::exit(1);
             });
@@ -108,8 +108,8 @@ fn main() {
             updater.set_interval(60);
             updater.init().unwrap();
 
-            pinboard = s.1;
-            config = s.0;
+            pinboard = setup.1;
+            config = setup.0;
             let mut runner = Runner {
                 config: Some(config),
                 pinboard: Some(pinboard),
@@ -131,6 +131,9 @@ fn main() {
                 SubCommand::Delete { .. } => {
                     runner.delete(opt.cmd);
                 }
+                SubCommand::SelfUpdate { .. } => {
+                    runner.upgrade(opt.cmd);
+                }
                 _ => unimplemented!(),
             }
         }
@@ -149,6 +152,24 @@ fn setup<'a, 'p>() -> Result<(Config, Pinboard<'a, 'p>), Error> {
     Ok((config, pinboard))
 }
 
+fn write_to_alfred<'a, I>(items: I, is_alfred_v3: bool)
+where
+    I: IntoIterator<Item = alfred::Item<'a>>,
+{
+    let output_items = items.into_iter().collect::<Vec<alfred::Item>>();
+
+    let exec_counter = env::var("apr_execution_counter").unwrap_or_else(|_| "1".to_string());
+    // Depending on alfred version use either json or xml output.
+    if is_alfred_v3 {
+        let _ = alfred::json::Builder::with_items(output_items.as_slice())
+            .variable("apr_execution_counter", exec_counter.as_str())
+            .write(io::stdout())
+            .expect("Couldn't write items to Alfred");
+    } else {
+        let _ = alfred::xml::write_items(io::stdout(), &output_items)
+            .expect("Couldn't write items to Alfred");
+    }
+}
 fn show_error_alfred<'a, T: Into<Cow<'a, str>>>(s: T) {
     debug!("Starting in show_error_alfred");
     let item = alfred::ItemBuilder::new("Error")
