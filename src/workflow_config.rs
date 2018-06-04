@@ -59,7 +59,7 @@ impl<'a> Config {
             fuzzy_search: false,
             private_new_pin: true,
             toread_new_pin: false,
-            suggest_tags: true,
+            suggest_tags: false,
             auto_update_cache: true,
             auth_token: String::new(),
             update_time: get_epoch(),
@@ -79,8 +79,6 @@ impl<'a> Config {
 
     fn read(mut data_dir: PathBuf, cached_dir: PathBuf) -> Result<Config, Error> {
         debug!("Starting in read");
-        // If config file exists read settings
-        // let mut p = Config::get_workflow_dirs().0;
         data_dir.push(CONFIG_FILE_NAME);
         if data_dir.exists() {
             let mut config: Config = File::open(&data_dir)
@@ -93,30 +91,9 @@ impl<'a> Config {
                     serde_json::from_reader(buf_reader)
                         .map_err(|_| From::from(AlfredError::ConfigFileErr))
                 })?;
-            // let mut config: Config = File::open(&data_dir)
-            //     .map_err(|e| {
-            //         let _err: Error = From::from(e);
-            //         _err
-            //     })
-            //     .and_then(|f| {
-            //         let mut content = String::new();
-            //         let mut reader = BufReader::with_capacity(FILE_BUF_SIZE, f);
-            //         reader.read_to_string(&mut content).map_err(|e| {
-            //             let _err: Error = From::from(e);
-            //             _err
-            //         })?;
-            //         Ok(content)
-            //     })
-            //     .and_then(|inp| {
-            //         serde_json::from_str(&inp).map_err(|_| {
-            //             let workflow_err: Error = From::from(AlfredError::ConfigFileErr);
-            //             workflow_err
-            //         })
-            //     })?;
             assert!(data_dir.pop());
             config.workflow_data_dir = data_dir;
             config.workflow_cache_dir = cached_dir;
-            // config.discover_dirs();
             Ok(config)
         } else {
             Err(From::from(AlfredError::MissingConfigFile))

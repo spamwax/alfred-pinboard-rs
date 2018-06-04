@@ -61,6 +61,7 @@ use commands::config;
 
 // TODO: add modifiers to delete commands output //
 // TODO: parse Alfred preferences and get number of visible items? //
+// TODO: Use alfred_rs::Data for file operations.
 
 #[derive(Debug, Fail)]
 pub enum AlfredError {
@@ -73,17 +74,16 @@ pub enum AlfredError {
 }
 
 fn main() {
-    env::set_var("alfred_workflow_data", "/Volumes/Home/hamid/tmp/rust");
-    env::set_var("alfred_workflow_cache", "/Volumes/Home/hamid/tmp/rust");
-    env::set_var("alfred_workflow_uid", "hamid63");
-    env::set_var("alfred_workflow_name", "alfred-pinboard-rs");
-    env::set_var("alfred_version", "3.6");
-    env::set_var("RUST_LOG", "rusty_pin=debug,alfred_pinboard_rs=debug");
+    // env::set_var("alfred_workflow_data", "/Volumes/Home/hamid/tmp/rust");
+    // env::set_var("alfred_workflow_cache", "/Volumes/Home/hamid/tmp/rust");
+    // env::set_var("alfred_workflow_uid", "hamid63");
+    // env::set_var("alfred_workflow_name", "alfred-pinboard-rs");
+    // env::set_var("alfred_version", "3.6");
+    // env::set_var("RUST_LOG", "rusty_pin=debug,alfred_pinboard_rs=debug");
     // If user has Alfred's debug panel open, print all debug info
     // by setting RUST_LOG environment variable.
     if alfred::env::is_debug() {
         env::set_var("RUST_LOG", "rusty_pin=debug,alfred_pinboard_rs=debug");
-        eprintln!("Set var RUST_LOG to: {:?}", env::var("RUST_LOG"));
     }
 
     env_logger::init();
@@ -104,9 +104,9 @@ fn main() {
             });
 
             let mut updater = Updater::gh("spamwax/alfred-pinboard-rs").unwrap();
-            updater.set_version("0.13.1");
-            updater.set_interval(60);
-            updater.init().unwrap();
+            // updater.set_version("0.13.1");
+            // updater.set_interval(60);
+            updater.init().expect("cannot start updater!");
 
             pinboard = setup.1;
             config = setup.0;
