@@ -44,19 +44,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>01BC462E-92A4-4879-AFB4-99702CFC316F</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>161C3C06-3CA3-40CD-BB3B-35A4C93AAA91</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>03AF5169-B606-486F-B432-98CF6E2BB0F2</key>
 		<array>
 			<dict>
@@ -71,17 +58,7 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>01BC462E-92A4-4879-AFB4-99702CFC316F</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>ECFB3A26-DDE5-4473-9429-1175808D573F</string>
+				<string>C4C3FAC9-E038-44BB-8345-7A89E39F8EDE</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -103,11 +80,60 @@
 				<false/>
 			</dict>
 		</array>
+		<key>12357CB5-92FC-4FC0-B13F-E8303700B102</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A2481ADE-0AF6-4C3D-8E9B-E389206CD571</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>1E7D31C4-5229-4DA3-971E-7F0BCC04A81D</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>5D22F26C-5A6A-4D18-B1F9-1158B8075764</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>2202AECC-AE14-46AC-A4E7-0ECE9060F556</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>6FCE34C9-B61B-4C75-8443-DD17F968A46E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>221EA45C-D3F1-4FD8-9143-CD10110D5BFC</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>8181252C-6CC9-4CFA-97D8-2C5097DB6AF4</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>C6A1B854-359E-4D50-9081-56FEAEFC8CBC</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -143,7 +169,30 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>7D0D3480-DBAF-4261-B304-169C58BDA745</string>
+				<string>CDFD158D-8C5A-459F-9164-A4FBF4C9E314</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>3CE0B131-A3E7-4756-BB56-C0AEC7448C28</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>6D7ED5D0-0347-46AE-81ED-D308BDF21676</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>ED8A8F0C-7FA1-4861-8FB7-76C5FAE4E673</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -197,7 +246,20 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>A2481ADE-0AF6-4C3D-8E9B-E389206CD571</string>
+				<string>5EDAB9E7-B4EA-4022-9523-DD865A75B345</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>4AB57A0F-846D-4AA0-B3DD-DD1C7F411BAE</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A2DA0FE3-D7E7-47E0-9383-B42E0EFDF202</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -224,6 +286,42 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>988D1146-585C-4DC6-A56B-B303B9A3F173</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>50AED498-A7C0-4CEE-BDDB-B4887FF49957</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>C2C3C705-A4E7-44AB-BB2B-46F35B1A8E0E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>50F6A6C6-7D1D-4876-92C2-4702A00D4AB2</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>78C19F72-991F-47BC-85D0-E69E021AC18A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>221EA45C-D3F1-4FD8-9143-CD10110D5BFC</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -294,11 +392,57 @@
 				<false/>
 			</dict>
 		</array>
+		<key>5EDAB9E7-B4EA-4022-9523-DD865A75B345</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>D91FD9FE-14F6-4291-8478-11A126B03BD0</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>12357CB5-92FC-4FC0-B13F-E8303700B102</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>5F6E4E5A-1035-498B-A2CF-B7E3ACB85009</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>799A5CC4-A7DB-4074-8044-ED7DBEFED12D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>60353C96-9D07-4EF6-B8AB-FA8EC4EF2236</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>C51D6351-6D3A-40C7-821C-C02D35C92332</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>EE0705F1-36FB-49F6-AA24-3BA82965A14C</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -338,6 +482,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>6BA4C470-B64F-4BE2-9346-38ADACABCCBA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>6D7ED5D0-0347-46AE-81ED-D308BDF21676</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>59CC5D01-8A21-4819-BCBD-A02BF648DCD1</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -434,8 +591,19 @@
 				<false/>
 			</dict>
 		</array>
-		<key>8147420E-05A2-4B5B-A16E-9599A5E14AA8</key>
-		<array/>
+		<key>8181252C-6CC9-4CFA-97D8-2C5097DB6AF4</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>2202AECC-AE14-46AC-A4E7-0ECE9060F556</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>877E9FAB-0FE7-42CD-AE40-751ED947D0B2</key>
 		<array>
 			<dict>
@@ -453,7 +621,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>7D0D3480-DBAF-4261-B304-169C58BDA745</string>
+				<string>CDFD158D-8C5A-459F-9164-A4FBF4C9E314</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -538,7 +706,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>59CC5D01-8A21-4819-BCBD-A02BF648DCD1</string>
+				<string>3CE0B131-A3E7-4756-BB56-C0AEC7448C28</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -572,6 +740,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>25F462E5-343C-4BDF-B314-B96E55AE5875</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>A2DA0FE3-D7E7-47E0-9383-B42E0EFDF202</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>C1E87F32-A676-401C-A330-9A305B928E8E</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -645,11 +826,96 @@
 				<false/>
 			</dict>
 		</array>
+		<key>C1E87F32-A676-401C-A330-9A305B928E8E</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>F55B41C7-8CBF-4F98-B7C5-9EB468713A5D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>50F6A6C6-7D1D-4876-92C2-4702A00D4AB2</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>C4C3FAC9-E038-44BB-8345-7A89E39F8EDE</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>50AED498-A7C0-4CEE-BDDB-B4887FF49957</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>4AB57A0F-846D-4AA0-B3DD-DD1C7F411BAE</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>C51D6351-6D3A-40C7-821C-C02D35C92332</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>5BBD268D-C102-4516-86B3-7A1DA7AE6AD8</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>C6A1B854-359E-4D50-9081-56FEAEFC8CBC</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>33CEA28E-CBEF-499B-8397-6C4C3B947B72</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>C79DF9E2-8026-4F82-B31C-BCD0D4AFCE20</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>6BA4C470-B64F-4BE2-9346-38ADACABCCBA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>CDFD158D-8C5A-459F-9164-A4FBF4C9E314</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>7D0D3480-DBAF-4261-B304-169C58BDA745</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -676,6 +942,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>453D2BA7-92D6-4AD0-821B-132AF0365147</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>D91FD9FE-14F6-4291-8478-11A126B03BD0</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A2DA0FE3-D7E7-47E0-9383-B42E0EFDF202</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -759,11 +1038,24 @@
 				<false/>
 			</dict>
 		</array>
-		<key>ECFB3A26-DDE5-4473-9429-1175808D573F</key>
+		<key>ED8A8F0C-7FA1-4861-8FB7-76C5FAE4E673</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>F6BF4AA0-4332-4032-B655-35674C53600D</string>
+				<string>A2DA0FE3-D7E7-47E0-9383-B42E0EFDF202</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>EE0705F1-36FB-49F6-AA24-3BA82965A14C</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A2DA0FE3-D7E7-47E0-9383-B42E0EFDF202</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -789,7 +1081,33 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>5BBD268D-C102-4516-86B3-7A1DA7AE6AD8</string>
+				<string>60353C96-9D07-4EF6-B8AB-FA8EC4EF2236</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>F5143EEF-D67B-4518-A5BA-1DFFD993A314</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A2DA0FE3-D7E7-47E0-9383-B42E0EFDF202</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>F55B41C7-8CBF-4F98-B7C5-9EB468713A5D</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>6DA1238D-B036-4CC7-9351-D41AF426C1A7</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -842,21 +1160,27 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>Successful</string>
+				<key>inputstring</key>
+				<string>{var:workflow_update_ready}</string>
+				<key>matchcasesensitive</key>
+				<true/>
+				<key>matchmode</key>
+				<integer>1</integer>
+				<key>matchstring</key>
+				<string>1</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
+			<string>alfred.workflow.utility.filter</string>
 			<key>uid</key>
-			<string>CEA5E6BE-477F-4E65-910B-1096368B93C8</string>
+			<string>6D7ED5D0-0347-46AE-81ED-D308BDF21676</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>3CE0B131-A3E7-4756-BB56-C0AEC7448C28</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -883,6 +1207,46 @@ echo "Posted: $title"</string>
 			<string>0F03B46B-AD75-491E-8B5B-36ADF3E084F4</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>Successful</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>CEA5E6BE-477F-4E65-910B-1096368B93C8</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>inputstring</key>
+				<string>{var:workflow_update_ready}</string>
+				<key>matchcasesensitive</key>
+				<true/>
+				<key>matchmode</key>
+				<integer>0</integer>
+				<key>matchstring</key>
+				<string>1</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.filter</string>
+			<key>uid</key>
+			<string>ED8A8F0C-7FA1-4861-8FB7-76C5FAE4E673</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -921,6 +1285,36 @@ echo "Posted: $title"</string>
 			<string>71EE10F6-37BC-4869-B8A8-0602D9A76863</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>126</integer>
+				<key>script</key>
+				<string># $tags and $description env. variables are passed in as input from previous script filter.
+
+ret=$(./alfred-pinboard-rs post --toread true --tags "$tags" --description "$description")
+if [ $? -ne 0 ]; then
+    echo -n "$ret"
+else
+    echo -n "$ret"
+fi</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>4F6CE11B-3454-41F1-BF65-AD752A4AC53F</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -966,36 +1360,6 @@ echo "Posted: $title"</string>
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
 			<string>A1AB9903-87A7-4041-8EB9-F9E9C06C451B</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>126</integer>
-				<key>script</key>
-				<string># $tags and $description env. variables are passed in as input from previous script filter.
-
-ret=$(./alfred-pinboard-rs post --toread true --tags "$tags" --description "$description")
-if [ $? -ne 0 ]; then
-    echo -n "$ret"
-else
-    echo -n "$ret"
-fi</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>4F6CE11B-3454-41F1-BF65-AD752A4AC53F</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -1115,7 +1479,8 @@ Seanau
 Shmidt Sergey
 Rodolfo Alvarez
 Raashid.A
-useiconic.com, US</string>
+useiconic.com, US
+Gregor Cresnar</string>
 				<key>variables</key>
 				<dict/>
 			</dict>
@@ -1244,19 +1609,6 @@ useiconic.com, US</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>largetypetext</key>
-				<string>{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.largetype</string>
-			<key>uid</key>
-			<string>71D25BDA-BF77-41BE-B3C6-A7ABE0B3990A</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -1274,6 +1626,19 @@ useiconic.com, US</string>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
 			<string>41032086-9AA2-40AF-A887-9148D35771D8</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>largetypetext</key>
+				<string>{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.largetype</string>
+			<key>uid</key>
+			<string>71D25BDA-BF77-41BE-B3C6-A7ABE0B3990A</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -1346,23 +1711,125 @@ useiconic.com, US</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>openwith</key>
+				<key>browser</key>
 				<string></string>
-				<key>sourcefile</key>
+				<key>spaces</key>
 				<string></string>
+				<key>url</key>
+				<string>{query}</string>
+				<key>utf8</key>
+				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.openfile</string>
+			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>161C3C06-3CA3-40CD-BB3B-35A4C93AAA91</string>
+			<string>C2C3C705-A4E7-44AB-BB2B-46F35B1A8E0E</string>
 			<key>version</key>
-			<integer>3</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
 				<key>inputstring</key>
-				<string>{var:updater}</string>
+				<string>{var:workflow_update_ready}</string>
+				<key>matchcasesensitive</key>
+				<true/>
+				<key>matchmode</key>
+				<integer>1</integer>
+				<key>matchstring</key>
+				<string>1</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.filter</string>
+			<key>uid</key>
+			<string>50AED498-A7C0-4CEE-BDDB-B4887FF49957</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>Error</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>6DA1238D-B036-4CC7-9351-D41AF426C1A7</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>C4C3FAC9-E038-44BB-8345-7A89E39F8EDE</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>inputstring</key>
+				<string>{query}</string>
+				<key>matchcasesensitive</key>
+				<false/>
+				<key>matchmode</key>
+				<integer>2</integer>
+				<key>matchstring</key>
+				<string>Error: .*</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.filter</string>
+			<key>uid</key>
+			<string>F55B41C7-8CBF-4F98-B7C5-9EB468713A5D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string># remove old downloads
+rm "$alfred_workflow_cache/latest_release_Rusty_Pin.alfredworkflow"
+
+# download &amp; install
+ret=$(./alfred-pinboard-rs self -d)
+echo $ret
+
+# /Volumes/Home/hamid/tmp/rust/latest_release_alfred_pinboard_rs.alfredworkflow
+# $alfred_workflow_cache/latest_release_$alfred_workflow_name.alfredworkflow</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>A2DA0FE3-D7E7-47E0-9383-B42E0EFDF202</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>inputstring</key>
+				<string>{var:workflow_update_ready}</string>
 				<key>matchcasesensitive</key>
 				<true/>
 				<key>matchmode</key>
@@ -1373,7 +1840,55 @@ useiconic.com, US</string>
 			<key>type</key>
 			<string>alfred.workflow.utility.filter</string>
 			<key>uid</key>
-			<string>01BC462E-92A4-4879-AFB4-99702CFC316F</string>
+			<string>4AB57A0F-846D-4AA0-B3DD-DD1C7F411BAE</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>C1E87F32-A676-401C-A330-9A305B928E8E</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>Download successful. Opening Alfred to install...</string>
+				<key>title</key>
+				<string>Successful</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>78C19F72-991F-47BC-85D0-E69E021AC18A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>inputstring</key>
+				<string>{query}</string>
+				<key>matchcasesensitive</key>
+				<false/>
+				<key>matchmode</key>
+				<integer>2</integer>
+				<key>matchstring</key>
+				<string>Download successful: .*</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.filter</string>
+			<key>uid</key>
+			<string>50F6A6C6-7D1D-4876-92C2-4702A00D4AB2</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1392,51 +1907,9 @@ useiconic.com, US</string>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>F6BF4AA0-4332-4032-B655-35674C53600D</string>
+			<string>51B3C295-B9CD-44D4-B1D3-19038C54735B</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>inputstring</key>
-				<string>{var:updater}</string>
-				<key>matchcasesensitive</key>
-				<true/>
-				<key>matchmode</key>
-				<integer>1</integer>
-				<key>matchstring</key>
-				<string>1</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.filter</string>
-			<key>uid</key>
-			<string>ECFB3A26-DDE5-4473-9429-1175808D573F</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>./alfred-pinboard-rs delete "$1"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>8147420E-05A2-4B5B-A16E-9599A5E14AA8</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1486,6 +1959,25 @@ useiconic.com, US</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>inputstring</key>
+				<string>{var:workflow_update_ready}</string>
+				<key>matchcasesensitive</key>
+				<true/>
+				<key>matchmode</key>
+				<integer>1</integer>
+				<key>matchstring</key>
+				<string>1</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.filter</string>
+			<key>uid</key>
+			<string>C51D6351-6D3A-40C7-821C-C02D35C92332</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -1531,36 +2023,52 @@ useiconic.com, US</string>
 			<integer>2</integer>
 		</dict>
 		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>{query}</string>
-				<key>utf8</key>
-				<true/>
-			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
+			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
-			<string>51B3C295-B9CD-44D4-B1D3-19038C54735B</string>
+			<string>60353C96-9D07-4EF6-B8AB-FA8EC4EF2236</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>largetypetext</key>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
 				<string>{query}</string>
+				<key>title</key>
+				<string>Error</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.largetype</string>
+			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
-			<string>4411CFFD-1BD6-49B2-8EBB-8AE42CD82ECC</string>
+			<string>6FCE34C9-B61B-4C75-8443-DD17F968A46E</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>inputstring</key>
+				<string>{var:workflow_update_ready}</string>
+				<key>matchcasesensitive</key>
+				<true/>
+				<key>matchmode</key>
+				<integer>0</integer>
+				<key>matchstring</key>
+				<string>1</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.filter</string>
+			<key>uid</key>
+			<string>EE0705F1-36FB-49F6-AA24-3BA82965A14C</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1577,9 +2085,69 @@ useiconic.com, US</string>
 			<key>type</key>
 			<string>alfred.workflow.utility.filter</string>
 			<key>uid</key>
-			<string>E0487C9A-022A-4894-8CE6-F2B54684C7D2</string>
+			<string>8181252C-6CC9-4CFA-97D8-2C5097DB6AF4</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>seconds</key>
+				<string>5</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.delay</string>
+			<key>uid</key>
+			<string>2202AECC-AE14-46AC-A4E7-0ECE9060F556</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>pcheck</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Checking...</string>
+				<key>script</key>
+				<string>./alfred-pinboard-rs self -c</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Check for latest upgrade!</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>F5143EEF-D67B-4518-A5BA-1DFFD993A314</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1589,7 +2157,14 @@ useiconic.com, US</string>
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>./alfred-pinboard-rs delete $1</string>
+				<string>filename=$(echo "$1" | cut -d ' ' -f 3-)
+
+# if open -b com.runningwithcrayons.Alfred-3 "$alfred_workflow_cache/latest_release_Rusty_Pin.alfredworkflow"; then
+if open -b com.runningwithcrayons.Alfred-3 "$filename"; then
+    echo "Success: Wait! Openning Alfred to install..."
+else
+    echo "Error: $filename Couldn't install the downloaded file!"
+fi</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -1600,9 +2175,68 @@ useiconic.com, US</string>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>A2481ADE-0AF6-4C3D-8E9B-E389206CD571</string>
+			<string>221EA45C-D3F1-4FD8-9143-CD10110D5BFC</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>Successful</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>33CEA28E-CBEF-499B-8397-6C4C3B947B72</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>inputstring</key>
+				<string>{var:workflow_update_ready}</string>
+				<key>matchcasesensitive</key>
+				<true/>
+				<key>matchmode</key>
+				<integer>0</integer>
+				<key>matchstring</key>
+				<string>1</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.filter</string>
+			<key>uid</key>
+			<string>D91FD9FE-14F6-4291-8478-11A126B03BD0</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>inputstring</key>
+				<string>{query}</string>
+				<key>matchcasesensitive</key>
+				<false/>
+				<key>matchmode</key>
+				<integer>2</integer>
+				<key>matchstring</key>
+				<string>Success: .*</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.filter</string>
+			<key>uid</key>
+			<string>C6A1B854-359E-4D50-9081-56FEAEFC8CBC</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1650,6 +2284,88 @@ useiconic.com, US</string>
 			<string>46667F34-E27E-4FBA-83B5-4A55C6FA2FD6</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>largetypetext</key>
+				<string>{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.largetype</string>
+			<key>uid</key>
+			<string>4411CFFD-1BD6-49B2-8EBB-8AE42CD82ECC</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>inputstring</key>
+				<string>{query}</string>
+				<key>matchcasesensitive</key>
+				<false/>
+				<key>matchmode</key>
+				<integer>2</integer>
+				<key>matchstring</key>
+				<string>Error: .*</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.filter</string>
+			<key>uid</key>
+			<string>E0487C9A-022A-4894-8CE6-F2B54684C7D2</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>5EDAB9E7-B4EA-4022-9523-DD865A75B345</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>./alfred-pinboard-rs delete $1</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>A2481ADE-0AF6-4C3D-8E9B-E389206CD571</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>inputstring</key>
+				<string>{var:workflow_update_ready}</string>
+				<key>matchcasesensitive</key>
+				<true/>
+				<key>matchmode</key>
+				<integer>1</integer>
+				<key>matchstring</key>
+				<string>1</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.filter</string>
+			<key>uid</key>
+			<string>12357CB5-92FC-4FC0-B13F-E8303700B102</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>type</key>
@@ -1721,6 +2437,14 @@ useiconic.com, US</string>
 			<integer>1</integer>
 		</dict>
 		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>CDFD158D-8C5A-459F-9164-A4FBF4C9E314</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
 			<key>config</key>
 			<dict>
 				<key>largetypetext</key>
@@ -1781,30 +2505,6 @@ useiconic.com, US</string>
 				<key>escaping</key>
 				<integer>127</integer>
 				<key>script</key>
-				<string>ret=$(./alfred-pinboard-rs update)
-echo $ret</string>
-				<key>scriptargtype</key>
-				<integer>0</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>7D0D3480-DBAF-4261-B304-169C58BDA745</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>127</integer>
-				<key>script</key>
 				<string>if ! ./alfred-pinboard-rs config --authorization $1; then
     echo "Couldn't set user credentials!!!"
 else
@@ -1821,6 +2521,30 @@ fi</string>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
 			<string>0087168E-C986-4511-9873-B107C12CD6C0</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>127</integer>
+				<key>script</key>
+				<string>ret=$(./alfred-pinboard-rs update)
+echo $ret</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>7D0D3480-DBAF-4261-B304-169C58BDA745</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -1846,6 +2570,14 @@ fi</string>
 			<integer>1</integer>
 		</dict>
 		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>E92C07F3-7E97-4675-8096-07AA081760A3</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
 			<key>config</key>
 			<dict>
 				<key>inputstring</key>
@@ -1861,14 +2593,6 @@ fi</string>
 			<string>alfred.workflow.utility.filter</string>
 			<key>uid</key>
 			<string>877E9FAB-0FE7-42CD-AE40-751ED947D0B2</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.junction</string>
-			<key>uid</key>
-			<string>E92C07F3-7E97-4675-8096-07AA081760A3</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -2148,34 +2872,6 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>127</integer>
-				<key>script</key>
-				<string>output=$(./alfred-pinboard-rs config --bookmark-numbers $1)
-if [ $? -ne 0 ]; then
-    echo $output
-else
-    echo "No. items to show: $1"
-fi</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>DA27F20C-DD88-4FCB-A665-CD66BFF2761D</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>keyword</key>
@@ -2202,11 +2898,11 @@ fi</string>
 				<key>escaping</key>
 				<integer>127</integer>
 				<key>script</key>
-				<string>output=$(./alfred-pinboard-rs config --suggest-tags $1)
+				<string>output=$(./alfred-pinboard-rs config --bookmark-numbers $1)
 if [ $? -ne 0 ]; then
     echo $output
 else
-    echo "Tag suggestion: $1"
+    echo "No. items to show: $1"
 fi</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
@@ -2218,7 +2914,7 @@ fi</string>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>403451E0-718B-4D95-8546-05E9CCA25495</string>
+			<string>DA27F20C-DD88-4FCB-A665-CD66BFF2761D</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -2282,6 +2978,34 @@ EOB</string>
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
 			<string>BD868971-C272-43FC-B20B-1C5471C1EBC1</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>127</integer>
+				<key>script</key>
+				<string>output=$(./alfred-pinboard-rs config --suggest-tags $1)
+if [ $? -ne 0 ]; then
+    echo $output
+else
+    echo "Tag suggestion: $1"
+fi</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>403451E0-718B-4D95-8546-05E9CCA25495</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -2400,6 +3124,34 @@ EOB</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>123</integer>
+				<key>script</key>
+				<string>output=$(./alfred-pinboard-rs config --tags-only $1)
+if [ $? -ne 0 ]; then
+    echo $output
+else
+    echo "Tag ONLY: $1"
+fi</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>ACED2549-3532-4ECC-9709-96679199529D</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -2457,34 +3209,6 @@ EOB</string>
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
 			<string>3CFEFF60-C0B3-44A0-8761-FB5AA2F96547</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>123</integer>
-				<key>script</key>
-				<string>output=$(./alfred-pinboard-rs config --tags-only $1)
-if [ $? -ne 0 ]; then
-    echo $output
-else
-    echo "Tag ONLY: $1"
-fi</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>ACED2549-3532-4ECC-9709-96679199529D</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -2681,9 +3405,9 @@ Detailed instructions are available at https://github.com/spamwax/alfred-pinboar
 		<key>0087168E-C986-4511-9873-B107C12CD6C0</key>
 		<dict>
 			<key>xpos</key>
-			<integer>290</integer>
+			<integer>280</integer>
 			<key>ypos</key>
-			<integer>1490</integer>
+			<integer>1610</integer>
 		</dict>
 		<key>00892451-3E5D-421F-B3ED-367DD1560720</key>
 		<dict>
@@ -2692,9 +3416,9 @@ Detailed instructions are available at https://github.com/spamwax/alfred-pinboar
 			<key>note</key>
 			<string>Add your credentials first!</string>
 			<key>xpos</key>
-			<integer>50</integer>
+			<integer>40</integer>
 			<key>ypos</key>
-			<integer>1490</integer>
+			<integer>1610</integer>
 		</dict>
 		<key>013B2DEB-D66D-4D01-8528-0696630F8DEF</key>
 		<dict>
@@ -2719,145 +3443,173 @@ Raashid.A</string>
 			<key>xpos</key>
 			<integer>60</integer>
 			<key>ypos</key>
-			<integer>290</integer>
-		</dict>
-		<key>01BC462E-92A4-4879-AFB4-99702CFC316F</key>
-		<dict>
-			<key>note</key>
-			<string>updater item</string>
-			<key>xpos</key>
-			<integer>710</integer>
-			<key>ypos</key>
-			<integer>770</integer>
+			<integer>310</integer>
 		</dict>
 		<key>03AF5169-B606-486F-B432-98CF6E2BB0F2</key>
 		<dict>
 			<key>note</key>
 			<string>Find bookmarks using query.</string>
 			<key>xpos</key>
-			<integer>50</integer>
+			<integer>40</integer>
 			<key>ypos</key>
-			<integer>630</integer>
+			<integer>660</integer>
 		</dict>
 		<key>06E0CAC8-FEFC-4D89-852A-C9B0D9DC2FA2</key>
 		<dict>
 			<key>xpos</key>
-			<integer>1150</integer>
+			<integer>1320</integer>
 			<key>ypos</key>
-			<integer>220</integer>
+			<integer>240</integer>
 		</dict>
 		<key>0F03B46B-AD75-491E-8B5B-36ADF3E084F4</key>
 		<dict>
 			<key>note</key>
 			<string>Show successful posting.</string>
 			<key>xpos</key>
-			<integer>950</integer>
+			<integer>1120</integer>
 			<key>ypos</key>
-			<integer>80</integer>
+			<integer>100</integer>
 		</dict>
-		<key>161C3C06-3CA3-40CD-BB3B-35A4C93AAA91</key>
+		<key>12357CB5-92FC-4FC0-B13F-E8303700B102</key>
 		<dict>
 			<key>xpos</key>
-			<integer>900</integer>
+			<integer>290</integer>
 			<key>ypos</key>
-			<integer>690</integer>
+			<integer>1240</integer>
 		</dict>
 		<key>1E7D31C4-5229-4DA3-971E-7F0BCC04A81D</key>
 		<dict>
 			<key>note</key>
 			<string>Success in cache update.</string>
 			<key>xpos</key>
-			<integer>1130</integer>
+			<integer>1190</integer>
 			<key>ypos</key>
-			<integer>1590</integer>
+			<integer>1710</integer>
+		</dict>
+		<key>2202AECC-AE14-46AC-A4E7-0ECE9060F556</key>
+		<dict>
+			<key>xpos</key>
+			<integer>1440</integer>
+			<key>ypos</key>
+			<integer>1020</integer>
+		</dict>
+		<key>221EA45C-D3F1-4FD8-9143-CD10110D5BFC</key>
+		<dict>
+			<key>xpos</key>
+			<integer>1100</integer>
+			<key>ypos</key>
+			<integer>1050</integer>
 		</dict>
 		<key>2338607E-BB4F-4C20-B121-B2C3A10C1C6E</key>
 		<dict>
 			<key>xpos</key>
-			<integer>1150</integer>
+			<integer>1320</integer>
 			<key>ypos</key>
-			<integer>390</integer>
+			<integer>410</integer>
 		</dict>
 		<key>25F462E5-343C-4BDF-B314-B96E55AE5875</key>
 		<dict>
 			<key>xpos</key>
-			<integer>430</integer>
+			<integer>580</integer>
 			<key>ypos</key>
-			<integer>1150</integer>
+			<integer>1240</integer>
 		</dict>
 		<key>282CD8F9-1BEE-4B7D-A72C-94D7CBA13073</key>
 		<dict>
 			<key>xpos</key>
-			<integer>1240</integer>
+			<integer>1310</integer>
 			<key>ypos</key>
-			<integer>1400</integer>
+			<integer>1530</integer>
 		</dict>
 		<key>28EB0348-E6C5-4205-9AD5-B50DDFFF4DD0</key>
 		<dict>
 			<key>xpos</key>
-			<integer>650</integer>
+			<integer>920</integer>
 			<key>ypos</key>
-			<integer>1180</integer>
+			<integer>1270</integer>
 		</dict>
 		<key>2DFDAFE5-6A0E-4E95-A1C5-30789A06C27C</key>
 		<dict>
 			<key>xpos</key>
-			<integer>650</integer>
+			<integer>690</integer>
 			<key>ypos</key>
-			<integer>1300</integer>
+			<integer>1410</integer>
+		</dict>
+		<key>33CEA28E-CBEF-499B-8397-6C4C3B947B72</key>
+		<dict>
+			<key>xpos</key>
+			<integer>1530</integer>
+			<key>ypos</key>
+			<integer>1110</integer>
+		</dict>
+		<key>3CE0B131-A3E7-4756-BB56-C0AEC7448C28</key>
+		<dict>
+			<key>xpos</key>
+			<integer>230</integer>
+			<key>ypos</key>
+			<integer>80</integer>
 		</dict>
 		<key>3CFEFF60-C0B3-44A0-8761-FB5AA2F96547</key>
 		<dict>
 			<key>xpos</key>
-			<integer>70</integer>
+			<integer>40</integer>
 			<key>ypos</key>
-			<integer>2320</integer>
+			<integer>2490</integer>
 		</dict>
 		<key>403451E0-718B-4D95-8546-05E9CCA25495</key>
 		<dict>
 			<key>xpos</key>
-			<integer>300</integer>
+			<integer>280</integer>
 			<key>ypos</key>
-			<integer>2120</integer>
+			<integer>2290</integer>
 		</dict>
 		<key>41032086-9AA2-40AF-A887-9148D35771D8</key>
 		<dict>
 			<key>xpos</key>
-			<integer>750</integer>
+			<integer>920</integer>
 			<key>ypos</key>
-			<integer>560</integer>
+			<integer>580</integer>
 		</dict>
 		<key>4411CFFD-1BD6-49B2-8EBB-8AE42CD82ECC</key>
 		<dict>
 			<key>xpos</key>
-			<integer>650</integer>
+			<integer>920</integer>
 			<key>ypos</key>
-			<integer>1060</integer>
+			<integer>1150</integer>
 		</dict>
 		<key>453D2BA7-92D6-4AD0-821B-132AF0365147</key>
 		<dict>
 			<key>xpos</key>
-			<integer>290</integer>
+			<integer>280</integer>
 			<key>ypos</key>
-			<integer>1650</integer>
+			<integer>1770</integer>
 		</dict>
 		<key>46667F34-E27E-4FBA-83B5-4A55C6FA2FD6</key>
 		<dict>
 			<key>note</key>
 			<string>Tries to delete bookmark for active tab of browser.</string>
 			<key>xpos</key>
-			<integer>50</integer>
+			<integer>40</integer>
 			<key>ypos</key>
-			<integer>1120</integer>
+			<integer>1150</integer>
+		</dict>
+		<key>4AB57A0F-846D-4AA0-B3DD-DD1C7F411BAE</key>
+		<dict>
+			<key>note</key>
+			<string>Upgrade selected.</string>
+			<key>xpos</key>
+			<integer>290</integer>
+			<key>ypos</key>
+			<integer>810</integer>
 		</dict>
 		<key>4F682CAE-BDB1-4A64-B8BB-1C149CC24751</key>
 		<dict>
 			<key>note</key>
 			<string>Success in deleting.</string>
 			<key>xpos</key>
-			<integer>540</integer>
+			<integer>690</integer>
 			<key>ypos</key>
-			<integer>1210</integer>
+			<integer>1300</integer>
 		</dict>
 		<key>4F6CE11B-3454-41F1-BF65-AD752A4AC53F</key>
 		<dict>
@@ -2866,106 +3618,159 @@ Raashid.A</string>
 			<key>note</key>
 			<string>Mark the bookmark TOREAD</string>
 			<key>xpos</key>
-			<integer>280</integer>
+			<integer>450</integer>
 			<key>ypos</key>
-			<integer>140</integer>
+			<integer>160</integer>
+		</dict>
+		<key>50AED498-A7C0-4CEE-BDDB-B4887FF49957</key>
+		<dict>
+			<key>xpos</key>
+			<integer>290</integer>
+			<key>ypos</key>
+			<integer>700</integer>
+		</dict>
+		<key>50F6A6C6-7D1D-4876-92C2-4702A00D4AB2</key>
+		<dict>
+			<key>note</key>
+			<string>Success in downloading.</string>
+			<key>xpos</key>
+			<integer>1190</integer>
+			<key>ypos</key>
+			<integer>880</integer>
 		</dict>
 		<key>51B3C295-B9CD-44D4-B1D3-19038C54735B</key>
 		<dict>
 			<key>xpos</key>
-			<integer>470</integer>
+			<integer>690</integer>
 			<key>ypos</key>
-			<integer>950</integer>
+			<integer>890</integer>
 		</dict>
 		<key>59152538-B4C0-4377-AEEA-034B5B257033</key>
 		<dict>
 			<key>note</key>
 			<string>Error in cache update.</string>
 			<key>xpos</key>
-			<integer>730</integer>
+			<integer>900</integer>
 			<key>ypos</key>
-			<integer>420</integer>
+			<integer>440</integer>
 		</dict>
 		<key>59CC5D01-8A21-4819-BCBD-A02BF648DCD1</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>4</integer>
 			<key>xpos</key>
-			<integer>280</integer>
+			<integer>450</integer>
 			<key>ypos</key>
-			<integer>30</integer>
+			<integer>10</integer>
 		</dict>
 		<key>5BBD268D-C102-4516-86B3-7A1DA7AE6AD8</key>
 		<dict>
 			<key>xpos</key>
-			<integer>290</integer>
+			<integer>440</integer>
 			<key>ypos</key>
-			<integer>950</integer>
+			<integer>890</integer>
 		</dict>
 		<key>5D065041-109B-41B0-ADE0-62CA836178E5</key>
 		<dict>
 			<key>xpos</key>
-			<integer>70</integer>
+			<integer>40</integer>
 			<key>ypos</key>
-			<integer>1820</integer>
+			<integer>1990</integer>
 		</dict>
 		<key>5D22F26C-5A6A-4D18-B1F9-1158B8075764</key>
 		<dict>
 			<key>xpos</key>
-			<integer>1240</integer>
+			<integer>1310</integer>
 			<key>ypos</key>
-			<integer>1560</integer>
+			<integer>1680</integer>
+		</dict>
+		<key>5EDAB9E7-B4EA-4022-9523-DD865A75B345</key>
+		<dict>
+			<key>xpos</key>
+			<integer>210</integer>
+			<key>ypos</key>
+			<integer>1180</integer>
 		</dict>
 		<key>5F6E4E5A-1035-498B-A2CF-B7E3ACB85009</key>
 		<dict>
 			<key>xpos</key>
-			<integer>70</integer>
+			<integer>40</integer>
 			<key>ypos</key>
-			<integer>2520</integer>
+			<integer>2690</integer>
+		</dict>
+		<key>60353C96-9D07-4EF6-B8AB-FA8EC4EF2236</key>
+		<dict>
+			<key>xpos</key>
+			<integer>210</integer>
+			<key>ypos</key>
+			<integer>960</integer>
 		</dict>
 		<key>64829D2F-3DDE-46EC-BE53-F60150D38CEA</key>
 		<dict>
 			<key>xpos</key>
-			<integer>950</integer>
+			<integer>1120</integer>
 			<key>ypos</key>
-			<integer>560</integer>
+			<integer>580</integer>
 		</dict>
 		<key>68426E77-6C32-41BA-A11F-8B90F20AABEE</key>
 		<dict>
 			<key>xpos</key>
-			<integer>830</integer>
+			<integer>1000</integer>
 			<key>ypos</key>
-			<integer>150</integer>
+			<integer>170</integer>
 		</dict>
 		<key>6A4A2D1D-0087-4112-8D83-7BD1C4886CBB</key>
 		<dict>
 			<key>xpos</key>
-			<integer>300</integer>
+			<integer>280</integer>
 			<key>ypos</key>
-			<integer>1820</integer>
+			<integer>1990</integer>
 		</dict>
 		<key>6BA4C470-B64F-4BE2-9346-38ADACABCCBA</key>
 		<dict>
 			<key>xpos</key>
-			<integer>640</integer>
+			<integer>620</integer>
 			<key>ypos</key>
-			<integer>2170</integer>
+			<integer>2340</integer>
+		</dict>
+		<key>6D7ED5D0-0347-46AE-81ED-D308BDF21676</key>
+		<dict>
+			<key>note</key>
+			<string>Tag selected.</string>
+			<key>xpos</key>
+			<integer>350</integer>
+			<key>ypos</key>
+			<integer>40</integer>
+		</dict>
+		<key>6DA1238D-B036-4CC7-9351-D41AF426C1A7</key>
+		<dict>
+			<key>xpos</key>
+			<integer>1320</integer>
+			<key>ypos</key>
+			<integer>720</integer>
+		</dict>
+		<key>6FCE34C9-B61B-4C75-8443-DD17F968A46E</key>
+		<dict>
+			<key>xpos</key>
+			<integer>1530</integer>
+			<key>ypos</key>
+			<integer>990</integer>
 		</dict>
 		<key>71D25BDA-BF77-41BE-B3C6-A7ABE0B3990A</key>
 		<dict>
 			<key>xpos</key>
-			<integer>1150</integer>
+			<integer>1320</integer>
 			<key>ypos</key>
-			<integer>560</integer>
+			<integer>580</integer>
 		</dict>
 		<key>71EE10F6-37BC-4869-B8A8-0602D9A76863</key>
 		<dict>
 			<key>note</key>
 			<string>Success in posting.</string>
 			<key>xpos</key>
-			<integer>630</integer>
+			<integer>800</integer>
 			<key>ypos</key>
-			<integer>110</integer>
+			<integer>130</integer>
 		</dict>
 		<key>75B3B3EC-5FC5-449A-A74E-A22D1D848FA7</key>
 		<dict>
@@ -2974,96 +3779,101 @@ Raashid.A</string>
 			<key>note</key>
 			<string>Make the bookmark SHARED</string>
 			<key>xpos</key>
-			<integer>280</integer>
+			<integer>450</integer>
 			<key>ypos</key>
-			<integer>290</integer>
+			<integer>310</integer>
+		</dict>
+		<key>78C19F72-991F-47BC-85D0-E69E021AC18A</key>
+		<dict>
+			<key>xpos</key>
+			<integer>1320</integer>
+			<key>ypos</key>
+			<integer>850</integer>
 		</dict>
 		<key>799A5CC4-A7DB-4074-8044-ED7DBEFED12D</key>
 		<dict>
 			<key>xpos</key>
-			<integer>300</integer>
+			<integer>280</integer>
 			<key>ypos</key>
-			<integer>2520</integer>
+			<integer>2690</integer>
 		</dict>
 		<key>7A213534-8342-46AB-A4EA-4CCF95685833</key>
 		<dict>
 			<key>xpos</key>
-			<integer>70</integer>
+			<integer>40</integer>
 			<key>ypos</key>
-			<integer>2420</integer>
+			<integer>2590</integer>
 		</dict>
 		<key>7BF8F66E-ECC8-4BCD-86CE-5E19FD509604</key>
 		<dict>
 			<key>note</key>
 			<string>Success in cache update.</string>
 			<key>xpos</key>
-			<integer>730</integer>
+			<integer>900</integer>
 			<key>ypos</key>
-			<integer>110</integer>
+			<integer>130</integer>
 		</dict>
 		<key>7D0D3480-DBAF-4261-B304-169C58BDA745</key>
 		<dict>
 			<key>note</key>
 			<string>Update cache.</string>
 			<key>xpos</key>
-			<integer>850</integer>
+			<integer>920</integer>
 			<key>ypos</key>
-			<integer>1490</integer>
+			<integer>1610</integer>
 		</dict>
-		<key>8147420E-05A2-4B5B-A16E-9599A5E14AA8</key>
+		<key>8181252C-6CC9-4CFA-97D8-2C5097DB6AF4</key>
 		<dict>
-			<key>colorindex</key>
-			<integer>3</integer>
 			<key>note</key>
-			<string>Delete bookmark.</string>
+			<string>Error in openning Alfred.</string>
 			<key>xpos</key>
-			<integer>900</integer>
+			<integer>1320</integer>
 			<key>ypos</key>
-			<integer>930</integer>
+			<integer>1020</integer>
 		</dict>
 		<key>877E9FAB-0FE7-42CD-AE40-751ED947D0B2</key>
 		<dict>
 			<key>note</key>
 			<string>Set auth. correctly?</string>
 			<key>xpos</key>
-			<integer>540</integer>
+			<integer>530</integer>
 			<key>ypos</key>
-			<integer>1520</integer>
+			<integer>1640</integer>
 		</dict>
 		<key>8CD4D7F7-49EA-44FF-878E-18B836627810</key>
 		<dict>
 			<key>xpos</key>
-			<integer>650</integer>
+			<integer>690</integer>
 			<key>ypos</key>
-			<integer>1420</integer>
+			<integer>1530</integer>
 		</dict>
 		<key>8FBE3EBB-9672-493C-977C-95B832412F2E</key>
 		<dict>
 			<key>xpos</key>
-			<integer>70</integer>
+			<integer>40</integer>
 			<key>ypos</key>
-			<integer>1920</integer>
+			<integer>2090</integer>
 		</dict>
 		<key>93A64ECE-BB64-492B-B845-7CB85B544D40</key>
 		<dict>
 			<key>xpos</key>
-			<integer>70</integer>
+			<integer>40</integer>
 			<key>ypos</key>
-			<integer>2220</integer>
+			<integer>2390</integer>
 		</dict>
 		<key>988D1146-585C-4DC6-A56B-B303B9A3F173</key>
 		<dict>
 			<key>xpos</key>
-			<integer>510</integer>
+			<integer>680</integer>
 			<key>ypos</key>
-			<integer>170</integer>
+			<integer>190</integer>
 		</dict>
 		<key>A156743D-A9BB-4AFB-A0C2-D16EF45F7DD0</key>
 		<dict>
 			<key>xpos</key>
-			<integer>300</integer>
+			<integer>280</integer>
 			<key>ypos</key>
-			<integer>2220</integer>
+			<integer>2390</integer>
 		</dict>
 		<key>A1AB9903-87A7-4041-8EB9-F9E9C06C451B</key>
 		<dict>
@@ -3072,178 +3882,260 @@ Raashid.A</string>
 			<key>xpos</key>
 			<integer>40</integer>
 			<key>ypos</key>
-			<integer>140</integer>
+			<integer>160</integer>
 		</dict>
 		<key>A2481ADE-0AF6-4C3D-8E9B-E389206CD571</key>
 		<dict>
 			<key>xpos</key>
-			<integer>290</integer>
+			<integer>440</integer>
 			<key>ypos</key>
-			<integer>1120</integer>
+			<integer>1210</integer>
+		</dict>
+		<key>A2DA0FE3-D7E7-47E0-9383-B42E0EFDF202</key>
+		<dict>
+			<key>note</key>
+			<string>Download &amp; Install</string>
+			<key>xpos</key>
+			<integer>920</integer>
+			<key>ypos</key>
+			<integer>780</integer>
 		</dict>
 		<key>A8EE818C-427B-476F-93FD-02825231464B</key>
 		<dict>
 			<key>xpos</key>
-			<integer>70</integer>
+			<integer>40</integer>
 			<key>ypos</key>
-			<integer>2020</integer>
+			<integer>2190</integer>
 		</dict>
 		<key>ACED2549-3532-4ECC-9709-96679199529D</key>
 		<dict>
 			<key>xpos</key>
-			<integer>300</integer>
+			<integer>280</integer>
 			<key>ypos</key>
-			<integer>2320</integer>
+			<integer>2490</integer>
 		</dict>
 		<key>B3A96530-EDA5-4FDE-AD9E-487DBAFBE856</key>
 		<dict>
 			<key>note</key>
 			<string>Error in cache update.</string>
 			<key>xpos</key>
-			<integer>1120</integer>
+			<integer>1190</integer>
 			<key>ypos</key>
-			<integer>1430</integer>
+			<integer>1560</integer>
 		</dict>
 		<key>BBFBAB3B-9592-48EF-9E70-3DDF3303690D</key>
 		<dict>
 			<key>xpos</key>
-			<integer>510</integer>
+			<integer>500</integer>
 			<key>ypos</key>
-			<integer>1620</integer>
+			<integer>1740</integer>
 		</dict>
 		<key>BC2AD49B-4564-4816-B814-83431644EC9D</key>
 		<dict>
 			<key>note</key>
 			<string>Show error in cache update.</string>
 			<key>xpos</key>
-			<integer>950</integer>
+			<integer>1120</integer>
 			<key>ypos</key>
-			<integer>390</integer>
+			<integer>410</integer>
 		</dict>
 		<key>BD868971-C272-43FC-B20B-1C5471C1EBC1</key>
 		<dict>
 			<key>xpos</key>
-			<integer>70</integer>
+			<integer>40</integer>
 			<key>ypos</key>
-			<integer>2120</integer>
+			<integer>2290</integer>
+		</dict>
+		<key>C1E87F32-A676-401C-A330-9A305B928E8E</key>
+		<dict>
+			<key>xpos</key>
+			<integer>1070</integer>
+			<key>ypos</key>
+			<integer>810</integer>
+		</dict>
+		<key>C2C3C705-A4E7-44AB-BB2B-46F35B1A8E0E</key>
+		<dict>
+			<key>xpos</key>
+			<integer>440</integer>
+			<key>ypos</key>
+			<integer>670</integer>
+		</dict>
+		<key>C4C3FAC9-E038-44BB-8345-7A89E39F8EDE</key>
+		<dict>
+			<key>xpos</key>
+			<integer>210</integer>
+			<key>ypos</key>
+			<integer>750</integer>
+		</dict>
+		<key>C51D6351-6D3A-40C7-821C-C02D35C92332</key>
+		<dict>
+			<key>xpos</key>
+			<integer>290</integer>
+			<key>ypos</key>
+			<integer>920</integer>
+		</dict>
+		<key>C6A1B854-359E-4D50-9081-56FEAEFC8CBC</key>
+		<dict>
+			<key>note</key>
+			<string>Success in openning Alfred.</string>
+			<key>xpos</key>
+			<integer>1320</integer>
+			<key>ypos</key>
+			<integer>1140</integer>
 		</dict>
 		<key>C79DF9E2-8026-4F82-B31C-BCD0D4AFCE20</key>
 		<dict>
 			<key>xpos</key>
-			<integer>300</integer>
+			<integer>280</integer>
 			<key>ypos</key>
-			<integer>1920</integer>
+			<integer>2090</integer>
+		</dict>
+		<key>CDFD158D-8C5A-459F-9164-A4FBF4C9E314</key>
+		<dict>
+			<key>xpos</key>
+			<integer>850</integer>
+			<key>ypos</key>
+			<integer>1500</integer>
 		</dict>
 		<key>CEA5E6BE-477F-4E65-910B-1096368B93C8</key>
 		<dict>
 			<key>xpos</key>
-			<integer>1150</integer>
+			<integer>1320</integer>
 			<key>ypos</key>
-			<integer>80</integer>
+			<integer>100</integer>
 		</dict>
 		<key>D52A87C2-E602-4F4F-A20E-DD9202A461E9</key>
 		<dict>
 			<key>note</key>
 			<string>Success in posting.</string>
 			<key>xpos</key>
-			<integer>630</integer>
+			<integer>800</integer>
 			<key>ypos</key>
-			<integer>420</integer>
+			<integer>440</integer>
 		</dict>
 		<key>D5939049-C73A-4872-9625-87A9F9BE886C</key>
 		<dict>
 			<key>note</key>
 			<string>Show current settings of workflow.</string>
 			<key>xpos</key>
-			<integer>50</integer>
+			<integer>40</integer>
 			<key>ypos</key>
-			<integer>1650</integer>
+			<integer>1770</integer>
+		</dict>
+		<key>D91FD9FE-14F6-4291-8478-11A126B03BD0</key>
+		<dict>
+			<key>note</key>
+			<string>Upgrade selected.</string>
+			<key>xpos</key>
+			<integer>290</integer>
+			<key>ypos</key>
+			<integer>1120</integer>
 		</dict>
 		<key>DA27F20C-DD88-4FCB-A665-CD66BFF2761D</key>
 		<dict>
 			<key>xpos</key>
-			<integer>300</integer>
+			<integer>280</integer>
 			<key>ypos</key>
-			<integer>2020</integer>
+			<integer>2190</integer>
 		</dict>
 		<key>E0487C9A-022A-4894-8CE6-F2B54684C7D2</key>
 		<dict>
 			<key>note</key>
 			<string>Error in deleting.</string>
 			<key>xpos</key>
-			<integer>540</integer>
+			<integer>690</integer>
 			<key>ypos</key>
-			<integer>1090</integer>
+			<integer>1180</integer>
 		</dict>
 		<key>E27BB22A-56EB-4D38-9725-99555F0EB6D1</key>
 		<dict>
 			<key>xpos</key>
-			<integer>300</integer>
+			<integer>280</integer>
 			<key>ypos</key>
-			<integer>2420</integer>
+			<integer>2590</integer>
 		</dict>
 		<key>E92C07F3-7E97-4675-8096-07AA081760A3</key>
 		<dict>
 			<key>xpos</key>
-			<integer>1010</integer>
+			<integer>1080</integer>
 			<key>ypos</key>
-			<integer>1520</integer>
+			<integer>1640</integer>
 		</dict>
 		<key>EA97375D-329E-4A06-8BBF-FBF7329AA9CC</key>
 		<dict>
 			<key>note</key>
 			<string>Show successful cache update.</string>
 			<key>xpos</key>
-			<integer>950</integer>
+			<integer>1120</integer>
 			<key>ypos</key>
-			<integer>220</integer>
+			<integer>240</integer>
 		</dict>
-		<key>ECFB3A26-DDE5-4473-9429-1175808D573F</key>
+		<key>ED8A8F0C-7FA1-4861-8FB7-76C5FAE4E673</key>
 		<dict>
 			<key>note</key>
-			<string>normal item</string>
+			<string>Upgrade selected.</string>
 			<key>xpos</key>
-			<integer>710</integer>
+			<integer>350</integer>
 			<key>ypos</key>
-			<integer>840</integer>
+			<integer>120</integer>
+		</dict>
+		<key>EE0705F1-36FB-49F6-AA24-3BA82965A14C</key>
+		<dict>
+			<key>note</key>
+			<string>Upgrade selected.</string>
+			<key>xpos</key>
+			<integer>290</integer>
+			<key>ypos</key>
+			<integer>1010</integer>
 		</dict>
 		<key>EF1102C5-4180-496A-A4AF-1FDB7C59D7EE</key>
 		<dict>
 			<key>note</key>
 			<string>Error in posting.</string>
 			<key>xpos</key>
-			<integer>630</integer>
+			<integer>800</integer>
 			<key>ypos</key>
-			<integer>590</integer>
+			<integer>610</integer>
 		</dict>
 		<key>F495558F-7866-454F-B070-80417D1419B6</key>
 		<dict>
 			<key>note</key>
 			<string>Search for a single tag. Actioning on an item will then show all bookmarks containing that tag.</string>
 			<key>xpos</key>
-			<integer>50</integer>
+			<integer>40</integer>
 			<key>ypos</key>
-			<integer>950</integer>
+			<integer>930</integer>
 		</dict>
-		<key>F6BF4AA0-4332-4032-B655-35674C53600D</key>
+		<key>F5143EEF-D67B-4518-A5BA-1DFFD993A314</key>
 		<dict>
+			<key>note</key>
+			<string>Check for workflow updates.</string>
 			<key>xpos</key>
-			<integer>910</integer>
+			<integer>690</integer>
 			<key>ypos</key>
-			<integer>810</integer>
+			<integer>1020</integer>
+		</dict>
+		<key>F55B41C7-8CBF-4F98-B7C5-9EB468713A5D</key>
+		<dict>
+			<key>note</key>
+			<string>Error in downloading.</string>
+			<key>xpos</key>
+			<integer>1190</integer>
+			<key>ypos</key>
+			<integer>750</integer>
 		</dict>
 		<key>F7728DC2-A69E-415A-8833-57B85C8F54A8</key>
 		<dict>
 			<key>note</key>
 			<string>Find bookmark on Pinboard's site.</string>
 			<key>xpos</key>
-			<integer>290</integer>
+			<integer>440</integer>
 			<key>ypos</key>
-			<integer>490</integer>
+			<integer>520</integer>
 		</dict>
 	</dict>
 	<key>version</key>
-	<string>0.13.3</string>
+	<string>0.14.0</string>
 	<key>webaddress</key>
 	<string>https://github.com/spamwax/alfred-pinboard-rs</string>
 </dict>
