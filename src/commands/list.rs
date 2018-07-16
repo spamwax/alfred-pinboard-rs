@@ -17,7 +17,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
         }
     }
 
-    fn process<'a>(
+    fn process(
         &self,
         // config: &Config,
         // pinboard: &Pinboard<'a, 'a>,

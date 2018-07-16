@@ -22,6 +22,7 @@ structopt = "0.2"
 semver = "0.9"
 
 failure = "0.1.1"
+dirs = "1.0"
 
 if_chain = "0.1.2"
 

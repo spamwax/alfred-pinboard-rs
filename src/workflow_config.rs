@@ -1,5 +1,5 @@
 use chrono::prelude::*;
-use std::env;
+use dirs::home_dir;
 use std::fs::{create_dir_all, File};
 use std::io::{BufReader, BufWriter};
 use std::path::PathBuf;
@@ -140,13 +140,13 @@ impl<'a> Config {
     fn get_workflow_dirs() -> (PathBuf, PathBuf) {
         debug!("Starting in get_workflow_dirs");
         let cache_dir = alfred::env::workflow_cache().unwrap_or_else(|| {
-            let mut dir = env::home_dir().unwrap_or_else(|| PathBuf::from(""));
+            let mut dir = home_dir().unwrap_or_else(|| PathBuf::from(""));
             dir.push(".cache");
             dir.push("alfred-pinboard-rs");
             dir
         });
         let data_dir = alfred::env::workflow_data().unwrap_or_else(|| {
-            let mut dir = env::home_dir().unwrap_or_else(|| PathBuf::from(""));
+            let mut dir = home_dir().unwrap_or_else(|| PathBuf::from(""));
             dir.push(".config");
             dir.push("alfred-pinboard-rs");
             dir

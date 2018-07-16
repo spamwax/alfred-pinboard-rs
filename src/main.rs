@@ -14,6 +14,7 @@ extern crate chrono;
 
 #[macro_use]
 extern crate failure;
+extern crate dirs;
 extern crate semver;
 extern crate serde;
 
@@ -161,12 +162,12 @@ where
     let exec_counter = env::var("apr_execution_counter").unwrap_or_else(|_| "1".to_string());
     // Depending on alfred version use either json or xml output.
     if is_alfred_v3 {
-        let _ = alfred::json::Builder::with_items(output_items.as_slice())
+        alfred::json::Builder::with_items(output_items.as_slice())
             .variable("apr_execution_counter", exec_counter.as_str())
             .write(io::stdout())
             .expect("Couldn't write items to Alfred");
     } else {
-        let _ = alfred::xml::write_items(io::stdout(), &output_items)
+        alfred::xml::write_items(io::stdout(), &output_items)
             .expect("Couldn't write items to Alfred");
     }
 }
