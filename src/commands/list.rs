@@ -52,6 +52,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                 if let Err(e) = self.write_output_items(item) {
                     error!("list: Couldn't write to Alfred: {:?}", e);
                 }
+                return;
             }
 
             let query_words: Vec<&str> = queries.split_whitespace().collect();
@@ -152,8 +153,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                         .subtitle(pin.url.as_ref())
                         .arg(pin.url.as_ref())
                         .into_item()
-                })
-                .collect::<Vec<Item>>();
+                }).collect::<Vec<Item>>();
             if let Err(e) = self.write_output_items(items) {
                 error!("list: Couldn't write to Alfred: {:?}", e);
             }

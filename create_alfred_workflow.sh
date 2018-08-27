@@ -8,7 +8,8 @@ if [ -z "$version_tag" ]; then
     exit
 fi
 
-alfred_pinboard_rs=$(pwd)
+# alfred_pinboard_rs=$(pwd)
+alfred_pinboard_rs="/Volumes/Home/hamid/src/learn/rust/alfred-pinboard-rs"
 workflow_dir="$HOME/Dropbox/Alfred/Alfred.alfredpreferences/workflows/user.workflow.665EAB20-5141-463D-8C5A-90093EEAA756"
 res_dir="$alfred_pinboard_rs/res/workflow"
 
