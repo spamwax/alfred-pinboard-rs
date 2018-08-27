@@ -44,8 +44,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                 "no"
             } else {
                 "yes"
-            })
-            .toread(if self.config.as_ref().unwrap().toread_new_pin {
+            }).toread(if self.config.as_ref().unwrap().toread_new_pin {
                 "yes"
             } else {
                 "no"
@@ -77,7 +76,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                 );
             }
             if self.config.as_ref().unwrap().auto_update_cache {
-                // update::run(config, pinboard);
+                self.update_cache();
             }
         }
     }

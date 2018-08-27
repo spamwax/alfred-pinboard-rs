@@ -69,11 +69,10 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                         ).subtitle(format!(
                             "Click to download & upgrade {} ⟶ {}",
                             old_version, new_version
-                        ))
-                            .icon_path("auto_update.png")
-                            .variable("workflow_update_ready", "1")
-                            .arg("update")
-                            .into_item(),
+                        )).icon_path("auto_update.png")
+                        .variable("workflow_update_ready", "1")
+                        .arg("update")
+                        .into_item(),
                     );
                 } else if !update {
                     info!("Update *UNAVAILABLE*\n{:#?}", r);

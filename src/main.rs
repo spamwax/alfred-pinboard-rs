@@ -84,7 +84,10 @@ fn main() {
     // If user has Alfred's debug panel open, print all debug info
     // by setting RUST_LOG environment variable.
     if alfred::env::is_debug() {
-        env::set_var("RUST_LOG", "rusty_pin=debug,alfred_pinboard_rs=debug");
+        env::set_var(
+            "RUST_LOG",
+            "rusty_pin=debug,alfred_rs=debug,alfred_pinboard_rs=debug",
+        );
     }
 
     env_logger::init();

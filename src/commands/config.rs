@@ -24,7 +24,7 @@ pub fn run(x: SubCommand) {
             config = Config::setup().unwrap_or_else(|err| {
                 if_chain!{
                     if auth_token.is_some();
-                    if let Some(t) = err.cause().downcast_ref::<AlfredError>();
+                    if let Some(t) = err.as_fail().downcast_ref::<AlfredError>();
                     if let AlfredError::MissingConfigFile = *t;
                     then {
                         let mut config = Config::new();
@@ -116,10 +116,10 @@ fn show_config(config: &Config) {
                     .format("%Y-%m-%d %H:%M:%S")
                     .to_string(),
             ).subtitle("Latest cache update")
-                .arg("pupdate")
-                .icon_path("auto_update.png")
-                .into_item(),
+            .arg("pupdate")
+            .icon_path("auto_update.png")
+            .into_item(),
         ]).write(io::stdout())
-            .expect("Couldn't build alfred items");
+        .expect("Couldn't build alfred items");
     }
 }
