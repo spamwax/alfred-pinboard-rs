@@ -51,7 +51,13 @@ pub fn run(x: SubCommand) {
 
     if let Err(e) = config.save() {
         error!("Couldn't save config file: {:?}", e);
-    };
+    } else {
+        debug!(
+            "Saved new configs to {} in: {}",
+            ::workflow_config::CONFIG_FILE_NAME,
+            config.data_dir().to_string_lossy()
+        );
+    }
 
     if print_config {
         show_config(&config);
@@ -115,11 +121,13 @@ fn show_config(config: &Config) {
                     .with_timezone(&Local)
                     .format("%Y-%m-%d %H:%M:%S")
                     .to_string(),
-            ).subtitle("Latest cache update")
+            )
+            .subtitle("Latest cache update")
             .arg("pupdate")
             .icon_path("auto_update.png")
             .into_item(),
-        ]).write(io::stdout())
+        ])
+        .write(io::stdout())
         .expect("Couldn't build alfred items");
     }
 }

@@ -101,21 +101,20 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                     // Show the tag with highest frequency matching the last query before popular/suggested tags.
                     popular_tags.insert(0, items[0].clone());
                     alfred_items = popular_tags
-                            .iter()
-                            // Combine popular tags and returned tags from cache
-                            .chain(items.into_iter().skip(1).take(config.tags_to_show as usize))
-                            // Remove tags that user has aleady selected
-                            .filter(|tag| {
-                                if !query_words.is_empty() {
-                                    let upper = query_words.len() - 1;
-                                    !query_words
-                                        .as_slice()[0..upper]
-                                        .iter()
-                                        .any(|q| q == &tag.0.as_str())
-                                } else {
-                                    true
-                                }
-                            })
+                        .iter()
+                        // Combine popular tags and returned tags from cache
+                        .chain(items.into_iter().skip(1).take(config.tags_to_show as usize))
+                        // Remove tags that user has aleady selected
+                        .filter(|tag| {
+                            if !query_words.is_empty() {
+                                let upper = query_words.len() - 1;
+                                !query_words.as_slice()[0..upper]
+                                    .iter()
+                                    .any(|q| q == &tag.0.as_str())
+                            } else {
+                                true
+                            }
+                        })
                         // transform tags to Alfred items
                         .map(|tag| {
                             let mut _args = String::with_capacity(prev_tags_len + tag.0.len());
@@ -153,7 +152,8 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                         .subtitle(pin.url.as_ref())
                         .arg(pin.url.as_ref())
                         .into_item()
-                }).collect::<Vec<Item>>();
+                })
+                .collect::<Vec<Item>>();
             if let Err(e) = self.write_output_items(items) {
                 error!("list: Couldn't write to Alfred: {:?}", e);
             }
