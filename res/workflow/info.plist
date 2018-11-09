@@ -2505,7 +2505,17 @@ fi</string>
 				<key>escaping</key>
 				<integer>127</integer>
 				<key>script</key>
-				<string>if ! ./alfred-pinboard-rs config --authorization $1; then
+				<string># capture username only
+IN=$1
+IFS=':' read -ra OUT &lt;&lt;&lt; "$IN"
+USERNAME=${OUT[0]}
+
+# we now substitue hamid with user name so we can actually see our links on pinboard.in
+sed -i '' -e "s/u:hamid/u:$USERNAME/" info.plist
+
+
+# set the auth token in config.json
+if ! ./alfred-pinboard-rs config --authorization $IN; then
     echo "Couldn't set user credentials!!!"
 else
     echo "Successfully set user credentials."
