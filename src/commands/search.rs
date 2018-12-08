@@ -67,13 +67,12 @@ fn process<'a>(
         Ok(r) => {
             match r {
                 // No result was found.
-                None => vec![
-                    ItemBuilder::new("No bookmarks found!")
-                        .icon_path("no_result.png")
-                        .into_item(),
-                ],
+                None => vec![ItemBuilder::new("No bookmarks found!")
+                    .icon_path("no_result.png")
+                    .into_item()],
                 // Some results were found
-                Some(pins) => pins.iter()
+                Some(pins) => pins
+                    .iter()
                     // Only take pins_to_show of them to show
                     .take(pins_to_show as usize)
                     // Create Alfred items that support:
@@ -94,9 +93,13 @@ fn process<'a>(
                             .text_copy(pin.url.as_ref())
                             .icon_path("bookmarks.png")
                             // Hold Control: Show extended description of bookmark.
-                            .modifier(Modifier::Control,
-                                      pin.extended.clone(),
-                                      Some(pin.url.as_ref()), true, None)
+                            .modifier(
+                                Modifier::Control,
+                                pin.extended.clone(),
+                                Some(pin.url.as_ref()),
+                                true,
+                                None,
+                            )
                             // Hold Option: Pressing Enter opens the bookmark on Pinboard
                             // FIXME: There should be a better way of locating an item on
                             // Pinboard's website. Pinboard, however currently doesn't
@@ -112,15 +115,17 @@ fn process<'a>(
                                 // arg
                                 Some(
                                     [
-                                    pin.tags.as_ref(),
-                                    " ",
-                                    pin.title
-                                        .split_whitespace()
-                                        .filter(|s| s.len() != 1)
-                                        .filter(|s| s.chars().all(|c| c.is_alphanumeric()))
-                                        .collect::<Vec<&str>>()
-                                        .join(" ").as_str()
-                                    ].concat()
+                                        pin.tags.as_ref(),
+                                        " ",
+                                        pin.title
+                                            .split_whitespace()
+                                            .filter(|s| s.len() != 1)
+                                            .filter(|s| s.chars().all(|c| c.is_alphanumeric()))
+                                            .collect::<Vec<&str>>()
+                                            .join(" ")
+                                            .as_str(),
+                                    ]
+                                    .concat(),
                                 ),
                                 true,
                                 None,

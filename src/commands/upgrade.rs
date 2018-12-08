@@ -2,9 +2,9 @@ use super::*;
 use std::io::Write;
 
 impl<'api, 'pin> Runner<'api, 'pin> {
-    pub fn upgrade(&self, cmd: SubCommand) {
+    pub fn upgrade(&self, cmd: &SubCommand) {
         debug!("Starting in upgrade");
-        match cmd {
+        match *cmd {
             SubCommand::SelfUpdate { check, download } => {
                 if check && download {
                     eprintln!("Cannont check & download at the same time!");

@@ -136,7 +136,7 @@ fn main() {
                     runner.delete(opt.cmd);
                 }
                 SubCommand::SelfUpdate { .. } => {
-                    runner.upgrade(opt.cmd);
+                    runner.upgrade(&opt.cmd);
                 }
                 _ => unimplemented!(),
             }
