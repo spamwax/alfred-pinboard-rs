@@ -76,7 +76,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                     let prev_tags = if query_words.len() > 1 {
                         // User has already searched for other tags, we should include those in the
                         // 'autocomplete' field of the AlfredItem
-                        queries.get(0..queries.rfind(' ').unwrap() + 1).unwrap()
+                        queries.get(0..=queries.rfind(' ').unwrap()).unwrap()
                     } else {
                         ""
                     };
