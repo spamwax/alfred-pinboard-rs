@@ -10,7 +10,7 @@ use serde_json;
 
 use semver::{Version, VersionReq};
 
-use AlfredError;
+use crate::AlfredError;
 
 pub(crate) const CONFIG_FILE_NAME: &str = "settings.json";
 const FILE_BUF_SIZE: usize = 4 * 1024 * 1024;

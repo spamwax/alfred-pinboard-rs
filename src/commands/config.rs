@@ -1,6 +1,6 @@
 use super::*;
 use chrono::prelude::Local;
-use AlfredError;
+use crate::AlfredError;
 
 pub fn run(x: SubCommand) {
     debug!("Starting in run");
@@ -31,7 +31,7 @@ pub fn run(x: SubCommand) {
                         config.auth_token = auth_token.as_ref().unwrap().clone();
                         config
                     } else {
-                        ::show_error_alfred(err.to_string());
+                        crate::show_error_alfred(err.to_string());
                         process::exit(1);
                     }
                 }
@@ -54,7 +54,7 @@ pub fn run(x: SubCommand) {
     } else {
         debug!(
             "Saved new configs to {} in: {}",
-            ::workflow_config::CONFIG_FILE_NAME,
+            crate::workflow_config::CONFIG_FILE_NAME,
             config.data_dir().to_string_lossy()
         );
     }

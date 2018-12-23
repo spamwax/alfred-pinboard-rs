@@ -13,11 +13,11 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                 let is_alfred_v3 = self.config.as_ref().unwrap().is_alfred_v3();
                 if check {
                     if let Ok(item) = self.get_upgrade_item() {
-                        ::write_to_alfred(vec![item], is_alfred_v3);
+                        crate::write_to_alfred(vec![item], is_alfred_v3);
                     } else {
                         let item =
                             alfred::ItemBuilder::new("Error in getting upgrade info!").into_item();
-                        ::write_to_alfred(vec![item], is_alfred_v3);
+                        crate::write_to_alfred(vec![item], is_alfred_v3);
                     }
                 } else if download {
                     let filename = self.updater.as_ref().unwrap().download_latest();

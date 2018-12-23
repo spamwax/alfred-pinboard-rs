@@ -53,12 +53,12 @@ mod cli;
 mod commands;
 mod workflow_config;
 
-use cli::{Opt, SubCommand};
-use workflow_config::Config;
+use crate::cli::{Opt, SubCommand};
+use crate::workflow_config::Config;
 
-use commands::Runner;
+use crate::commands::Runner;
 // use commands::{config, delete, list, post, search, update};
-use commands::config;
+use crate::commands::config;
 
 // TODO: add modifiers to delete commands output //
 // TODO: parse Alfred preferences and get number of visible items? //

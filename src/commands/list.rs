@@ -71,7 +71,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
             let last_query_word = query_words.last().unwrap_or(&"");
 
             match pinboard.search_list_of_tags(last_query_word) {
-                Err(e) => ::show_error_alfred(e.to_string()),
+                Err(e) => crate::show_error_alfred(e.to_string()),
                 Ok(results) => {
                     let prev_tags = if query_words.len() > 1 {
                         // User has already searched for other tags, we should include those in the

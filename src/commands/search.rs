@@ -63,7 +63,7 @@ fn process<'a>(
     debug!("Starting in search::process");
     match pinboard.search(&query, search_fields) {
         // Err(e) => ::show_error_alfred(e.to_string()),
-        Err(e) => vec![::alfred_error(e.to_string())],
+        Err(e) => vec![crate::alfred_error(e.to_string())],
         Ok(r) => {
             match r {
                 // No result was found.

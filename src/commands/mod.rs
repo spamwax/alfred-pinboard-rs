@@ -2,8 +2,8 @@ use alfred;
 use std::io;
 use std::{env, process};
 
-use cli::SubCommand;
-use workflow_config::Config;
+use crate::cli::SubCommand;
+use crate::workflow_config::Config;
 
 use rusty_pin::{PinBuilder, Pinboard, Tag};
 
@@ -41,7 +41,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
         }
 
         let is_alfred_v3 = self.config.as_ref().unwrap().is_alfred_v3();
-        ::write_to_alfred(output_items, is_alfred_v3);
+        crate::write_to_alfred(output_items, is_alfred_v3);
         Ok(())
     }
 
