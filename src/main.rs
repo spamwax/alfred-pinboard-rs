@@ -63,6 +63,9 @@ use crate::commands::config;
 // TODO: add modifiers to delete commands output //
 // TODO: parse Alfred preferences and get number of visible items? //
 // TODO: Use alfred_rs::Data for file operations.
+// TODO: Check for all alfred related env. variables before doing anything else.
+//       This will prevent unnecessary loading and checking of cache files and then
+//       panicing due to missing env. variables.
 
 #[derive(Debug, Fail)]
 pub enum AlfredError {
