@@ -132,6 +132,12 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                         .collect::<Vec<Item>>();
                 }
             }
+            if is_page_bookmarked(&pinboard) {
+                let bookmark_present = ItemBuilder::new("You already have the bookmark!")
+                    .icon_path("bookmark-delete.png")
+                    .into_item();
+                alfred_items.insert(0, bookmark_present);
+            }
             if let Err(e) = self.write_output_items(alfred_items) {
                 error!("list: Couldn't write to Alfred: {:?}", e);
             }
@@ -159,6 +165,56 @@ impl<'api, 'pin> Runner<'api, 'pin> {
             }
         }
     }
+}
+
+fn is_page_bookmarked(pinboard: &Pinboard) -> bool {
+    let found;
+
+    let exec_counter = env::var("apr_execution_counter")
+        .unwrap_or_else(|_| "1".to_string())
+        .parse::<usize>()
+        .unwrap_or(1);
+    debug!("exec_counter: {}", exec_counter);
+
+    if exec_counter == 1 {
+        let tab_info = browser_info::get();
+        found = match tab_info {
+            Ok(tab_info) => {
+                debug!("tab_info: {:?}", tab_info);
+                let sr = pinboard.find_url(&tab_info.url);
+                debug!("sr: {:?}", sr);
+                if let Ok(op) = sr {
+                    if let Some(vp) = op {
+                        if vp.is_empty() {
+                            false
+                        } else {
+                            debug!("vp: {:?}", vp);
+                            true
+                        }
+                    } else {
+                        false
+                    }
+                } else {
+                    false
+                }
+                // pinboard
+                //     .find_url(&tab_info.url)
+                //     .and_then(|op| {
+                //         if let Some(vp) = op {
+                //             Ok(!vp.is_empty())
+                //         } else {
+                //             Ok(false)
+                //         }
+                //     })
+                //     .unwrap_or(false),
+            }
+            Err(_) => false,
+        };
+        let _ = alfred_rs::Data::save_to_file("bookmark_exists.json", &found);
+    } else {
+        found = alfred_rs::Data::load_from_file("bookmark_exists.json").unwrap_or(false);
+    }
+    found
 }
 
 fn suggest_tags() -> Vec<Tag> {
