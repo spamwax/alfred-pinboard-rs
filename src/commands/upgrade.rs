@@ -22,10 +22,14 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                 } else if download {
                     let filename = self.updater.as_ref().unwrap().download_latest();
                     if let Ok(filename) = filename {
-                        filename.to_str().map(|p| {
+                        if let Some(p) = filename.to_str() {
                             let _ = io::stdout()
                                 .write(format!("Download successful: {}", p).as_bytes());
-                        });
+                        } else {
+                            let _ = io::stdout().write(
+                                format!("Download OK, issue with its file name!").as_bytes(),
+                            );
+                        }
                     } else {
                         let _ =
                             io::stdout().write(b"Error: Couldn't download the latest workflow.");

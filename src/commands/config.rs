@@ -1,12 +1,13 @@
 use super::*;
-use chrono::prelude::Local;
 use crate::AlfredError;
+use chrono::prelude::Local;
 
 pub fn run(x: SubCommand) {
     debug!("Starting in run");
     let print_config;
     let mut config: Config;
 
+    #[allow(clippy::option_map_unit_fn)]
     match x {
         SubCommand::Config {
             display,
@@ -22,7 +23,7 @@ pub fn run(x: SubCommand) {
         } => {
             print_config = display;
             config = Config::setup().unwrap_or_else(|err| {
-                if_chain!{
+                if_chain! {
                     if auth_token.is_some();
                     if let Some(t) = err.as_fail().downcast_ref::<AlfredError>();
                     if let AlfredError::MissingConfigFile = *t;

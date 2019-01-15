@@ -2,6 +2,7 @@ use super::*;
 use chrono::prelude::*;
 use std::io::Write;
 
+#[allow(clippy::option_map_unit_fn)]
 impl<'api, 'pin> Runner<'api, 'pin> {
     pub fn update_cache(&mut self) {
         info!("Starting in update_cache");
