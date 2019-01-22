@@ -181,32 +181,33 @@ fn is_page_bookmarked(pinboard: &Pinboard) -> bool {
         found = match tab_info {
             Ok(tab_info) => {
                 debug!("tab_info: {:?}", tab_info);
-                let sr = pinboard.find_url(&tab_info.url);
-                debug!("sr: {:?}", sr);
-                if let Ok(op) = sr {
-                    if let Some(vp) = op {
-                        if vp.is_empty() {
-                            false
-                        } else {
-                            debug!("vp: {:?}", vp);
-                            true
-                        }
-                    } else {
-                        false
-                    }
-                } else {
-                    false
-                }
-                // pinboard
-                //     .find_url(&tab_info.url)
-                //     .and_then(|op| {
-                //         if let Some(vp) = op {
-                //             Ok(!vp.is_empty())
+                // let sr = pinboard.find_url(&tab_info.url);
+                // debug!("sr: {:?}", sr);
+                // if let Ok(op) = sr {
+                //     if let Some(vp) = op {
+                //         if vp.is_empty() {
+                //             false
                 //         } else {
-                //             Ok(false)
+                //             debug!("vp: {:?}", vp);
+                //             true
                 //         }
-                //     })
-                //     .unwrap_or(false),
+                //     } else {
+                //         false
+                //     }
+                // } else {
+                //     false
+                // }
+                pinboard
+                    .find_url(&tab_info.url)
+                    .and_then(|op| {
+                        if let Some(vp) = op {
+                            assert!(!vp.is_empty());
+                            Ok(!vp.is_empty())
+                        } else {
+                            Ok(false)
+                        }
+                    })
+                    .unwrap_or(false)
             }
             Err(_) => false,
         };

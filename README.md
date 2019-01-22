@@ -83,6 +83,17 @@ If you want to add extra description to the bookmark you can add it after a semi
 
 ![image](./res/images/adding-notes.png)
 
+#### Already saved bookmark
+If the current page is already saved, you will be notified. However the workflow assumes that:
+
+- `http://example.com/list.html`
+- `https://example.com/list.html`
+- `http://example.com/list.html#fragment`
+
+are all different bookmarks and will not notify you about duplication!
+
+  ![image](./res/images/already-saved.png)
+
 ---
 
 ## Usage (search bookmarks):
