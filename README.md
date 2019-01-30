@@ -35,6 +35,7 @@ After initial [setup](#installation--setup):
 - Firefox (See [known issues](#known_issues) )
 - Opera
 - Vivaldi
+- Brave
 - Firefox Dev. Edition
 - Safari Tech. Preview
 - Chrome
