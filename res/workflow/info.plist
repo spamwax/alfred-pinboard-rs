@@ -1138,11 +1138,8 @@
 				<string># $tags and $description env. variables are passed in as input from previous script filter.
 
 ret=$(./alfred-pinboard-rs post --tags "$tags" --description "$description")
-if [ $? -ne 0 ]; then
-    echo -n "$ret"
-else
-    echo -n "$ret"
-fi</string>
+
+echo "$ret"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -1338,7 +1335,7 @@ fi</string>
 				<key>queuedelaymode</key>
 				<integer>0</integer>
 				<key>queuemode</key>
-				<integer>1</integer>
+				<integer>2</integer>
 				<key>runningsubtext</key>
 				<string>Fetching tags...</string>
 				<key>script</key>
@@ -4144,7 +4141,7 @@ Raashid.A</string>
 		</dict>
 	</dict>
 	<key>version</key>
-	<string>0.14.6</string>
+	<string>0.14.7</string>
 	<key>webaddress</key>
 	<string>https://github.com/spamwax/alfred-pinboard-rs</string>
 </dict>
