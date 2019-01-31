@@ -22,6 +22,8 @@ pub fn get() -> Result<BrowserActiveTabInfo, Error> {
     }
     // Get output of above command
     let osascript_result = String::from_utf8(output.stdout)?;
+    // let osascript_result = String::from(r#"{"file:///Users/alwc/Downloads/test.pdf fd850fc2e63511e79f720023dfdf24ec file:///Users/alwc/Downloads/test.pdf"}"#);
+    // let osascript_result = String::from(r#"{"safari-resource :/ErrorPage.html fd850fc2e63511e79f720023dfdf24ec Failed to open page"}"#);
     debug!("  osascript_result: {}", osascript_result);
 
     // Extract theURL and theTitle from output (assumed they are separated

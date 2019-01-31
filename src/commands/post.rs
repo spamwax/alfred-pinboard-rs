@@ -36,8 +36,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
             process::exit(1);
         });
 
-        let mut pin_builder =
-            PinBuilder::new(&browser_tab_info.url, browser_tab_info.title.clone());
+        let mut pin_builder = PinBuilder::new(&browser_tab_info.url, &browser_tab_info.title);
         pin_builder = pin_builder
             .tags(input_tags.join(" "))
             .shared(if self.config.as_ref().unwrap().private_new_pin {
