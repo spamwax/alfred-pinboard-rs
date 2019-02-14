@@ -17,6 +17,10 @@ git checkout master || exit
 
 echo "Building new release..."
 cd "$alfred_pinboard_rs" || exit
+
+# fix cargo version
+cp Cargo.toml Cargo.toml.back
+python res/fix_cargo_version.py "$version_tag"
 cargo build --release > build.log 2>&1
 
 echo "Copying resoursces from Alfred's workflow dir..."
