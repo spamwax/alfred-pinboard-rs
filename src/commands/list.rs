@@ -62,8 +62,8 @@ impl<'api, 'pin> Runner<'api, 'pin> {
             let mut alfred_items = vec![];
 
             // First try to get list of popular tags from Pinboard
-            let suggest_hints = suggest.unwrap_or(config.suggest_tags);
-            popular_tags = if suggest_hints {
+            let tag_suggestion = suggest.unwrap_or(config.suggest_tags);
+            popular_tags = if tag_suggestion {
                 // if suggest.unwrap_or(config.suggest_tags) {
                 suggest_tags()
             } else {
@@ -134,7 +134,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                         .collect::<Vec<Item>>();
                 }
             }
-            if suggest_hints && is_page_bookmarked(&pinboard) {
+            if config.page_is_bookmarked && is_page_bookmarked(&pinboard) {
                 let bookmark_present = ItemBuilder::new("You already have the bookmark!")
                     .icon_path("bookmark-delete.png")
                     .into_item();

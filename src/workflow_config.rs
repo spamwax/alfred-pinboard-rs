@@ -34,6 +34,8 @@ pub struct Config {
     pub toread_new_pin: bool,
     /// Flag to suggest popular tags for the browser's current url
     pub suggest_tags: bool,
+    /// Flag to check if browser's page is already bookmarked
+    pub page_is_bookmarked: bool,
     /// Flag to update cache after each bookmark saving automatically.
     pub auto_update_cache: bool,
     /// Authentication Token
@@ -60,6 +62,7 @@ impl<'a> Config {
             private_new_pin: true,
             toread_new_pin: false,
             suggest_tags: false,
+            page_is_bookmarked: true,
             auto_update_cache: true,
             auth_token: String::new(),
             update_time: get_epoch(),

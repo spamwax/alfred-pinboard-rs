@@ -53,6 +53,14 @@ pub enum SubCommand {
         /// When posting a new bookmark, show 3 popular tags for the URL (if available). [default: true]
         #[structopt(name = "suggest_tags", short = "o", long = "suggest-tags")]
         suggest_tags: Option<bool>,
+
+        /// Check if the current browser page is already pinned. [default: true]
+        #[structopt(
+            name = "check_bookmarked_page",
+            short = "p",
+            long = "check-bookmarked-page"
+        )]
+        check_bookmarked_page: Option<bool>,
     },
     #[structopt(name = "list")]
     /// Lists all bookmarks (default) or tags.

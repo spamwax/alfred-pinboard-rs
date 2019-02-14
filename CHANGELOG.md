@@ -8,6 +8,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Changes before release points will be listed here
 
+## [0.14.9] - 2019-02-13
+### Added
+- Add settings for notifying if page is already bookmarked.
+
+[]#25](https://github.com/spamwax/alfred-pinboard-rs/issues/21)
+## [0.14.8] - 2019-02-13
+### Fixed
+- Workaround for Firefox ([Fixes #25](https://github.com/spamwax/alfred-pinboard-rs/issues/21))
+
 ## [0.14.7] - 2019-01-30
 ### Added
 - Support [Brave Browser](brave.com)

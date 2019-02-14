@@ -20,6 +20,7 @@ pub fn run(x: SubCommand) {
             tags_only,
             auto_update,
             suggest_tags,
+            check_bookmarked_page,
         } => {
             print_config = display;
             config = Config::setup().unwrap_or_else(|err| {
@@ -46,6 +47,7 @@ pub fn run(x: SubCommand) {
             tags_only.map(|val| config.tag_only_search = val);
             auto_update.map(|val| config.auto_update_cache = val);
             suggest_tags.map(|val| config.suggest_tags = val);
+            check_bookmarked_page.map(|val| config.page_is_bookmarked = val);
         }
         _ => unreachable!(),
     }
@@ -101,6 +103,11 @@ fn show_config(config: &Config) {
                 .subtitle(format!("{:?}", config.private_new_pin))
                 .arg("pset shared")
                 .icon_path("private.png")
+                .into_item(),
+            ItemBuilder::new("Check if page is bookmarked")
+                .subtitle(format!("{:?}", config.page_is_bookmarked))
+                .arg("pset check_bookmarked")
+                .icon_path("check_bookmarked_page.png")
                 .into_item(),
             ItemBuilder::new("Number of tags to show")
                 .subtitle(format!("{:?}", config.tags_to_show))

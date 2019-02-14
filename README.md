@@ -150,6 +150,7 @@ On top of using `pconf`, you can directly type following commands to also adjust
 - `pset suggest_tags`: When posting a new bookmark, list popular tags for the active page. Note that this information is fetched from Pinboard and sometimes is not very _accurate_.
 - `pset shared`: Mark all new bookmarks as _shared_.
 - `pset toread`: Mark all new bookmarks as _toread_.
+- `pset check_bookmarked`: Notify if active page is already bookmarked.
 - `pset tagonly`: Only search within _tag_ field while doing any look-up.
 - `pset auto`: After posting a new bookmark, automatically update the local cache.
 - `pset tags`: Set number of tags to show: `pset tags 25`
@@ -193,7 +194,7 @@ When fuzzy search is enabled, the tags/bookmarks that contain the query letters 
 ---
 
 ## Known Issues<a name="known_issues"></a>
-- Posting bookmark from Firefox while tag suggestions is enabled is broken. Also deleting bookmarks using `pind` won't work when Firefox is your active browser. Reason: Alfred intercepts <kbd>Command ⌘-L</kbd> that's used in AppleScript to focus location bar of Firefox. This focus is needed to get url and other info out of Firefox. Unfortunately Firefox does not offer any better way of interacting with it from outside world programatically.
+- **Firefox**: While tag suggestions and "Check if page is bookmarked" options are enabled, posting bookmark from Firefox is broken. Deleting bookmarks using `pind` won't work when Firefox is your active browser. Reason: Firefox does not properly support interacting with it programatically.
 - This workflow is setup to work with Aflred 3. It may or may not work with previous version as it has not been tested for them.
 
 ## TODO
