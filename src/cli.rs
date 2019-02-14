@@ -57,7 +57,7 @@ pub enum SubCommand {
         /// Check if the current browser page is already pinned. [default: true]
         #[structopt(
             name = "check_bookmarked_page",
-            short = "p",
+            short = "b",
             long = "check-bookmarked-page"
         )]
         check_bookmarked_page: Option<bool>,

@@ -2861,34 +2861,6 @@ EOB
 				<key>escaping</key>
 				<integer>127</integer>
 				<key>script</key>
-				<string>output=$(./alfred-pinboard-rs config --check-bookmarked-page $1)
-if [ $? -ne 0 ]; then
-    echo $output
-else
-    echo "Notify if page is already bookmarked: $1"
-fi</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>C4A2975E-14BF-4A7E-B3C0-60384A4AB5A1</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>127</integer>
-				<key>script</key>
 				<string>output=$(./alfred-pinboard-rs config --tag-numbers $1)
 if [ $? -ne 0 ]; then
     echo $output
@@ -2929,69 +2901,6 @@ fi</string>
 			<string>8FBE3EBB-9672-493C-977C-95B832412F2E</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<false/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>127</integer>
-				<key>keyword</key>
-				<string>pset check_bookmarked</string>
-				<key>queuedelaycustom</key>
-				<integer>1</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<false/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string></string>
-				<key>script</key>
-				<string>cat &lt;&lt; EOB
-
-&lt;?xml version="1.0"?&gt;
-
-&lt;items&gt;
-  &lt;item uid="" arg="true" valid="YES" autocomplete="Yes"&gt;
-    &lt;title&gt;Notify if page is already bookmarked&lt;/title&gt;
-	&lt;icon&gt;check_bookmarked_page.png&lt;/icon&gt;
-  &lt;/item&gt;
-
-  &lt;item uid="" arg="false" valid="YES" autocomplete="No"&gt;
-    &lt;title&gt;Do not notify if page is already bookmarked&lt;/title&gt;
-	&lt;icon&gt;no_check_bookmarked_page.png&lt;/icon&gt;
-  &lt;/item&gt;
-&lt;/items&gt;
-
-EOB</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>subtext</key>
-				<string>Enable/Disable notifying user if page is already bookmarked</string>
-				<key>title</key>
-				<string>Check if page is already bookmarked</string>
-				<key>type</key>
-				<integer>0</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>78C8A61E-FD70-4CD9-BEC8-66A30106E128</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -3136,27 +3045,6 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>Rusty Pinboard</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>6BA4C470-B64F-4BE2-9346-38ADACABCCBA</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -3181,6 +3069,27 @@ fi</string>
 			<string>A156743D-A9BB-4AFB-A0C2-D16EF45F7DD0</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>Rusty Pinboard</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>6BA4C470-B64F-4BE2-9346-38ADACABCCBA</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -3518,6 +3427,97 @@ EOB</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>127</integer>
+				<key>script</key>
+				<string>output=$(./alfred-pinboard-rs config --check-bookmarked-page $1)
+if [ $? -ne 0 ]; then
+    echo $output
+else
+    echo "Notify if page is already bookmarked: $1"
+fi</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>C4A2975E-14BF-4A7E-B3C0-60384A4AB5A1</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>127</integer>
+				<key>keyword</key>
+				<string>pset check_bookmarked</string>
+				<key>queuedelaycustom</key>
+				<integer>1</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<false/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string>cat &lt;&lt; EOB
+
+&lt;?xml version="1.0"?&gt;
+
+&lt;items&gt;
+  &lt;item uid="" arg="true" valid="YES" autocomplete="Yes"&gt;
+    &lt;title&gt;Notify if page is already bookmarked&lt;/title&gt;
+	&lt;icon&gt;check_bookmarked_page.png&lt;/icon&gt;
+  &lt;/item&gt;
+
+  &lt;item uid="" arg="false" valid="YES" autocomplete="No"&gt;
+    &lt;title&gt;Do not notify if page is already bookmarked&lt;/title&gt;
+	&lt;icon&gt;no_check_bookmarked_page.png&lt;/icon&gt;
+  &lt;/item&gt;
+&lt;/items&gt;
+
+EOB</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string>Enable/Disable notifying user if page is already bookmarked</string>
+				<key>title</key>
+				<string>Check if page is already bookmarked</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>78C8A61E-FD70-4CD9-BEC8-66A30106E128</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>This is a Workflow to manage your Pinboard bookmarks.
@@ -3678,14 +3678,14 @@ Raashid.A</string>
 			<key>xpos</key>
 			<integer>40</integer>
 			<key>ypos</key>
-			<integer>2490</integer>
+			<integer>2450</integer>
 		</dict>
 		<key>403451E0-718B-4D95-8546-05E9CCA25495</key>
 		<dict>
 			<key>xpos</key>
 			<integer>280</integer>
 			<key>ypos</key>
-			<integer>2290</integer>
+			<integer>2250</integer>
 		</dict>
 		<key>41032086-9AA2-40AF-A887-9148D35771D8</key>
 		<dict>
@@ -3799,7 +3799,7 @@ Raashid.A</string>
 			<key>xpos</key>
 			<integer>40</integer>
 			<key>ypos</key>
-			<integer>1990</integer>
+			<integer>1950</integer>
 		</dict>
 		<key>5D22F26C-5A6A-4D18-B1F9-1158B8075764</key>
 		<dict>
@@ -3820,7 +3820,7 @@ Raashid.A</string>
 			<key>xpos</key>
 			<integer>40</integer>
 			<key>ypos</key>
-			<integer>2690</integer>
+			<integer>2650</integer>
 		</dict>
 		<key>60353C96-9D07-4EF6-B8AB-FA8EC4EF2236</key>
 		<dict>
@@ -3848,14 +3848,14 @@ Raashid.A</string>
 			<key>xpos</key>
 			<integer>280</integer>
 			<key>ypos</key>
-			<integer>1990</integer>
+			<integer>1950</integer>
 		</dict>
 		<key>6BA4C470-B64F-4BE2-9346-38ADACABCCBA</key>
 		<dict>
 			<key>xpos</key>
 			<integer>620</integer>
 			<key>ypos</key>
-			<integer>2340</integer>
+			<integer>2350</integer>
 		</dict>
 		<key>6D7ED5D0-0347-46AE-81ED-D308BDF21676</key>
 		<dict>
@@ -3917,23 +3917,23 @@ Raashid.A</string>
 		<key>78C8A61E-FD70-4CD9-BEC8-66A30106E128</key>
 		<dict>
 			<key>xpos</key>
-			<integer>900</integer>
+			<integer>40</integer>
 			<key>ypos</key>
-			<integer>2090</integer>
+			<integer>2750</integer>
 		</dict>
 		<key>799A5CC4-A7DB-4074-8044-ED7DBEFED12D</key>
 		<dict>
 			<key>xpos</key>
 			<integer>280</integer>
 			<key>ypos</key>
-			<integer>2690</integer>
+			<integer>2650</integer>
 		</dict>
 		<key>7A213534-8342-46AB-A4EA-4CCF95685833</key>
 		<dict>
 			<key>xpos</key>
 			<integer>40</integer>
 			<key>ypos</key>
-			<integer>2590</integer>
+			<integer>2550</integer>
 		</dict>
 		<key>7BF8F66E-ECC8-4BCD-86CE-5E19FD509604</key>
 		<dict>
@@ -3983,14 +3983,14 @@ Raashid.A</string>
 			<key>xpos</key>
 			<integer>40</integer>
 			<key>ypos</key>
-			<integer>2090</integer>
+			<integer>2050</integer>
 		</dict>
 		<key>93A64ECE-BB64-492B-B845-7CB85B544D40</key>
 		<dict>
 			<key>xpos</key>
 			<integer>40</integer>
 			<key>ypos</key>
-			<integer>2390</integer>
+			<integer>2350</integer>
 		</dict>
 		<key>988D1146-585C-4DC6-A56B-B303B9A3F173</key>
 		<dict>
@@ -4004,7 +4004,7 @@ Raashid.A</string>
 			<key>xpos</key>
 			<integer>280</integer>
 			<key>ypos</key>
-			<integer>2390</integer>
+			<integer>2350</integer>
 		</dict>
 		<key>A1AB9903-87A7-4041-8EB9-F9E9C06C451B</key>
 		<dict>
@@ -4036,14 +4036,14 @@ Raashid.A</string>
 			<key>xpos</key>
 			<integer>40</integer>
 			<key>ypos</key>
-			<integer>2190</integer>
+			<integer>2150</integer>
 		</dict>
 		<key>ACED2549-3532-4ECC-9709-96679199529D</key>
 		<dict>
 			<key>xpos</key>
 			<integer>280</integer>
 			<key>ypos</key>
-			<integer>2490</integer>
+			<integer>2450</integer>
 		</dict>
 		<key>B3A96530-EDA5-4FDE-AD9E-487DBAFBE856</key>
 		<dict>
@@ -4075,7 +4075,7 @@ Raashid.A</string>
 			<key>xpos</key>
 			<integer>40</integer>
 			<key>ypos</key>
-			<integer>2290</integer>
+			<integer>2250</integer>
 		</dict>
 		<key>C1E87F32-A676-401C-A330-9A305B928E8E</key>
 		<dict>
@@ -4094,9 +4094,9 @@ Raashid.A</string>
 		<key>C4A2975E-14BF-4A7E-B3C0-60384A4AB5A1</key>
 		<dict>
 			<key>xpos</key>
-			<integer>1130</integer>
+			<integer>280</integer>
 			<key>ypos</key>
-			<integer>2090</integer>
+			<integer>2750</integer>
 		</dict>
 		<key>C4C3FAC9-E038-44BB-8345-7A89E39F8EDE</key>
 		<dict>
@@ -4126,7 +4126,7 @@ Raashid.A</string>
 			<key>xpos</key>
 			<integer>280</integer>
 			<key>ypos</key>
-			<integer>2090</integer>
+			<integer>2050</integer>
 		</dict>
 		<key>CDFD158D-8C5A-459F-9164-A4FBF4C9E314</key>
 		<dict>
@@ -4174,7 +4174,7 @@ Raashid.A</string>
 			<key>xpos</key>
 			<integer>280</integer>
 			<key>ypos</key>
-			<integer>2190</integer>
+			<integer>2150</integer>
 		</dict>
 		<key>E0487C9A-022A-4894-8CE6-F2B54684C7D2</key>
 		<dict>
@@ -4190,7 +4190,7 @@ Raashid.A</string>
 			<key>xpos</key>
 			<integer>280</integer>
 			<key>ypos</key>
-			<integer>2590</integer>
+			<integer>2550</integer>
 		</dict>
 		<key>E92C07F3-7E97-4675-8096-07AA081760A3</key>
 		<dict>
@@ -4273,7 +4273,7 @@ Raashid.A</string>
 		</dict>
 	</dict>
 	<key>version</key>
-	<string>0.14.10_1</string>
+	<string>0.14.10_2</string>
 	<key>webaddress</key>
 	<string>https://github.com/spamwax/alfred-pinboard-rs</string>
 </dict>
