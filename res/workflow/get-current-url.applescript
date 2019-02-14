@@ -83,7 +83,7 @@ on run
       set myApp to name of first application process whose frontmost is true
       if myApp is \"Firefox\" then
         tell application \"System Events\"
-          keystroke \"l\" using command down
+          key code 97
           delay 0.5
           keystroke \"c\" using command down
         end tell
