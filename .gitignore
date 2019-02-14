@@ -6,3 +6,4 @@ auth_token.txt
 .rustfmt.toml
 build.log
 AlfredPinboardRust.alfredworkflow
+Cargo.toml.back
