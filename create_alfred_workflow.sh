@@ -2,6 +2,7 @@
 
 # set -x
 version_tag=$1
+push_it=$2
 
 if [ -z "$version_tag" ]; then
     echo "You need to provide a semver tag: v0.9.10"
@@ -53,6 +54,9 @@ $2"
 git pull origin master
 git commit -a -m "$commit_msg"
 git tag "$version_tag"
-git push
-sleep 5
-git push --tags
+
+if [ ! -z "$push_it" ]; then
+    git push
+    sleep 5
+    git push --tags
+fi
