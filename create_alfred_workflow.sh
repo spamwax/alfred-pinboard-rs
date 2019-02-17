@@ -2,7 +2,8 @@
 
 # set -x
 version_tag=$1
-push_it=$2
+msg=$2
+push_it=$3
 
 if [ -z "$version_tag" ]; then
     echo "You need to provide a semver tag: v0.9.10"
@@ -48,9 +49,9 @@ mv AlfredPinboardRust.alfredworkflow "$alfred_pinboard_rs"
 rm alfred-pinboard-rs
 
 commit_msg="Release version $version_tag"
-[ ! -z "$2" ] && commit_msg="$commit_msg
+[ ! -z "$msg" ] && commit_msg="$commit_msg
 
-$2"
+$msg"
 git pull origin master
 git commit -a -m "$commit_msg"
 git tag "$version_tag"
