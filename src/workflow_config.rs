@@ -35,6 +35,7 @@ pub struct Config {
     /// Flag to suggest popular tags for the browser's current url
     pub suggest_tags: bool,
     /// Flag to check if browser's page is already bookmarked
+    #[serde(default)]
     pub page_is_bookmarked: bool,
     /// Flag to update cache after each bookmark saving automatically.
     pub auto_update_cache: bool,

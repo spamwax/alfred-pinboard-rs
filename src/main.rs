@@ -66,6 +66,8 @@ use crate::commands::config;
 // TODO: Check for all alfred related env. variables before doing anything else.
 //       This will prevent unnecessary loading and checking of cache files and then
 //       panicing due to missing env. variables.
+// TODO: running ./alfred-pinboard-rs update from command line panics (starting from
+//       fetch_latest_release)
 
 #[derive(Debug, Fail)]
 pub enum AlfredError {
