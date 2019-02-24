@@ -20,7 +20,7 @@ echo "Building new release..."
 cd "$alfred_pinboard_rs" || exit
 
 # fix cargo version
-cp Cargo.toml Cargo.toml.back
+# cp Cargo.toml Cargo.toml.back
 python res/fix_cargo_version.py "$version_tag"
 cargo build --release > build.log 2>&1
 
@@ -49,14 +49,14 @@ mv AlfredPinboardRust.alfredworkflow "$alfred_pinboard_rs"
 rm alfred-pinboard-rs
 
 commit_msg="Release version $version_tag"
-[ ! -z "$msg" ] && commit_msg="$commit_msg
+[ -n "$msg" ] && commit_msg="$commit_msg
 
 $msg"
 git pull origin master
 git commit -a -m "$commit_msg"
 git tag "$version_tag"
 
-if [ ! -z "$push_it" ]; then
+if [ -n "$push_it" ]; then
     git push
     sleep 5
     git push --tags

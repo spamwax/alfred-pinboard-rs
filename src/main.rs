@@ -68,6 +68,7 @@ use crate::commands::config;
 //       panicing due to missing env. variables.
 // TODO: running ./alfred-pinboard-rs update from command line panics (starting from
 //       fetch_latest_release)
+// TODO: Make sure that we don't show any json-like error in macOS's notification (check issue#27)
 
 #[derive(Debug, Fail)]
 pub enum AlfredError {
