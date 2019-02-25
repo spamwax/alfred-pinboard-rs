@@ -43,7 +43,6 @@ use std::env;
 use std::io;
 use std::process;
 
-// use alfred_rs::Data;
 use alfred_rs::Updater;
 use failure::Error;
 use rusty_pin::Pinboard;

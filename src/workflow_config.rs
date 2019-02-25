@@ -1,10 +1,11 @@
 use chrono::prelude::*;
 use dirs::home_dir;
 use std::fs::{create_dir_all, File};
-use std::io::{BufReader, BufWriter};
+use std::io::BufReader;
 use std::path::PathBuf;
 
 use alfred;
+use alfred_rs::Data;
 use failure::Error;
 use serde_json;
 
@@ -13,6 +14,8 @@ use semver::{Version, VersionReq};
 use crate::AlfredError;
 
 pub(crate) const CONFIG_FILE_NAME: &str = "settings.json";
+pub(crate) const CONFIG_KEY_NAME: &str = "settings";
+
 const FILE_BUF_SIZE: usize = 4 * 1024 * 1024;
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -85,20 +88,33 @@ impl<'a> Config {
         debug!("Starting in read");
         data_dir.push(CONFIG_FILE_NAME);
         if data_dir.exists() {
-            let mut config: Config = File::open(&data_dir)
-                .map_err(|e| {
-                    let _err: Error = From::from(e);
-                    _err
-                })
-                .and_then(|fp| {
-                    let buf_reader = BufReader::with_capacity(FILE_BUF_SIZE, fp);
-                    serde_json::from_reader(buf_reader)
-                        .map_err(|_| From::from(AlfredError::ConfigFileErr))
-                })?;
-            assert!(data_dir.pop());
-            config.workflow_data_dir = data_dir;
-            config.workflow_cache_dir = cached_dir;
-            Ok(config)
+            let config = Data::load(&data_dir)?;
+            let config: Result<Config, Error> = config
+                .get(CONFIG_KEY_NAME)
+                .map_or_else(
+                    || {
+                        // println!("--> Resorting to old config file format.");
+                        let config = File::open(&data_dir)
+                            .map_err(|e| {
+                                let _err: Error = From::from(e);
+                                _err
+                            })
+                            .and_then(|fp| {
+                                let buf_reader = BufReader::with_capacity(FILE_BUF_SIZE, fp);
+                                serde_json::from_reader(buf_reader)
+                                    .map_err(|_| From::from(AlfredError::ConfigFileErr))
+                            });
+                        config
+                    },
+                    |c: Config| Ok(c),
+                )
+                .map(|mut c| {
+                    assert!(data_dir.pop());
+                    c.workflow_data_dir = data_dir;
+                    c.workflow_cache_dir = cached_dir;
+                    c
+                });
+            config
         } else {
             Err(From::from(AlfredError::MissingConfigFile))
         }
@@ -108,16 +124,9 @@ impl<'a> Config {
         debug!("Starting in save");
         create_dir_all(&self.data_dir())?;
 
-        let mut settings_fn = self.workflow_data_dir.clone();
-        settings_fn.push(CONFIG_FILE_NAME);
-
-        File::create(settings_fn)
-            .map_err(|e| e.into())
-            .and_then(|fp| {
-                let buf_writer = BufWriter::with_capacity(FILE_BUF_SIZE, fp);
-                serde_json::to_writer(buf_writer, self)?;
-                Ok(())
-            })
+        let mut mydata = Data::load(CONFIG_FILE_NAME)?;
+        mydata.clear();
+        mydata.set(CONFIG_KEY_NAME, self)
     }
 
     pub fn discover_dirs(&mut self) {
