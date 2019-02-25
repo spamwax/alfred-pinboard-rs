@@ -1,5 +1,4 @@
 use super::*;
-use std::io::Write;
 use std::{thread, time};
 
 use alfred::{Item, ItemBuilder};
@@ -261,10 +260,8 @@ fn suggest_tags() -> Vec<Tag> {
 /// Retrieves popular tags from a Web API call for first run and caches them for subsequent runs.
 fn retrieve_popular_tags(exec_counter: usize) -> Result<Vec<Tag>, Error> {
     debug!("Starting in get_suggested_tags");
-    use std::fs;
-    use std::io::{BufRead, BufReader, BufWriter};
 
-    // TODO: Don't create another pinboard instance. use the one list.rs receives to shared with
+    // TODO: Don't create another pinboard instance. use the one list.rs receives to be shared with
     // the thread that runs this function.
     // FIXME: If run from outside Alfred (say terminal),
     // the cache folder for 'config' and 'pinboard' will be different.
@@ -272,30 +269,30 @@ fn retrieve_popular_tags(exec_counter: usize) -> Result<Vec<Tag>, Error> {
     let pinboard = Pinboard::new(config.auth_token.clone(), alfred::env::workflow_cache())?;
 
     let ptags_fn = config.cache_dir().join("popular.tags.cache");
-    let popular_tags = if exec_counter == 1 {
+    let tags;
+    if exec_counter == 1 {
         let tab_info = browser_info::get()?;
         warn!("tab_info.url: {:?}", tab_info.url);
-        let tags = match pinboard.popular_tags(&tab_info.url) {
+        tags = match pinboard.popular_tags(&tab_info.url) {
             Err(e) => vec![format!("ERROR: fetching popular tags: {:?}", e)],
             Ok(tags) => tags,
         };
-        warn!("tags: {:?}", ptags_fn);
-        fs::File::create(ptags_fn).and_then(|fp| {
-            let mut writer = BufWriter::with_capacity(1024, fp);
-            writer.write_all(tags.join("\n").as_bytes())
-        })?;
-        tags.into_iter()
-            .map(|t| Tag::new(t, 0).set_popular())
-            .collect::<Vec<Tag>>()
+        info!("popular tags: {:?}", tags);
+        use alfred_rs::Data;
+        let ptags_fn = "popular.tags.cache";
+        let _ = Data::save_to_file(&ptags_fn, &tags)?;
     } else {
-        warn!("reading suggested tags from cache file: {:?}", ptags_fn);
-        fs::File::open(ptags_fn).and_then(|fp| {
-            let reader = BufReader::with_capacity(1024, fp);
-            Ok(reader
-                .lines()
-                .map(|l| Tag::new(l.expect("bad popular tags cache file?"), 0).set_popular())
-                .collect::<Vec<Tag>>())
-        })?
-    };
-    Ok(popular_tags)
+        warn!(
+            "**** reading suggested tags from cache file: {:?}",
+            ptags_fn
+        );
+        use alfred_rs::Data;
+        use failure::err_msg;
+        tags = Data::load_from_file(ptags_fn)
+            .map_or(Err(err_msg("bad popular tags cache file")), |c| Ok(c))?;
+    }
+    Ok(tags
+        .into_iter()
+        .map(|t| Tag::new(t, 0).set_popular())
+        .collect::<Vec<Tag>>())
 }
