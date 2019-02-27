@@ -68,6 +68,8 @@ use crate::commands::config;
 // TODO: running ./alfred-pinboard-rs update from command line panics (starting from
 //       fetch_latest_release)
 // TODO: Make sure that we don't show any json-like error in macOS's notification (check issue#27)
+// TODO: check timestamp of cached suggested tags and if it's too old then make a network call
+// otherwise use it.
 
 #[derive(Debug, Fail)]
 pub enum AlfredError {
