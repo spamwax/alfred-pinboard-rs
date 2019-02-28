@@ -2,6 +2,7 @@ use super::*;
 use std::{thread, time};
 
 use alfred::{Item, ItemBuilder};
+use alfred_rs::Data;
 use failure::Error;
 
 impl<'api, 'pin> Runner<'api, 'pin> {
@@ -182,22 +183,6 @@ fn is_page_bookmarked(pinboard: &Pinboard) -> bool {
         found = match tab_info {
             Ok(tab_info) => {
                 debug!("tab_info: {:?}", tab_info);
-                // let sr = pinboard.find_url(&tab_info.url);
-                // debug!("sr: {:?}", sr);
-                // if let Ok(op) = sr {
-                //     if let Some(vp) = op {
-                //         if vp.is_empty() {
-                //             false
-                //         } else {
-                //             debug!("vp: {:?}", vp);
-                //             true
-                //         }
-                //     } else {
-                //         false
-                //     }
-                // } else {
-                //     false
-                // }
                 pinboard
                     .find_url(&tab_info.url)
                     .and_then(|op| {
@@ -212,9 +197,11 @@ fn is_page_bookmarked(pinboard: &Pinboard) -> bool {
             }
             Err(_) => false,
         };
-        let _ = alfred_rs::Data::save_to_file("bookmark_exists.json", &found);
+        let _ = Data::save_to_file("bookmark_exists.json", &found);
+        debug!("bookmark found from browser info: {}", found);
     } else {
-        found = alfred_rs::Data::load_from_file("bookmark_exists.json").unwrap_or(false);
+        found = Data::load_from_file("bookmark_exists.json").unwrap_or(false);
+        debug!("bookmark found from cache info: {}", found);
     }
     found
 }
@@ -270,6 +257,13 @@ fn retrieve_popular_tags(exec_counter: usize) -> Result<Vec<Tag>, Error> {
 
     let ptags_fn = config.cache_dir().join("popular.tags.cache");
     let tags;
+    // let metadata = fs::metadata("foo.txt")?;
+
+    // if let Ok(time) = metadata.created() {
+    //     println!("{:?}", time);
+    // } else {
+    //     println!("Not supported on this platform");
+    // }
     if exec_counter == 1 {
         let tab_info = browser_info::get()?;
         warn!("tab_info.url: {:?}", tab_info.url);
@@ -278,7 +272,6 @@ fn retrieve_popular_tags(exec_counter: usize) -> Result<Vec<Tag>, Error> {
             Ok(tags) => tags,
         };
         info!("popular tags: {:?}", tags);
-        use alfred_rs::Data;
         let ptags_fn = "popular.tags.cache";
         let _ = Data::save_to_file(&ptags_fn, &tags)?;
     } else {
