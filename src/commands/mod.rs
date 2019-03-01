@@ -11,6 +11,7 @@ pub mod config;
 mod delete;
 mod list;
 mod post;
+mod rename;
 mod search;
 mod update;
 mod upgrade;

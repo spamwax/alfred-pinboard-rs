@@ -149,6 +149,9 @@ fn main() {
                 SubCommand::SelfUpdate { .. } => {
                     runner.upgrade(&opt.cmd);
                 }
+                SubCommand::Rename { .. } => {
+                    runner.rename(&opt.cmd);
+                }
                 _ => unimplemented!(),
             }
         }

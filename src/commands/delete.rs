@@ -8,14 +8,35 @@ use std::io::Write;
 /// can be used for deletion in next step.
 ///
 
+// TODO: right now we accept deleting tag & url at the same time. If user asks to delete a tag
+// only, this function will automatically grab browser's url and return an Alfred item containing
+// it while deleteing the given tag as well. I believe these two options should be made exclusively
+// mutual.
 impl<'api, 'pin> Runner<'api, 'pin> {
     pub fn delete(&mut self, cmd: SubCommand) {
         debug!("Starting in delete");
-        let url = match cmd {
-            SubCommand::Delete { url } => url,
+        let (url, tag) = match cmd {
+            SubCommand::Delete { url, tag } => (url, tag),
             _ => unreachable!(),
         };
 
+        if let Some(tag) = tag {
+            debug!("  tag: {}", tag);
+            if let Err(e) = self.pinboard.as_ref().unwrap().delete_tag(tag) {
+                let _ = io::stdout()
+                    .write(format!("Error: {}", e).as_ref())
+                    .expect("Couldn't write to stdout");
+                process::exit(1);
+            } else {
+                let _ = io::stdout()
+                    .write(b"Successfully deleted tag.")
+                    .expect("Couldn't write to stdout");
+                if self.config.as_ref().unwrap().auto_update_cache {
+                    self.update_cache();
+                }
+            }
+            return;
+        }
         if let Some(url) = url {
             debug!("  url: {}", url);
             if let Err(e) = self.pinboard.as_ref().unwrap().delete(&url) {
