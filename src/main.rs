@@ -70,6 +70,7 @@ use crate::commands::config;
 // TODO: Make sure that we don't show any json-like error in macOS's notification (check issue#27)
 // TODO: check timestamp of cached suggested tags and if it's too old then make a network call
 // otherwise use it.
+// TODO: add an option to disable/enable update checks
 
 #[derive(Debug, Fail)]
 pub enum AlfredError {

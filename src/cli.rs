@@ -93,7 +93,7 @@ pub enum SubCommand {
         toread: Option<bool>,
     },
     #[structopt(name = "delete")]
-    /// Deletes a bookmark for the current page of the active browser, or a given tag.
+    /// Deletes a bookmark for the current page of the active browser.
     /// Or deletes a tag (see TODO item in delete.rs)
     Delete {
         /// Url/bookmark to be deleted.
