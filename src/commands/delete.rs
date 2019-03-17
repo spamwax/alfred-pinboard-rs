@@ -10,7 +10,7 @@ use std::io::Write;
 
 // TODO: right now we accept deleting tag & url at the same time. If user asks to delete a tag
 // only, this function will automatically grab browser's url and return an Alfred item containing
-// it while deleteing the given tag as well. I believe these two options should be made exclusively
+// it while deleting the given tag as well. I believe these two options should be made exclusively
 // mutual.
 impl<'api, 'pin> Runner<'api, 'pin> {
     pub fn delete(&mut self, cmd: SubCommand) {

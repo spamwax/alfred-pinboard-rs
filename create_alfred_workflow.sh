@@ -20,9 +20,12 @@ echo "Building new release..."
 cd "$alfred_pinboard_rs" || exit
 
 # fix cargo version
-# cp Cargo.toml Cargo.toml.back
 python res/fix_cargo_version.py "$version_tag"
+cp Cargo.toml Cargo.toml.back
+echo "[profile.release]" >> Cargo.toml
+echo "lto = true" >> Cargo.toml
 cargo build --release > build.log 2>&1
+cp Cargo.toml.back Cargo.toml
 
 echo "Copying resoursces from Alfred's workflow dir..."
 cp "$workflow_dir"/* "$res_dir"

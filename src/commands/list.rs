@@ -19,8 +19,6 @@ impl<'api, 'pin> Runner<'api, 'pin> {
 
     fn process(
         &self,
-        // config: &Config,
-        // pinboard: &Pinboard<'a, 'a>,
         tags: bool,
         suggest: Option<bool>,
         q: Option<String>,
@@ -106,7 +104,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                         .iter()
                         // Combine popular tags and returned tags from cache
                         .chain(items.into_iter().skip(1).take(config.tags_to_show as usize))
-                        // Remove tags that user has aleady selected
+                        // Remove tags that user has already selected
                         .filter(|tag| {
                             if !query_words.is_empty() {
                                 let upper = query_words.len() - 1;
