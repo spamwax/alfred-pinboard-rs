@@ -17,12 +17,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
         }
     }
 
-    fn process(
-        &self,
-        tags: bool,
-        suggest: Option<bool>,
-        q: Option<String>,
-    ) {
+    fn process(&self, tags: bool, suggest: Option<bool>, q: Option<String>) {
         debug!("Starting in list::process");
         let config = self.config.as_ref().unwrap();
         let pinboard = self.pinboard.as_ref().unwrap();
@@ -253,7 +248,8 @@ fn retrieve_popular_tags(exec_counter: usize) -> Result<Vec<Tag>, Error> {
     let config = Config::setup()?;
     let pinboard = Pinboard::new(config.auth_token.clone(), alfred::env::workflow_cache())?;
 
-    let ptags_fn = config.cache_dir().join("popular.tags.cache");
+    // let ptags_fn = config.cache_dir().join("popular.tags.cache");
+    let ptags_fn = "popular.tags.cache";
     let tags;
     // let metadata = fs::metadata("foo.txt")?;
 
@@ -270,7 +266,6 @@ fn retrieve_popular_tags(exec_counter: usize) -> Result<Vec<Tag>, Error> {
             Ok(tags) => tags,
         };
         info!("popular tags: {:?}", tags);
-        let ptags_fn = "popular.tags.cache";
         let _ = Data::save_to_file(&ptags_fn, &tags)?;
     } else {
         warn!(
