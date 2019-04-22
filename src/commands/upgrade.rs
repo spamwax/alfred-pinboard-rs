@@ -26,9 +26,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                             let _ = io::stdout()
                                 .write(format!("Download successful: {}", p).as_bytes());
                         } else {
-                            let _ = io::stdout().write(
-                                format!("Download OK, issue with its file name!").as_bytes(),
-                            );
+                            let _ = io::stdout().write(b"Download OK, issue with its file name!");
                         }
                     } else {
                         let _ =

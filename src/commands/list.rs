@@ -266,7 +266,7 @@ fn retrieve_popular_tags(exec_counter: usize) -> Result<Vec<Tag>, Error> {
             Ok(tags) => tags,
         };
         info!("popular tags: {:?}", tags);
-        let _ = Data::save_to_file(&ptags_fn, &tags)?;
+        Data::save_to_file(&ptags_fn, &tags)?;
     } else {
         warn!(
             "**** reading suggested tags from cache file: {:?}",

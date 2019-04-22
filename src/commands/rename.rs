@@ -10,7 +10,8 @@ impl<'api, 'pin> Runner<'api, 'pin> {
         }
     }
 
-    fn run(&mut self, tags: &Vec<String>) -> () {
+    // fn run(&mut self, tags: &Vec<String>) {
+    fn run(&mut self, tags: &[String]) {
         debug!("running rename::run");
         if tags.len() != 2 {
             debug!("  tags: {:?}", tags);

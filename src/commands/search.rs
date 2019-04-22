@@ -120,7 +120,7 @@ fn process<'a>(
                                         pin.title
                                             .split_whitespace()
                                             .filter(|s| s.len() != 1)
-                                            .filter(|s| s.chars().all(|c| c.is_alphanumeric()))
+                                            .filter(|s| s.chars().all(char::is_alphanumeric))
                                             .collect::<Vec<&str>>()
                                             .join(" ")
                                             .as_str(),
