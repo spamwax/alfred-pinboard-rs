@@ -26,6 +26,15 @@ on run
     set theURL to item 1 of theResult
     set theText to item 2 of theResult
 
+ else if theApplication is "Opera Developer.app" and appIsRunning("Opera") then
+    set theResult to run script "tell application id \"com.operasoftware.OperaDeveloper\"
+      set theText to title of active tab of first window
+      set theURL to get URL of active tab of first window
+      return {theURL, theText}
+    end tell"
+    set theURL to item 1 of theResult
+    set theText to item 2 of theResult
+
   else if theApplication is "Vivaldi.app" and appIsRunning("Vivaldi") then
     set theResult to run script "tell application id \"com.vivaldi.Vivaldi\"
       set theText to title of active tab of first window
