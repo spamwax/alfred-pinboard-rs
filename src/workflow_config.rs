@@ -137,8 +137,9 @@ impl<'a> Config {
 
     pub fn is_alfred_v3(&self) -> bool {
         debug!("Starting in is_alfred_v3");
-        let r = VersionReq::parse("~3").expect("Couldn't parse ~3 version string");
-        r.matches(&self.alfred_version)
+        let v3 = VersionReq::parse("~3").expect("Couldn't parse ~3 version string");
+        let v4 = VersionReq::parse("~4").expect("Couldn't parse ~4 version string");
+        v3.matches(&self.alfred_version) || v4.matches(&self.alfred_version)
     }
 
     fn get_workflow_dirs() -> (PathBuf, PathBuf) {
@@ -167,6 +168,8 @@ fn get_alfred_version() -> Version {
             Version::parse(s).unwrap_or_else(|_| {
                 if s.starts_with("3.") {
                     Version::parse("3.0.0").expect("Parsing 3.0.0 shouldn't fail")
+                } else if s.starts_with("4."){
+                    Version::parse("4.0.0").expect("Parsing 4.0.0 shouldn't fail")
                 } else {
                     Version::parse("2.0.0").expect("Parsing 2.0.0 shouldn't fail")
                 }
