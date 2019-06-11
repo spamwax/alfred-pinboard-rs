@@ -14,6 +14,8 @@ run_phase() {
             export alfred_workflow_uid=hamid63
             export alfred_workflow_name="RustyPin"
             export alfred_workflow_bundleid=cc.hamid.alfred-pinboard-rs
+            export alfred_workflow_data=/Users/travis/.config/alfred-pinboard-rs
+            export alfred_workflow_cache=/Users/travis/.config/alfred-pinboard-rs
             mkdir "/Users/travis/.config/alfred-pinboard-rs"
 
             cross run --target "$TARGET" -- config --authorization hamid:12345
