@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Changed
-- Changes before release points will be listed here
+- Add a combo modifier for search result to copy URL to clipboard.
 
 ## [0.14.9] - 2019-02-13
 ### Added

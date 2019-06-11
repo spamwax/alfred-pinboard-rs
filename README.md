@@ -120,6 +120,7 @@ You can hold down modifiers to enable different behavior:
 - <kbd>Control ⌃</kbd> : will show the extended description of selected bookmark.
 - <kbd>Command ⌘</kbd> : will show tags of selected bookmark.
 - <kbd>Option ⌥</kbd> : Holding `⌥` and pressing enter will open the bookmark in [Pinboard's website](https://pinboard.in).
+- <kbd>Command ⌘</kbd> + <kbd>Option ⌥</kbd> : Hitting Return ⏎ key with these combo modifiers will copy the bookmark's URL to clipboard.
 - <kbd>Shift ⇧</kbd>: **Tap** ⇧ to load a preview of bookmark without opening your browser 😎 ⤵︎
 
 ![image](./res/images/quicklook-preview.png)

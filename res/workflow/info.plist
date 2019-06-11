@@ -46,6 +46,16 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
+				<string>1A981B9B-5BEE-491E-A897-46DF38627688</string>
+				<key>modifiers</key>
+				<integer>1572864</integer>
+				<key>modifiersubtext</key>
+				<string>Copy URL to Clipboard</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>F7728DC2-A69E-415A-8833-57B85C8F54A8</string>
 				<key>modifiers</key>
 				<integer>524288</integer>
@@ -83,6 +93,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>A2481ADE-0AF6-4C3D-8E9B-E389206CD571</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>1A981B9B-5BEE-491E-A897-46DF38627688</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>83A73753-C3ED-430E-8B03-C57500B672AD</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -1198,8 +1221,6 @@ echo "$ret"</string>
 			<integer>1</integer>
 		</dict>
 		<dict>
-			<key>config</key>
-			<dict/>
 			<key>type</key>
 			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
@@ -1346,6 +1367,8 @@ fi</string>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
@@ -1384,7 +1407,7 @@ fi</string>
 			<key>uid</key>
 			<string>A1AB9903-87A7-4041-8EB9-F9E9C06C451B</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1400,8 +1423,6 @@ fi</string>
 			<integer>1</integer>
 		</dict>
 		<dict>
-			<key>config</key>
-			<dict/>
 			<key>type</key>
 			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
@@ -1520,15 +1541,27 @@ Check by Chanut is Industries from the Noun Project</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>alignment</key>
+				<integer>0</integer>
+				<key>backgroundcolor</key>
+				<string></string>
+				<key>fadespeed</key>
+				<integer>0</integer>
+				<key>fillmode</key>
+				<integer>0</integer>
+				<key>font</key>
+				<string></string>
 				<key>largetypetext</key>
 				<string>{query}</string>
+				<key>textcolor</key>
+				<string></string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.largetype</string>
 			<key>uid</key>
 			<string>2338607E-BB4F-4C20-B121-B2C3A10C1C6E</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1595,19 +1628,38 @@ Check by Chanut is Industries from the Noun Project</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://pinboard.in/search/u:hamid?query={query}</string>
-				<key>utf8</key>
-				<true/>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>transient</key>
+				<false/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
+			<string>alfred.workflow.output.clipboard</string>
 			<key>uid</key>
-			<string>F7728DC2-A69E-415A-8833-57B85C8F54A8</string>
+			<string>1A981B9B-5BEE-491E-A897-46DF38627688</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>Copied URL to Clipboard!</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>83A73753-C3ED-430E-8B03-C57500B672AD</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1658,15 +1710,46 @@ Check by Chanut is Industries from the Noun Project</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>alignment</key>
+				<integer>0</integer>
+				<key>backgroundcolor</key>
+				<string></string>
+				<key>fadespeed</key>
+				<integer>0</integer>
+				<key>fillmode</key>
+				<integer>0</integer>
+				<key>font</key>
+				<string></string>
 				<key>largetypetext</key>
 				<string>{query}</string>
+				<key>textcolor</key>
+				<string></string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.largetype</string>
 			<key>uid</key>
 			<string>71D25BDA-BF77-41BE-B3C6-A7ABE0B3990A</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://pinboard.in/search/u:hamid?query={query}</string>
+				<key>utf8</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>F7728DC2-A69E-415A-8833-57B85C8F54A8</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1690,91 +1773,6 @@ Check by Chanut is Industries from the Noun Project</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>alfredfiltersresults</key>
-				<false/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>2</integer>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>escaping</key>
-				<integer>126</integer>
-				<key>keyword</key>
-				<string>ps</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<false/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>2</integer>
-				<key>runningsubtext</key>
-				<string>Searching...</string>
-				<key>script</key>
-				<string>./alfred-pinboard-rs search $1</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>subtext</key>
-				<string>ps query1 query2 ...</string>
-				<key>title</key>
-				<string>Search your Pinboard bookmarks</string>
-				<key>type</key>
-				<integer>0</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>03AF5169-B606-486F-B432-98CF6E2BB0F2</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>{query}</string>
-				<key>utf8</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>C2C3C705-A4E7-44AB-BB2B-46F35B1A8E0E</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>inputstring</key>
-				<string>{var:workflow_update_ready}</string>
-				<key>matchcasesensitive</key>
-				<true/>
-				<key>matchmode</key>
-				<integer>1</integer>
-				<key>matchstring</key>
-				<string>1</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.filter</string>
-			<key>uid</key>
-			<string>50AED498-A7C0-4CEE-BDDB-B4887FF49957</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -1790,16 +1788,6 @@ Check by Chanut is Industries from the Noun Project</string>
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
 			<string>6DA1238D-B036-4CC7-9351-D41AF426C1A7</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict/>
-			<key>type</key>
-			<string>alfred.workflow.utility.junction</string>
-			<key>uid</key>
-			<string>C4C3FAC9-E038-44BB-8345-7A89E39F8EDE</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1853,33 +1841,61 @@ echo $ret
 			<integer>2</integer>
 		</dict>
 		<dict>
-			<key>config</key>
-			<dict>
-				<key>inputstring</key>
-				<string>{var:workflow_update_ready}</string>
-				<key>matchcasesensitive</key>
-				<true/>
-				<key>matchmode</key>
-				<integer>0</integer>
-				<key>matchstring</key>
-				<string>1</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.filter</string>
-			<key>uid</key>
-			<string>4AB57A0F-846D-4AA0-B3DD-DD1C7F411BAE</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict/>
 			<key>type</key>
 			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
 			<string>C1E87F32-A676-401C-A330-9A305B928E8E</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>126</integer>
+				<key>keyword</key>
+				<string>ps</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<false/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>2</integer>
+				<key>runningsubtext</key>
+				<string>Searching...</string>
+				<key>script</key>
+				<string>./alfred-pinboard-rs search $1</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string>ps query1 query2 ...</string>
+				<key>title</key>
+				<string>Search your Pinboard bookmarks</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>03AF5169-B606-486F-B432-98CF6E2BB0F2</string>
+			<key>version</key>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1905,6 +1921,25 @@ echo $ret
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>{query}</string>
+				<key>utf8</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>C2C3C705-A4E7-44AB-BB2B-46F35B1A8E0E</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>inputstring</key>
 				<string>{query}</string>
 				<key>matchcasesensitive</key>
@@ -1924,70 +1959,6 @@ echo $ret
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>{query}</string>
-				<key>utf8</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>51B3C295-B9CD-44D4-B1D3-19038C54735B</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<false/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>escaping</key>
-				<integer>62</integer>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>2</integer>
-				<key>runningsubtext</key>
-				<string></string>
-				<key>script</key>
-				<string>./alfred-pinboard-rs search --tags "$1"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>Show bookmarks for tag</string>
-				<key>type</key>
-				<integer>0</integer>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>5BBD268D-C102-4516-86B3-7A1DA7AE6AD8</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>inputstring</key>
 				<string>{var:workflow_update_ready}</string>
 				<key>matchcasesensitive</key>
@@ -2000,7 +1971,7 @@ echo $ret
 			<key>type</key>
 			<string>alfred.workflow.utility.filter</string>
 			<key>uid</key>
-			<string>C51D6351-6D3A-40C7-821C-C02D35C92332</string>
+			<string>50AED498-A7C0-4CEE-BDDB-B4887FF49957</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -2011,14 +1982,16 @@ echo $ret
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
-				<integer>0</integer>
+				<integer>2</integer>
 				<key>escaping</key>
-				<integer>62</integer>
+				<integer>102</integer>
 				<key>keyword</key>
-				<string>pt</string>
+				<string>pcheck</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -2026,38 +1999,36 @@ echo $ret
 				<key>queuedelaymode</key>
 				<integer>0</integer>
 				<key>queuemode</key>
-				<integer>2</integer>
+				<integer>1</integer>
 				<key>runningsubtext</key>
-				<string>Fetching tags...</string>
+				<string>Checking...</string>
 				<key>script</key>
-				<string>./alfred-pinboard-rs list --suggest false -t "$1"</string>
+				<string>./alfred-pinboard-rs self -c</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
 				<string></string>
 				<key>subtext</key>
-				<string>to show all related bookmarks for</string>
+				<string></string>
 				<key>title</key>
-				<string>Find a tag</string>
+				<string>Check for latest upgrade!</string>
 				<key>type</key>
 				<integer>0</integer>
 				<key>withspace</key>
-				<true/>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>F495558F-7866-454F-B070-80417D1419B6</string>
+			<string>F5143EEF-D67B-4518-A5BA-1DFFD993A314</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>3</integer>
 		</dict>
 		<dict>
-			<key>config</key>
-			<dict/>
 			<key>type</key>
 			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
-			<string>60353C96-9D07-4EF6-B8AB-FA8EC4EF2236</string>
+			<string>C4C3FAC9-E038-44BB-8345-7A89E39F8EDE</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -2097,7 +2068,7 @@ echo $ret
 			<key>type</key>
 			<string>alfred.workflow.utility.filter</string>
 			<key>uid</key>
-			<string>EE0705F1-36FB-49F6-AA24-3BA82965A14C</string>
+			<string>4AB57A0F-846D-4AA0-B3DD-DD1C7F411BAE</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -2136,53 +2107,6 @@ echo $ret
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>alfredfiltersresults</key>
-				<false/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>keyword</key>
-				<string>pcheck</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>Checking...</string>
-				<key>script</key>
-				<string>./alfred-pinboard-rs self -c</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>Check for latest upgrade!</string>
-				<key>type</key>
-				<integer>0</integer>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>F5143EEF-D67B-4518-A5BA-1DFFD993A314</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -2213,6 +2137,91 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>{query}</string>
+				<key>utf8</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>51B3C295-B9CD-44D4-B1D3-19038C54735B</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>escaping</key>
+				<integer>62</integer>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>2</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string>./alfred-pinboard-rs search --tags "$1"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Show bookmarks for tag</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>5BBD268D-C102-4516-86B3-7A1DA7AE6AD8</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>inputstring</key>
+				<string>{var:workflow_update_ready}</string>
+				<key>matchcasesensitive</key>
+				<true/>
+				<key>matchmode</key>
+				<integer>1</integer>
+				<key>matchstring</key>
+				<string>1</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.filter</string>
+			<key>uid</key>
+			<string>C51D6351-6D3A-40C7-821C-C02D35C92332</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -2228,6 +2237,101 @@ fi</string>
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
 			<string>33CEA28E-CBEF-499B-8397-6C4C3B947B72</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>62</integer>
+				<key>keyword</key>
+				<string>pt</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>2</integer>
+				<key>runningsubtext</key>
+				<string>Fetching tags...</string>
+				<key>script</key>
+				<string>./alfred-pinboard-rs list --suggest false -t "$1"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string>to show all related bookmarks for</string>
+				<key>title</key>
+				<string>Find a tag</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>F495558F-7866-454F-B070-80417D1419B6</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>inputstring</key>
+				<string>{query}</string>
+				<key>matchcasesensitive</key>
+				<false/>
+				<key>matchmode</key>
+				<integer>2</integer>
+				<key>matchstring</key>
+				<string>Success: .*</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.filter</string>
+			<key>uid</key>
+			<string>C6A1B854-359E-4D50-9081-56FEAEFC8CBC</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>60353C96-9D07-4EF6-B8AB-FA8EC4EF2236</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>inputstring</key>
+				<string>{var:workflow_update_ready}</string>
+				<key>matchcasesensitive</key>
+				<true/>
+				<key>matchmode</key>
+				<integer>0</integer>
+				<key>matchstring</key>
+				<string>1</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.filter</string>
+			<key>uid</key>
+			<string>EE0705F1-36FB-49F6-AA24-3BA82965A14C</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -2253,29 +2357,12 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>inputstring</key>
-				<string>{query}</string>
-				<key>matchcasesensitive</key>
-				<false/>
-				<key>matchmode</key>
-				<integer>2</integer>
-				<key>matchstring</key>
-				<string>Success: .*</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.filter</string>
-			<key>uid</key>
-			<string>C6A1B854-359E-4D50-9081-56FEAEFC8CBC</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
@@ -2314,20 +2401,32 @@ fi</string>
 			<key>uid</key>
 			<string>46667F34-E27E-4FBA-83B5-4A55C6FA2FD6</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>alignment</key>
+				<integer>0</integer>
+				<key>backgroundcolor</key>
+				<string></string>
+				<key>fadespeed</key>
+				<integer>0</integer>
+				<key>fillmode</key>
+				<integer>0</integer>
+				<key>font</key>
+				<string></string>
 				<key>largetypetext</key>
 				<string>{query}</string>
+				<key>textcolor</key>
+				<string></string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.largetype</string>
 			<key>uid</key>
 			<string>4411CFFD-1BD6-49B2-8EBB-8AE42CD82ECC</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -2349,8 +2448,6 @@ fi</string>
 			<integer>1</integer>
 		</dict>
 		<dict>
-			<key>config</key>
-			<dict/>
 			<key>type</key>
 			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
@@ -2401,8 +2498,6 @@ fi</string>
 			<integer>1</integer>
 		</dict>
 		<dict>
-			<key>config</key>
-			<dict/>
 			<key>type</key>
 			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
@@ -2472,8 +2567,6 @@ fi</string>
 			<integer>1</integer>
 		</dict>
 		<dict>
-			<key>config</key>
-			<dict/>
 			<key>type</key>
 			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
@@ -2484,15 +2577,27 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>alignment</key>
+				<integer>0</integer>
+				<key>backgroundcolor</key>
+				<string></string>
+				<key>fadespeed</key>
+				<integer>0</integer>
+				<key>fillmode</key>
+				<integer>0</integer>
+				<key>font</key>
+				<string></string>
 				<key>largetypetext</key>
 				<string>{query}</string>
+				<key>textcolor</key>
+				<string></string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.largetype</string>
 			<key>uid</key>
 			<string>282CD8F9-1BEE-4B7D-A72C-94D7CBA13073</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -2617,8 +2722,6 @@ echo $ret</string>
 			<integer>1</integer>
 		</dict>
 		<dict>
-			<key>config</key>
-			<dict/>
 			<key>type</key>
 			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
@@ -2713,6 +2816,8 @@ echo $ret</string>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
@@ -2752,7 +2857,7 @@ echo $ret</string>
 			<key>uid</key>
 			<string>D5939049-C73A-4872-9625-87A9F9BE886C</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -2812,6 +2917,8 @@ fi</string>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
@@ -2867,7 +2974,7 @@ EOB
 			<key>uid</key>
 			<string>5D065041-109B-41B0-ADE0-62CA836178E5</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -2974,6 +3081,8 @@ fi</string>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
@@ -3028,7 +3137,7 @@ EOB</string>
 			<key>uid</key>
 			<string>BD868971-C272-43FC-B20B-1C5471C1EBC1</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -3114,6 +3223,8 @@ fi</string>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
@@ -3168,7 +3279,7 @@ EOB</string>
 			<key>uid</key>
 			<string>93A64ECE-BB64-492B-B845-7CB85B544D40</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -3205,6 +3316,8 @@ fi</string>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
@@ -3259,7 +3372,7 @@ EOB</string>
 			<key>uid</key>
 			<string>3CFEFF60-C0B3-44A0-8761-FB5AA2F96547</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -3268,6 +3381,8 @@ EOB</string>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
@@ -3322,7 +3437,7 @@ EOB</string>
 			<key>uid</key>
 			<string>7A213534-8342-46AB-A4EA-4CCF95685833</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -3387,6 +3502,8 @@ fi</string>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
@@ -3441,7 +3558,7 @@ EOB</string>
 			<key>uid</key>
 			<string>5F6E4E5A-1035-498B-A2CF-B7E3ACB85009</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -3478,6 +3595,8 @@ fi</string>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
@@ -3532,7 +3651,7 @@ EOB</string>
 			<key>uid</key>
 			<string>78C8A61E-FD70-4CD9-BEC8-66A30106E128</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>3</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -3545,9 +3664,9 @@ Detailed instructions are available at https://github.com/spamwax/alfred-pinboar
 		<key>0087168E-C986-4511-9873-B107C12CD6C0</key>
 		<dict>
 			<key>xpos</key>
-			<integer>280</integer>
+			<integer>285</integer>
 			<key>ypos</key>
-			<integer>1610</integer>
+			<integer>1835</integer>
 		</dict>
 		<key>00892451-3E5D-421F-B3ED-367DD1560720</key>
 		<dict>
@@ -3556,9 +3675,9 @@ Detailed instructions are available at https://github.com/spamwax/alfred-pinboar
 			<key>note</key>
 			<string>Add your credentials first!</string>
 			<key>xpos</key>
-			<integer>40</integer>
+			<integer>45</integer>
 			<key>ypos</key>
-			<integer>1610</integer>
+			<integer>1835</integer>
 		</dict>
 		<key>013B2DEB-D66D-4D01-8528-0696630F8DEF</key>
 		<dict>
@@ -3592,7 +3711,7 @@ Raashid.A</string>
 			<key>xpos</key>
 			<integer>40</integer>
 			<key>ypos</key>
-			<integer>660</integer>
+			<integer>865</integer>
 		</dict>
 		<key>06E0CAC8-FEFC-4D89-852A-C9B0D9DC2FA2</key>
 		<dict>
@@ -3615,30 +3734,37 @@ Raashid.A</string>
 			<key>xpos</key>
 			<integer>290</integer>
 			<key>ypos</key>
-			<integer>1240</integer>
+			<integer>1445</integer>
+		</dict>
+		<key>1A981B9B-5BEE-491E-A897-46DF38627688</key>
+		<dict>
+			<key>xpos</key>
+			<integer>375</integer>
+			<key>ypos</key>
+			<integer>470</integer>
 		</dict>
 		<key>1E7D31C4-5229-4DA3-971E-7F0BCC04A81D</key>
 		<dict>
 			<key>note</key>
 			<string>Success in cache update.</string>
 			<key>xpos</key>
-			<integer>1190</integer>
+			<integer>1195</integer>
 			<key>ypos</key>
-			<integer>1710</integer>
+			<integer>1935</integer>
 		</dict>
 		<key>2202AECC-AE14-46AC-A4E7-0ECE9060F556</key>
 		<dict>
 			<key>xpos</key>
 			<integer>1440</integer>
 			<key>ypos</key>
-			<integer>1020</integer>
+			<integer>1045</integer>
 		</dict>
 		<key>221EA45C-D3F1-4FD8-9143-CD10110D5BFC</key>
 		<dict>
 			<key>xpos</key>
-			<integer>1100</integer>
+			<integer>1120</integer>
 			<key>ypos</key>
-			<integer>1050</integer>
+			<integer>1075</integer>
 		</dict>
 		<key>2338607E-BB4F-4C20-B121-B2C3A10C1C6E</key>
 		<dict>
@@ -3652,35 +3778,35 @@ Raashid.A</string>
 			<key>xpos</key>
 			<integer>580</integer>
 			<key>ypos</key>
-			<integer>1240</integer>
+			<integer>1445</integer>
 		</dict>
 		<key>282CD8F9-1BEE-4B7D-A72C-94D7CBA13073</key>
 		<dict>
 			<key>xpos</key>
-			<integer>1310</integer>
+			<integer>1315</integer>
 			<key>ypos</key>
-			<integer>1530</integer>
+			<integer>1755</integer>
 		</dict>
 		<key>28EB0348-E6C5-4205-9AD5-B50DDFFF4DD0</key>
 		<dict>
 			<key>xpos</key>
 			<integer>920</integer>
 			<key>ypos</key>
-			<integer>1270</integer>
+			<integer>1475</integer>
 		</dict>
 		<key>2DFDAFE5-6A0E-4E95-A1C5-30789A06C27C</key>
 		<dict>
 			<key>xpos</key>
-			<integer>690</integer>
+			<integer>695</integer>
 			<key>ypos</key>
-			<integer>1410</integer>
+			<integer>1635</integer>
 		</dict>
 		<key>33CEA28E-CBEF-499B-8397-6C4C3B947B72</key>
 		<dict>
 			<key>xpos</key>
 			<integer>1530</integer>
 			<key>ypos</key>
-			<integer>1110</integer>
+			<integer>1135</integer>
 		</dict>
 		<key>3CE0B131-A3E7-4756-BB56-C0AEC7448C28</key>
 		<dict>
@@ -3692,16 +3818,16 @@ Raashid.A</string>
 		<key>3CFEFF60-C0B3-44A0-8761-FB5AA2F96547</key>
 		<dict>
 			<key>xpos</key>
-			<integer>40</integer>
+			<integer>45</integer>
 			<key>ypos</key>
-			<integer>2450</integer>
+			<integer>2675</integer>
 		</dict>
 		<key>403451E0-718B-4D95-8546-05E9CCA25495</key>
 		<dict>
 			<key>xpos</key>
-			<integer>280</integer>
+			<integer>285</integer>
 			<key>ypos</key>
-			<integer>2250</integer>
+			<integer>2475</integer>
 		</dict>
 		<key>41032086-9AA2-40AF-A887-9148D35771D8</key>
 		<dict>
@@ -3715,14 +3841,14 @@ Raashid.A</string>
 			<key>xpos</key>
 			<integer>920</integer>
 			<key>ypos</key>
-			<integer>1150</integer>
+			<integer>1355</integer>
 		</dict>
 		<key>453D2BA7-92D6-4AD0-821B-132AF0365147</key>
 		<dict>
 			<key>xpos</key>
-			<integer>280</integer>
+			<integer>285</integer>
 			<key>ypos</key>
-			<integer>1770</integer>
+			<integer>1995</integer>
 		</dict>
 		<key>46667F34-E27E-4FBA-83B5-4A55C6FA2FD6</key>
 		<dict>
@@ -3731,7 +3857,7 @@ Raashid.A</string>
 			<key>xpos</key>
 			<integer>40</integer>
 			<key>ypos</key>
-			<integer>1150</integer>
+			<integer>1355</integer>
 		</dict>
 		<key>4AB57A0F-846D-4AA0-B3DD-DD1C7F411BAE</key>
 		<dict>
@@ -3740,7 +3866,7 @@ Raashid.A</string>
 			<key>xpos</key>
 			<integer>290</integer>
 			<key>ypos</key>
-			<integer>810</integer>
+			<integer>1015</integer>
 		</dict>
 		<key>4F682CAE-BDB1-4A64-B8BB-1C149CC24751</key>
 		<dict>
@@ -3749,7 +3875,7 @@ Raashid.A</string>
 			<key>xpos</key>
 			<integer>690</integer>
 			<key>ypos</key>
-			<integer>1300</integer>
+			<integer>1505</integer>
 		</dict>
 		<key>4F6CE11B-3454-41F1-BF65-AD752A4AC53F</key>
 		<dict>
@@ -3767,7 +3893,7 @@ Raashid.A</string>
 			<key>xpos</key>
 			<integer>290</integer>
 			<key>ypos</key>
-			<integer>700</integer>
+			<integer>905</integer>
 		</dict>
 		<key>50F6A6C6-7D1D-4876-92C2-4702A00D4AB2</key>
 		<dict>
@@ -3776,14 +3902,14 @@ Raashid.A</string>
 			<key>xpos</key>
 			<integer>1190</integer>
 			<key>ypos</key>
-			<integer>880</integer>
+			<integer>905</integer>
 		</dict>
 		<key>51B3C295-B9CD-44D4-B1D3-19038C54735B</key>
 		<dict>
 			<key>xpos</key>
-			<integer>690</integer>
+			<integer>665</integer>
 			<key>ypos</key>
-			<integer>890</integer>
+			<integer>1095</integer>
 		</dict>
 		<key>59152538-B4C0-4377-AEEA-034B5B257033</key>
 		<dict>
@@ -3806,44 +3932,44 @@ Raashid.A</string>
 		<key>5BBD268D-C102-4516-86B3-7A1DA7AE6AD8</key>
 		<dict>
 			<key>xpos</key>
-			<integer>440</integer>
+			<integer>445</integer>
 			<key>ypos</key>
-			<integer>890</integer>
+			<integer>1095</integer>
 		</dict>
 		<key>5D065041-109B-41B0-ADE0-62CA836178E5</key>
 		<dict>
 			<key>xpos</key>
-			<integer>40</integer>
+			<integer>45</integer>
 			<key>ypos</key>
-			<integer>1950</integer>
+			<integer>2175</integer>
 		</dict>
 		<key>5D22F26C-5A6A-4D18-B1F9-1158B8075764</key>
 		<dict>
 			<key>xpos</key>
-			<integer>1310</integer>
+			<integer>1315</integer>
 			<key>ypos</key>
-			<integer>1680</integer>
+			<integer>1905</integer>
 		</dict>
 		<key>5EDAB9E7-B4EA-4022-9523-DD865A75B345</key>
 		<dict>
 			<key>xpos</key>
 			<integer>210</integer>
 			<key>ypos</key>
-			<integer>1180</integer>
+			<integer>1385</integer>
 		</dict>
 		<key>5F6E4E5A-1035-498B-A2CF-B7E3ACB85009</key>
 		<dict>
 			<key>xpos</key>
-			<integer>40</integer>
+			<integer>45</integer>
 			<key>ypos</key>
-			<integer>2650</integer>
+			<integer>2875</integer>
 		</dict>
 		<key>60353C96-9D07-4EF6-B8AB-FA8EC4EF2236</key>
 		<dict>
 			<key>xpos</key>
 			<integer>210</integer>
 			<key>ypos</key>
-			<integer>960</integer>
+			<integer>1165</integer>
 		</dict>
 		<key>64829D2F-3DDE-46EC-BE53-F60150D38CEA</key>
 		<dict>
@@ -3862,16 +3988,16 @@ Raashid.A</string>
 		<key>6A4A2D1D-0087-4112-8D83-7BD1C4886CBB</key>
 		<dict>
 			<key>xpos</key>
-			<integer>280</integer>
+			<integer>285</integer>
 			<key>ypos</key>
-			<integer>1950</integer>
+			<integer>2175</integer>
 		</dict>
 		<key>6BA4C470-B64F-4BE2-9346-38ADACABCCBA</key>
 		<dict>
 			<key>xpos</key>
-			<integer>620</integer>
+			<integer>625</integer>
 			<key>ypos</key>
-			<integer>2350</integer>
+			<integer>2575</integer>
 		</dict>
 		<key>6D7ED5D0-0347-46AE-81ED-D308BDF21676</key>
 		<dict>
@@ -3887,14 +4013,14 @@ Raashid.A</string>
 			<key>xpos</key>
 			<integer>1320</integer>
 			<key>ypos</key>
-			<integer>720</integer>
+			<integer>745</integer>
 		</dict>
 		<key>6FCE34C9-B61B-4C75-8443-DD17F968A46E</key>
 		<dict>
 			<key>xpos</key>
 			<integer>1530</integer>
 			<key>ypos</key>
-			<integer>990</integer>
+			<integer>1015</integer>
 		</dict>
 		<key>71D25BDA-BF77-41BE-B3C6-A7ABE0B3990A</key>
 		<dict>
@@ -3928,28 +4054,28 @@ Raashid.A</string>
 			<key>xpos</key>
 			<integer>1320</integer>
 			<key>ypos</key>
-			<integer>850</integer>
+			<integer>875</integer>
 		</dict>
 		<key>78C8A61E-FD70-4CD9-BEC8-66A30106E128</key>
 		<dict>
 			<key>xpos</key>
-			<integer>40</integer>
+			<integer>45</integer>
 			<key>ypos</key>
-			<integer>2750</integer>
+			<integer>2975</integer>
 		</dict>
 		<key>799A5CC4-A7DB-4074-8044-ED7DBEFED12D</key>
 		<dict>
 			<key>xpos</key>
-			<integer>280</integer>
+			<integer>285</integer>
 			<key>ypos</key>
-			<integer>2650</integer>
+			<integer>2875</integer>
 		</dict>
 		<key>7A213534-8342-46AB-A4EA-4CCF95685833</key>
 		<dict>
 			<key>xpos</key>
-			<integer>40</integer>
+			<integer>45</integer>
 			<key>ypos</key>
-			<integer>2550</integer>
+			<integer>2775</integer>
 		</dict>
 		<key>7BF8F66E-ECC8-4BCD-86CE-5E19FD509604</key>
 		<dict>
@@ -3965,9 +4091,9 @@ Raashid.A</string>
 			<key>note</key>
 			<string>Update cache.</string>
 			<key>xpos</key>
-			<integer>920</integer>
+			<integer>925</integer>
 			<key>ypos</key>
-			<integer>1610</integer>
+			<integer>1835</integer>
 		</dict>
 		<key>8181252C-6CC9-4CFA-97D8-2C5097DB6AF4</key>
 		<dict>
@@ -3976,37 +4102,44 @@ Raashid.A</string>
 			<key>xpos</key>
 			<integer>1320</integer>
 			<key>ypos</key>
-			<integer>1020</integer>
+			<integer>1045</integer>
+		</dict>
+		<key>83A73753-C3ED-430E-8B03-C57500B672AD</key>
+		<dict>
+			<key>xpos</key>
+			<integer>580</integer>
+			<key>ypos</key>
+			<integer>470</integer>
 		</dict>
 		<key>877E9FAB-0FE7-42CD-AE40-751ED947D0B2</key>
 		<dict>
 			<key>note</key>
 			<string>Set auth. correctly?</string>
 			<key>xpos</key>
-			<integer>530</integer>
+			<integer>535</integer>
 			<key>ypos</key>
-			<integer>1640</integer>
+			<integer>1865</integer>
 		</dict>
 		<key>8CD4D7F7-49EA-44FF-878E-18B836627810</key>
 		<dict>
 			<key>xpos</key>
-			<integer>690</integer>
+			<integer>695</integer>
 			<key>ypos</key>
-			<integer>1530</integer>
+			<integer>1755</integer>
 		</dict>
 		<key>8FBE3EBB-9672-493C-977C-95B832412F2E</key>
 		<dict>
 			<key>xpos</key>
-			<integer>40</integer>
+			<integer>45</integer>
 			<key>ypos</key>
-			<integer>2050</integer>
+			<integer>2275</integer>
 		</dict>
 		<key>93A64ECE-BB64-492B-B845-7CB85B544D40</key>
 		<dict>
 			<key>xpos</key>
-			<integer>40</integer>
+			<integer>45</integer>
 			<key>ypos</key>
-			<integer>2350</integer>
+			<integer>2575</integer>
 		</dict>
 		<key>988D1146-585C-4DC6-A56B-B303B9A3F173</key>
 		<dict>
@@ -4018,9 +4151,9 @@ Raashid.A</string>
 		<key>A156743D-A9BB-4AFB-A0C2-D16EF45F7DD0</key>
 		<dict>
 			<key>xpos</key>
-			<integer>280</integer>
+			<integer>285</integer>
 			<key>ypos</key>
-			<integer>2350</integer>
+			<integer>2575</integer>
 		</dict>
 		<key>A1AB9903-87A7-4041-8EB9-F9E9C06C451B</key>
 		<dict>
@@ -4036,7 +4169,7 @@ Raashid.A</string>
 			<key>xpos</key>
 			<integer>440</integer>
 			<key>ypos</key>
-			<integer>1210</integer>
+			<integer>1415</integer>
 		</dict>
 		<key>A2DA0FE3-D7E7-47E0-9383-B42E0EFDF202</key>
 		<dict>
@@ -4045,37 +4178,37 @@ Raashid.A</string>
 			<key>xpos</key>
 			<integer>920</integer>
 			<key>ypos</key>
-			<integer>780</integer>
+			<integer>805</integer>
 		</dict>
 		<key>A8EE818C-427B-476F-93FD-02825231464B</key>
 		<dict>
 			<key>xpos</key>
-			<integer>40</integer>
+			<integer>45</integer>
 			<key>ypos</key>
-			<integer>2150</integer>
+			<integer>2375</integer>
 		</dict>
 		<key>ACED2549-3532-4ECC-9709-96679199529D</key>
 		<dict>
 			<key>xpos</key>
-			<integer>280</integer>
+			<integer>285</integer>
 			<key>ypos</key>
-			<integer>2450</integer>
+			<integer>2675</integer>
 		</dict>
 		<key>B3A96530-EDA5-4FDE-AD9E-487DBAFBE856</key>
 		<dict>
 			<key>note</key>
 			<string>Error in cache update.</string>
 			<key>xpos</key>
-			<integer>1190</integer>
+			<integer>1195</integer>
 			<key>ypos</key>
-			<integer>1560</integer>
+			<integer>1785</integer>
 		</dict>
 		<key>BBFBAB3B-9592-48EF-9E70-3DDF3303690D</key>
 		<dict>
 			<key>xpos</key>
-			<integer>500</integer>
+			<integer>505</integer>
 			<key>ypos</key>
-			<integer>1740</integer>
+			<integer>1965</integer>
 		</dict>
 		<key>BC2AD49B-4564-4816-B814-83431644EC9D</key>
 		<dict>
@@ -4089,44 +4222,44 @@ Raashid.A</string>
 		<key>BD868971-C272-43FC-B20B-1C5471C1EBC1</key>
 		<dict>
 			<key>xpos</key>
-			<integer>40</integer>
+			<integer>45</integer>
 			<key>ypos</key>
-			<integer>2250</integer>
+			<integer>2475</integer>
 		</dict>
 		<key>C1E87F32-A676-401C-A330-9A305B928E8E</key>
 		<dict>
 			<key>xpos</key>
 			<integer>1070</integer>
 			<key>ypos</key>
-			<integer>810</integer>
+			<integer>835</integer>
 		</dict>
 		<key>C2C3C705-A4E7-44AB-BB2B-46F35B1A8E0E</key>
 		<dict>
 			<key>xpos</key>
-			<integer>440</integer>
+			<integer>445</integer>
 			<key>ypos</key>
-			<integer>670</integer>
+			<integer>875</integer>
 		</dict>
 		<key>C4A2975E-14BF-4A7E-B3C0-60384A4AB5A1</key>
 		<dict>
 			<key>xpos</key>
-			<integer>280</integer>
+			<integer>285</integer>
 			<key>ypos</key>
-			<integer>2750</integer>
+			<integer>2975</integer>
 		</dict>
 		<key>C4C3FAC9-E038-44BB-8345-7A89E39F8EDE</key>
 		<dict>
 			<key>xpos</key>
 			<integer>210</integer>
 			<key>ypos</key>
-			<integer>750</integer>
+			<integer>955</integer>
 		</dict>
 		<key>C51D6351-6D3A-40C7-821C-C02D35C92332</key>
 		<dict>
 			<key>xpos</key>
 			<integer>290</integer>
 			<key>ypos</key>
-			<integer>920</integer>
+			<integer>1125</integer>
 		</dict>
 		<key>C6A1B854-359E-4D50-9081-56FEAEFC8CBC</key>
 		<dict>
@@ -4135,21 +4268,21 @@ Raashid.A</string>
 			<key>xpos</key>
 			<integer>1320</integer>
 			<key>ypos</key>
-			<integer>1140</integer>
+			<integer>1165</integer>
 		</dict>
 		<key>C79DF9E2-8026-4F82-B31C-BCD0D4AFCE20</key>
 		<dict>
 			<key>xpos</key>
-			<integer>280</integer>
+			<integer>285</integer>
 			<key>ypos</key>
-			<integer>2050</integer>
+			<integer>2275</integer>
 		</dict>
 		<key>CDFD158D-8C5A-459F-9164-A4FBF4C9E314</key>
 		<dict>
 			<key>xpos</key>
-			<integer>850</integer>
+			<integer>855</integer>
 			<key>ypos</key>
-			<integer>1500</integer>
+			<integer>1725</integer>
 		</dict>
 		<key>CEA5E6BE-477F-4E65-910B-1096368B93C8</key>
 		<dict>
@@ -4172,9 +4305,9 @@ Raashid.A</string>
 			<key>note</key>
 			<string>Show current settings of workflow.</string>
 			<key>xpos</key>
-			<integer>40</integer>
+			<integer>45</integer>
 			<key>ypos</key>
-			<integer>1770</integer>
+			<integer>1995</integer>
 		</dict>
 		<key>D91FD9FE-14F6-4291-8478-11A126B03BD0</key>
 		<dict>
@@ -4183,14 +4316,14 @@ Raashid.A</string>
 			<key>xpos</key>
 			<integer>290</integer>
 			<key>ypos</key>
-			<integer>1120</integer>
+			<integer>1325</integer>
 		</dict>
 		<key>DA27F20C-DD88-4FCB-A665-CD66BFF2761D</key>
 		<dict>
 			<key>xpos</key>
-			<integer>280</integer>
+			<integer>285</integer>
 			<key>ypos</key>
-			<integer>2150</integer>
+			<integer>2375</integer>
 		</dict>
 		<key>E0487C9A-022A-4894-8CE6-F2B54684C7D2</key>
 		<dict>
@@ -4199,21 +4332,21 @@ Raashid.A</string>
 			<key>xpos</key>
 			<integer>690</integer>
 			<key>ypos</key>
-			<integer>1180</integer>
+			<integer>1385</integer>
 		</dict>
 		<key>E27BB22A-56EB-4D38-9725-99555F0EB6D1</key>
 		<dict>
 			<key>xpos</key>
-			<integer>280</integer>
+			<integer>285</integer>
 			<key>ypos</key>
-			<integer>2550</integer>
+			<integer>2775</integer>
 		</dict>
 		<key>E92C07F3-7E97-4675-8096-07AA081760A3</key>
 		<dict>
 			<key>xpos</key>
-			<integer>1080</integer>
+			<integer>1085</integer>
 			<key>ypos</key>
-			<integer>1640</integer>
+			<integer>1865</integer>
 		</dict>
 		<key>EA97375D-329E-4A06-8BBF-FBF7329AA9CC</key>
 		<dict>
@@ -4240,7 +4373,7 @@ Raashid.A</string>
 			<key>xpos</key>
 			<integer>290</integer>
 			<key>ypos</key>
-			<integer>1010</integer>
+			<integer>1215</integer>
 		</dict>
 		<key>EF1102C5-4180-496A-A4AF-1FDB7C59D7EE</key>
 		<dict>
@@ -4258,16 +4391,16 @@ Raashid.A</string>
 			<key>xpos</key>
 			<integer>40</integer>
 			<key>ypos</key>
-			<integer>930</integer>
+			<integer>1135</integer>
 		</dict>
 		<key>F5143EEF-D67B-4518-A5BA-1DFFD993A314</key>
 		<dict>
 			<key>note</key>
 			<string>Check for workflow updates.</string>
 			<key>xpos</key>
-			<integer>690</integer>
+			<integer>660</integer>
 			<key>ypos</key>
-			<integer>1020</integer>
+			<integer>940</integer>
 		</dict>
 		<key>F55B41C7-8CBF-4F98-B7C5-9EB468713A5D</key>
 		<dict>
@@ -4276,16 +4409,16 @@ Raashid.A</string>
 			<key>xpos</key>
 			<integer>1190</integer>
 			<key>ypos</key>
-			<integer>750</integer>
+			<integer>775</integer>
 		</dict>
 		<key>F7728DC2-A69E-415A-8833-57B85C8F54A8</key>
 		<dict>
 			<key>note</key>
 			<string>Find bookmark on Pinboard's site.</string>
 			<key>xpos</key>
-			<integer>440</integer>
+			<integer>370</integer>
 			<key>ypos</key>
-			<integer>520</integer>
+			<integer>610</integer>
 		</dict>
 	</dict>
 	<key>version</key>
