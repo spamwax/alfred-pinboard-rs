@@ -2463,7 +2463,7 @@ fi</string>
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>./alfred-pinboard-rs delete $1</string>
+				<string>./alfred-pinboard-rs delete -u $1</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>

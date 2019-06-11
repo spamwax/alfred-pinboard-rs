@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Changed
 - Add a combo modifier for search result to copy URL to clipboard.
+- Fix: deleting a bookmark was not working.
 
 ## [0.14.9] - 2019-02-13
 ### Added
