@@ -1,6 +1,6 @@
 [package]
 name = "alfred-pinboard-rs"
-version = "0.14.11"
+version = "0.14.12"
 authors = [ "Hamid Ghadyani <hamid@hamid.cc>",]
 
 [dependencies]
@@ -19,11 +19,9 @@ env_logger = "0.6"
 [features]
 
 [dependencies.alfred-rs]
-#path = "../alfred-workflow"
 version = "0.5"
 
 [dependencies.rusty-pin]
-#path = "../rusty-pin"
 git = "https://github.com/spamwax/rusty-pin"
 branch = "master"
 
