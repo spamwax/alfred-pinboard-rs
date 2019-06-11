@@ -44,15 +44,6 @@ on run
     set theURL to item 1 of theResult
     set theText to item 2 of theResult
 
-  else if theApplication is "Brave Browser Beta.app" and appIsRunning("Brave Browser Beta") then
-    set theResult to run script "tell application id \"com.brave.Browser.beta\"
-      set theText to title of active tab of first window
-      set theURL to get URL of active tab of first window
-      return {theURL, theText}
-    end tell"
-    set theURL to item 1 of theResult
-    set theText to item 2 of theResult
-
   else if theApplication is "Safari.app" and appIsRunning("Safari") then
     set theResult to run script "tell application id \"com.apple.safari\"
       set theTab to front document
