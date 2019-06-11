@@ -71,7 +71,7 @@ fn show_config(config: &Config) {
     debug!("Starting in show_config");
     // TODO: Add support for Alfred 2 by returning XML <09-02-18, Hamid> //
     // If Using Alfred Version >=3
-    if config.is_alfred_v3() {
+    if config.can_use_json() {
         use alfred::ItemBuilder;
         alfred::json::Builder::with_items(&[
             ItemBuilder::new("Only search tags")

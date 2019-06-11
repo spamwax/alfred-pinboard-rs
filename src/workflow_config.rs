@@ -143,10 +143,11 @@ impl<'a> Config {
         &self.workflow_data_dir
     }
 
-    pub fn is_alfred_v3(&self) -> bool {
-        debug!("Starting in is_alfred_v3");
-        let r = VersionReq::parse("~3").expect("Couldn't parse ~3 version string");
-        r.matches(&self.alfred_version)
+    pub fn can_use_json(&self) -> bool {
+        // Alfred v3 & above support reading/writing Items in json format
+        debug!("Starting in can_use_json");
+        let required_version = VersionReq::parse(">= 3").expect("Couldn't parse >= 3 version string");
+        required_version.matches(&self.alfred_version)
     }
 
     fn get_workflow_dirs() -> (PathBuf, PathBuf) {
@@ -157,12 +158,25 @@ impl<'a> Config {
             dir.push("alfred-pinboard-rs");
             dir
         });
+        debug!("cache_dir: {:?}", cache_dir);
+        if !cache_dir.exists() {
+            // If we can't create directories, workflow won't be able to work, so we panic!
+            debug!("creating cache_dir");
+            create_dir_all(&cache_dir).unwrap();
+        }
         let data_dir = alfred::env::workflow_data().unwrap_or_else(|| {
             let mut dir = home_dir().unwrap_or_else(|| PathBuf::from(""));
             dir.push(".config");
             dir.push("alfred-pinboard-rs");
             dir
         });
+        debug!("data_dir: {:?}", data_dir);
+        if !data_dir.exists() {
+            // If we can't create directories, workflow won't be able to work, so we panic!
+            debug!("creating data_dir");
+            create_dir_all(&data_dir).unwrap();
+        }
+
         (data_dir, cache_dir)
     }
 }
@@ -173,7 +187,9 @@ fn get_alfred_version() -> Version {
         Version::parse("2.0.0").expect("Parsing 2.0.0 shouldn't fail"),
         |ref s| {
             Version::parse(s).unwrap_or_else(|_| {
-                if s.starts_with("3.") {
+                if s.starts_with("4.") {
+                    Version::parse("4.0.1").expect("Parsing 4.0.0 shouldn't fail")
+                } else if s.starts_with("3.") {
                     Version::parse("3.0.0").expect("Parsing 3.0.0 shouldn't fail")
                 } else {
                     Version::parse("2.0.0").expect("Parsing 2.0.0 shouldn't fail")

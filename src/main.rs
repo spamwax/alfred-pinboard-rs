@@ -171,7 +171,7 @@ fn setup<'a, 'p>() -> Result<(Config, Pinboard<'a, 'p>), Error> {
     Ok((config, pinboard))
 }
 
-fn write_to_alfred<'a, I>(items: I, is_alfred_v3: bool)
+fn write_to_alfred<'a, I>(items: I, supports_json: bool)
 where
     I: IntoIterator<Item = alfred::Item<'a>>,
 {
@@ -179,7 +179,7 @@ where
 
     let exec_counter = env::var("apr_execution_counter").unwrap_or_else(|_| "1".to_string());
     // Depending on alfred version use either json or xml output.
-    if is_alfred_v3 {
+    if supports_json {
         alfred::json::Builder::with_items(output_items.as_slice())
             .variable("apr_execution_counter", exec_counter.as_str())
             .write(io::stdout())

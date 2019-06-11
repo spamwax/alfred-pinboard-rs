@@ -41,8 +41,8 @@ impl<'api, 'pin> Runner<'api, 'pin> {
             output_items.push(item);
         }
 
-        let is_alfred_v3 = self.config.as_ref().unwrap().is_alfred_v3();
-        crate::write_to_alfred(output_items, is_alfred_v3);
+        let json_format = self.config.as_ref().unwrap().can_use_json();
+        crate::write_to_alfred(output_items, json_format);
         Ok(())
     }
 
