@@ -3,7 +3,9 @@
 
 # Alfred Workflow for Pinboard
 
+
 Manage, post and **preview** your bookmarks on [Pinboard](https://pinboard.in) right from within [Alfred app](https://www.alfredapp.com).
+### <span style="color:red">Important:</span> [Update & Support for Alfred 3 Users](#alfred_3_support)
 ## Features
 Pinboard is a great and reliable bookmarking service. Its [front page](https://pinboard.in) sums it all:
 "**Social Bookmarking for Introverts. Pinboard is a fast, no-nonsense bookmarking site.**"
@@ -196,6 +198,10 @@ When fuzzy search is enabled, the tags/bookmarks that contain the query letters 
 ## Known Issues<a name="known_issues"></a>
 - **Firefox**: While tag suggestions and "Check if page is bookmarked" options are enabled, posting bookmark from Firefox is broken. Deleting bookmarks using `pind` won't work when Firefox is your active browser. Reason: Firefox does not properly support interacting with it programatically.
 - This workflow is setup to work with Aflred 3. It may or may not work with previous version as it has not been tested for them.
+
+## Alfred 3 Support & Issues<a name="alfred_3_support"></a>
+- Alfred 4 has made some changes to internal structure of workflows. Therefore if you updated this workflow the built-in *automatic update*, it's very *likely* that it'll stop working. If that happens, you can fix it by first deleteing & then re-installing the workflow by [downloading the last version (0.14.11)](https://github.com/spamwax/alfred-pinboard-rs/releases/tag/0.14.11) that has Alfred 3 format.
+- Moving forward, new features, changes & bug fixes will first target Alfred 4 users and then (time permitting) will be ported back to Alfred 3. 
 
 ## TODO
 
