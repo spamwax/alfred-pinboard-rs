@@ -115,11 +115,18 @@ fn main() {
                 process::exit(1);
             });
 
-            // TODO: asking to check for updates just reads from cache
-            // instead of making a network call. We need to call
-            // updater.set_interval(0) if opt.command is SelfUpdate before
-            // calling update.init() and setting the Runner.
             let mut updater = Updater::gh("spamwax/alfred-pinboard-rs").unwrap();
+
+            // If running ./alfred-pinboard-rs self -c, we have to make a network call
+            // We do this by forcing the check interval to be zero
+            match opt.cmd {
+                SubCommand::SelfUpdate { check, .. } => {
+                    if check {
+                        updater.set_interval(0);
+                    }
+                }
+                _ => (),
+            }
             // updater.set_version("0.13.1");
             // updater.set_interval(60);
             updater.init().expect("cannot start updater!");
