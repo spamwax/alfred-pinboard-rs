@@ -2114,8 +2114,7 @@ echo $ret
 				<key>script</key>
 				<string>filename=$(echo "$1" | cut -d ' ' -f 3-)
 
-# if open -b com.runningwithcrayons.Alfred-3 "$alfred_workflow_cache/latest_release_Rusty_Pin.alfredworkflow"; then
-if open -b com.runningwithcrayons.Alfred-3 "$filename"; then
+if open -b com.runningwithcrayons.Alfred "$filename"; then
     echo "Success: Wait! Openning Alfred to install..."
 else
     echo "Error: $filename Couldn't install the downloaded file!"
@@ -4422,7 +4421,7 @@ Raashid.A</string>
 		</dict>
 	</dict>
 	<key>version</key>
-	<string>0.14.14</string>
+	<string>0.14.15</string>
 	<key>webaddress</key>
 	<string>https://github.com/spamwax/alfred-pinboard-rs</string>
 </dict>
