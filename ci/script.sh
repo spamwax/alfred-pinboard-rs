@@ -9,7 +9,7 @@ run_phase() {
     case "$TARGET" in
         x86_64-apple-darwin)
             export alfred_debug=1
-            export alfred_version="3.6"
+            export alfred_version="4.0.1"
             export alfred_workflow_version=0.11.1
             export alfred_workflow_uid=hamid63
             export alfred_workflow_name="RustyPin"

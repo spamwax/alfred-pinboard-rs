@@ -38,7 +38,14 @@ install:
 test_script:
   # we don't run the "test phase" when doing deploys
   - if [%APPVEYOR_REPO_TAG%]==[false] (
-      set alfred_debug=1 && set alfred_version=3.6 &&
+      set alfred_debug=1
+      && set alfred_version=4.0.1
+      && set alfred_workflow_version=0.11.1
+      && set alfred_workflow_uid=hamid63
+      && set alfred_workflow_name=RustyPin
+      && set alfred_workflow_bundleid=cc.hamid.alfred-pinboard-rs
+      && set alfred_workflow_data=C:\projects\alfred-pinboard-rs
+      && set alfred_workflow_cache=C:\projects\alfred-pinboard-rs
       cargo build --target %TARGET% &&
       cargo run --target %TARGET% -- config --authorization hamid:12345 &&
       cargo run --target %TARGET% -- config -d &&
