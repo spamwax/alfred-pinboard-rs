@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Changed
+- Add support to show either tag or urls in search results.
 - Add a combo modifier for search result to copy URL to clipboard.
 - Fix: deleting a bookmark was not working.
 

@@ -40,6 +40,9 @@ pub struct Config {
     /// Flag to check if browser's page is already bookmarked
     #[serde(default)]
     pub page_is_bookmarked: bool,
+    /// Flag to check if browser's page is already bookmarked
+    #[serde(default)]
+    pub show_url_vs_tags: bool,
     /// Flag to update cache after each bookmark saving automatically.
     pub auto_update_cache: bool,
     /// Authentication Token
@@ -68,6 +71,7 @@ impl<'a> Config {
             suggest_tags: false,
             page_is_bookmarked: true,
             auto_update_cache: true,
+            show_url_vs_tags: true,
             auth_token: String::new(),
             update_time: get_epoch(),
             workflow_data_dir: PathBuf::default(),
@@ -81,6 +85,7 @@ impl<'a> Config {
         debug!("Starting in setup");
         let (data_dir, cache_dir) = Config::get_workflow_dirs();
         let config = Config::read(data_dir, cache_dir)?;
+        debug!("{:?}", config);
         Ok(config)
     }
 
@@ -146,7 +151,8 @@ impl<'a> Config {
     pub fn can_use_json(&self) -> bool {
         // Alfred v3 & above support reading/writing Items in json format
         debug!("Starting in can_use_json");
-        let required_version = VersionReq::parse(">= 3").expect("Couldn't parse >= 3 version string");
+        let required_version =
+            VersionReq::parse(">= 3").expect("Couldn't parse >= 3 version string");
         required_version.matches(&self.alfred_version)
     }
 

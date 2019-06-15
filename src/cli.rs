@@ -54,13 +54,16 @@ pub enum SubCommand {
         #[structopt(name = "suggest_tags", short = "o", long = "suggest-tags")]
         suggest_tags: Option<bool>,
 
-        /// Check if the current browser page is already pinned. [default: true]
+        /// Check if the current browser page is already pinned. [default: false]
         #[structopt(
             name = "check_bookmarked_page",
             short = "b",
             long = "check-bookmarked-page"
         )]
         check_bookmarked_page: Option<bool>,
+        /// Show urls (or tags) in search results' subtitle. [default: false (url)]
+        #[structopt(name = "show-url-or-tags", short = "e", long = "show-urls-vs-tags")]
+        show_url_vs_tags: Option<bool>,
     },
     #[structopt(name = "list")]
     /// Lists all bookmarks (default) or tags.

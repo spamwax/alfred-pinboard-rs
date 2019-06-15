@@ -116,6 +116,10 @@ The search result is ordered in descending order of dates they were posted to yo
 
 ![image](./res/images/bookmarks-search-results.png)
 
+To show tags (instead of URLS) in search results subtitles, use `pset url_tag`:
+
+![image](./res/images/url_vs_tag.png)
+
 #### Modifier keys (<kbd>Command ⌘, Control ⌃, Option ⌥</kbd>)
 You can hold down modifiers to enable different behavior:
 
@@ -160,6 +164,7 @@ On top of using `pconf`, you can directly type following commands to also adjust
 - `pset auto`: After posting a new bookmark, automatically update the local cache.
 - `pset tags`: Set number of tags to show: `pset tags 25`
 - `pset bookmarks`: Set number of bookmarks to show: `pset bookmarks 12`
+- `pset url_tag`: Show either URLs or tags in search results subtitles
 
 ### Manual cache update<a name="cache_update"></a>
 

@@ -42,8 +42,9 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                     }
                 }
                 let pins_to_show = self.config.as_ref().unwrap().pins_to_show;
+                let url_vs_tags = self.config.as_ref().unwrap().show_url_vs_tags;
                 let pinboard = self.pinboard.as_ref().unwrap();
-                let items = process(query, &search_fields, pins_to_show, pinboard);
+                let items = process(query, &search_fields, pins_to_show, url_vs_tags, pinboard);
                 if let Err(e) = self.write_output_items(items) {
                     error!("search: Couldn't write to Alfred: {:?}", e);
                 }
@@ -58,6 +59,7 @@ fn process<'a>(
     query: Vec<String>,
     search_fields: &[SearchType],
     pins_to_show: u8,
+    url_vs_tags: bool,
     pinboard: &'a Pinboard<'a, 'a>,
 ) -> Vec<Item<'a>> {
     debug!("Starting in search::process");
@@ -83,8 +85,13 @@ fn process<'a>(
                     //   show extended text, tags or open the link in https://pinboard.in
                     .map(|pin| {
                         let _none: Option<String> = None;
+                        let subtitle = if !url_vs_tags {
+                            pin.url.as_ref()
+                        } else {
+                            pin.tags.as_ref()
+                        };
                         ItemBuilder::new(pin.title.as_ref())
-                            .subtitle(pin.url.as_ref())
+                            .subtitle(subtitle)
                             .arg(pin.url.as_ref())
                             .variable("tags", pin.tags.as_ref())
                             .subtitle_mod(Modifier::Command, pin.tags.as_ref())
@@ -125,7 +132,9 @@ fn process<'a>(
                                             .join(" ")
                                             .as_str(),
                                     ]
-                                    .concat(),
+                                    .concat()
+                                    .trim()
+                                    .to_string(),
                                 ),
                                 true,
                                 None,

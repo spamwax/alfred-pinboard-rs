@@ -78,7 +78,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                     Ok(
                         alfred::ItemBuilder::new("You have the latest version of workflow!")
                             .icon_path("auto_update.png")
-                            .variable("workflow_update_ready", "1")
+                            .variable("workflow_update_ready", "0")
                             .arg("update")
                             .into_item(),
                     )

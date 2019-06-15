@@ -21,6 +21,7 @@ pub fn run(x: SubCommand) {
             auto_update,
             suggest_tags,
             check_bookmarked_page,
+            show_url_vs_tags,
         } => {
             print_config = display;
             config = Config::setup().unwrap_or_else(|err| {
@@ -48,6 +49,7 @@ pub fn run(x: SubCommand) {
             auto_update.map(|val| config.auto_update_cache = val);
             suggest_tags.map(|val| config.suggest_tags = val);
             check_bookmarked_page.map(|val| config.page_is_bookmarked = val);
+            show_url_vs_tags.map(|val| config.show_url_vs_tags = val);
         }
         _ => unreachable!(),
     }
@@ -108,6 +110,11 @@ fn show_config(config: &Config) {
                 .subtitle(format!("{:?}", config.page_is_bookmarked))
                 .arg("pset check_bookmarked")
                 .icon_path("check_bookmarked_page.png")
+                .into_item(),
+            ItemBuilder::new("Show TAGs vs URLs in search results")
+                .subtitle(format!("{:?}", config.show_url_vs_tags))
+                .arg("pset url_tag")
+                .icon_path("url.png")
                 .into_item(),
             ItemBuilder::new("Number of tags to show")
                 .subtitle(format!("{:?}", config.tags_to_show))

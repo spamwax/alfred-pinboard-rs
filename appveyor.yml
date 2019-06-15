@@ -21,6 +21,9 @@ environment:
     - TARGET: i686-pc-windows-msvc
     - TARGET: x86_64-pc-windows-msvc
 
+init:
+  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+
 install:
   - ps: >-
       If ($Env:TARGET -eq 'x86_64-pc-windows-gnu') {
@@ -44,8 +47,8 @@ test_script:
       && set alfred_workflow_uid=hamid63
       && set alfred_workflow_name=RustyPin
       && set alfred_workflow_bundleid=cc.hamid.alfred-pinboard-rs
-      && set alfred_workflow_data=C:\projects\alfred-pinboard-rs
-      && set alfred_workflow_cache=C:\projects\alfred-pinboard-rs
+      && set alfred_workflow_data="C:\projects\alfred-pinboard-rs"
+      && set alfred_workflow_cache="C:\projects\alfred-pinboard-rs" &&
       cargo build --target %TARGET% &&
       cargo run --target %TARGET% -- config --authorization hamid:12345 &&
       cargo run --target %TARGET% -- config -d &&
@@ -58,9 +61,9 @@ cache:
 
 branches:
   only:
-    # Release tags
     - /^v?\d+\.\d+\.\d+.*$/
     - master
+    - develop
 
 notifications:
   - provider: Email
