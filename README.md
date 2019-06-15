@@ -203,7 +203,7 @@ When fuzzy search is enabled, the tags/bookmarks that contain the query letters 
 - This workflow is setup to work with Aflred 3. It may or may not work with previous version as it has not been tested for them.
 
 ## Alfred 3 Support & Issues<a name="alfred_3_support"></a>
-- Alfred 4 has made some changes to internal structure of workflows. Therefore if you updated this workflow the built-in *automatic update*, it's very *likely* that it'll stop working. If that happens, you can fix it by first deleteing & then re-installing the workflow by [downloading the last version (0.14.11)](https://github.com/spamwax/alfred-pinboard-rs/releases/tag/0.14.11) that has Alfred 3 format.
+- Alfred 4 has made some changes to internal structure of workflows. Therefore if you updated this workflow through the built-in *automatic update*, it's very *likely* that it'll stop working. If that happens, you can fix it by first deleteing & then re-installing the workflow by [downloading the last version (0.14.11)](https://github.com/spamwax/alfred-pinboard-rs/releases/tag/0.14.11) that has Alfred 3 format.
 - Moving forward, new features, changes & bug fixes will first target Alfred 4 users and then (time permitting) will be ported back to Alfred 3. 
 
 ## TODO
