@@ -25,7 +25,6 @@ cp Cargo.toml Cargo.toml.back
 echo "[profile.release]" >> Cargo.toml
 echo "lto = true" >> Cargo.toml
 cargo build --release > build.log 2>&1
-cp Cargo.toml.back Cargo.toml
 
 echo "Copying resoursces from Alfred's workflow dir..."
 cp "$workflow_dir"/* "$res_dir"
@@ -50,6 +49,9 @@ zip -r AlfredPinboardRust.alfredworkflow ./*
 echo "Moving bundle to executable folder..."
 mv AlfredPinboardRust.alfredworkflow "$alfred_pinboard_rs"
 rm alfred-pinboard-rs
+
+git add res/workflow
+git add res/images
 
 commit_msg="Release version $version_tag"
 [ -n "$msg" ] && commit_msg="$commit_msg

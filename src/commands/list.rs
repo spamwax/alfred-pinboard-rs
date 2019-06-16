@@ -272,7 +272,6 @@ fn retrieve_popular_tags(exec_counter: usize) -> Result<Vec<Tag>, Error> {
             "**** reading suggested tags from cache file: {:?}",
             ptags_fn
         );
-        use alfred_rs::Data;
         use failure::err_msg;
         tags = Data::load_from_file(ptags_fn)
             .map_or(Err(err_msg("bad popular tags cache file")), |c| Ok(c))?;

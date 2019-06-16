@@ -1,6 +1,6 @@
 [package]
 name = "alfred-pinboard-rs"
-version = "0.14.16"
+version = "0.15.1"
 authors = [ "Hamid Ghadyani <hamid@hamid.cc>",]
 
 [dependencies]
@@ -29,5 +29,7 @@ branch = "master"
 version = "0.4"
 features = [ "serde",]
 
+[profile.release]
+lto = true
 [profile.release]
 lto = true
