@@ -85,7 +85,6 @@ impl<'a> Config {
         debug!("Starting in setup");
         let (data_dir, cache_dir) = Config::get_workflow_dirs();
         let config = Config::read(data_dir, cache_dir)?;
-        debug!("{:?}", config);
         Ok(config)
     }
 
