@@ -6,7 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Changed
-- Add support to show either tag or urls in search results.
+- Add pre-release changes here.
+
+## [0.15.4]
+### Added
+- Add option to either show TAGs or URLs in search results.
+- Fix multiple issues related to release of Alfred 4
+- `pcheck` should now force a network call regardless of when last update check was done.
 - Add a combo modifier for search result to copy URL to clipboard.
 - Fix: deleting a bookmark was not working.
 

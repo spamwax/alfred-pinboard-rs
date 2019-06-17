@@ -187,7 +187,7 @@ When fuzzy search is enabled, the tags/bookmarks that contain the query letters 
 ---
 
 ## Misc.<a name="misc"></a>
-- Workflow will check for newever version of itself every 24 hours. This check only takes place when you actually use one of its keywords (no background service is ever used). You can also manually check for updates through the options from `pconf`.
+- Workflow will check for newever version of itself every 24 hours. This check only takes place when you actually use one of its keywords (no background service is ever used). You can also manually check for updates using `pcheck`.
 
 ![image](./res/images/upgrade_available.png)
 
@@ -205,7 +205,7 @@ When fuzzy search is enabled, the tags/bookmarks that contain the query letters 
 
 ## Known Issues<a name="known_issues"></a>
 - **Firefox**: While tag suggestions and "Check if page is bookmarked" options are enabled, posting bookmark from Firefox is broken. Deleting bookmarks using `pind` won't work when Firefox is your active browser. Reason: Firefox does not properly support interacting with it programatically.
-- This workflow is setup to work with Aflred 3. It may or may not work with previous version as it has not been tested for them.
+- This workflow is setup to work with Aflred 4. It may or may not work with previous version as it has not been tested for them.
 
 ## Alfred 3 Support & Issues<a name="alfred_3_support"></a>
 - Alfred 4 has made some changes to internal structure of workflows. Therefore if you updated this workflow through the built-in *automatic update*, it's very *likely* that it'll stop working. If that happens, you can fix it by first deleteing & then re-installing the workflow by [downloading the last version (0.14.11)](https://github.com/spamwax/alfred-pinboard-rs/releases/tag/0.14.11) that has Alfred 3 format.
