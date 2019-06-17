@@ -1285,8 +1285,6 @@ echo "$ret"</string>
 			<integer>1</integer>
 		</dict>
 		<dict>
-			<key>config</key>
-			<dict/>
 			<key>type</key>
 			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
@@ -1489,8 +1487,6 @@ fi</string>
 			<integer>1</integer>
 		</dict>
 		<dict>
-			<key>config</key>
-			<dict/>
 			<key>type</key>
 			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
@@ -1910,8 +1906,6 @@ echo $ret
 			<integer>2</integer>
 		</dict>
 		<dict>
-			<key>config</key>
-			<dict/>
 			<key>type</key>
 			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
@@ -2096,8 +2090,6 @@ echo $ret
 			<integer>3</integer>
 		</dict>
 		<dict>
-			<key>config</key>
-			<dict/>
 			<key>type</key>
 			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
@@ -2381,8 +2373,6 @@ fi</string>
 			<integer>1</integer>
 		</dict>
 		<dict>
-			<key>config</key>
-			<dict/>
 			<key>type</key>
 			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
@@ -2618,8 +2608,6 @@ echo "$ret"</string>
 			<integer>1</integer>
 		</dict>
 		<dict>
-			<key>config</key>
-			<dict/>
 			<key>type</key>
 			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
@@ -2670,8 +2658,6 @@ echo "$ret"</string>
 			<integer>1</integer>
 		</dict>
 		<dict>
-			<key>config</key>
-			<dict/>
 			<key>type</key>
 			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
@@ -2764,8 +2750,6 @@ echo "$ret"</string>
 			<integer>1</integer>
 		</dict>
 		<dict>
-			<key>config</key>
-			<dict/>
 			<key>type</key>
 			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
@@ -2921,8 +2905,6 @@ echo $ret</string>
 			<integer>1</integer>
 		</dict>
 		<dict>
-			<key>config</key>
-			<dict/>
 			<key>type</key>
 			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
@@ -3917,12 +3899,12 @@ fi</string>
 &lt;?xml version="1.0"?&gt;
 
 &lt;items&gt;
-  &lt;item uid="" arg="true" valid="YES"&gt;
+  &lt;item uid="" arg="false" valid="YES"&gt;
     &lt;title&gt;Show URLs in search results&lt;/title&gt;
 	&lt;icon&gt;url.png&lt;/icon&gt;
   &lt;/item&gt;
 
-  &lt;item uid="" arg="false" valid="YES"&gt;
+  &lt;item uid="" arg="true" valid="YES"&gt;
     &lt;title&gt;Show TAGs in search results&lt;/title&gt;
 	&lt;icon&gt;tag.png&lt;/icon&gt;
   &lt;/item&gt;
@@ -4764,7 +4746,7 @@ Raashid.A</string>
 		</dict>
 	</dict>
 	<key>version</key>
-	<string>0.15.4</string>
+	<string>0.15.5</string>
 	<key>webaddress</key>
 	<string>https://github.com/spamwax/alfred-pinboard-rs</string>
 </dict>
