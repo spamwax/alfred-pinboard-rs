@@ -163,7 +163,7 @@ impl<'a> Config {
             dir.push("alfred-pinboard-rs");
             dir
         });
-        debug!("cache_dir: {:?}", cache_dir);
+        debug!("cache_dir: {}", cache_dir.to_string_lossy());
         if !cache_dir.exists() {
             // If we can't create directories, workflow won't be able to work, so we panic!
             debug!("creating cache_dir");
@@ -175,7 +175,7 @@ impl<'a> Config {
             dir.push("alfred-pinboard-rs");
             dir
         });
-        debug!("data_dir: {:?}", data_dir);
+        debug!("data_dir: {}", data_dir.to_string_lossy());
         if !data_dir.exists() {
             // If we can't create directories, workflow won't be able to work, so we panic!
             debug!("creating data_dir");

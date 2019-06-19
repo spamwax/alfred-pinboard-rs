@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Changed
-- Add pre-release changes here.
+- Fix appveyor CI issue with directory names.
 
 ## [0.15.4]
 ### Added

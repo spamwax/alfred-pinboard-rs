@@ -20,6 +20,16 @@ environment:
     # MSVC
     - TARGET: i686-pc-windows-msvc
     - TARGET: x86_64-pc-windows-msvc
+  RUST_BACKTRACE: 1
+  alfred_debug: 1
+  alfred_version: 4.0.1
+  alfred_workflow_version: 0.11.1
+  alfred_workflow_uid: hamid63
+  alfred_workflow_name: RustyPin
+  alfred_workflow_bundleid: 'cc.hamid.alfred-pinboard-rs'
+  alfred_workflow_data: 'C:\projects\alfred-pinboard-rs'
+  alfred_workflow_cache: 'C:\projects\alfred-pinboard-rs'
+
 
 init:
   - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
@@ -39,16 +49,7 @@ install:
 
 # TODO This is the "test phase", tweak it as you see fit
 test_script:
-  # we don't run the "test phase" when doing deploys
   - if [%APPVEYOR_REPO_TAG%]==[false] (
-      set alfred_debug=1
-      && set alfred_version=4.0.1
-      && set alfred_workflow_version=0.11.1
-      && set alfred_workflow_uid=hamid63
-      && set alfred_workflow_name=RustyPin
-      && set alfred_workflow_bundleid=cc.hamid.alfred-pinboard-rs
-      && set alfred_workflow_data="C:\projects\alfred-pinboard-rs"
-      && set alfred_workflow_cache="C:\projects\alfred-pinboard-rs" &&
       cargo build --target %TARGET% &&
       cargo run --target %TARGET% -- config --authorization hamid:12345 &&
       cargo run --target %TARGET% -- config -d &&
@@ -63,7 +64,6 @@ branches:
   only:
     - /^v?\d+\.\d+\.\d+.*$/
     - master
-    - develop
 
 notifications:
   - provider: Email
