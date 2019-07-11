@@ -52,7 +52,6 @@ build_release() {
 
     zip -r AlfredPinboardRust.alfredworkflow ./*
 
-    cd "$stage"
     case $TARGET in
         x86_64-apple-darwin)
             cp ./AlfredPinboardRust.alfredworkflow "$src/alfred-pinboard-rust-$TRAVIS_TAG.alfredworkflow"

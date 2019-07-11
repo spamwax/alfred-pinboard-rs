@@ -47,7 +47,8 @@ run_phase() {
 # TODO This is the "test phase", tweak it as you see fit
 test_phase() {
 
-    if [ ! -z "$DISABLE_TESTS" ]; then
+    rustup target add --toolchain stable x86_64-unknown-freebsd
+    if [ -n "$DISABLE_TESTS" ]; then
         cross build --target "$TARGET"
         return
     fi
