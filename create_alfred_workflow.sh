@@ -49,6 +49,7 @@ rm alfred-pinboard-rs
 
 git add res/workflow
 git add res/images
+git add Cargo.toml
 
 commit_msg="Release version $version_tag"
 [ -n "$msg" ] && commit_msg="$commit_msg

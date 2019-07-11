@@ -6,8 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Changed
-- Fix appveyor CI issue with directory names.
+
+## [0.15.6] - 2019-07-11
+### Added
 - Holding CMD in search results now correctly shows either tags or URL based on users' settings.
+### Fixed
+- Fix appveyor CI issue with directory names.
 
 ## [0.15.4] - 2019-06-17
 ### Added
