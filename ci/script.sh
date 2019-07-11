@@ -21,20 +21,22 @@ run_phase() {
             cross run --target "$TARGET" -- config -d
             ;;
         x86_64-unknown-linux-gnu)
-            mkdir "/Users/travis/.config/alfred-pinboard-rs"
+            mkdir "$HOME/.config/alfred-pinboard-rs"
             cross run --target "$TARGET" -- config --authorization hamid:12345
             cross run --target "$TARGET" -- config -d
             ;;
         i686-apple-darwin)
+            mkdir "$HOME/.config/alfred-pinboard-rs"
             cross run --target "$TARGET" -- config --authorization hamid:12345
             cross run --target "$TARGET" -- config -d
             ;;
         x86_64-unknown-freebsd)
+            mkdir "$HOME/.config/alfred-pinboard-rs"
             cross run --target "$TARGET" -- config --authorization hamid:12345
             cross run --target "$TARGET" -- config -d
             ;;
         armv7-linux-androideabi)
-            export alfred_debug=1
+            mkdir "$HOME/.config/alfred-pinboard-rs"
             cross run --target "$TARGET" -- config --authorization hamid:12345
             ;;
         *)
