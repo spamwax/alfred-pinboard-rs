@@ -24,6 +24,7 @@ run_phase() {
             mkdir "$HOME/.config/alfred-pinboard-rs"
             export alfred_workflow_data=$HOME/.config/alfred-pinboard-rs
             export alfred_workflow_cache=$HOME/.config/alfred-pinboard-rs
+            echo "=========>>> " "`pwd`"
             cross run --target "$TARGET" -- config --authorization hamid:12345
             cross run --target "$TARGET" -- config -d
             ;;
@@ -35,12 +36,11 @@ run_phase() {
             cross run --target "$TARGET" -- config -d
             ;;
         x86_64-unknown-freebsd)
-            return # can't compile openssl on FreeBSD
-            mkdir "$HOME/.config/alfred-pinboard-rs"
-            export alfred_workflow_data=$HOME/.config/alfred-pinboard-rs
-            export alfred_workflow_cache=$HOME/.config/alfred-pinboard-rs
-            cross run --target "$TARGET" -- config --authorization hamid:12345
-            cross run --target "$TARGET" -- config -d
+            # mkdir "$HOME/.config/alfred-pinboard-rs"
+            # export alfred_workflow_data=$HOME/.config/alfred-pinboard-rs
+            # export alfred_workflow_cache=$HOME/.config/alfred-pinboard-rs
+            # cross run --target "$TARGET" -- config --authorization hamid:12345
+            # cross run --target "$TARGET" -- config -d
             ;;
         armv7-linux-androideabi)
             mkdir "$HOME/.config/alfred-pinboard-rs"
