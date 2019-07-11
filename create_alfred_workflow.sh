@@ -47,6 +47,7 @@ echo "Moving bundle to executable folder..."
 mv AlfredPinboardRust.alfredworkflow "$alfred_pinboard_rs"
 rm alfred-pinboard-rs
 
+cd "$alfred_pinboard_rs" || exit
 git add res/workflow
 git add res/images
 git add Cargo.toml
