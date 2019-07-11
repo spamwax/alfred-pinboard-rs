@@ -24,6 +24,7 @@ run_phase() {
             mkdir -p "$HOME/.config/alfred-pinboard-rs"
             export alfred_workflow_data=$HOME/.config/alfred-pinboard-rs
             export alfred_workflow_cache=$HOME/.config/alfred-pinboard-rs
+            export RUST_BACKTRACE=1
             ls -ld $alfred_workflow_data
             ls -ld $alfred_workflow_cache
             chown -R $USER:$USER $alfred_workflow_data
