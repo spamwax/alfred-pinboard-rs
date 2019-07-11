@@ -85,16 +85,16 @@ fn process<'a>(
                     //   show extended text, tags or open the link in https://pinboard.in
                     .map(|pin| {
                         let _none: Option<String> = None;
-                        let subtitle = if !url_vs_tags {
-                            pin.url.as_ref()
+                        let (subtitle, modifier_subtitle) = if !url_vs_tags {
+                            (pin.url.as_ref(), pin.tags.as_ref())
                         } else {
-                            pin.tags.as_ref()
+                            (pin.tags.as_ref(), pin.url.as_ref())
                         };
                         ItemBuilder::new(pin.title.as_ref())
                             .subtitle(subtitle)
                             .arg(pin.url.as_ref())
                             .variable("tags", pin.tags.as_ref())
-                            .subtitle_mod(Modifier::Command, pin.tags.as_ref())
+                            .subtitle_mod(Modifier::Command, modifier_subtitle)
                             .quicklook_url(pin.url.as_ref())
                             .text_large_type(pin.title.as_ref())
                             .text_copy(pin.url.as_ref())

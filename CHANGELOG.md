@@ -7,13 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Changed
 - Fix appveyor CI issue with directory names.
+- Holding CMD in search results now correctly shows either tags or URL based on users' settings.
 
-## [0.15.4]
+## [0.15.4] - 2019-06-17
 ### Added
 - Add option to either show TAGs or URLs in search results.
+- Add a combo modifier for search result to copy URL to clipboard.
+### Fixed
 - Fix multiple issues related to release of Alfred 4
 - `pcheck` should now force a network call regardless of when last update check was done.
-- Add a combo modifier for search result to copy URL to clipboard.
 - Fix: deleting a bookmark was not working.
 
 ## [0.14.9] - 2019-02-13
