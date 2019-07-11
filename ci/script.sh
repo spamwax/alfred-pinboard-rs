@@ -12,31 +12,40 @@ run_phase() {
     export alfred_workflow_uid=hamid63
     export alfred_workflow_name="RustyPin"
     export alfred_workflow_bundleid=cc.hamid.alfred-pinboard-rs
-    export alfred_workflow_data=/Users/travis/.config/alfred-pinboard-rs
-    export alfred_workflow_cache=/Users/travis/.config/alfred-pinboard-rs
     case "$TARGET" in
         x86_64-apple-darwin)
+            export alfred_workflow_data=/Users/travis/.config/alfred-pinboard-rs
+            export alfred_workflow_cache=/Users/travis/.config/alfred-pinboard-rs
             mkdir "/Users/travis/.config/alfred-pinboard-rs"
             cross run --target "$TARGET" -- config --authorization hamid:12345
             cross run --target "$TARGET" -- config -d
             ;;
         x86_64-unknown-linux-gnu)
             mkdir "$HOME/.config/alfred-pinboard-rs"
+            export alfred_workflow_data=$HOME/.config/alfred-pinboard-rs
+            export alfred_workflow_cache=$HOME/.config/alfred-pinboard-rs
             cross run --target "$TARGET" -- config --authorization hamid:12345
             cross run --target "$TARGET" -- config -d
             ;;
         i686-apple-darwin)
             mkdir "$HOME/.config/alfred-pinboard-rs"
+            export alfred_workflow_data=$HOME/.config/alfred-pinboard-rs
+            export alfred_workflow_cache=$HOME/.config/alfred-pinboard-rs
             cross run --target "$TARGET" -- config --authorization hamid:12345
             cross run --target "$TARGET" -- config -d
             ;;
         x86_64-unknown-freebsd)
+            return # can't compile openssl on FreeBSD
             mkdir "$HOME/.config/alfred-pinboard-rs"
+            export alfred_workflow_data=$HOME/.config/alfred-pinboard-rs
+            export alfred_workflow_cache=$HOME/.config/alfred-pinboard-rs
             cross run --target "$TARGET" -- config --authorization hamid:12345
             cross run --target "$TARGET" -- config -d
             ;;
         armv7-linux-androideabi)
             mkdir "$HOME/.config/alfred-pinboard-rs"
+            export alfred_workflow_data=$HOME/.config/alfred-pinboard-rs
+            export alfred_workflow_cache=$HOME/.config/alfred-pinboard-rs
             cross run --target "$TARGET" -- config --authorization hamid:12345
             ;;
         *)
