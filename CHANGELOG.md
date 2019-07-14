@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Changed
+- Preserve upper/lowercase of titles/urls/description.
 
 ## [0.15.6] - 2019-07-11
 ### Added

@@ -24,6 +24,7 @@ version = "0.5"
 [dependencies.rusty-pin]
 git = "https://github.com/spamwax/rusty-pin"
 branch = "master"
+# path = "../rusty-pin"
 
 [dependencies.chrono]
 version = "0.4"
