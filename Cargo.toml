@@ -1,6 +1,6 @@
 [package]
 name = "alfred-pinboard-rs"
-version = "0.15.6"
+version = "0.15.7"
 authors = [ "Hamid Ghadyani <hamid@hamid.cc>",]
 
 [dependencies]
@@ -24,7 +24,6 @@ version = "0.5"
 [dependencies.rusty-pin]
 git = "https://github.com/spamwax/rusty-pin"
 branch = "master"
-# path = "../rusty-pin"
 
 [dependencies.chrono]
 version = "0.4"
