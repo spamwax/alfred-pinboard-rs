@@ -21,6 +21,10 @@ impl<'api, 'pin> Runner<'api, 'pin> {
         debug!("Starting in list::process");
         let config = self.config.as_ref().unwrap();
         let pinboard = self.pinboard.as_ref().unwrap();
+
+        let private_pin = (!config.private_new_pin).to_string();
+        let toread_pin = config.toread_new_pin.to_string();
+
         if tags {
             // Search the tags using the last 'word' in 'q'
             let queries = q.unwrap_or_else(String::new);
@@ -37,6 +41,8 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                 let mut item = ItemBuilder::new("Hit Return to bookmark the page!")
                     .icon_path("upload.png")
                     .arg(queries.as_str())
+                    .variable("shared", private_pin)
+                    .variable("toread", toread_pin)
                     .variable("tags", pin_info[0]);
                 if !pin_info[1].is_empty() {
                     item = item.variable("description", pin_info[1])
@@ -119,6 +125,8 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                                 .subtitle(tag.1.to_string())
                                 .autocomplete(_args.clone())
                                 .variable("tags", _args.clone())
+                                .variable("shared", &private_pin)
+                                .variable("toread", &toread_pin)
                                 .arg(_args)
                                 .valid(true)
                                 .icon_path("tag.png")

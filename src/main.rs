@@ -205,7 +205,7 @@ fn show_error_alfred<'a, T: Into<Cow<'a, str>>>(s: T) {
     alfred::json::write_items(io::stdout(), &[item]).expect("Can't write to stdout");
 }
 
-fn alfred_error<'a, T: Into<Cow<'a, str>>>(s: T) -> alfred::Item<'a> {
+fn alfred_error_item<'a, T: Into<Cow<'a, str>>>(s: T) -> alfred::Item<'a> {
     debug!("Starting in alfred_error");
     alfred::ItemBuilder::new("Error")
         .subtitle(s)
