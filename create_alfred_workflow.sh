@@ -51,6 +51,8 @@ cd "$alfred_pinboard_rs" || exit
 git add res/workflow
 git add res/images
 git add Cargo.toml
+git add CHANGELOG.md
+git add README.md
 
 commit_msg="Release version $version_tag"
 [ -n "$msg" ] && commit_msg="$commit_msg

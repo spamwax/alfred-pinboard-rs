@@ -79,8 +79,8 @@ To finish the process just press Enter.
 #### Modifiers (<kbd>Control ⌃, Option ⌥</kbd>)
 You can hold down modifiers to one-time change some of your settings:
 
-- <kbd>Control ⌃</kbd> : will mark the bookmark as `toread` (regardless of settings)
-- <kbd>Option ⌥</kbd> : will mark the bookmark as `shared` (regardless of settings)
+- <kbd>Control ⌃</kbd> : will toggle `toread` setting momentarily.
+- <kbd>Option ⌥</kbd> : will toggle `shared` setting momentarily.
 
 
 After entering last desired tag, you can hit enter to post the bookmark.

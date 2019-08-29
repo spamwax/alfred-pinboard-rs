@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Changed
 
+## [0.15.8] - 2019-08-29
+### Changed
+- Holding `Control`/`Option` keys while posting a bookmark will now momentarily toggle `toread`/`shared` settings. ([Closes #38](https://github.com/spamwax/alfred-pinboard-rs/issues/38)) 
+
 ## [0.15.7] - 2019-07-14
 - Preserve upper/lowercase of titles/urls/description.
 
