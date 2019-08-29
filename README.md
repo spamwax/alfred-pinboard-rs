@@ -108,7 +108,7 @@ Searching your bookmarks is easy.
 ps query1 query2 query3 ...
 ```
 
-Workflow will use the text you enter in Alfred and show list of bookmarks that contain **all** of the search keywords in any of the bookmarks information (Desrciption of bookmark, its tags, its url and its extended notes). However, these search fields can be adjusted, see [settings](#config).
+Workflow will use the text you enter in Alfred and show list of bookmarks that contain **all** of the search keywords in any of the bookmarks information (Description of bookmark, its tags, its url and its extended notes). However, these search fields can be adjusted, see [settings](#config).
 
 So **the more** search keywords you enter **the less** results will be displayed as it tries to find the bookmarks that contain ***all*** of the keywords.
 
