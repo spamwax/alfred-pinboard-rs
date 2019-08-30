@@ -1,7 +1,7 @@
 use super::*;
 use std::{thread, time};
 
-use alfred::{Item, ItemBuilder};
+use alfred::{Item, ItemBuilder, Modifier};
 use alfred_rs::Data;
 use failure::Error;
 
@@ -24,6 +24,16 @@ impl<'api, 'pin> Runner<'api, 'pin> {
 
         let private_pin = (!config.private_new_pin).to_string();
         let toread_pin = config.toread_new_pin.to_string();
+        let option_subtitle = if config.private_new_pin {
+            "Post the bookmark as PUBLIC."
+        } else {
+            "Post the bookmark as private."
+        };
+        let control_subtitle = if config.toread_new_pin {
+            "Mark the pin as NOT toread."
+        } else {
+            "Mark the pin as TOREAD."
+        };
 
         if tags {
             // Search the tags using the last 'word' in 'q'
@@ -43,7 +53,9 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                     .arg(queries.as_str())
                     .variable("shared", private_pin)
                     .variable("toread", toread_pin)
-                    .variable("tags", pin_info[0]);
+                    .variable("tags", pin_info[0])
+                    .subtitle_mod(Modifier::Option, option_subtitle)
+                    .subtitle_mod(Modifier::Control, control_subtitle);
                 if !pin_info[1].is_empty() {
                     item = item.variable("description", pin_info[1])
                 }
@@ -124,6 +136,8 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                             ItemBuilder::new(tag.0.as_str())
                                 .subtitle(tag.1.to_string())
                                 .autocomplete(_args.clone())
+                                .subtitle_mod(Modifier::Option, option_subtitle)
+                                .subtitle_mod(Modifier::Control, control_subtitle)
                                 .variable("tags", _args.clone())
                                 .variable("shared", &private_pin)
                                 .variable("toread", &toread_pin)
