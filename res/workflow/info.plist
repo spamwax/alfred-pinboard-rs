@@ -690,6 +690,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>917EC178-CADB-4DD0-B8B4-B3D7F7685BBC</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>988D1146-585C-4DC6-A56B-B303B9A3F173</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>93A64ECE-BB64-492B-B845-7CB85B544D40</key>
 		<array>
 			<dict>
@@ -767,7 +780,7 @@
 				<key>modifiers</key>
 				<integer>262144</integer>
 				<key>modifiersubtext</key>
-				<string>Toggle TOREAD setting!</string>
+				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -777,7 +790,17 @@
 				<key>modifiers</key>
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>Toggle SHARED bookmark setting!</string>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>917EC178-CADB-4DD0-B8B4-B3D7F7685BBC</string>
+				<key>modifiers</key>
+				<integer>786432</integer>
+				<key>modifiersubtext</key>
+				<string>Toggle both shared and toread settings momentarily.</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -1591,6 +1614,39 @@ Chain by Alax from the Noun Project</string>
 			<string>013B2DEB-D66D-4D01-8528-0696630F8DEF</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>126</integer>
+				<key>script</key>
+				<string># $tags and $description env. variables are passed in as input from previous script filter.
+
+[ "$shared" = "false" ] &amp;&amp; shared=true || shared=false
+[ "$toread" = "false" ] &amp;&amp; toread=true || toread=false
+
+ret=$(./alfred-pinboard-rs post --shared "$shared" --toread "$toread" --tags "$tags" --description "$description")
+if [ $? -ne 0 ]; then
+    echo -n "$ret"
+else
+    echo -n "$ret"
+fi</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>917EC178-CADB-4DD0-B8B4-B3D7F7685BBC</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -4391,6 +4447,17 @@ Raashid.A</string>
 			<key>ypos</key>
 			<integer>2275</integer>
 		</dict>
+		<key>917EC178-CADB-4DD0-B8B4-B3D7F7685BBC</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>Toggle SHARED and TOREAD bookmark setting!</string>
+			<key>xpos</key>
+			<integer>190</integer>
+			<key>ypos</key>
+			<integer>390</integer>
+		</dict>
 		<key>91BE90E3-0CA9-4BEA-AEA7-0077C8AC9F62</key>
 		<dict>
 			<key>xpos</key>
@@ -4704,7 +4771,7 @@ Raashid.A</string>
 		</dict>
 	</dict>
 	<key>version</key>
-	<string>0.15.8</string>
+	<string>0.15.9</string>
 	<key>webaddress</key>
 	<string>https://github.com/spamwax/alfred-pinboard-rs</string>
 </dict>
