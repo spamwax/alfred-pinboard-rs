@@ -119,13 +119,10 @@ fn main() {
 
             // If running ./alfred-pinboard-rs self -c, we have to make a network call
             // We do this by forcing the check interval to be zero
-            match opt.cmd {
-                SubCommand::SelfUpdate { check, .. } => {
-                    if check {
-                        updater.set_interval(0);
-                    }
+            if let SubCommand::SelfUpdate { check, .. } = opt.cmd {
+                if check {
+                    updater.set_interval(0);
                 }
-                _ => (),
             }
             // updater.set_version("0.13.1");
             // updater.set_interval(60);

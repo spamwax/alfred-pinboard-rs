@@ -109,9 +109,9 @@ impl<'a> Config {
                                     .map_err(|_| From::from(AlfredError::ConfigFileErr))
                             })
                     },
-                    |c: Config| Ok(c),
+                    Ok,
                 )
-                .map(|mut c| {
+                .map(|mut c: Config| {
                     assert!(data_dir.pop());
                     c.workflow_data_dir = data_dir;
                     c.workflow_cache_dir = cached_dir;

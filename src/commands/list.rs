@@ -70,7 +70,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
 
             let last_query_word_tag;
             let mut popular_tags;
-            let mut alfred_items = vec![];
+            let mut alfred_items = Vec::with_capacity(config.tags_to_show as usize + 1);
 
             // First try to get list of popular tags from Pinboard
             let tag_suggestion = suggest.unwrap_or(config.suggest_tags);
@@ -235,10 +235,9 @@ fn suggest_tags() -> Vec<Tag> {
         let r = retrieve_popular_tags(exec_counter);
         if let Ok(pt) = r {
             let tx_result = tx.send(pt);
-            if tx_result.is_ok() {
-                warn!("Sent the popular tags from child thread");
-            } else {
-                warn!("Failed to send popular tags: {:?}", tx_result.unwrap_err());
+            match tx_result {
+                Ok(_) => warn!("Sent the popular tags from child thread"),
+                Err(e) => warn!("Failed to send popular tags: {:?}", e),
             }
         } else {
             warn!("get_suggested_tags: {:?}", r);
@@ -296,7 +295,7 @@ fn retrieve_popular_tags(exec_counter: usize) -> Result<Vec<Tag>, Error> {
         );
         use failure::err_msg;
         tags = Data::load_from_file(ptags_fn)
-            .map_or(Err(err_msg("bad popular tags cache file")), |c| Ok(c))?;
+            .map_or(Err(err_msg("bad popular tags cache file")), Ok)?;
     }
     Ok(tags
         .into_iter()

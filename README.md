@@ -73,7 +73,7 @@ You can move Alfred's highlighter to the desired tag and hit '**Tab**' to **auto
 To finish the process just press Enter.
 
 - If tag suggestion feature is enabled (see `pset suggest_tags`), 3 popular tags based on current active webpage will be added to the list of your tags. The list is fetched from Pinboard's API and is often helpful. However this feature will add a 1 second delay to showing the tag list after first keystroke. This delay is disabled for consequent keystrokes as the fetched popular tags are cached.
-  
+
   ![image](./res/images/popular-tags.png)
 
 #### Modifiers (<kbd>Control ⌃, Option ⌥</kbd>)
@@ -177,11 +177,11 @@ To manually update the cache, you need to issue the ***`pu`*** command:
 Most of configuration settings are self-explanatory. However `fuzzy` search may need a demo.
 
 When fuzzy search is enabled, the tags/bookmarks that contain the query letters in the given order are displayed:
- 
+
   ![image](./res/images/fuzzy-search-tags.png)
 
   Otherwise, _normal_ search will search for consecutive characters in query:
-  
+
   ![image](./res/images/non-fuzzy-search-tags.png)
 
 ---
@@ -209,7 +209,7 @@ When fuzzy search is enabled, the tags/bookmarks that contain the query letters 
 
 ## Alfred 3 Support & Issues<a name="alfred_3_support"></a>
 - Alfred 4 has made some changes to internal structure of workflows. Therefore if you updated this workflow through the built-in *automatic update*, it's very *likely* that it'll stop working. If that happens, you can fix it by first deleteing & then re-installing the workflow by [downloading the last version (0.14.11)](https://github.com/spamwax/alfred-pinboard-rs/releases/tag/0.14.11) that has Alfred 3 format.
-- Moving forward, new features, changes & bug fixes will first target Alfred 4 users and then (time permitting) will be ported back to Alfred 3. 
+- Moving forward, new features, changes & bug fixes will first target Alfred 4 users and then (time permitting) will be ported back to Alfred 3.
 
 ## TODO
 
