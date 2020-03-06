@@ -40,7 +40,7 @@ pub struct Config {
     /// Flag to check if browser's page is already bookmarked
     #[serde(default)]
     pub page_is_bookmarked: bool,
-    /// Flag to check if browser's page is already bookmarked
+    /// Flag to show either url or tags of current bookmark
     #[serde(default)]
     pub show_url_vs_tags: bool,
     /// Flag to update cache after each bookmark saving automatically.
