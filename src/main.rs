@@ -39,6 +39,7 @@ extern crate alfred_rs;
 extern crate rusty_pin;
 
 use std::borrow::Cow;
+use std::collections::HashMap;
 use std::env;
 use std::io;
 use std::process;
@@ -175,17 +176,27 @@ fn setup<'a, 'p>() -> Result<(Config, Pinboard<'a, 'p>), Error> {
     Ok((config, pinboard))
 }
 
-fn write_to_alfred<'a, I>(items: I, supports_json: bool)
+fn write_to_alfred<'a, 'b, I, J>(items: I, supports_json: bool, vars: Option<J>)
 where
     I: IntoIterator<Item = alfred::Item<'a>>,
+    J: IntoIterator<Item = (&'b str, &'b str)>,
 {
-    let output_items = items.into_iter().collect::<Vec<alfred::Item>>();
-
     let exec_counter = env::var("apr_execution_counter").unwrap_or_else(|_| "1".to_string());
+    let output_items = items.into_iter().collect::<Vec<alfred::Item>>();
+    let mut variables: HashMap<&str, &str> = HashMap::new();
+
+    variables.insert("apr_execution_counter", exec_counter.as_str());
+    if let Some(items) = vars {
+        items.into_iter().for_each(|(k, v)| {
+            variables.insert(k, v);
+        });
+    }
+
+    debug!("variables: {:?}", variables);
     // Depending on alfred version use either json or xml output.
     if supports_json {
         alfred::json::Builder::with_items(output_items.as_slice())
-            .variable("apr_execution_counter", exec_counter.as_str())
+            .variables(variables)
             .write(io::stdout())
             .expect("Couldn't write items to Alfred");
     } else {

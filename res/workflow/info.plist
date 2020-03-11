@@ -1827,7 +1827,7 @@ fi</string>
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>https://pinboard.in/search/u:hamid?query={query}</string>
+				<string>https://pinboard.in/search/u:{var:username}?query={query}</string>
 				<key>utf8</key>
 				<true/>
 			</dict>
@@ -2852,22 +2852,8 @@ echo $ret</string>
 				<key>escaping</key>
 				<integer>127</integer>
 				<key>script</key>
-				<string># capture username only
-IN=$1
-IFS=':' read -ra OUT &lt;&lt;&lt; "$IN"
-USERNAME=${OUT[0]}
-
-# we now substitue hamid with user name so we can actually see our links on pinboard.in
-sed -i '' -e "s/u:hamid/u:$USERNAME/" info.plist
-
-# add hacky support for qutebrowser
-# plugin_folder="$alfred_preferences/workflows/$alfred_workflow_uid"
-# for_sed=$(sed -e 's/[/'\'']/\\&amp;/g' &lt;&lt;&lt; $plugin_folder)
-# for_scpt=$(sed -e 's/"/\\\\\\\\\\\\\"/g' &lt;&lt;&lt; $for_sed)
-# sed -i .bak -e 's/_path_to_qutebrowser_script_/'"$for_scpt"'/' get-current-url.applescript
-
-# set the auth token in config.json
-if ! ./alfred-pinboard-rs config --authorization $IN; then
+				<string># set the auth token in config.json
+if ! ./alfred-pinboard-rs config --authorization $1; then
     echo "Couldn't set user credentials!!!"
 else
     echo "Successfully set user credentials."

@@ -39,32 +39,45 @@ impl<'api, 'pin> Runner<'api, 'pin> {
         let update_item = self.get_upgrade_item();
         if let Ok(item) = update_item {
             output_items.push(item);
+        } else {
+            error!(
+                "Error checking for workflow updates: {:?}",
+                update_item.unwrap_err()
+            );
         }
 
         let json_format = self.config.as_ref().unwrap().can_use_json();
-        crate::write_to_alfred(output_items, json_format);
+        // Get username from auth_token
+        let idx = self
+            .config
+            .as_ref()
+            .unwrap()
+            .auth_token
+            .find(':')
+            .ok_or(failure::err_msg("Bad Auth. Token!"))?;
+        let username = &self.config.as_ref().unwrap().auth_token.as_str()[..idx];
+        crate::write_to_alfred(
+            output_items,
+            json_format,
+            Some(vec![("username", username)]),
+        );
         Ok(())
     }
 
     fn get_upgrade_item(&self) -> Result<alfred::Item, Error> {
         debug!("Starting in get_upgrade_item");
-        let r = self.updater.as_ref().unwrap().update_ready();
-
-        match r {
-            Ok(update) => {
-                if update {
-                    info!("update is available");
-                    // Since an update is available `latest_version().unwrap()` will not fail
-                    let new_version = self
-                        .updater
-                        .as_ref()
-                        .unwrap()
-                        .latest_avail_version()
-                        .unwrap();
-                    let old_version = self.updater.as_ref().unwrap().current_version();
-                    Ok(alfred::ItemBuilder::new(
-                        "New Version Is Available for Rusty Pin Workflow! 🎉",
-                    )
+        self.updater.as_ref().unwrap().update_ready().map(|update| {
+            if update {
+                info!("Update is available");
+                // Since an update is available `latest_version().unwrap()` will not fail
+                let new_version = self
+                    .updater
+                    .as_ref()
+                    .unwrap()
+                    .latest_avail_version()
+                    .unwrap();
+                let old_version = self.updater.as_ref().unwrap().current_version();
+                alfred::ItemBuilder::new("New Version Is Available for Rusty Pin Workflow! 🎉")
                     .subtitle(format!(
                         "Click to download & upgrade {} ⟶ {}",
                         old_version, new_version
@@ -72,22 +85,15 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                     .icon_path("auto_update.png")
                     .variable("workflow_update_ready", "1")
                     .arg("update")
-                    .into_item())
-                } else {
-                    info!("Update *UNAVAILABLE*\n{:#?}", r);
-                    Ok(
-                        alfred::ItemBuilder::new("You have the latest version of workflow!")
-                            .icon_path("auto_update.png")
-                            .variable("workflow_update_ready", "0")
-                            .arg("update")
-                            .into_item(),
-                    )
-                }
+                    .into_item()
+            } else {
+                info!("Update *UNAVAILABLE*");
+                alfred::ItemBuilder::new("You have the latest version of workflow!")
+                    .icon_path("auto_update.png")
+                    .variable("workflow_update_ready", "0")
+                    .arg("update")
+                    .into_item()
             }
-            Err(e) => {
-                error!("Error: {}", e.to_string());
-                Err(e)
-            }
-        }
+        })
     }
 }
