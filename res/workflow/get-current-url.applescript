@@ -1,5 +1,15 @@
 on appIsRunning(appName)
+    set osver to system version of (system info)
+    considering numeric strings
+        set catalina to (osver >= "10.15" and osver < "10.16")
+    end considering
+    if catalina then
+        return true
+    end if
     tell application "System Events" to (name of processes) contains appName
+    -- set processName to run script "tell application \"System Events\" to (name of processes)"
+    -- set ret to processName contains appName
+    -- return ret
 end appIsRunning
 
 
