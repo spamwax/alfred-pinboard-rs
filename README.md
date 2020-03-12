@@ -40,6 +40,7 @@ After initial [setup](#installation--setup):
 - Opera
 - Vivaldi
 - Brave
+- qutebrowser (See [known issues](#known_issues) )
 - Firefox Dev. Edition
 - Safari Tech. Preview
 - Chrome
