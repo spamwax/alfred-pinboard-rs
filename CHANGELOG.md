@@ -5,8 +5,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [0.15.10] - 2020-03-12
+### Fixed
+- Trying to address issue [#47](https://github.com/spamwax/alfred-pinboard-rs/issues/47) (Catalina osascript premissions)
+### Added
+- Suport Microsoft Edge Browser
 ### Changed
-- Don't use 'sed' hack to pass username to URL on pinboard (which will be overwritten on new updates).
+- Don't use `sed` hack to set username for url search on [pinboard](https://pinboard.in). A `username` environment variable is now passed to Alfred.
 
 ## [0.15.8] - 2019-08-29
 ### Changed

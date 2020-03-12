@@ -1458,13 +1458,24 @@ fi</string>
 				<key>queuedelayimmediatelyinitially</key>
 				<false/>
 				<key>queuedelaymode</key>
-				<integer>0</integer>
+				<integer>1</integer>
 				<key>queuemode</key>
 				<integer>2</integer>
 				<key>runningsubtext</key>
 				<string>Fetching tags...</string>
 				<key>script</key>
-				<string>apr_execution_counter=$((apr_execution_counter + 1)) ./alfred-pinboard-rs list -t "$1"</string>
+				<string>
+apr_execution_counter=$((apr_execution_counter + 1))
+
+#if [ -z ${supported_browser+x} ] || [ -z "$supported_browser" ]; then
+
+ #   supported_browser=$(osascript -s so identify-browser.applescript)
+
+#fi
+
+
+
+supported_browser=$supported_browser apr_execution_counter=$apr_execution_counter ./alfred-pinboard-rs list -t "$1"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -1606,7 +1617,8 @@ Raashid.A
 useiconic.com, US
 Gregor Cresnar
 Check by Chanut is Industries from the Noun Project
-Chain by Alax from the Noun Project</string>
+Chain by Alax from the Noun Project
+Information by Kevin White from the Noun Project</string>
 				<key>variables</key>
 				<dict/>
 			</dict>
@@ -2265,7 +2277,7 @@ fi</string>
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>./alfred-pinboard-rs search --tags "$1"</string>
+				<string>./alfred-pinboard-rs search --tags --title --url --description "$1"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -3286,20 +3298,30 @@ fi</string>
 				<string></string>
 				<key>script</key>
 				<string>cat &lt;&lt; EOB
+{
+    "items": [
+        {
+            "subtitle": "show popular tags for the current webpage.",
+            "title": "Enable Popular Tags",
+            "arg": "true",
+            "icon": {
+                "path": "suggest.png"
+            },
+            "uid": "1"
 
-&lt;?xml version="1.0"?&gt;
+        },
+        {
 
-&lt;items&gt;
-  &lt;item uid="" arg="true" valid="YES" autocomplete="Yes"&gt;
-    &lt;title&gt;Enable Popular Tags&lt;/title&gt;
-	&lt;icon&gt;suggest.png&lt;/icon&gt;
-  &lt;/item&gt;
+            "title": "Disable Popular Tags",
+            "arg": "false",
+            "icon": {
+                "path": "no_suggest.png"
+            },
+            "uid": "10"
+        },
 
-  &lt;item uid="" arg="false" valid="YES" autocomplete="No"&gt;
-    &lt;title&gt;Disable Popular Tags&lt;/title&gt;
-	&lt;icon&gt;no_suggest.png&lt;/icon&gt;
-  &lt;/item&gt;
-&lt;/items&gt;
+    ]
+}
 
 EOB</string>
 				<key>scriptargtype</key>
@@ -3427,21 +3449,32 @@ fi</string>
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>cat &lt;&lt; EOB
+				<string>
+cat &lt;&lt; EOB
+{
+    "items": [
+        {
+            "subtitle": "post all new bookmarks as public.",
+            "title": "Enable Shared Bookmarkings",
+            "arg": "true",
+            "icon": {
+                "path": "unlocked.png"
+            },
+            "uid": "1"
 
-&lt;?xml version="1.0"?&gt;
+        },
+        {
+            "subtitle": "post all new bookmarks as private.",
+            "title": "Enable Private Bookmarking",
+            "arg": "false",
+            "icon": {
+                "path": "locked.png"
+            },
+            "uid": "10"
+        },
 
-&lt;items&gt;
-  &lt;item uid="" arg="true" valid="YES"&gt;
-    &lt;title&gt;Enable Shared Bookmarking&lt;/title&gt;
-	&lt;icon&gt;unlocked.png&lt;/icon&gt;
-  &lt;/item&gt;
-
-  &lt;item uid="" arg="false" valid="YES"&gt;
-    &lt;title&gt;Enable Private Bookmarking&lt;/title&gt;
-	&lt;icon&gt;locked.png&lt;/icon&gt;
-  &lt;/item&gt;
-&lt;/items&gt;
+    ]
+}
 
 EOB</string>
 				<key>scriptargtype</key>
@@ -3520,23 +3553,38 @@ fi</string>
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>cat &lt;&lt; EOB
+				<string>
 
-&lt;?xml version="1.0"?&gt;
 
-&lt;items&gt;
-  &lt;item uid="tagonly" arg="true" valid="YES" autocomplete="Yes"&gt;
-    &lt;title&gt;Search ONLY tag field&lt;/title&gt;
-	&lt;icon&gt;tagonly.png&lt;/icon&gt;
-  &lt;/item&gt;
+cat &lt;&lt; EOB
+{
+    "items": [
+        {
 
-  &lt;item uid="des" arg="false" valid="YES" autocomplete="No"&gt;
-    &lt;title&gt;Search ALL fields (tags/titles/notes)&lt;/title&gt;
-	&lt;icon&gt;bookmarks.png&lt;/icon&gt;
-  &lt;/item&gt;
-&lt;/items&gt;
+            "title": "Search only TAG field",
+            "arg": "true",
+            "icon": {
+                "path": "tagonly.png"
+            },
+            "uid": "1"
 
-EOB</string>
+        },
+        {
+
+            "title": "Search ALL fields (tags/titles/notes)",
+            "arg": "false",
+            "icon": {
+                "path": "bookmarks.png"
+            },
+            "uid": "10"
+        },
+
+    ]
+}
+
+EOB
+
+</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -3976,7 +4024,8 @@ AlfredoCreates.com/Icons
 Seanau
 Shmidt Sergey
 Rodolfo Alvarez
-Raashid.A</string>
+Raashid.A
+Information by Kevin White from the Noun Project</string>
 			<key>xpos</key>
 			<integer>60</integer>
 			<key>ypos</key>
@@ -4733,13 +4782,13 @@ Raashid.A</string>
 			<key>note</key>
 			<string>Find bookmark on Pinboard's site.</string>
 			<key>xpos</key>
-			<integer>370</integer>
+			<integer>375</integer>
 			<key>ypos</key>
-			<integer>610</integer>
+			<integer>600</integer>
 		</dict>
 	</dict>
 	<key>version</key>
-	<string>0.15.9</string>
+	<string>0.15.10</string>
 	<key>webaddress</key>
 	<string>https://github.com/spamwax/alfred-pinboard-rs</string>
 </dict>

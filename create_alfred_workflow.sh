@@ -53,6 +53,7 @@ git add res/images
 git add Cargo.toml
 git add CHANGELOG.md
 git add README.md
+git add Cargo.lock
 
 commit_msg="Release version $version_tag"
 [ -n "$msg" ] && commit_msg="$commit_msg
