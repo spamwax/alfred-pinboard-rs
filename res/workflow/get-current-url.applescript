@@ -100,7 +100,7 @@ on run
         set theURL to item 1 of theResult
         set theText to item 2 of theResult
 
-  else if theApplication is "Microsoft Edge.app" and appIsRunning("Microsoft Edge") then
+    else if theApplication is "Microsoft Edge.app" and appIsRunning("Microsoft Edge") then
         set theResult to run script "tell application id \"com.microsoft.edgemac\"
         set theText to title of active tab of first window
         set theURL to get URL of active tab of first window
@@ -111,80 +111,80 @@ on run
 
     else if theApplication is "qutebrowser.app" and appIsRunning("qutebrowser") then
         set theResult to run script "tell application id \"org.qt-project.Qt.QtWebEngineCore\"
-      activate
-      end tell
-      tell application \"System Events\"
-        set myApp to name of first application process whose frontmost is true
-      end tell
-      if myApp is \"qutebrowser\" then
+          activate
+        end tell
         tell application \"System Events\"
-          key code 53 -- ESC
+          set myApp to name of first application process whose frontmost is true
+        end tell
+        if myApp is \"qutebrowser\" then
+          tell application \"System Events\"
+            key code 53 -- ESC
+            delay 0.5
+          end tell
+          tell application \"System Events\" -- yank url
+            keystroke \"y\"
+            delay 0.4
+            keystroke \"y\"
+          end tell
           delay 0.5
-        end tell
-        tell application \"System Events\" -- yank url
-          keystroke \"y\"
-          delay 0.4
-          keystroke \"y\"
-        end tell
-        delay 0.5
-        set theURL to (get the clipboard as Unicode text)
+          set theURL to (get the clipboard as Unicode text)
 
-        tell application \"System Events\" -- yank title
-          keystroke \"y\"
-          delay 0.4
-          keystroke \"t\"
-        end tell
-        delay 0.5
-        set theTitle to (the clipboard as Unicode text)
-      end if
-      do shell script \"pbcopy < /dev/null\"
-      return {theURL, theTitle}"
+          tell application \"System Events\" -- yank title
+            keystroke \"y\"
+            delay 0.4
+            keystroke \"t\"
+          end tell
+          delay 0.5
+          set theTitle to (the clipboard as Unicode text)
+        end if
+        do shell script \"pbcopy < /dev/null\"
+        return {theURL, theTitle}"
         set theURL to item 1 of theResult
         set theText to item 2 of theResult
 
     else if theApplication is "Firefox.app" and appIsRunning("Firefox") then
         set theResult to run script "tell application id \"org.mozilla.firefox\"
-      activate
-      set w to item 1 of window 1
-      set theText to name of w
-    end tell
-    tell application \"System Events\"
-      set myApp to name of first application process whose frontmost is true
-      if myApp is \"Firefox\" then
-        tell application \"System Events\"
-          key code 97
-          delay 0.5
-          keystroke \"c\" using command down
+          activate
+          set w to item 1 of window 1
+          set theText to name of w
         end tell
-        delay 0.5
-      end if
-      delay 0.5
-    end tell
-    set theURL to get the clipboard
-    return {theURL, theText}"
+        tell application \"System Events\"
+          set myApp to name of first application process whose frontmost is true
+          if myApp is \"Firefox\" then
+            tell application \"System Events\"
+              key code 97
+              delay 0.5
+              keystroke \"c\" using command down
+            end tell
+            delay 0.5
+          end if
+          delay 0.5
+        end tell
+        set theURL to get the clipboard
+        return {theURL, theText}"
         set theURL to item 1 of theResult
         set theText to item 2 of theResult
 
     else if {"Firefox Developer Edition.app", "FirefoxDeveloperEdition.app"} contains theApplication and appIsRunning("Firefox") then
         set theResult to run script "tell application id \"org.mozilla.firefoxdeveloperedition\"
-      activate
-      set w to item 1 of window 1
-      set theText to name of w
-    end tell
-    tell application \"System Events\"
-      set myApp to name of first application process whose frontmost is true
-      if myApp is \"Firefox\" then
-        tell application \"System Events\"
-          keystroke \"l\" using command down
-          delay 0.5
-          keystroke \"c\" using command down
+          activate
+          set w to item 1 of window 1
+          set theText to name of w
         end tell
-        delay 0.5
-      end if
-      delay 0.5
-    end tell
-    set theURL to get the clipboard
-    return {theURL, theText}"
+        tell application \"System Events\"
+          set myApp to name of first application process whose frontmost is true
+          if myApp is \"Firefox\" then
+            tell application \"System Events\"
+              keystroke \"l\" using command down
+              delay 0.5
+              keystroke \"c\" using command down
+            end tell
+            delay 0.5
+          end if
+          delay 0.5
+        end tell
+        set theURL to get the clipboard
+        return {theURL, theText}"
         set theURL to item 1 of theResult
         set theText to item 2 of theResult
 
