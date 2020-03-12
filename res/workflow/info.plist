@@ -10,17 +10,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>877E9FAB-0FE7-42CD-AE40-751ED947D0B2</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>BBFBAB3B-9592-48EF-9E70-3DDF3303690D</string>
+				<string>72B7C67C-93D9-4FF4-A1CA-B4546C14A1F0</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -476,7 +466,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>71D25BDA-BF77-41BE-B3C6-A7ABE0B3990A</string>
+				<string>2338607E-BB4F-4C20-B121-B2C3A10C1C6E</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -542,6 +532,31 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>7BF8F66E-ECC8-4BCD-86CE-5E19FD509604</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>72B7C67C-93D9-4FF4-A1CA-B4546C14A1F0</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>7D0D3480-DBAF-4261-B304-169C58BDA745</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>BCA24D57-E642-440C-BD0F-D4DEF49C9592</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>BBFBAB3B-9592-48EF-9E70-3DDF3303690D</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -643,19 +658,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>2202AECC-AE14-46AC-A4E7-0ECE9060F556</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>877E9FAB-0FE7-42CD-AE40-751ED947D0B2</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>7D0D3480-DBAF-4261-B304-169C58BDA745</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -1820,37 +1822,12 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>alignment</key>
-				<integer>0</integer>
-				<key>backgroundcolor</key>
-				<string></string>
-				<key>fadespeed</key>
-				<integer>0</integer>
-				<key>fillmode</key>
-				<integer>0</integer>
-				<key>font</key>
-				<string></string>
-				<key>largetypetext</key>
-				<string>{query}</string>
-				<key>textcolor</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.largetype</string>
-			<key>uid</key>
-			<string>71D25BDA-BF77-41BE-B3C6-A7ABE0B3990A</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>browser</key>
 				<string></string>
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
-				<string>https://pinboard.in/search/u:hamid?query={query}</string>
+				<string>https://pinboard.in/search/u:{var:username}?query={query}</string>
 				<key>utf8</key>
 				<true/>
 			</dict>
@@ -2475,7 +2452,7 @@ fi</string>
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
-				<integer>1</integer>
+				<integer>0</integer>
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>keyword</key>
@@ -2851,17 +2828,32 @@ fi</string>
 				<key>escaping</key>
 				<integer>127</integer>
 				<key>script</key>
-				<string># capture username only
-IN=$1
-IFS=':' read -ra OUT &lt;&lt;&lt; "$IN"
-USERNAME=${OUT[0]}
-
-# we now substitue hamid with user name so we can actually see our links on pinboard.in
-sed -i '' -e "s/u:hamid/u:$USERNAME/" info.plist
-
-
-# set the auth token in config.json
-if ! ./alfred-pinboard-rs config --authorization $IN; then
+				<string>ret=$(./alfred-pinboard-rs update)
+echo $ret</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>7D0D3480-DBAF-4261-B304-169C58BDA745</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>127</integer>
+				<key>script</key>
+				<string># set the auth token in config.json
+if ! ./alfred-pinboard-rs config --authorization $1; then
     echo "Couldn't set user credentials!!!"
 else
     echo "Successfully set user credentials."
@@ -2877,30 +2869,6 @@ fi</string>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
 			<string>0087168E-C986-4511-9873-B107C12CD6C0</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>127</integer>
-				<key>script</key>
-				<string>ret=$(./alfred-pinboard-rs update)
-echo $ret</string>
-				<key>scriptargtype</key>
-				<integer>0</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>7D0D3480-DBAF-4261-B304-169C58BDA745</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -2926,29 +2894,40 @@ echo $ret</string>
 			<integer>1</integer>
 		</dict>
 		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{query}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>4</integer>
+						<key>matchstring</key>
+						<string>Successfully set user credentials.*</string>
+						<key>outputlabel</key>
+						<string>Update Cache</string>
+						<key>uid</key>
+						<string>BCA24D57-E642-440C-BD0F-D4DEF49C9592</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>Show result</string>
+			</dict>
 			<key>type</key>
-			<string>alfred.workflow.utility.junction</string>
+			<string>alfred.workflow.utility.conditional</string>
 			<key>uid</key>
-			<string>E92C07F3-7E97-4675-8096-07AA081760A3</string>
+			<string>72B7C67C-93D9-4FF4-A1CA-B4546C14A1F0</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
 		<dict>
-			<key>config</key>
-			<dict>
-				<key>inputstring</key>
-				<string>{query}</string>
-				<key>matchcasesensitive</key>
-				<false/>
-				<key>matchmode</key>
-				<integer>2</integer>
-				<key>matchstring</key>
-				<string>Successfully set user credentials.*</string>
-			</dict>
 			<key>type</key>
-			<string>alfred.workflow.utility.filter</string>
+			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
-			<string>877E9FAB-0FE7-42CD-AE40-751ED947D0B2</string>
+			<string>E92C07F3-7E97-4675-8096-07AA081760A3</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -4056,7 +4035,7 @@ Raashid.A</string>
 			<key>xpos</key>
 			<integer>1195</integer>
 			<key>ypos</key>
-			<integer>1935</integer>
+			<integer>1925</integer>
 		</dict>
 		<key>2202AECC-AE14-46AC-A4E7-0ECE9060F556</key>
 		<dict>
@@ -4091,7 +4070,7 @@ Raashid.A</string>
 			<key>xpos</key>
 			<integer>1315</integer>
 			<key>ypos</key>
-			<integer>1755</integer>
+			<integer>1745</integer>
 		</dict>
 		<key>28EB0348-E6C5-4205-9AD5-B50DDFFF4DD0</key>
 		<dict>
@@ -4103,7 +4082,7 @@ Raashid.A</string>
 		<key>2DFDAFE5-6A0E-4E95-A1C5-30789A06C27C</key>
 		<dict>
 			<key>xpos</key>
-			<integer>695</integer>
+			<integer>665</integer>
 			<key>ypos</key>
 			<integer>1635</integer>
 		</dict>
@@ -4254,7 +4233,7 @@ Raashid.A</string>
 			<key>xpos</key>
 			<integer>1315</integer>
 			<key>ypos</key>
-			<integer>1905</integer>
+			<integer>1895</integer>
 		</dict>
 		<key>5EDAB9E7-B4EA-4022-9523-DD865A75B345</key>
 		<dict>
@@ -4335,13 +4314,6 @@ Raashid.A</string>
 			<key>ypos</key>
 			<integer>1015</integer>
 		</dict>
-		<key>71D25BDA-BF77-41BE-B3C6-A7ABE0B3990A</key>
-		<dict>
-			<key>xpos</key>
-			<integer>1295</integer>
-			<key>ypos</key>
-			<integer>580</integer>
-		</dict>
 		<key>71EE10F6-37BC-4869-B8A8-0602D9A76863</key>
 		<dict>
 			<key>note</key>
@@ -4350,6 +4322,13 @@ Raashid.A</string>
 			<integer>795</integer>
 			<key>ypos</key>
 			<integer>130</integer>
+		</dict>
+		<key>72B7C67C-93D9-4FF4-A1CA-B4546C14A1F0</key>
+		<dict>
+			<key>xpos</key>
+			<integer>445</integer>
+			<key>ypos</key>
+			<integer>1855</integer>
 		</dict>
 		<key>75B3B3EC-5FC5-449A-A74E-A22D1D848FA7</key>
 		<dict>
@@ -4406,7 +4385,7 @@ Raashid.A</string>
 			<key>xpos</key>
 			<integer>925</integer>
 			<key>ypos</key>
-			<integer>1835</integer>
+			<integer>1825</integer>
 		</dict>
 		<key>8181252C-6CC9-4CFA-97D8-2C5097DB6AF4</key>
 		<dict>
@@ -4424,19 +4403,10 @@ Raashid.A</string>
 			<key>ypos</key>
 			<integer>470</integer>
 		</dict>
-		<key>877E9FAB-0FE7-42CD-AE40-751ED947D0B2</key>
-		<dict>
-			<key>note</key>
-			<string>Set auth. correctly?</string>
-			<key>xpos</key>
-			<integer>535</integer>
-			<key>ypos</key>
-			<integer>1865</integer>
-		</dict>
 		<key>8CD4D7F7-49EA-44FF-878E-18B836627810</key>
 		<dict>
 			<key>xpos</key>
-			<integer>695</integer>
+			<integer>665</integer>
 			<key>ypos</key>
 			<integer>1755</integer>
 		</dict>
@@ -4532,7 +4502,7 @@ Raashid.A</string>
 			<key>xpos</key>
 			<integer>1195</integer>
 			<key>ypos</key>
-			<integer>1785</integer>
+			<integer>1775</integer>
 		</dict>
 		<key>BAD58837-06A2-45EE-8991-1349D183E5E8</key>
 		<dict>
@@ -4544,9 +4514,9 @@ Raashid.A</string>
 		<key>BBFBAB3B-9592-48EF-9E70-3DDF3303690D</key>
 		<dict>
 			<key>xpos</key>
-			<integer>505</integer>
+			<integer>670</integer>
 			<key>ypos</key>
-			<integer>1965</integer>
+			<integer>1995</integer>
 		</dict>
 		<key>BC2AD49B-4564-4816-B814-83431644EC9D</key>
 		<dict>
@@ -4618,7 +4588,7 @@ Raashid.A</string>
 		<key>CDFD158D-8C5A-459F-9164-A4FBF4C9E314</key>
 		<dict>
 			<key>xpos</key>
-			<integer>855</integer>
+			<integer>825</integer>
 			<key>ypos</key>
 			<integer>1725</integer>
 		</dict>
@@ -4649,8 +4619,6 @@ Raashid.A</string>
 		</dict>
 		<key>D8134282-42F0-464E-846C-8ECAD90BF80A</key>
 		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
 			<key>note</key>
 			<string>Rename 1st tag to 2nd tag</string>
 			<key>xpos</key>
@@ -4695,7 +4663,7 @@ Raashid.A</string>
 			<key>xpos</key>
 			<integer>1085</integer>
 			<key>ypos</key>
-			<integer>1865</integer>
+			<integer>1855</integer>
 		</dict>
 		<key>EA97375D-329E-4A06-8BBF-FBF7329AA9CC</key>
 		<dict>

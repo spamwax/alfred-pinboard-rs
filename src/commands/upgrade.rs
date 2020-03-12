@@ -12,12 +12,13 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                 }
                 let json_format = self.config.as_ref().unwrap().can_use_json();
                 if check {
+                    let none: Option<Vec<(&str, &str)>> = None;
                     if let Ok(item) = self.get_upgrade_item() {
-                        crate::write_to_alfred(vec![item], json_format);
+                        crate::write_to_alfred(vec![item], json_format, none);
                     } else {
                         let item =
                             alfred::ItemBuilder::new("Error in getting upgrade info!").into_item();
-                        crate::write_to_alfred(vec![item], json_format);
+                        crate::write_to_alfred(vec![item], json_format, none);
                     }
                 } else if download {
                     let filename = self.updater.as_ref().unwrap().download_latest();

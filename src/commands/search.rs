@@ -142,8 +142,6 @@ fn process<'a>(
                     })
                     .collect::<Vec<Item>>(),
             }
-            // alfred::json::write_items(io::stdout(), alfred_items.as_ref())
-            //     .expect("Couldn't write to stdout");
         }
     }
 }

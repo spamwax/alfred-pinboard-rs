@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Changed
+- Don't use 'sed' hack to pass username to URL on pinboard (which will be overwritten on new updates).
 
 ## [0.15.8] - 2019-08-29
 ### Changed
