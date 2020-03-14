@@ -1,0 +1,68 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/rust:stretch
+    environment:
+      TARGET: x86_64-unknown-linux-gnu
+    steps:
+      - checkout
+      - run:
+          name: Version Information
+          command: rustc --version; cargo --version; rustup --version
+      - run:
+          name: Install Dependencies
+          command: |
+              sudo sh -c 'echo "deb http://deb.debian.org/debian stretch-backports main" > /etc/apt/sources.list.d/backports.list'
+              sudo apt-get update
+              sudo apt-get clean
+              sudo rm -r /var/lib/apt/lists/*
+              rustup component add clippy rustfmt
+      - run:
+          name: Build
+          command: .circleci/script.sh
+  tests:
+    docker:
+      - image: circleci/rust:stretch
+    environment:
+      TARGET: x86_64-unknown-linux-gnu
+      CIRCLECI_TEST: true # change to false to disable tests
+    steps:
+      - checkout
+      - run:
+          name: Run Tests
+          command: .circleci/script.sh
+
+  macos:
+    macos:
+      xcode: "9.0"
+    environment:
+      RUST_BACKTRACE: 1
+      TARGET: x86_64-apple-darwin
+    steps:
+      - checkout
+      - run:
+          name: Build
+          command: .circleci/script.sh
+
+workflows:
+  version: 2
+  build-n-test:
+      jobs:
+        - build:
+            filters:
+              branches:
+                only: /.*/
+        - tests:
+            filters:
+              branches:
+                only: [master, develop]
+            requires:
+              - build
+  build-n-test-mac:
+    jobs:
+      - macos:
+          filters:
+            branches:
+              only: /.*/
+
