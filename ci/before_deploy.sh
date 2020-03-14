@@ -69,5 +69,10 @@ build_release() {
 
 }
 
-echo "This is a tagged commit, running before_deploy"
+if [ -z "$TRAVIS_TAG" ]; then
+    return
+else
+    echo "This is a tagged commit, running before_deploy"
+fi
+
 main
