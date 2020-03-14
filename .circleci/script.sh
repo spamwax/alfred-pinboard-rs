@@ -17,8 +17,8 @@ run_phase() {
         x86_64-apple-darwin)
             export alfred_workflow_data=/home/circleci/.config/alfred-pinboard-rs
             export alfred_workflow_cache=/home/circleci/.config/alfred-pinboard-rs
-            cross run --target "$TARGET" -- config --authorization hamid:12345
-            cross run --target "$TARGET" -- config -d
+            cargo run --target "$TARGET" -- config --authorization hamid:12345
+            cargo run --target "$TARGET" -- config -d
             ;;
         x86_64-unknown-linux-gnu)
             mkdir -p "$HOME/.config/alfred-pinboard-rs"
@@ -29,28 +29,28 @@ run_phase() {
             ls -ld "$alfred_workflow_cache"
             chown -R "$USER":"$USER" "$alfred_workflow_data"
 
-            cross run --target "$TARGET" -- config --authorization hamid:12345
-            cross run --target "$TARGET" -- config -d
+            cargo run --target "$TARGET" -- config --authorization hamid:12345
+            cargo run --target "$TARGET" -- config -d
             ;;
         i686-apple-darwin)
             mkdir "$HOME/.config/alfred-pinboard-rs"
             export alfred_workflow_data=$HOME/.config/alfred-pinboard-rs
             export alfred_workflow_cache=$HOME/.config/alfred-pinboard-rs
-            cross run --target "$TARGET" -- config --authorization hamid:12345
-            cross run --target "$TARGET" -- config -d
+            cargo run --target "$TARGET" -- config --authorization hamid:12345
+            cargo run --target "$TARGET" -- config -d
             ;;
         x86_64-unknown-freebsd)
             # mkdir "$HOME/.config/alfred-pinboard-rs"
             # export alfred_workflow_data=$HOME/.config/alfred-pinboard-rs
             # export alfred_workflow_cache=$HOME/.config/alfred-pinboard-rs
-            # cross run --target "$TARGET" -- config --authorization hamid:12345
-            # cross run --target "$TARGET" -- config -d
+            # cargo run --target "$TARGET" -- config --authorization hamid:12345
+            # cargo run --target "$TARGET" -- config -d
             ;;
         armv7-linux-androideabi)
             mkdir "$HOME/.config/alfred-pinboard-rs"
             export alfred_workflow_data=$HOME/.config/alfred-pinboard-rs
             export alfred_workflow_cache=$HOME/.config/alfred-pinboard-rs
-            cross run --target "$TARGET" -- config --authorization hamid:12345
+            cargo run --target "$TARGET" -- config --authorization hamid:12345
             ;;
         *)
             return
@@ -62,9 +62,9 @@ run_phase() {
 # TODO This is the "test phase", tweak it as you see fit
 test_phase() {
 
-    rustup target add --toolchain stable x86_64-unknown-freebsd
+    # rustup target add --toolchain stable x86_64-unknown-linux-gnu
     if [ -n "$DISABLE_TESTS" ] || [ -z "$CIRCLECI_TEST" ]; then
-        cross build --target "$TARGET"
+        cargo build --target "$TARGET"
         return
     fi
 
