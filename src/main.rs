@@ -211,6 +211,7 @@ fn show_error_alfred<'a, T: Into<Cow<'a, str>>>(s: T) {
         .icon_path("erroricon.icns")
         .into_item();
     alfred::json::write_items(io::stdout(), &[item]).expect("Can't write to stdout");
+    std::process::exit(1);
 }
 
 fn alfred_error_item<'a, T: Into<Cow<'a, str>>>(s: T) -> alfred::Item<'a> {

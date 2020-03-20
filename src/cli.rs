@@ -111,7 +111,7 @@ pub enum SubCommand {
     /// Renames a tag.
     Rename {
         /// tags for renaming (tag1 -> tag2)
-        #[structopt(name = "tags")]
+        #[structopt(name = "tags", min_values = 2, max_values = 2)]
         tags: Vec<String>,
     },
 

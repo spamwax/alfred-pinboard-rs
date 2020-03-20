@@ -1,15 +1,20 @@
-version: 2
+version: 2.1
+
 jobs:
-  build:
+  linux:
+    parameters:
+      target:
+        type: string
+      rust:
+        type: string
+        default: 1.42.0
     docker:
       - image: circleci/rust:stretch
     environment:
-      TARGET: x86_64-unknown-linux-gnu
+      RUST_BACKTRACE: "1"
+      CIRCLE_OS_NAME: linux
+      TARGET: "<< parameters.target >>"
     steps:
-      - checkout
-      - run:
-          name: Version Information
-          command: rustc --version; cargo --version; rustup --version
       - run:
           name: Install Dependencies
           command: |
@@ -17,52 +22,180 @@ jobs:
               sudo apt-get update
               sudo apt-get clean
               sudo rm -r /var/lib/apt/lists/*
-              rustup component add clippy rustfmt
+      - run:
+          name: Install Rust "<< parameters.rust >>"
+          command:
+            curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain << parameters.rust >>
+      - run:
+          name: Add Rust Components
+          command: |
+            rustup component add clippy rustfmt
+            rustc --version; cargo --version; rustup --version
+      - checkout
       - run:
           name: Build
-          command: .circleci/script.sh
+          command: |
+            cargo generate-lockfile
+            .circleci/script.sh
+      - persist_to_workspace:
+          root: /home/circleci
+          paths:
+            - project
   tests:
+    parameters:
+      target:
+        type: string
+      rust:
+        type: string
+        default: 1.42.0
     docker:
       - image: circleci/rust:stretch
     environment:
-      TARGET: x86_64-unknown-linux-gnu
-      CIRCLECI_TEST: true # change to false to disable tests
+      RUST_BACKTRACE: "1"
+      TARGET: "<< parameters.target >>"
+      CIRCLE_TEST: "true" # change to false to disable tests
+      PROJECT_BUILD_WORKSPACE: /tmp/apr
+      CIRCLE_OS_NAME: linux
     steps:
-      - checkout
+      # - checkout
+      - attach_workspace:
+         at: /tmp/apr
+      - run:
+          name: Attched?
+          command: |
+            echo $(pwd)
+            ls /tmp/apr
       - run:
           name: Run Tests
-          command: .circleci/script.sh
-
-  macos:
-    macos:
-      xcode: "9.0"
+          command: |
+            cd /tmp/apr/project
+            export APR_EXEC=/tmp/apr/project/target/$TARGET/debug/alfred-pinboard-rs
+            export working_dir=$(pwd)
+            .circleci/script.sh $APR_EXEC $working_dir
+  deploy:
+    description: Deploy to Github
+    docker:
+      - image: circleci/golang:1.13
     environment:
-      RUST_BACKTRACE: 1
-      TARGET: x86_64-apple-darwin
+      TARGET: x86_64-unknown-linux-gnu
+      CIRCLECI_TEST: "false"
+      BUNDLEDIR: /tmp/bundle
     steps:
+      - attach_workspace:
+          at: /tmp
       - checkout
       - run:
-          name: Build
-          command: .circleci/script.sh
+          command: |
+            go get github.com/tcnksm/ghr
+            export VERSION=${CIRCLE_TAG}
+            [ -n ${GITHUB_TOKEN} ] && echo "I have it!"
+            [ -z ${GITHUB_TOKEN} ] && echo "I DO NOT have it!"
+            [ -f /tmp/target/alfred-pinboard-rust-${CIRCLE_TAG}.alfredworkflow ]
+            export artifacts=/tmp/target/alfred-pinboard-rust-${CIRCLE_TAG}.alfredworkflow
+            echo ${CIRCLE_PROJECT_USERNAME} ${CIRCLE_PROJECT_REPONAME} ${CIRCLE_SHA1} ${VERSION} ${artifacts}
+            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} ${artifacts}
+
+  macosimage:
+    parameters:
+      release:
+        type: boolean
+        default: false
+      rust:
+        type: string
+        default: 1.42.0
+    macos:
+      xcode: "10.0"
+    environment:
+      RUST_BACKTRACE: "1"
+      TARGET: x86_64-apple-darwin
+      CIRCLE_OS_NAME: macos
+    steps:
+      - run:
+          name: Install Rust
+          command: |
+            sudo mkdir /opt
+            curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain << parameters.rust >>
+            sudo ln -s ~/.cargo/bin/* /usr/local/bin
+      - run:
+          name: Rust Version
+          command: rustc --version; cargo --version; rustup --version
+      - unless:
+          condition: << parameters.release >>
+          steps:
+            - checkout
+            - run:
+                name: Build Debug
+                command: |
+                  .circleci/script.sh
+            - run:
+                name: Running macOS Tests
+                command: |
+                    export CIRCLE_TEST=true
+                    export APR_EXEC=./target/$TARGET/debug/alfred-pinboard-rs
+                    export working_dir=$(pwd)
+                    .circleci/script.sh $APR_EXEC $working_dir
+      - when:
+          condition: << parameters.release >>
+          steps:
+            - checkout
+            - run:
+                name: Building Release
+                command: |
+                    export BUILD_TYPE=release
+                    .circleci/script.sh
+            - run:
+                name: Building Alfred Workflow Bundle
+                command: .circleci/before_deploy.sh
+            - persist_to_workspace:
+                root: ../project
+                paths:
+                  - target
 
 workflows:
-  version: 2
-  build-n-test:
-      jobs:
-        - build:
-            filters:
-              branches:
-                only: /.*/
-        - tests:
-            filters:
-              branches:
-                only: [master, develop]
-            requires:
-              - build
+  # build-n-test-linux:
+  #     jobs:
+  #       - linux:
+  #           name: Linux-64bit
+  #           target: x86_64-unknown-linux-gnu
+  #           rust: 1.42.0
+  #           filters:
+  #             branches:
+  #               only: /.*/
+  #       - tests:
+  #           name: Linux-64bit-test
+  #           target: x86_64-unknown-linux-gnu
+  #           rust: 1.42.0
+  #           filters:
+  #             branches:
+  #               only: [master, develop]
+  #           requires:
+  #             - Linux-64bit
   build-n-test-mac:
     jobs:
-      - macos:
+      - macosimage:
+          name: macOS-64bit
+          rust: 1.42.0
           filters:
             branches:
               only: /.*/
+  deploy-to-github:
+    jobs:
+      - macosimage:
+          name: macOS-64bit-release
+          rust: 1.42.0
+          release: true
+          filters:
+            tags:
+              only: /v[0-9]+.*/
+            branches:
+              ignore: /.*/
+      - deploy:
+          name: Deploy to Github
+          requires:
+            - macOS-64bit-release
+          filters:
+            tags:
+              only: /v[0-9]+.*/
+            branches:
+              ignore: /.*/
 

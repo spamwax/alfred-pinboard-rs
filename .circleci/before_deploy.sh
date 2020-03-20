@@ -1,4 +1,4 @@
-#!/usr/local/bin/bash
+#!/bin/bash
 # This script takes care of building your crate and packaging it for release
 
 set -ex
@@ -7,13 +7,16 @@ main() {
     local src=$(pwd) \
           stage=
 
-    case $TRAVIS_OS_NAME in
+    case $CIRCLE_OS_NAME in
         linux)
             stage=$(mktemp -d)
             ;;
-        osx)
+        macos)
             stage=$(mktemp -d -t tmp)
             ;;
+        *)
+            echo "$CIRCLE_OS_NAME not a supported OS"
+            exit 1
     esac
 
     # only build for macOS
@@ -40,7 +43,8 @@ build_release() {
     # cross rustc --bin alfred-pinboard-rs --target "$TARGET" --release -- -C lto
 
     # TODO Update this to package the right artifacts
-    res_dir="$src/res/workflow"
+    # res_dir="$src/res/workflow"
+    res_dir="$src/res/workflow/"
 
     # echo "Copying executable to workflow's folder..."
     cp "$src/target/$TARGET/release/alfred-pinboard-rs" "$stage"
@@ -55,10 +59,10 @@ build_release() {
 
     case $TARGET in
         x86_64-apple-darwin)
-            cp ./AlfredPinboardRust.alfredworkflow "$src/target/alfred-pinboard-rust-$TRAVIS_TAG.alfredworkflow"
+            mv ./AlfredPinboardRust.alfredworkflow "$src/target/alfred-pinboard-rust-$CIRCLE_TAG.alfredworkflow"
             ;;
         i686-apple-darwin)
-            tar czf "$src/$TARGET-$CRATE_NAME-$TRAVIS_TAG.tar.gz" ./AlfredPinboardRust.alfredworkflow
+            tar czf "$src/$TARGET-$CRATE_NAME-$CIRCLE_TAG.tar.gz" ./AlfredPinboardRust.alfredworkflow
             ;;
         *)
             return
@@ -66,11 +70,9 @@ build_release() {
     esac
     cd "$src"
 
-    rm -rf "$stage"
-
 }
 
-if [ -z "$TRAVIS_TAG" ]; then
+if [ -z "$CIRCLE_TAG" ]; then
     echo "Not a tagged commit. Exitting"
     exit 1
 else

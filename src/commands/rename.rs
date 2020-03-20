@@ -13,15 +13,16 @@ impl<'api, 'pin> Runner<'api, 'pin> {
     // fn run(&mut self, tags: &Vec<String>) {
     fn run(&mut self, tags: &[String]) {
         debug!("running rename::run");
-        if tags.len() != 2 {
-            debug!("  tags: {:?}", tags);
-            let item = ItemBuilder::new("pr old_tag new_tag")
-                .subtitle("Rename old -> new")
-                .icon_path("bookmark-delete.png")
+        debug!("  tags: {:?}", tags);
+        if tags.len() != 2 || tags.iter().any(|tag| tag.len() == 0) {
+            let item = ItemBuilder::new("Enter 2 tags please!")
+                .subtitle("pr old_tag new_tag")
+                .icon_path("erroricon.icns")
                 .into_item();
-            if let Err(e) = self.write_output_items(vec![item]) {
-                error!("delete: Couldn't write to Alfred: {:?}", e);
-            }
+            crate::show_error_alfred("Enter 2 tags please!");
+            // if let Err(e) = self.write_output_items(vec![item]) {
+            //     error!("delete: Couldn't write to Alfred: {:?}", e);
+            // }
             return;
         }
 
