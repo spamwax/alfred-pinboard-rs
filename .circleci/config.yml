@@ -191,7 +191,7 @@ workflows:
           release: true
           filters:
             tags:
-              only: /v[0-9]+.*/
+              only: /v?[0-9]+.*/
             branches:
               ignore: /.*/
       - deploy:
@@ -200,7 +200,7 @@ workflows:
             - macOS-64bit-release
           filters:
             tags:
-              only: /v[0-9]+.*/
+              only: /v?[0-9]+.*/
             branches:
               ignore: /.*/
 

@@ -67,7 +67,7 @@ git commit -a -m "$commit_msg"
 git tag "$version_tag"
 
 if [ -n "$push_it" ]; then
-    git push
-    sleep 5
     git push --tags
+    sleep 5
+    git push
 fi
