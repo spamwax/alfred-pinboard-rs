@@ -152,28 +152,28 @@ jobs:
                   - target
 
 workflows:
-  # linux_x86_64:
-  #     jobs:
-  #       - linux:
-  #           name: Linux-64bit
-  #           target: x86_64-unknown-linux-gnu
-  #           rust: 1.42.0
-  #           filters:
-  #             branches:
-  #               only: /.*/
-  #             tags:
-  #               ignore: /v.*/
-  #       - tests:
-  #           name: Linux-64bit-test
-  #           target: x86_64-unknown-linux-gnu
-  #           rust: 1.42.0
-  #           filters:
-  #             branches:
-  #               only: [master, develop]
-  #             tags:
-  #               ignore: /v.*/
-  #           requires:
-  #             - Linux-64bit
+  linux_x86_64:
+      jobs:
+        - linux:
+            name: Linux-64bit
+            target: x86_64-unknown-linux-gnu
+            rust: 1.42.0
+            filters:
+              branches:
+                only: /.*/
+              tags:
+                ignore: /v?[0-9]+.*/
+        - tests:
+            name: Linux-64bit-test
+            target: x86_64-unknown-linux-gnu
+            rust: 1.42.0
+            filters:
+              branches:
+                only: [master, develop]
+              tags:
+                ignore: /v?[0-9]+.*/
+            requires:
+              - Linux-64bit
 
   build-n-test-macos:
     jobs:
