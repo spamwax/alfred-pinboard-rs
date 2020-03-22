@@ -12,7 +12,8 @@ run_tests() {
     export alfred_workflow_uid=hamid63
     export alfred_workflow_name="RustyPin"
     export alfred_workflow_bundleid=cc.hamid.alfred-pinboard-rs
-    mkdir -p "$working_dir"/.config/alfred-pinboard-rs
+    workflow_dir="$working_dir/.config/alfred-pinboard-rs"
+    mkdir -p "$workflow_dir"
     export alfred_workflow_data="$working_dir"
     export alfred_workflow_cache="$working_dir"
     case "$TARGET" in
