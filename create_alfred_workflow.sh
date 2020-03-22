@@ -19,7 +19,7 @@ git checkout master || exit
 echo "Building new release..."
 cd "$alfred_pinboard_rs" || exit
 
-# fix cargo version
+# Bump Cargo.toml version
 python res/fix_cargo_version.py "$version_tag"
 cargo build --release > build.log 2>&1
 
@@ -48,12 +48,15 @@ mv AlfredPinboardRust.alfredworkflow "$alfred_pinboard_rs"
 rm alfred-pinboard-rs
 
 cd "$alfred_pinboard_rs" || exit
+git add .circleci
 git add res/workflow
 git add res/images
 git add Cargo.toml
+git add Cargo.lock
 git add CHANGELOG.md
 git add README.md
-git add Cargo.lock
+git add create_alfred_workflow.sh
+git add src
 
 commit_msg="Release version $version_tag"
 [ -n "$msg" ] && commit_msg="$commit_msg

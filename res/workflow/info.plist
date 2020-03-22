@@ -189,6 +189,21 @@
 				<false/>
 			</dict>
 		</array>
+		<key>3255D630-A333-4759-9C18-A108C04EAEE6</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>9BDBE952-A169-4051-923A-0D980680261F</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>3A8F63FC-42D6-4F71-9822-5442E212FAC9</key>
+		<array/>
 		<key>3CE0B131-A3E7-4756-BB56-C0AEC7448C28</key>
 		<array>
 			<dict>
@@ -718,6 +733,8 @@
 				<false/>
 			</dict>
 		</array>
+		<key>95123ED4-AF0C-42EE-BEDE-1E5C833FECF4</key>
+		<array/>
 		<key>988D1146-585C-4DC6-A56B-B303B9A3F173</key>
 		<array>
 			<dict>
@@ -743,6 +760,43 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>EF1102C5-4180-496A-A4AF-1FDB7C59D7EE</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>9BDBE952-A169-4051-923A-0D980680261F</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>7D0D3480-DBAF-4261-B304-169C58BDA745</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>676F259E-6485-41FC-92EE-D8B9FE736C52</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>A7A2EACE-7297-4665-84CF-9BDFAFD604C2</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>676F259E-6485-41FC-92EE-D8B9FE736C52</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>3A8F63FC-42D6-4F71-9822-5442E212FAC9</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -983,6 +1037,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>C655280A-EE5C-4DA4-9A45-C40695E06751</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>3255D630-A333-4759-9C18-A108C04EAEE6</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>C6A1B854-359E-4D50-9081-56FEAEFC8CBC</key>
 		<array>
 			<dict>
@@ -1040,29 +1107,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>453D2BA7-92D6-4AD0-821B-132AF0365147</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>D8134282-42F0-464E-846C-8ECAD90BF80A</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>91BE90E3-0CA9-4BEA-AEA7-0077C8AC9F62</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>054E8262-D64D-4662-A4BA-B2BB7DCB5C31</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -1467,15 +1511,8 @@ fi</string>
 				<string>
 apr_execution_counter=$((apr_execution_counter + 1))
 
-#if [ -z ${supported_browser+x} ] || [ -z "$supported_browser" ]; then
 
- #   supported_browser=$(osascript -s so identify-browser.applescript)
-
-#fi
-
-
-
-supported_browser=$supported_browser apr_execution_counter=$apr_execution_counter ./alfred-pinboard-rs list -t "$1"</string>
+apr_execution_counter=$apr_execution_counter ./alfred-pinboard-rs list -t "$1"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -1618,7 +1655,8 @@ useiconic.com, US
 Gregor Cresnar
 Check by Chanut is Industries from the Noun Project
 Chain by Alax from the Noun Project
-Information by Kevin White from the Noun Project</string>
+Information by Kevin White from the Noun Project
+rename by iconmu from the Noun Project</string>
 				<key>variables</key>
 				<dict/>
 			</dict>
@@ -2458,76 +2496,6 @@ fi</string>
 				<key>alfredfiltersresults</key>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<false/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>keyword</key>
-				<string>pr</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<false/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>2</integer>
-				<key>runningsubtext</key>
-				<string>Fetching tags...</string>
-				<key>script</key>
-				<string>./alfred-pinboard-rs rename "$1" "$2"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>subtext</key>
-				<string>pr old_name new_name</string>
-				<key>title</key>
-				<string>Rename tags</string>
-				<key>type</key>
-				<integer>0</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>D8134282-42F0-464E-846C-8ECAD90BF80A</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>Successful</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>91BE90E3-0CA9-4BEA-AEA7-0077C8AC9F62</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<false/>
-				<key>alfredfiltersresultsmatchmode</key>
 				<integer>2</integer>
 				<key>argumenttreatemptyqueryasnil</key>
 				<false/>
@@ -2672,31 +2640,6 @@ fi</string>
 			<string>25F462E5-343C-4BDF-B314-B96E55AE5875</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alignment</key>
-				<integer>0</integer>
-				<key>backgroundcolor</key>
-				<string></string>
-				<key>fadespeed</key>
-				<integer>0</integer>
-				<key>fillmode</key>
-				<integer>0</integer>
-				<key>font</key>
-				<string></string>
-				<key>largetypetext</key>
-				<string>{query}</string>
-				<key>textcolor</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.largetype</string>
-			<key>uid</key>
-			<string>054E8262-D64D-4662-A4BA-B2BB7DCB5C31</string>
-			<key>version</key>
-			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -3080,6 +3023,27 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>Successful</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>A7A2EACE-7297-4665-84CF-9BDFAFD604C2</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -3174,6 +3138,101 @@ EOB
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>pr</string>
+				<key>subtext</key>
+				<string>pr old new</string>
+				<key>text</key>
+				<string>Rename Tags</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>C655280A-EE5C-4DA4-9A45-C40695E06751</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>echo "$1" &gt; ~/tmp.txt
+input=$(echo "$1" | tr -s ' ')
+IFS=' '
+read -ra TAGS &lt;&lt;&lt; "$input"
+
+
+x=$(./alfred-pinboard-rs rename "${TAGS[0]}" "${TAGS[1]}")
+
+if [ $? -eq 0 ]; then
+  echo {\"alfredworkflow\": { \
+    \"arg\": \"$x\", \
+    \"variables\": {\"success\": \"true\"}}}
+else
+foo=$(echo $x | tr '"' '\"')
+  echo {\"alfredworkflow\": { \
+    \"arg\": \"\", \
+    \"variables\":  \
+    {\"result\": \" \
+{ \\\"items\\\": [ { \\\"title\\\": \\\"Error in renaming tags\\\", \\\"subtitle\\\": \\\"pr old new\\\", \\\"arg\\\": \\\"false\\\", \\\"icon\\\": { \\\"path\\\": \\\"erroricon.icns\\\" }, \\\"uid\\\": \\\"1\\\" } ] } \
+\"}}}
+
+fi</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>3255D630-A333-4759-9C18-A108C04EAEE6</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:success}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>true</string>
+						<key>outputlabel</key>
+						<string>success</string>
+						<key>uid</key>
+						<string>676F259E-6485-41FC-92EE-D8B9FE736C52</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>error</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>9BDBE952-A169-4051-923A-0D980680261F</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -3198,6 +3257,53 @@ fi</string>
 			<string>C79DF9E2-8026-4F82-B31C-BCD0D4AFCE20</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<false/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>2</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string>echo $result</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>3A8F63FC-42D6-4F71-9822-5442E212FAC9</string>
+			<key>version</key>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -3240,6 +3346,36 @@ fi</string>
 			<string>A8EE818C-427B-476F-93FD-02825231464B</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>echo "$1" &gt; ~/tmp.txt
+input=$(echo "$1" | tr -s ' ')
+IFS=' '
+read -ra TAGS &lt;&lt;&lt; "$input"
+
+echo {\"alfredworkflow\": { \
+    \"arg\": \"https://www.google.com\", \
+    \"variables\": {\"browser\": \"${TAGS[@]}\"}}}</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>95123ED4-AF0C-42EE-BEDE-1E5C833FECF4</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -4025,7 +4161,8 @@ Seanau
 Shmidt Sergey
 Rodolfo Alvarez
 Raashid.A
-Information by Kevin White from the Noun Project</string>
+Information by Kevin White from the Noun Project
+rename by iconmu from the Noun Project</string>
 			<key>xpos</key>
 			<integer>60</integer>
 			<key>ypos</key>
@@ -4039,13 +4176,6 @@ Information by Kevin White from the Noun Project</string>
 			<integer>40</integer>
 			<key>ypos</key>
 			<integer>805</integer>
-		</dict>
-		<key>054E8262-D64D-4662-A4BA-B2BB7DCB5C31</key>
-		<dict>
-			<key>xpos</key>
-			<integer>1395</integer>
-			<key>ypos</key>
-			<integer>1460</integer>
 		</dict>
 		<key>06E0CAC8-FEFC-4D89-852A-C9B0D9DC2FA2</key>
 		<dict>
@@ -4135,12 +4265,28 @@ Information by Kevin White from the Noun Project</string>
 			<key>ypos</key>
 			<integer>1635</integer>
 		</dict>
+		<key>3255D630-A333-4759-9C18-A108C04EAEE6</key>
+		<dict>
+			<key>xpos</key>
+			<integer>925</integer>
+			<key>ypos</key>
+			<integer>2175</integer>
+		</dict>
 		<key>33CEA28E-CBEF-499B-8397-6C4C3B947B72</key>
 		<dict>
 			<key>xpos</key>
 			<integer>1530</integer>
 			<key>ypos</key>
 			<integer>1135</integer>
+		</dict>
+		<key>3A8F63FC-42D6-4F71-9822-5442E212FAC9</key>
+		<dict>
+			<key>note</key>
+			<string>Rename 1st tag to 2nd tag</string>
+			<key>xpos</key>
+			<integer>1315</integer>
+			<key>ypos</key>
+			<integer>2275</integer>
 		</dict>
 		<key>3CE0B131-A3E7-4756-BB56-C0AEC7448C28</key>
 		<dict>
@@ -4477,13 +4623,6 @@ Information by Kevin White from the Noun Project</string>
 			<key>ypos</key>
 			<integer>390</integer>
 		</dict>
-		<key>91BE90E3-0CA9-4BEA-AEA7-0077C8AC9F62</key>
-		<dict>
-			<key>xpos</key>
-			<integer>1530</integer>
-			<key>ypos</key>
-			<integer>1355</integer>
-		</dict>
 		<key>93A64ECE-BB64-492B-B845-7CB85B544D40</key>
 		<dict>
 			<key>xpos</key>
@@ -4491,12 +4630,26 @@ Information by Kevin White from the Noun Project</string>
 			<key>ypos</key>
 			<integer>2575</integer>
 		</dict>
+		<key>95123ED4-AF0C-42EE-BEDE-1E5C833FECF4</key>
+		<dict>
+			<key>xpos</key>
+			<integer>670</integer>
+			<key>ypos</key>
+			<integer>2375</integer>
+		</dict>
 		<key>988D1146-585C-4DC6-A56B-B303B9A3F173</key>
 		<dict>
 			<key>xpos</key>
 			<integer>680</integer>
 			<key>ypos</key>
 			<integer>190</integer>
+		</dict>
+		<key>9BDBE952-A169-4051-923A-0D980680261F</key>
+		<dict>
+			<key>xpos</key>
+			<integer>1120</integer>
+			<key>ypos</key>
+			<integer>2195</integer>
 		</dict>
 		<key>A156743D-A9BB-4AFB-A0C2-D16EF45F7DD0</key>
 		<dict>
@@ -4529,6 +4682,13 @@ Information by Kevin White from the Noun Project</string>
 			<integer>920</integer>
 			<key>ypos</key>
 			<integer>805</integer>
+		</dict>
+		<key>A7A2EACE-7297-4665-84CF-9BDFAFD604C2</key>
+		<dict>
+			<key>xpos</key>
+			<integer>1315</integer>
+			<key>ypos</key>
+			<integer>2160</integer>
 		</dict>
 		<key>A8EE818C-427B-476F-93FD-02825231464B</key>
 		<dict>
@@ -4618,6 +4778,13 @@ Information by Kevin White from the Noun Project</string>
 			<key>ypos</key>
 			<integer>1125</integer>
 		</dict>
+		<key>C655280A-EE5C-4DA4-9A45-C40695E06751</key>
+		<dict>
+			<key>xpos</key>
+			<integer>665</integer>
+			<key>ypos</key>
+			<integer>2175</integer>
+		</dict>
 		<key>C6A1B854-359E-4D50-9081-56FEAEFC8CBC</key>
 		<dict>
 			<key>note</key>
@@ -4665,15 +4832,6 @@ Information by Kevin White from the Noun Project</string>
 			<integer>45</integer>
 			<key>ypos</key>
 			<integer>1995</integer>
-		</dict>
-		<key>D8134282-42F0-464E-846C-8ECAD90BF80A</key>
-		<dict>
-			<key>note</key>
-			<string>Rename 1st tag to 2nd tag</string>
-			<key>xpos</key>
-			<integer>1120</integer>
-			<key>ypos</key>
-			<integer>1355</integer>
 		</dict>
 		<key>D91FD9FE-14F6-4291-8478-11A126B03BD0</key>
 		<dict>
@@ -4788,7 +4946,7 @@ Information by Kevin White from the Noun Project</string>
 		</dict>
 	</dict>
 	<key>version</key>
-	<string>0.15.10</string>
+	<string>0.15.11</string>
 	<key>webaddress</key>
 	<string>https://github.com/spamwax/alfred-pinboard-rs</string>
 </dict>

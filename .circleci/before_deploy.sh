@@ -22,10 +22,10 @@ main() {
     # only build for macOS
     case $TARGET in
         x86_64-apple-darwin)
-            build_release "$src" "$stage"
+            build_alfred_bundle "$src" "$stage"
             ;;
         # i686-apple-darwin)
-            # build_release "$src" "$stage"
+            # build_alfred_bundle "$src" "$stage"
             # ;;
         *)
             return
@@ -34,7 +34,7 @@ main() {
 
 }
 
-build_release() {
+build_alfred_bundle() {
     src=$1
     stage=$2
     test -f Cargo.lock || cargo generate-lockfile

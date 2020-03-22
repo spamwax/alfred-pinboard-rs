@@ -47,27 +47,6 @@ run_tests() {
 
 }
 
-# # TODO This is the "test phase", tweak it as you see fit
-# test_phase() {
-
-#     # rustup target add --toolchain stable x86_64-unknown-linux-gnu
-#     if [ -n "$DISABLE_TESTS" ] || [ -z "$CIRCLE_TEST" ]; then
-#         cargo build --target "$TARGET"
-#         return
-#     fi
-
-#     cargo test --target "$TARGET" -- --nocapture --test-threads=1 || return
-#     run_phase
-# }
-
-# we don't run debug builds & tests whena tag is assigned.
-# if [ -n "$CIRCLE_TAG" ]; then
-#     echo "Tag commit, Not building in debug mode."
-#     echo "Refuse to do anything"
-#     exit 0
-# fi
-
-# if [ -z "$CIRCLE_TEST" ] || [ -n "$DISABLE_TESTS" ]; then
 # Build only
 if [ -z "$CIRCLE_TEST" ]; then
     arg=

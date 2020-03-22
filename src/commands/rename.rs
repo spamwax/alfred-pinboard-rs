@@ -1,5 +1,4 @@
 use super::*;
-use alfred::ItemBuilder;
 use std::io::Write;
 
 impl<'api, 'pin> Runner<'api, 'pin> {
@@ -15,15 +14,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
         debug!("running rename::run");
         debug!("  tags: {:?}", tags);
         if tags.len() != 2 || tags.iter().any(|tag| tag.len() == 0) {
-            let item = ItemBuilder::new("Enter 2 tags please!")
-                .subtitle("pr old_tag new_tag")
-                .icon_path("erroricon.icns")
-                .into_item();
             crate::show_error_alfred("Enter 2 tags please!");
-            // if let Err(e) = self.write_output_items(vec![item]) {
-            //     error!("delete: Couldn't write to Alfred: {:?}", e);
-            // }
-            return;
         }
 
         debug!("  calling rename API");

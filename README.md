@@ -145,6 +145,14 @@ Proposed workflow for deleting a bookmark is to first open it in browser (search
 
 ![image](./res/images/delete-pin.png)
 
+## Usage (rename a tag):
+```
+pr old_tag new_tag
+```
+
+**Note:** Pinboard tag renaming API lacks providing error message if `old_tag` is not in your tag collection!!! It basically says `success` even though no renaming was done!
+
+
 ## Settings<a name="config"></a>
 
 You can configure the behavior of workflow by entering `pconf` in Alfred:

@@ -64,7 +64,7 @@ jobs:
           name: Attched?
           command: |
             echo $(pwd)
-            ls /tmp/apr
+            ls /tmp/apr/*
       - run:
           name: Run Tests
           command: |
@@ -152,7 +152,7 @@ jobs:
                   - target
 
 workflows:
-  # build-n-test-linux:
+  # linux_x86_64:
   #     jobs:
   #       - linux:
   #           name: Linux-64bit
@@ -161,6 +161,8 @@ workflows:
   #           filters:
   #             branches:
   #               only: /.*/
+  #             tags:
+  #               ignore: /v.*/
   #       - tests:
   #           name: Linux-64bit-test
   #           target: x86_64-unknown-linux-gnu
@@ -168,9 +170,12 @@ workflows:
   #           filters:
   #             branches:
   #               only: [master, develop]
+  #             tags:
+  #               ignore: /v.*/
   #           requires:
   #             - Linux-64bit
-  build-n-test-mac:
+
+  build-n-test-macos:
     jobs:
       - macosimage:
           name: macOS-64bit

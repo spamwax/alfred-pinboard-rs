@@ -1,6 +1,6 @@
 [package]
 name = "alfred-pinboard-rs"
-version = "0.15.10"
+version = "0.15.11"
 authors = [ "Hamid Ghadyani <hamid@hamid.cc>",]
 
 [dependencies]
@@ -33,4 +33,4 @@ features = [ "serde",]
 lto = true
 
 [package.metadata.docs.rs]
-targets = ["x86_64-apple-ios", "x86_64-apple-darwin"]
+targets = [ "x86_64-apple-ios", "x86_64-apple-darwin",]

@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.15.11] - 2020-03-22
+### Added
+- Add basic support for tag renaming.
+
 ## [0.15.10] - 2020-03-12
 ### Fixed
 - Trying to address issue [#47](https://github.com/spamwax/alfred-pinboard-rs/issues/47) (Catalina osascript premissions)
