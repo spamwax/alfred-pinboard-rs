@@ -37,6 +37,11 @@ jobs:
           command: |
             cargo generate-lockfile
             .circleci/script.sh
+      - run:
+          name: Run clippy & rustfmt
+          command: |
+            cargo fmt
+            cargo clippy --all-targets --all-features -- -D warnings
       - persist_to_workspace:
           root: /home/circleci
           paths:
@@ -75,12 +80,6 @@ jobs:
           command: |
             rustup component add clippy rustfmt
             rustc --version; cargo --version; rustup --version
-      - run:
-          name: Run clippy & rustfmt
-          command: |
-            cd /tmp/apr/project
-            cargo fmt
-            cargo clippy --all-targets --all-features -- -D warnings
       - run:
           name: Run Tests
           command: |
