@@ -13,7 +13,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
     fn run(&mut self, tags: &[String]) {
         debug!("running rename::run");
         debug!("  tags: {:?}", tags);
-        if tags.len() != 2 || tags.iter().any(|tag| tag.len() == 0) {
+        if tags.len() != 2 || tags.iter().any(|tag| tag.is_empty()) {
             crate::show_error_alfred("Enter 2 tags please!");
         }
 

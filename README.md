@@ -1,5 +1,5 @@
 [![CircleCI](https://circleci.com/gh/spamwax/alfred-pinboard-rs.svg?style=svg)](https://circleci.com/gh/spamwax/alfred-pinboard-rs)
- [![Build status](https://ci.appveyor.com/api/projects/status/3g5uvuocs52yc444/branch/master?svg=true)](https://ci.appveyor.com/project/spamwax/alfred-pinboard-rs/branch/master) [![Build Status](https://travis-ci.org/spamwax/alfred-pinboard-rs.svg?branch=master)](https://travis-ci.org/spamwax/alfred-pinboard-rs)
+ [![Build status](https://ci.appveyor.com/api/projects/status/3g5uvuocs52yc444/branch/master?svg=true)](https://ci.appveyor.com/project/spamwax/alfred-pinboard-rs/branch/master) 
 
 
 # Alfred Workflow for Pinboard

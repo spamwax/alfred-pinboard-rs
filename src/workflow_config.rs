@@ -139,6 +139,7 @@ impl<'a> Config {
         self.workflow_cache_dir = dirs.1;
     }
 
+    #[allow(dead_code)]
     pub fn cache_dir(&self) -> &PathBuf {
         &self.workflow_cache_dir
     }

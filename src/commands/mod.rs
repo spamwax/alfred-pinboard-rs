@@ -54,7 +54,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
             .unwrap()
             .auth_token
             .find(':')
-            .ok_or(failure::err_msg("Bad Auth. Token!"))?;
+            .ok_or_else(|| failure::err_msg("Bad Auth. Token!"))?;
         let username = &self.config.as_ref().unwrap().auth_token.as_str()[..idx];
         crate::write_to_alfred(
             output_items,

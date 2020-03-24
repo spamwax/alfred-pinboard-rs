@@ -14,8 +14,8 @@ run_tests() {
     export alfred_workflow_bundleid=cc.hamid.alfred-pinboard-rs
     workflow_dir="$working_dir/.config/alfred-pinboard-rs"
     mkdir -p "$workflow_dir"
-    export alfred_workflow_data="$working_dir"
-    export alfred_workflow_cache="$working_dir"
+    export alfred_workflow_data="$workflow_dir"
+    export alfred_workflow_cache="$workflow_dir"
     case "$TARGET" in
         x86_64-apple-darwin)
             $runner config --authorization hamid:12345
@@ -28,6 +28,8 @@ run_tests() {
 
             $runner config --authorization hamid:12345
             $runner config -d
+            unset alfred_debug
+            $runner config -d | .circleci/json_pretty.sh
             ;;
         i686-apple-darwin)
             $runner config --authorization hamid:12345

@@ -65,6 +65,22 @@ jobs:
           command: |
             echo $(pwd)
             ls /tmp/apr/*
+            ls /tmp/apr/project || true
+      - run:
+          name: Install Rust "<< parameters.rust >>"
+          command:
+            curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain << parameters.rust >>
+      - run:
+          name: Add Rust Components
+          command: |
+            rustup component add clippy rustfmt
+            rustc --version; cargo --version; rustup --version
+      - run:
+          name: Run clippy & rustfmt
+          command: |
+            cd /tmp/apr/project
+            cargo fmt
+            cargo clippy --all-targets --all-features -- -D warnings
       - run:
           name: Run Tests
           command: |
@@ -73,13 +89,12 @@ jobs:
             export working_dir=$(pwd)
             .circleci/script.sh $APR_EXEC $working_dir
   deploy:
-    description: Deploy to Github
+    description: Deploy to Github from a linux container (not used in any workflows at the moment)
     docker:
       - image: circleci/golang:1.13
     environment:
       TARGET: x86_64-unknown-linux-gnu
       CIRCLECI_TEST: "false"
-      BUNDLEDIR: /tmp/bundle
     steps:
       - attach_workspace:
           at: /tmp
@@ -109,6 +124,7 @@ jobs:
       RUST_BACKTRACE: "1"
       TARGET: x86_64-apple-darwin
       CIRCLE_OS_NAME: macos
+      GHRELEASER_VERSION: v0.13.0
     steps:
       - run:
           name: Install Rust
@@ -146,10 +162,12 @@ jobs:
             - run:
                 name: Building Alfred Workflow Bundle
                 command: .circleci/before_deploy.sh
-            - persist_to_workspace:
-                root: ../project
-                paths:
-                  - target
+            - run:
+                name: Deploying to Github
+                command: |
+                  export CIRCLE_TEST=false
+                  export VERSION=${CIRCLE_TAG}
+                  .circleci/deploy.sh
 
 workflows:
   linux_x86_64:
@@ -175,14 +193,14 @@ workflows:
             requires:
               - Linux-64bit
 
-  build-n-test-macos:
-    jobs:
-      - macosimage:
-          name: macOS-64bit
-          rust: 1.42.0
-          filters:
-            branches:
-              only: /.*/
+  # build-n-test-macos:
+  #   jobs:
+  #     - macosimage:
+  #         name: macOS-64bit
+  #         rust: 1.42.0
+  #         filters:
+  #           branches:
+  #             only: [master, develop]
   deploy-to-github:
     jobs:
       - macosimage:
@@ -194,13 +212,14 @@ workflows:
               only: /v?[0-9]+.*/
             branches:
               ignore: /.*/
-      - deploy:
-          name: Deploy to Github
-          requires:
-            - macOS-64bit-release
-          filters:
-            tags:
-              only: /v?[0-9]+.*/
-            branches:
-              ignore: /.*/
+      # - deploy:
+      #     name: Deploy to Github
+      #     release: true
+      #     requires:
+      #       - macOS-64bit-release
+      #     filters:
+      #       tags:
+      #         only: /v?[0-9]+.*/
+      #       branches:
+      #         ignore: /.*/
 

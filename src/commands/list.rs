@@ -106,7 +106,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                             assert!(!query_words.is_empty());
                             debug!("Didn't find any tag for `{}`", last_query_word);
                             last_query_word_tag =
-                                Tag::new(last_query_word.to_string(), 0).set_new();
+                                Tag::new((*last_query_word).to_string(), 0).set_new();
                             vec![&last_query_word_tag]
                         }
                     };
@@ -267,7 +267,7 @@ fn retrieve_popular_tags(exec_counter: usize) -> Result<Vec<Tag>, Error> {
     // FIXME: If run from outside Alfred (say terminal),
     // the cache folder for 'config' and 'pinboard' will be different.
     let config = Config::setup()?;
-    let pinboard = Pinboard::new(config.auth_token.clone(), alfred::env::workflow_cache())?;
+    let pinboard = Pinboard::new(config.auth_token, alfred::env::workflow_cache())?;
 
     // let ptags_fn = config.cache_dir().join("popular.tags.cache");
     let ptags_fn = "popular.tags.cache";
