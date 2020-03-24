@@ -72,15 +72,6 @@ jobs:
             ls /tmp/apr/*
             ls /tmp/apr/project || true
       - run:
-          name: Install Rust "<< parameters.rust >>"
-          command:
-            curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain << parameters.rust >>
-      - run:
-          name: Add Rust Components
-          command: |
-            rustup component add clippy rustfmt
-            rustc --version; cargo --version; rustup --version
-      - run:
           name: Run Tests
           command: |
             cd /tmp/apr/project
