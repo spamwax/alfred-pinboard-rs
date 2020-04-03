@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.15.12] - 2020-04-03
+### Fixed
+- Use rusty-pin 0.5.1 to fix #46 (empty tag list on Pinboard)
+
 ## [0.15.11] - 2020-03-22
 ### Added
 - Add basic support for tag renaming.
