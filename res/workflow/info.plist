@@ -772,18 +772,6 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>7D0D3480-DBAF-4261-B304-169C58BDA745</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>sourceoutputuid</key>
-				<string>676F259E-6485-41FC-92EE-D8B9FE736C52</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
 				<string>A7A2EACE-7297-4665-84CF-9BDFAFD604C2</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -4945,8 +4933,10 @@ rename by iconmu from the Noun Project</string>
 			<integer>600</integer>
 		</dict>
 	</dict>
+	<key>variablesdontexport</key>
+	<array/>
 	<key>version</key>
-	<string>0.15.11</string>
+	<string>0.15.12</string>
 	<key>webaddress</key>
 	<string>https://github.com/spamwax/alfred-pinboard-rs</string>
 </dict>
