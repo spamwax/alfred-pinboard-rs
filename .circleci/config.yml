@@ -33,15 +33,15 @@ jobs:
             rustc --version; cargo --version; rustup --version
       - checkout
       - run:
-          name: Build
-          command: |
-            cargo generate-lockfile
-            .circleci/script.sh
-      - run:
           name: Run clippy & rustfmt
           command: |
             cargo fmt
             cargo clippy --all-targets --all-features -- -D warnings
+      - run:
+          name: Build
+          command: |
+            cargo generate-lockfile
+            .circleci/script.sh
       - persist_to_workspace:
           root: /home/circleci
           paths:
@@ -203,14 +203,4 @@ workflows:
               only: /v?[0-9]+.*/
             branches:
               ignore: /.*/
-      # - deploy:
-      #     name: Deploy to Github
-      #     release: true
-      #     requires:
-      #       - macOS-64bit-release
-      #     filters:
-      #       tags:
-      #         only: /v?[0-9]+.*/
-      #       branches:
-      #         ignore: /.*/
 
