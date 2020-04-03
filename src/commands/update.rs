@@ -27,7 +27,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                         .update_cache()
                         .unwrap_or_else(|err| {
                             io::stdout()
-                                .write(format!("Error: {}", err).as_ref())
+                                .write_all(format!("Error: {}", err).as_ref())
                                 .expect("Couldn't write to stdout");
                             process::exit(1);
                         });
@@ -36,16 +36,18 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                         .map(|config| config.update_time = Utc::now());
                     if self.config.as_mut().unwrap().save().is_err() {
                         io::stdout()
-                            .write(b"Error: Couldn't save update time to workflow's config file!")
+                            .write_all(
+                                b"Error: Couldn't save update time to workflow's config file!",
+                            )
                             .expect("Couldn't write to stdout");
                     }
                     io::stdout()
-                        .write(b"Updated cache files!")
+                        .write_all(b"Updated cache files!")
                         .expect("Couldn't write to stdout");
                 } else {
                     debug!("  cache is up-to-date.");
                     io::stdout()
-                        .write(b"Cache is already up-to-date!")
+                        .write_all(b"Cache is already up-to-date!")
                         .expect("Couldn't write to stdout");
                 }
             }

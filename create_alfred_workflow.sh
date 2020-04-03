@@ -16,6 +16,11 @@ res_dir="$alfred_pinboard_rs/res/workflow"
 
 git checkout master || exit
 
+# Run clippy
+if ! cargo +nightly clippy; then
+    exit
+fi
+
 echo "Building new release..."
 cd "$alfred_pinboard_rs" || exit
 

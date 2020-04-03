@@ -27,13 +27,13 @@ impl<'api, 'pin> Runner<'api, 'pin> {
         match r {
             Err(e) => {
                 io::stdout()
-                    .write(format!("Error: {}", e).as_ref())
+                    .write_all(format!("Error: {}", e).as_ref())
                     .expect("Couldn't write to stdout");
                 process::exit(1);
             }
             Ok(_) => {
                 io::stdout()
-                    .write(b"Successfully renamed tag.")
+                    .write_all(b"Successfully renamed tag.")
                     .expect("Couldn't write to stdout");
                 if self.config.as_ref().unwrap().auto_update_cache {
                     self.update_cache();
