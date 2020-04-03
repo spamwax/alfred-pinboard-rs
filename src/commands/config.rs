@@ -39,7 +39,11 @@ pub fn run(x: SubCommand) {
                     }
                 }
             });
-            auth_token.map(|val| config.auth_token = val);
+            // auth_token.map(|val| config.auth_token = val);
+            auth_token.and_then(|val| {
+                config.auth_token = val;
+                Some(())
+            });
             number_pins.map(|val| config.pins_to_show = val);
             number_tags.map(|val| config.tags_to_show = val);
             shared.map(|val| config.private_new_pin = !val);

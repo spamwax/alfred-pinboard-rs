@@ -194,7 +194,7 @@ fn get_alfred_version() -> Version {
         |ref s| {
             Version::parse(s).unwrap_or_else(|_| {
                 if s.starts_with("4.") {
-                    Version::parse("4.0.1").expect("Parsing 4.0.0 shouldn't fail")
+                    Version::parse("4.0.0").expect("Parsing 4.0.0 shouldn't fail")
                 } else if s.starts_with("3.") {
                     Version::parse("3.0.0").expect("Parsing 3.0.0 shouldn't fail")
                 } else {

@@ -62,7 +62,6 @@ use crate::commands::config;
 
 // TODO: add modifiers to delete commands output //
 // TODO: parse Alfred preferences and get number of visible items? //
-// TODO: Use alfred_rs::Data for file operations.
 // TODO: Check for all alfred related env. variables before doing anything else.
 //       This will prevent unnecessary loading and checking of cache files and then
 //       panicing due to missing env. variables.
@@ -72,6 +71,8 @@ use crate::commands::config;
 // TODO: check timestamp of cached suggested tags and if it's too old then make a network call
 // otherwise use it.
 // TODO: add an option to disable/enable update checks
+// TODO: Dont show full JSON errors after alfred's window has closed, just send a notification <01-04-20, hamid> //
+// TODO: Can we do something about failuse of parsing user's bookmarks or when the network times out
 
 #[derive(Debug, Fail)]
 pub enum AlfredError {
