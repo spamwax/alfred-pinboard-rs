@@ -3,7 +3,6 @@ use std::{thread, time};
 
 use alfred::{Item, ItemBuilder, Modifier};
 use alfred_rs::Data;
-use failure::Error;
 
 impl<'api, 'pin> Runner<'api, 'pin> {
     pub fn list(&self, cmd: SubCommand) {

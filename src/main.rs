@@ -68,11 +68,10 @@ use crate::commands::config;
 // TODO: running ./alfred-pinboard-rs update from command line panics (starting from
 //       fetch_latest_release)
 // TODO: Make sure that we don't show any json-like error in macOS's notification (check issue#27)
-// TODO: check timestamp of cached suggested tags and if it's too old then make a network call
-// otherwise use it.
 // TODO: add an option to disable/enable update checks
 // TODO: Dont show full JSON errors after alfred's window has closed, just send a notification <01-04-20, hamid> //
 // TODO: Can we do something about failuse of parsing user's bookmarks or when the network times out
+// TODO: Try to reduce number of calls to get_browser_info in list.rs <04-04-20, hamid> //
 
 #[derive(Debug, Fail)]
 pub enum AlfredError {
@@ -80,6 +79,8 @@ pub enum AlfredError {
     ConfigFileErr,
     #[fail(display = "Missing config file (did you set API token?)")]
     MissingConfigFile,
+    #[fail(display = "Cache: {}", _0)]
+    CacheUpdateFailed(String),
     #[fail(display = "What did you do?")]
     Other,
 }
