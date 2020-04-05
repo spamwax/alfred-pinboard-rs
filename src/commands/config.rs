@@ -7,7 +7,6 @@ pub fn run(x: SubCommand) {
     let print_config;
     let mut config: Config;
 
-    #[allow(clippy::option_map_unit_fn)]
     match x {
         SubCommand::Config {
             display,
@@ -39,21 +38,17 @@ pub fn run(x: SubCommand) {
                     }
                 }
             });
-            // auth_token.map(|val| config.auth_token = val);
-            auth_token.and_then(|val| {
-                config.auth_token = val;
-                Some(())
-            });
-            number_pins.map(|val| config.pins_to_show = val);
-            number_tags.map(|val| config.tags_to_show = val);
-            shared.map(|val| config.private_new_pin = !val);
-            toread.map(|val| config.toread_new_pin = val);
-            fuzzy.map(|val| config.fuzzy_search = val);
-            tags_only.map(|val| config.tag_only_search = val);
-            auto_update.map(|val| config.auto_update_cache = val);
-            suggest_tags.map(|val| config.suggest_tags = val);
-            check_bookmarked_page.map(|val| config.page_is_bookmarked = val);
-            show_url_vs_tags.map(|val| config.show_url_vs_tags = val);
+            config.auth_token = auth_token.unwrap_or(config.auth_token);
+            config.pins_to_show = number_pins.unwrap_or(config.pins_to_show);
+            config.tags_to_show = number_tags.unwrap_or(config.tags_to_show);
+            config.private_new_pin = !shared.unwrap_or(!config.private_new_pin);
+            config.toread_new_pin = toread.unwrap_or(config.toread_new_pin);
+            config.fuzzy_search = fuzzy.unwrap_or(config.fuzzy_search);
+            config.tag_only_search = tags_only.unwrap_or(config.tag_only_search);
+            config.auto_update_cache = auto_update.unwrap_or(config.auto_update_cache);
+            config.suggest_tags = suggest_tags.unwrap_or(config.suggest_tags);
+            config.page_is_bookmarked = check_bookmarked_page.unwrap_or(config.page_is_bookmarked);
+            config.show_url_vs_tags = show_url_vs_tags.unwrap_or(config.show_url_vs_tags);
         }
         _ => unreachable!(),
     }
