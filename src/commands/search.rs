@@ -15,6 +15,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                 url,
                 query,
             } => {
+                info!("query: {:?}", query);
                 let mut search_fields = vec![];
                 if tags {
                     search_fields.push(SearchType::TagOnly);
@@ -41,6 +42,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                         ];
                     }
                 }
+                debug!("search fields: {:?}", search_fields);
                 let pins_to_show = self.config.as_ref().unwrap().pins_to_show;
                 let url_vs_tags = self.config.as_ref().unwrap().show_url_vs_tags;
                 let pinboard = self.pinboard.as_ref().unwrap();

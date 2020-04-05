@@ -38,17 +38,18 @@ pub fn run(x: SubCommand) {
                     }
                 }
             });
-            config.auth_token = auth_token.unwrap_or(config.auth_token);
-            config.pins_to_show = number_pins.unwrap_or(config.pins_to_show);
-            config.tags_to_show = number_tags.unwrap_or(config.tags_to_show);
+            config.auth_token.update(auth_token);
+            config.pins_to_show.update(number_pins);
+            config.tags_to_show.update(number_tags);
+            // config.private_new_pin.update(!shared);
             config.private_new_pin = !shared.unwrap_or(!config.private_new_pin);
-            config.toread_new_pin = toread.unwrap_or(config.toread_new_pin);
-            config.fuzzy_search = fuzzy.unwrap_or(config.fuzzy_search);
-            config.tag_only_search = tags_only.unwrap_or(config.tag_only_search);
-            config.auto_update_cache = auto_update.unwrap_or(config.auto_update_cache);
-            config.suggest_tags = suggest_tags.unwrap_or(config.suggest_tags);
-            config.page_is_bookmarked = check_bookmarked_page.unwrap_or(config.page_is_bookmarked);
-            config.show_url_vs_tags = show_url_vs_tags.unwrap_or(config.show_url_vs_tags);
+            config.toread_new_pin.update(toread);
+            config.fuzzy_search.update(fuzzy);
+            config.tag_only_search.update(tags_only);
+            config.auto_update_cache.update(auto_update);
+            config.suggest_tags.update(suggest_tags);
+            config.page_is_bookmarked.update(check_bookmarked_page);
+            config.show_url_vs_tags.update(show_url_vs_tags);
         }
         _ => unreachable!(),
     }
@@ -145,3 +146,14 @@ fn show_config(config: &Config) {
         .expect("Couldn't build alfred items");
     }
 }
+
+/// Trait to update a value optionally based on `opt`
+trait OptionalUpdate: Sized {
+    fn update(&mut self, opt: Option<Self>) {
+        if let Some(val) = opt {
+            *self = val;
+        }
+    }
+}
+
+impl<T> OptionalUpdate for T {}
