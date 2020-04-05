@@ -23,28 +23,31 @@ impl<'api, 'pin> Runner<'api, 'pin> {
         debug!("Starting in perform_post");
         let input_tags: Vec<String>;
         let input_desc;
-        // let conifg = self.config.as_ref().unwrap();
-        // let pinboard = self.pinboard.as_ref().unwrap();
+        let toread;
+        let shared;
         match cmd {
             SubCommand::Post {
                 tags,
                 description,
-                shared,
-                toread,
+                shared: shared_flag,
+                toread: toread_flag,
             } => {
-                debug!("tags: {:?}", tags);
-                debug!("description: {:?}", description);
-                debug!("toread: {:?}", toread);
-                debug!("shared: {:?}", shared);
+                debug!(
+                    "tags: {:?}, description: {:?}, toread_flag: {:?}, shared_flag: {:?}",
+                    tags, description, toread_flag, shared_flag
+                );
                 input_tags = tags;
                 input_desc = description;
-                // let toread = toread.unwrap_or_else(|| self.config.as_ref().unwrap().toread_new_pin);
-                toread.map(|f| self.config.as_mut().map(|config| config.toread_new_pin = f));
-                shared.map(|f| {
-                    self.config
-                        .as_mut()
-                        .map(|config| config.private_new_pin = !f)
-                });
+                toread =
+                    toread_flag.unwrap_or_else(|| self.config.as_ref().unwrap().toread_new_pin);
+                shared =
+                    shared_flag.unwrap_or_else(|| !self.config.as_ref().unwrap().private_new_pin);
+                // toread.map(|f| self.config.as_mut().map(|config| config.toread_new_pin = f));
+                // shared.map(|f| {
+                //     self.config
+                //         .as_mut()
+                //         .map(|config| config.private_new_pin = !f)
+                // });
             }
             _ => unreachable!(),
         }
@@ -63,16 +66,10 @@ impl<'api, 'pin> Runner<'api, 'pin> {
         let mut pin_builder = PinBuilder::new(&browser_tab_info.url, &browser_tab_info.title);
         pin_builder = pin_builder
             .tags(input_tags.join(" "))
-            .shared(if self.config.as_ref().unwrap().private_new_pin {
-                "no"
-            } else {
-                "yes"
-            })
-            .toread(if self.config.as_ref().unwrap().toread_new_pin {
-                "yes"
-            } else {
-                "no"
-            });
+            // .shared(if self.config.as_ref().unwrap().private_new_pin {
+            .shared(if shared { "yes" } else { "no" })
+            // .toread(if self.config.as_ref().unwrap().toread_new_pin {
+            .toread(if toread { "yes" } else { "no" });
 
         if let Some(desc) = input_desc {
             pin_builder = pin_builder.description(desc);
