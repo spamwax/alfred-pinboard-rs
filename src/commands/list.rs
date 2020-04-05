@@ -29,9 +29,9 @@ impl<'api, 'pin> Runner<'api, 'pin> {
             "Post the bookmark as private."
         };
         let control_subtitle = if config.toread_new_pin {
-            "Mark the pin as NOT toread."
+            "Mark the bookmark as NOT toread."
         } else {
-            "Mark the pin as TOREAD."
+            "Mark the bookmark as TOREAD."
         };
 
         if tags {

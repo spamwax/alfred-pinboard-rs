@@ -81,6 +81,8 @@ pub enum AlfredError {
     MissingConfigFile,
     #[fail(display = "Cache: {}", _0)]
     CacheUpdateFailed(String),
+    #[fail(display = "Post: {}", _0)]
+    Post2PinboardFailed(String),
     #[fail(display = "What did you do?")]
     Other,
 }
