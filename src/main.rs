@@ -85,6 +85,8 @@ pub enum AlfredError {
     CacheUpdateFailed(String),
     #[fail(display = "Post: {}", _0)]
     Post2PinboardFailed(String),
+    #[fail(display = "Delete: {}", _0)]
+    DeleteFailed(String),
     #[fail(display = "What did you do?")]
     Other,
 }

@@ -1,5 +1,6 @@
 use super::browser_info;
 use super::*;
+use crate::AlfredError;
 use alfred::ItemBuilder;
 use std::io::Write;
 
@@ -19,39 +20,76 @@ impl<'api, 'pin> Runner<'api, 'pin> {
             SubCommand::Delete { url, tag } => (url, tag),
             _ => unreachable!(),
         };
-
-        if let Some(tag) = tag {
-            debug!("  tag: {}", tag);
-            if let Err(e) = self.pinboard.as_ref().unwrap().delete_tag(tag) {
-                let _ = io::stdout()
-                    .write(format!("Error: {}", e).as_ref())
-                    .expect("Couldn't write to stdout");
-                process::exit(1);
-            } else {
-                let _ = io::stdout()
-                    .write(b"Successfully deleted tag.")
+        match self.perform_delete(url, tag) {
+            Ok(s) if !s.is_empty() => {
+                io::stdout()
+                    .write_all(s.as_bytes())
                     .expect("Couldn't write to stdout");
                 if self.config.as_ref().unwrap().auto_update_cache {
                     self.update_cache();
                 }
             }
-            return;
+            Err(e) => {
+                let msg = ["Error: ", e.to_string().as_str()].concat();
+                io::stdout()
+                    .write_all(msg.as_bytes())
+                    .expect("Couldn't write to stdout");
+            }
+            Ok(_) => (),
+        }
+    }
+
+    fn perform_delete(
+        &mut self,
+        url: Option<String>,
+        tag: Option<String>,
+    ) -> Result<String, Error> {
+        if let Some(tag) = tag {
+            debug!("  tag: {}", tag);
+            self.pinboard
+                .as_ref()
+                .unwrap()
+                .delete_tag(tag)
+                .map_err(|e| {
+                    error!("{}", e.to_string());
+                    AlfredError::DeleteFailed("couldn't delete tag".to_string())
+                })?;
+            return Ok("Successfully deleted tag.".to_string());
+            // if let Err(e) = self.pinboard.as_ref().unwrap().delete_tag(tag) {
+            //     let _ = io::stdout()
+            //         .write(format!("Error: {}", e).as_ref())
+            //         .expect("Couldn't write to stdout");
+            //     process::exit(1);
+            // } else {
+            //     let _ = io::stdout()
+            //         .write(b"Successfully deleted tag.")
+            //         .expect("Couldn't write to stdout");
+            //     if self.config.as_ref().unwrap().auto_update_cache {
+            //         self.update_cache();
+            //     }
+            // }
+            // return;
         }
         if let Some(url) = url {
             debug!("  url: {}", url);
-            if let Err(e) = self.pinboard.as_ref().unwrap().delete(&url) {
-                let _ = io::stdout()
-                    .write(format!("Error: {}", e).as_ref())
-                    .expect("Couldn't write to stdout");
-                process::exit(1);
-            } else {
-                let _ = io::stdout()
-                    .write(b"Successfully deleted bookmark.")
-                    .expect("Couldn't write to stdout");
-                if self.config.as_ref().unwrap().auto_update_cache {
-                    self.update_cache();
-                }
-            }
+            self.pinboard.as_ref().unwrap().delete(&url).map_err(|e| {
+                error!("{}", e.to_string());
+                AlfredError::DeleteFailed("couldn't delete url".to_string())
+            })?;
+            return Ok("Successfully deleted bookmark.".to_string());
+        // if let Err(e) = self.pinboard.as_ref().unwrap().delete(&url) {
+        //     let _ = io::stdout()
+        //         .write(format!("Error: {}", e).as_ref())
+        //         .expect("Couldn't write to stdout");
+        //     process::exit(1);
+        // } else {
+        //     let _ = io::stdout()
+        //         .write(b"Successfully deleted bookmark.")
+        //         .expect("Couldn't write to stdout");
+        //     if self.config.as_ref().unwrap().auto_update_cache {
+        //         self.update_cache();
+        //     }
+        // }
         } else {
             let tab_info;
             let item = match browser_info::get() {
@@ -67,7 +105,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                         .into_item()
                 }
                 Err(e) => {
-                    warn!("Couldn't get browser info: {:?}", e);
+                    error!("Couldn't get browser info: {:?}", e);
                     ItemBuilder::new("Couldn't get browser's info!")
                         .subtitle("Error")
                         .icon_path("erroricon.icns")
@@ -77,6 +115,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
             if let Err(e) = self.write_output_items(vec![item]) {
                 error!("delete: Couldn't write to Alfred: {:?}", e);
             }
+            Ok(String::new())
         }
     }
 }
