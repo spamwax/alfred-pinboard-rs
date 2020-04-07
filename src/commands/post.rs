@@ -7,9 +7,14 @@ use super::browser_info;
 impl<'api, 'pin> Runner<'api, 'pin> {
     pub fn post(&mut self, cmd: SubCommand) {
         match self.perform_post(cmd) {
-            Ok(s) => io::stdout()
-                .write_all(s.as_bytes())
-                .expect("Couldn't write to stdout"),
+            Ok(s) => {
+                io::stdout()
+                    .write_all(s.as_bytes())
+                    .expect("Couldn't write to stdout");
+                if self.config.as_ref().unwrap().auto_update_cache {
+                    self.update_cache()
+                }
+            }
             Err(e) => {
                 let msg = ["Error: ", e.to_string().as_str()].concat();
                 io::stdout()
@@ -83,9 +88,6 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                 error!("{}", e.to_string());
                 AlfredError::Post2PinboardFailed("Could not post to Pinboard.".to_string())
             })?;
-        if self.config.as_ref().unwrap().auto_update_cache {
-            self.update_cache()
-        }
         Ok(format!("Successfully posted: {}\n", browser_tab_info.title))
         // if let Err(e) = self
         //     .pinboard
