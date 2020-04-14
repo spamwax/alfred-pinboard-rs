@@ -98,16 +98,11 @@ impl<'a> Config {
                 .map_or_else(
                     || {
                         // println!("--> Resorting to old config file format.");
-                        File::open(&data_dir)
-                            .map_err(|e| {
-                                let _err: Error = From::from(e);
-                                _err
-                            })
-                            .and_then(|fp| {
-                                let buf_reader = BufReader::with_capacity(FILE_BUF_SIZE, fp);
-                                serde_json::from_reader(buf_reader)
-                                    .map_err(|_| From::from(AlfredError::ConfigFileErr))
-                            })
+                        File::open(&data_dir).map_err(|e| e.into()).and_then(|fp| {
+                            let buf_reader = BufReader::with_capacity(FILE_BUF_SIZE, fp);
+                            serde_json::from_reader(buf_reader)
+                                .map_err(|_| From::from(AlfredError::ConfigFileErr))
+                        })
                     },
                     Ok,
                 )

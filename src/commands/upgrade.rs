@@ -24,14 +24,17 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                     let filename = self.updater.as_ref().unwrap().download_latest();
                     if let Ok(filename) = filename {
                         if let Some(p) = filename.to_str() {
-                            let _ = io::stdout()
-                                .write(format!("Download successful: {}", p).as_bytes());
+                            io::stdout()
+                                .write_all(["Download Successful: ", p].concat().as_bytes())
+                                .expect("Couldn't write to output!");
                         } else {
-                            let _ = io::stdout().write(b"Download OK, issue with its file name!");
+                            io::stdout()
+                                .write_all(b"Download OK, issue with its file name!")
+                                .expect("Couldn't write to output!");
                         }
                     } else {
-                        let _ =
-                            io::stdout().write(b"Error: Couldn't download the latest workflow.");
+                        let _ = io::stdout()
+                            .write_all(b"Error: Couldn't download the latest workflow.");
                         process::exit(1);
                     }
                 }

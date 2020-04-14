@@ -76,7 +76,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                 error!("{}", e.to_string());
                 AlfredError::DeleteFailed("couldn't delete url".to_string())
             })?;
-            return Ok("Successfully deleted bookmark.".to_string());
+            Ok("Successfully deleted bookmark.".to_string())
         // if let Err(e) = self.pinboard.as_ref().unwrap().delete(&url) {
         //     let _ = io::stdout()
         //         .write(format!("Error: {}", e).as_ref())
