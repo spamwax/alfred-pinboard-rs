@@ -14,7 +14,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
         {
             Err(err) => {
                 io::stdout()
-                    .write(format!("Error: {}", err).as_ref())
+                    .write_all(format!("Error: {}", err).as_ref())
                     .expect("Couldn't write to stdout");
                 process::exit(1);
             }
