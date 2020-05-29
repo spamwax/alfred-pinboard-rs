@@ -118,7 +118,7 @@ The search result is ordered in descending order of dates they were posted to yo
 
 ![image](./res/images/bookmarks-search-results.png)
 
-To show tags (instead of URLS) in search results subtitles, use `pset url_tag`:
+To show tags (instead of URLs) in search results subtitles, use `pset url_tag`:
 
 ![image](./res/images/url_vs_tag.png)
 
