@@ -69,7 +69,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>CEA5E6BE-477F-4E65-910B-1096368B93C8</string>
+				<string>2CEC8590-363C-4F9E-810F-E15D3C433F90</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -772,7 +772,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>A7A2EACE-7297-4665-84CF-9BDFAFD604C2</string>
+				<string>BBC927FE-9006-4C24-A812-1672BEA33096</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -1042,7 +1042,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>33CEA28E-CBEF-499B-8397-6C4C3B947B72</string>
+				<string>BFD4441D-1EB3-4F5E-9E04-96678AD399E9</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -1182,7 +1182,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>06E0CAC8-FEFC-4D89-852A-C9B0D9DC2FA2</string>
+				<string>2CEC8590-363C-4F9E-810F-E15D3C433F90</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -1342,7 +1342,8 @@ echo "$ret"</string>
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>title=$(echo "$1" | sed -n '1p' | cut -d ' ' -f 3-)
+				<string>echo "$1"
+title=$(echo "$1" | sed -n '1p' | cut -d ' ' -f 3-)
 echo "Posted: $title"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
@@ -1357,27 +1358,6 @@ echo "Posted: $title"</string>
 			<string>0F03B46B-AD75-491E-8B5B-36ADF3E084F4</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>Successful</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>CEA5E6BE-477F-4E65-910B-1096368B93C8</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1535,14 +1515,6 @@ apr_execution_counter=$apr_execution_counter ./alfred-pinboard-rs list -t "$1"</
 			<integer>1</integer>
 		</dict>
 		<dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.junction</string>
-			<key>uid</key>
-			<string>988D1146-585C-4DC6-A56B-B303B9A3F173</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
 			<key>config</key>
 			<dict>
 				<key>lastpathcomponent</key>
@@ -1554,12 +1526,20 @@ apr_execution_counter=$apr_execution_counter ./alfred-pinboard-rs list -t "$1"</
 				<key>text</key>
 				<string>{query}</string>
 				<key>title</key>
-				<string>Successful</string>
+				<string>👍</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
-			<string>06E0CAC8-FEFC-4D89-852A-C9B0D9DC2FA2</string>
+			<string>2CEC8590-363C-4F9E-810F-E15D3C433F90</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>988D1146-585C-4DC6-A56B-B303B9A3F173</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -2355,12 +2335,12 @@ fi</string>
 				<key>text</key>
 				<string>{query}</string>
 				<key>title</key>
-				<string>Successful</string>
+				<string>👍</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
-			<string>33CEA28E-CBEF-499B-8397-6C4C3B947B72</string>
+			<string>BFD4441D-1EB3-4F5E-9E04-96678AD399E9</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -2541,7 +2521,7 @@ fi</string>
 				<key>font</key>
 				<string></string>
 				<key>largetypetext</key>
-				<string>{query}</string>
+				<string>👎{query}</string>
 				<key>textcolor</key>
 				<string></string>
 			</dict>
@@ -2641,7 +2621,7 @@ fi</string>
 				<key>text</key>
 				<string>{query}</string>
 				<key>title</key>
-				<string>Successful</string>
+				<string>👍</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
@@ -2712,7 +2692,7 @@ fi</string>
 				<key>font</key>
 				<string></string>
 				<key>largetypetext</key>
-				<string>{query}</string>
+				<string>👎{query}</string>
 				<key>textcolor</key>
 				<string></string>
 			</dict>
@@ -2926,7 +2906,7 @@ fi</string>
 				<key>text</key>
 				<string>{query}</string>
 				<key>title</key>
-				<string>Rusty Pinboard</string>
+				<string>👎</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
@@ -3020,12 +3000,12 @@ fi</string>
 				<key>text</key>
 				<string>{query}</string>
 				<key>title</key>
-				<string>Successful</string>
+				<string>👍</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
-			<string>A7A2EACE-7297-4665-84CF-9BDFAFD604C2</string>
+			<string>BBC927FE-9006-4C24-A812-1672BEA33096</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -3170,7 +3150,7 @@ foo=$(echo $x | tr '"' '\"')
     \"arg\": \"\", \
     \"variables\":  \
     {\"result\": \" \
-{ \\\"items\\\": [ { \\\"title\\\": \\\"Error in renaming tags\\\", \\\"subtitle\\\": \\\"pr old new\\\", \\\"arg\\\": \\\"false\\\", \\\"icon\\\": { \\\"path\\\": \\\"erroricon.icns\\\" }, \\\"uid\\\": \\\"1\\\" } ] } \
+{ \\\"items\\\": [ { \\\"title\\\": \\\"Error in renaming tags\\\", \\\"subtitle\\\": \\\"pr old new\\\", \\\"valid\\\": \\\"false\\\", \\\"icon\\\": { \\\"path\\\": \\\"erroricon.icns\\\" }, \\\"uid\\\": \\\"1\\\" } ] } \
 \"}}}
 
 fi</string>
@@ -3536,7 +3516,7 @@ fi</string>
 				<key>text</key>
 				<string>{query}</string>
 				<key>title</key>
-				<string>Rusty Pinboard</string>
+				<string>Rusty Pinboard 👍</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
@@ -4165,13 +4145,6 @@ rename by iconmu from the Noun Project</string>
 			<key>ypos</key>
 			<integer>805</integer>
 		</dict>
-		<key>06E0CAC8-FEFC-4D89-852A-C9B0D9DC2FA2</key>
-		<dict>
-			<key>xpos</key>
-			<integer>1295</integer>
-			<key>ypos</key>
-			<integer>240</integer>
-		</dict>
 		<key>0F03B46B-AD75-491E-8B5B-36ADF3E084F4</key>
 		<dict>
 			<key>note</key>
@@ -4246,6 +4219,13 @@ rename by iconmu from the Noun Project</string>
 			<key>ypos</key>
 			<integer>1475</integer>
 		</dict>
+		<key>2CEC8590-363C-4F9E-810F-E15D3C433F90</key>
+		<dict>
+			<key>xpos</key>
+			<integer>1295</integer>
+			<key>ypos</key>
+			<integer>170</integer>
+		</dict>
 		<key>2DFDAFE5-6A0E-4E95-A1C5-30789A06C27C</key>
 		<dict>
 			<key>xpos</key>
@@ -4259,13 +4239,6 @@ rename by iconmu from the Noun Project</string>
 			<integer>925</integer>
 			<key>ypos</key>
 			<integer>2175</integer>
-		</dict>
-		<key>33CEA28E-CBEF-499B-8397-6C4C3B947B72</key>
-		<dict>
-			<key>xpos</key>
-			<integer>1530</integer>
-			<key>ypos</key>
-			<integer>1135</integer>
 		</dict>
 		<key>3A8F63FC-42D6-4F71-9822-5442E212FAC9</key>
 		<dict>
@@ -4671,13 +4644,6 @@ rename by iconmu from the Noun Project</string>
 			<key>ypos</key>
 			<integer>805</integer>
 		</dict>
-		<key>A7A2EACE-7297-4665-84CF-9BDFAFD604C2</key>
-		<dict>
-			<key>xpos</key>
-			<integer>1315</integer>
-			<key>ypos</key>
-			<integer>2160</integer>
-		</dict>
 		<key>A8EE818C-427B-476F-93FD-02825231464B</key>
 		<dict>
 			<key>xpos</key>
@@ -4708,6 +4674,13 @@ rename by iconmu from the Noun Project</string>
 			<key>ypos</key>
 			<integer>3075</integer>
 		</dict>
+		<key>BBC927FE-9006-4C24-A812-1672BEA33096</key>
+		<dict>
+			<key>xpos</key>
+			<integer>1315</integer>
+			<key>ypos</key>
+			<integer>2160</integer>
+		</dict>
 		<key>BBFBAB3B-9592-48EF-9E70-3DDF3303690D</key>
 		<dict>
 			<key>xpos</key>
@@ -4730,6 +4703,13 @@ rename by iconmu from the Noun Project</string>
 			<integer>45</integer>
 			<key>ypos</key>
 			<integer>2475</integer>
+		</dict>
+		<key>BFD4441D-1EB3-4F5E-9E04-96678AD399E9</key>
+		<dict>
+			<key>xpos</key>
+			<integer>1530</integer>
+			<key>ypos</key>
+			<integer>1135</integer>
 		</dict>
 		<key>C1E87F32-A676-401C-A330-9A305B928E8E</key>
 		<dict>
@@ -4795,13 +4775,6 @@ rename by iconmu from the Noun Project</string>
 			<integer>825</integer>
 			<key>ypos</key>
 			<integer>1725</integer>
-		</dict>
-		<key>CEA5E6BE-477F-4E65-910B-1096368B93C8</key>
-		<dict>
-			<key>xpos</key>
-			<integer>1295</integer>
-			<key>ypos</key>
-			<integer>100</integer>
 		</dict>
 		<key>D52A87C2-E602-4F4F-A20E-DD9202A461E9</key>
 		<dict>
@@ -4936,7 +4909,7 @@ rename by iconmu from the Noun Project</string>
 	<key>variablesdontexport</key>
 	<array/>
 	<key>version</key>
-	<string>0.15.12</string>
+	<string>0.15.13</string>
 	<key>webaddress</key>
 	<string>https://github.com/spamwax/alfred-pinboard-rs</string>
 </dict>
