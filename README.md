@@ -7,7 +7,7 @@
 
 Manage, post and **preview** your bookmarks on [Pinboard](https://pinboard.in) right from within [Alfred app](https://www.alfredapp.com).
 ### Important: [Update & Support for Alfred 3 Users](#alfred_3_support)
-### Alfred 4: If upgrading workflow from `0.14.14` or before, you may have to directly [download](https://github.com/spamwax/alfred-pinboard-rs/releases/latest) latest version and then open it in Finder
+### Alfred 4: If upgrading workflow from `0.15.12` ()or `0.14.14` and before), you may have to directly [download](https://github.com/spamwax/alfred-pinboard-rs/releases/latest) latest version and then open it in Finder
 
 ## Features
 Pinboard is a great and reliable bookmarking service. Its [front page](https://pinboard.in) sums it all:

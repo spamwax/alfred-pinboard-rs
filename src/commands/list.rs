@@ -199,12 +199,12 @@ fn is_page_bookmarked(pinboard: &Pinboard) -> bool {
                 debug!("tab_info: {:?}", tab_info);
                 pinboard
                     .find_url(&tab_info.url)
-                    .and_then(|op| {
+                    .map(|op| {
                         if let Some(vp) = op {
                             assert!(!vp.is_empty());
-                            Ok(!vp.is_empty())
+                            !vp.is_empty()
                         } else {
-                            Ok(false)
+                            false
                         }
                     })
                     .unwrap_or(false)
