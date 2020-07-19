@@ -166,7 +166,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
             }
             let items = pinboard
                 .list_bookmarks()
-                .unwrap_or_else(|| vec![])
+                .unwrap_or_else(Vec::new)
                 .into_iter()
                 .take(config.pins_to_show as usize)
                 .map(|pin| {
