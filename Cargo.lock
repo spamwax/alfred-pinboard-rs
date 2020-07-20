@@ -1556,8 +1556,8 @@ dependencies = [
 
 [[package]]
 name = "rusty-pin"
-version = "0.5.0"
-source = "git+https://github.com/spamwax/rusty-pin#b5e566a4f7722777211a4060634a7a0b40b3c52e"
+version = "0.5.4"
+source = "git+https://github.com/spamwax/rusty-pin#f66223d56e2037558d158ad364e60818b730d426"
 dependencies = [
  "chrono",
  "dirs 1.0.5",
