@@ -54,6 +54,8 @@ run_tests() {
 if [ -z "$CIRCLE_TEST" ]; then
     arg=
     [[ "$TARGET" == "x86_64-apple-darwin" ]] && [[ "$BUILD_TYPE" == "release" ]] && arg="--release"
+    cargo update
+    cargo generate-lockfile
     cargo build $arg --target "$TARGET"
 elif [[ "$CIRCLE_TEST" == "false" ]]; then # Tests disabled
     echo "Tests Disabled. Finishing the job."

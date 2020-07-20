@@ -15,6 +15,8 @@ workflow_dir="$HOME/Dropbox/Alfred/Alfred.alfredpreferences/workflows/user.workf
 res_dir="$alfred_pinboard_rs/res/workflow"
 
 git checkout master || exit
+cargo update || exit
+cargo generate-lockfile
 
 # Run clippy
 if ! cargo +nightly clippy; then
