@@ -134,6 +134,11 @@ pub enum SubCommand {
         #[structopt(name = "url", long = "url", short = "u")]
         url: bool,
 
+        /// Only include URLs in the output. By default search returns json suitable for Alfred.
+        /// This flags only outputs the URL of results (one per line)
+        #[structopt(name = "show-only-url", long = "show-only-url", short = "U")]
+        showonlyurl: bool,
+
         /// Query string to look for in all fields of bookmarks, unless modified by -t, -T or -u
         /// flags (space delimited). Bookmarks that have all of query strings will be
         /// returned.

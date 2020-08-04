@@ -3,6 +3,9 @@ use alfred::{Item, ItemBuilder, Modifier};
 
 use rusty_pin::pinboard::SearchType;
 
+use std::borrow::Cow;
+use std::io::Write;
+
 // TODO: Investigate why content of text_copy is not used within Alfred when user presses ⌘-C
 impl<'api, 'pin> Runner<'api, 'pin> {
     pub fn search(&mut self, cmd: SubCommand) {
@@ -13,6 +16,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                 title,
                 description,
                 url,
+                showonlyurl,
                 query,
             } => {
                 info!("query: {:?}", query);
@@ -51,8 +55,19 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                 let variables = vec![("user_query", user_query.as_str())];
 
                 let items = process(query, &search_fields, pins_to_show, url_vs_tags, pinboard);
-                if let Err(e) = self.write_output_items(items, Some(variables)) {
-                    error!("search: Couldn't write to Alfred: {:?}", e);
+                if showonlyurl {
+                    for item in items {
+                        io::stdout()
+                            .write_all(item.quicklook_url.unwrap_or(Cow::from("")).as_bytes())
+                            .expect("Couldn't write to stdout");
+                        io::stdout()
+                            .write_all(b"\n")
+                            .expect("Couldn't write to stdout");
+                    }
+                } else {
+                    if let Err(e) = self.write_output_items(items, Some(variables)) {
+                        error!("search: Couldn't write to Alfred: {:?}", e);
+                    }
                 }
             }
             _ => unreachable!(),
