@@ -112,7 +112,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                         .into_item()
                 }
             };
-            if let Err(e) = self.write_output_items(vec![item]) {
+            if let Err(e) = self.write_output_items(vec![item], Option::<Vec<(&str, &str)>>::None) {
                 error!("delete: Couldn't write to Alfred: {:?}", e);
             }
             Ok(String::new())

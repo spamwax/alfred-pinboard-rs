@@ -46,8 +46,12 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                 let pins_to_show = self.config.as_ref().unwrap().pins_to_show;
                 let url_vs_tags = self.config.as_ref().unwrap().show_url_vs_tags;
                 let pinboard = self.pinboard.as_ref().unwrap();
+
+                let user_query = query.join(" ");
+                let variables = vec![("user_query", user_query.as_str())];
+
                 let items = process(query, &search_fields, pins_to_show, url_vs_tags, pinboard);
-                if let Err(e) = self.write_output_items(items) {
+                if let Err(e) = self.write_output_items(items, Some(variables)) {
                     error!("search: Couldn't write to Alfred: {:?}", e);
                 }
             }

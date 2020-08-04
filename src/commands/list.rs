@@ -59,7 +59,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                     item = item.variable("description", pin_info[1])
                 }
                 let item = vec![item.into_item()];
-                if let Err(e) = self.write_output_items(item) {
+                if let Err(e) = self.write_output_items(item, Option::<Vec<(&str, &str)>>::None) {
                     error!("list: Couldn't write to Alfred: {:?}", e);
                 }
                 return;
@@ -154,7 +154,8 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                     .into_item();
                 alfred_items.insert(0, bookmark_present);
             }
-            if let Err(e) = self.write_output_items(alfred_items) {
+            if let Err(e) = self.write_output_items(alfred_items, Option::<Vec<(&str, &str)>>::None)
+            {
                 error!("list: Couldn't write to Alfred: {:?}", e);
             }
         } else {
@@ -176,7 +177,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                         .into_item()
                 })
                 .collect::<Vec<Item>>();
-            if let Err(e) = self.write_output_items(items) {
+            if let Err(e) = self.write_output_items(items, Option::<Vec<(&str, &str)>>::None) {
                 error!("list: Couldn't write to Alfred: {:?}", e);
             }
         }

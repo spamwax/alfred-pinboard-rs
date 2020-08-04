@@ -29,9 +29,10 @@ pub(super) struct Runner<'api, 'pin> {
 }
 
 impl<'api, 'pin> Runner<'api, 'pin> {
-    fn write_output_items<'a, I>(&self, items: I) -> Result<(), Error>
+    fn write_output_items<'a, 'b, I, J>(&self, items: I, vars: Option<J>) -> Result<(), Error>
     where
         I: IntoIterator<Item = alfred::Item<'a>>,
+        J: IntoIterator<Item = (&'b str, &'b str)>,
     {
         debug!("Starting in write_output_items");
         let mut output_items = items.into_iter().collect::<Vec<alfred::Item>>();
@@ -56,11 +57,13 @@ impl<'api, 'pin> Runner<'api, 'pin> {
             .find(':')
             .ok_or_else(|| failure::err_msg("Bad Auth. Token!"))?;
         let username = &self.config.as_ref().unwrap().auth_token.as_str()[..idx];
-        crate::write_to_alfred(
-            output_items,
-            json_format,
-            Some(vec![("username", username)]),
-        );
+        let mut variables = vec![("username", username)];
+        if let Some(items) = vars {
+            items.into_iter().for_each(|(k, v)| {
+                variables.push((k, v));
+            });
+        }
+        crate::write_to_alfred(output_items, json_format, Some(variables));
         Ok(())
     }
 
