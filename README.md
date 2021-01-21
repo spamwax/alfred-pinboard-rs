@@ -7,7 +7,7 @@
 
 Manage, post and **preview** your bookmarks on [Pinboard](https://pinboard.in) right from within [Alfred app](https://www.alfredapp.com).
 ### Important: [Update & Support for Alfred 3 Users](#alfred_3_support)
-### Alfred 4: If upgrading workflow from `0.15.12` ()or `0.14.14` and before), you may have to directly [download](https://github.com/spamwax/alfred-pinboard-rs/releases/latest) latest version and then open it in Finder
+### Alfred 4: If upgrading workflow from `0.15.12` (or `0.14.14` and before), you may have to directly [download](https://github.com/spamwax/alfred-pinboard-rs/releases/latest) latest version and then open it in Finder
 
 ## Features
 Pinboard is a great and reliable bookmarking service. Its [front page](https://pinboard.in) sums it all:
@@ -225,6 +225,7 @@ When fuzzy search is enabled, the tags/bookmarks that contain the query letters 
 
 I wish to add the following in the coming releases:
 
+- Replace current fuzzy search with `fzf`-like logic.
 - ~~Let users delete a selected bookmark from witin Alfred.~~
 - ~~Add a proper logging facility to Rust code.~~ (uses log_env)
 - ~~Use a better error mechanism (maybe [failure](https://crates.io/crates/failure)?)~~
