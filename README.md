@@ -215,6 +215,7 @@ When fuzzy search is enabled, the tags/bookmarks that contain the query letters 
 
 ## Known Issues<a name="known_issues"></a>
 - **Firefox**: While tag suggestions and "Check if page is bookmarked" options are enabled, posting bookmark from Firefox is broken. Deleting bookmarks using `pind` won't work when Firefox is your active browser. Reason: Firefox does not properly support interacting with it programatically.
+- If you get `cannot be opened because the developer cannot be verified.` error, check out [this issue](https://github.com/spamwax/alfred-pinboard-rs/issues/120) as well as the [post](https://www.alfredforum.com/topic/13824-workflow-fail-with-developer-cannot-be-verified-errors-in-catalina/?do=findComment&comment=72101) on Alfred forum
 - This workflow is setup to work with Aflred 4. It may or may not work with previous version as it has not been tested for them.
 
 ## Alfred 3 Support & Issues<a name="alfred_3_support"></a>
