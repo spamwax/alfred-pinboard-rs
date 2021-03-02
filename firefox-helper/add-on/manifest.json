@@ -1,0 +1,21 @@
+{
+
+  "description": "alfred_pinboard_rs tracks the current URL",
+  "manifest_version": 2,
+  "name": "alfred_pinboard_rs",
+  "version": "1.0",
+
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "alfred_pinboard_rs@brett.benders.net",
+      "strict_min_version": "50.0"
+    }
+  },
+
+  "background": {
+    "scripts": ["background.js"]
+  },
+  
+  "permissions": ["nativeMessaging", "tabs"]
+
+}

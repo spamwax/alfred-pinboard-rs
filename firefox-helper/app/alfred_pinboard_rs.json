@@ -1,0 +1,7 @@
+{
+  "name": "alfred_pinboard_rs",
+  "description": "alfred_pinboard_rs client",
+  "path": "/Users/brettbender/projects/alfred-pinboard-rs/firefox-helper/app/alfred_pinboard_rs.py",
+  "type": "stdio",
+  "allowed_extensions": [ "alfred_pinboard_rs@brett.benders.net" ]
+}
