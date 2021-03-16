@@ -162,6 +162,10 @@ on run
         set theText to item 2 of theResult
 
     else if theApplication is "Firefox.app" and appIsRunning("Firefox") then
+        set externalResult to do shell script "./get-current-url-from-alfred-firefox.sh"
+        if externalResult contains "fd850fc2e63511e79f720023dfdf24ec" then
+            return externalResult
+        end if
         set theResult to run script "tell application id \"org.mozilla.firefox\"
           activate
           set w to item 1 of window 1
