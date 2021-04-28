@@ -1,0 +1,27 @@
+version: 2
+updates:
+- package-ecosystem: cargo
+  directory: "/"
+  schedule:
+    interval: weekly
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: dirs
+    versions:
+    - ">= 3.a, < 4"
+  - dependency-name: serde
+    versions:
+    - 1.0.122
+    - 1.0.123
+    - 1.0.124
+  - dependency-name: env_logger
+    versions:
+    - 0.8.2
+    - 0.8.3
+  - dependency-name: serde_json
+    versions:
+    - 1.0.61
+    - 1.0.62
+  - dependency-name: log
+    versions:
+    - 0.4.13
