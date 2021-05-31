@@ -55,7 +55,7 @@ dependencies = [
  "if_chain",
  "log",
  "rusty-pin",
- "semver",
+ "semver 1.0.1",
  "serde",
  "serde_derive",
  "serde_json",
@@ -74,7 +74,7 @@ dependencies = [
  "failure",
  "log",
  "reqwest 0.8.8",
- "semver",
+ "semver 0.9.0",
  "serde",
  "serde_derive",
  "serde_json",
@@ -1553,7 +1553,7 @@ version = "0.2.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "138e3e0acb6c9fb258b19b67cb8abd63c00679d2851805ea151465464fe9030a"
 dependencies = [
- "semver",
+ "semver 0.9.0",
 ]
 
 [[package]]
@@ -1665,6 +1665,12 @@ dependencies = [
  "semver-parser",
  "serde",
 ]
+
+[[package]]
+name = "semver"
+version = "1.0.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d023dabf011d5dcb5ac64e3685d97d3b0ef412911077a2851455c6098524a723"
 
 [[package]]
 name = "semver-parser"
