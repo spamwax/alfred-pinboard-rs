@@ -14,7 +14,7 @@ failure = "0.1.8"
 dirs = "2.0"
 if_chain = "1.0.1"
 log = "0.4"
-env_logger = "0.7"
+env_logger = "0.9"
 
 [features]
 
