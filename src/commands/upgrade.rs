@@ -35,6 +35,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                     } else {
                         let _ = io::stdout()
                             .write_all(b"Error: Couldn't download the latest workflow.");
+                        debug!("Download error: {:?}", filename.unwrap_err());
                         process::exit(1);
                     }
                 }

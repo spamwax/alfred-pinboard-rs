@@ -8,6 +8,7 @@ pub struct Opt {
     pub cmd: SubCommand,
 }
 
+/// CLI verbs/commands and their options.
 #[derive(StructOpt, Debug)]
 pub enum SubCommand {
     #[structopt(name = "config")]
