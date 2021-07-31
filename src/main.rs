@@ -60,6 +60,10 @@ use crate::commands::Runner;
 // use commands::{config, delete, list, post, search, update};
 use crate::commands::config;
 
+// TODO:  <31-07-21 Use a fuzzy matcher crate to replace the regex pattern we use in rusty-pin
+// crate, ex. https://crates.io/crates/fuzzy-matcher>
+// TODO:  <31-07-21, Do not show "you have the latest version" if user is on the latest version
+// of software. Maybe just show it when user explicitly checks for the update>
 // TODO: add modifiers to delete commands output
 // TODO: parse Alfred preferences and get number of visible items?
 // TODO: Check for all alfred related env. variables before doing anything else.
