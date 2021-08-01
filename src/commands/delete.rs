@@ -1,13 +1,12 @@
+/// Providing this command with a URL will try to remove the related bookmark from Pinboard.
+/// If no URL is provided, this command will fetch browser's tab info and show and Alfred item that
+/// can be used for deletion in next step.
+///
 use super::browser_info;
 use super::*;
 use crate::AlfredError;
 use alfred::ItemBuilder;
 use std::io::Write;
-
-/// Providing this command with a URL will try to remove the related bookmark from Pinboard.
-/// If no URL is provided, this command will fetch browser's tab info and show and Alfred item that
-/// can be used for deletion in next step.
-///
 
 // TODO: right now we accept deleting tag & url at the same time. If user asks to delete a tag
 // only, this function will automatically grab browser's url and return an Alfred item containing
@@ -55,20 +54,6 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                     AlfredError::DeleteFailed("couldn't delete tag".to_string())
                 })?;
             return Ok("Successfully deleted tag.".to_string());
-            // if let Err(e) = self.pinboard.as_ref().unwrap().delete_tag(tag) {
-            //     let _ = io::stdout()
-            //         .write(format!("Error: {}", e).as_ref())
-            //         .expect("Couldn't write to stdout");
-            //     process::exit(1);
-            // } else {
-            //     let _ = io::stdout()
-            //         .write(b"Successfully deleted tag.")
-            //         .expect("Couldn't write to stdout");
-            //     if self.config.as_ref().unwrap().auto_update_cache {
-            //         self.update_cache();
-            //     }
-            // }
-            // return;
         }
         if let Some(url) = url {
             debug!("  url: {}", url);
@@ -77,19 +62,6 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                 AlfredError::DeleteFailed("couldn't delete url".to_string())
             })?;
             Ok("Successfully deleted bookmark.".to_string())
-        // if let Err(e) = self.pinboard.as_ref().unwrap().delete(&url) {
-        //     let _ = io::stdout()
-        //         .write(format!("Error: {}", e).as_ref())
-        //         .expect("Couldn't write to stdout");
-        //     process::exit(1);
-        // } else {
-        //     let _ = io::stdout()
-        //         .write(b"Successfully deleted bookmark.")
-        //         .expect("Couldn't write to stdout");
-        //     if self.config.as_ref().unwrap().auto_update_cache {
-        //         self.update_cache();
-        //     }
-        // }
         } else {
             let tab_info;
             let item = match browser_info::get() {

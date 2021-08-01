@@ -60,11 +60,8 @@ use crate::commands::Runner;
 // use commands::{config, delete, list, post, search, update};
 use crate::commands::config;
 
-// TODO:  <31-07-21 Use a fuzzy matcher crate to replace the regex pattern we use in rusty-pin
-// crate, ex. https://crates.io/crates/fuzzy-matcher>
 // TODO:  <31-07-21, Do not show "you have the latest version" if user is on the latest version
 // of software. Maybe just show it when user explicitly checks for the update>
-// TODO: add modifiers to delete commands output
 // TODO: parse Alfred preferences and get number of visible items?
 // TODO: Check for all alfred related env. variables before doing anything else.
 //       This will prevent unnecessary loading and checking of cache files and then
@@ -96,6 +93,15 @@ pub enum AlfredError {
 }
 
 fn main() {
+    /*
+         - export alfred_workflow_version=0.11.1
+         - export alfred_workflow_data=$HOME/tmp/apr
+         - export alfred_workflow_cache=$HOME/tmp/apr/
+         - export alfred_workflow_uid=hamid63
+         - export alfred_workflow_name="Rusty Pin"
+         - export alfred_workflow_bundleid=cc.hamid.alfred-pinboard-rs
+         - export alfred_version=3.6
+    */
     // env::set_var("alfred_workflow_data", "/Volumes/Home/hamid/tmp/rust");
     // env::set_var("alfred_workflow_cache", "/Volumes/Home/hamid/tmp/rust");
     // env::set_var("alfred_workflow_uid", "hamid63");
@@ -110,11 +116,30 @@ fn main() {
             "rusty_pin=debug,alfred_rs=debug,alfred_pinboard_rs=debug",
         );
     }
-
     env_logger::init();
 
     debug!("Parsing input arguments.");
     let opt: Opt = Opt::from_args();
+
+    debug!("Checking if alfred_workflow_* env. variables");
+    use env::var_os;
+    let env_flags = (
+        var_os("alfred_workflow_version").is_some(),
+        var_os("alfred_workflow_data").is_some(),
+        var_os("alfred_workflow_cache").is_some(),
+        var_os("alfred_workflow_uid").is_some(),
+        var_os("alfred_workflow_name").is_some(),
+        var_os("alfred_version").is_some(),
+    );
+    match env_flags {
+        (true, true, true, true, true, true) => (),
+        _ => {
+            show_error_alfred(
+                "Your workflow is not set up properly. Chech alfred_workflow_* env var.",
+            );
+            process::exit(1);
+        }
+    }
 
     let pinboard;
     let config;
