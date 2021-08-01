@@ -109,7 +109,7 @@ jobs:
         type: string
         default: 1.42.0
     macos:
-      xcode: "10.0"
+      xcode: "11.0"
     environment:
       RUST_BACKTRACE: "1"
       TARGET: x86_64-apple-darwin
