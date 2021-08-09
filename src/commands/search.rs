@@ -58,16 +58,14 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                 if showonlyurl {
                     for item in items {
                         io::stdout()
-                            .write_all(item.quicklook_url.unwrap_or(Cow::from("")).as_bytes())
+                            .write_all(item.quicklook_url.unwrap_or_else(|| Cow::from("")).as_bytes())
                             .expect("Couldn't write to stdout");
                         io::stdout()
                             .write_all(b"\n")
                             .expect("Couldn't write to stdout");
                     }
-                } else {
-                    if let Err(e) = self.write_output_items(items, Some(variables)) {
+                } else if let Err(e) = self.write_output_items(items, Some(variables)) {
                         error!("search: Couldn't write to Alfred: {:?}", e);
-                    }
                 }
             }
             _ => unreachable!(),

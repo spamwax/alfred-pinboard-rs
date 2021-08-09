@@ -148,7 +148,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                         .collect::<Vec<Item>>();
                 }
             }
-            if config.page_is_bookmarked && is_page_bookmarked(&pinboard) {
+            if config.page_is_bookmarked && is_page_bookmarked(pinboard) {
                 let bookmark_present = ItemBuilder::new("You already have the bookmark!")
                     .icon_path("bookmark-delete.png")
                     .into_item();

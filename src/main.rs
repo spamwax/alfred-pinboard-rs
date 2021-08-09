@@ -135,7 +135,7 @@ fn main() {
         (true, true, true, true, true, true) => (),
         _ => {
             show_error_alfred(
-                "Your workflow is not set up properly. Chech alfred_workflow_* env var.",
+                "Your workflow is not set up properly. Check alfred_workflow_* env var.",
             );
             process::exit(1);
         }
