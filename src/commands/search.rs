@@ -43,6 +43,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                             SearchType::TagOnly,
                             SearchType::TitleOnly,
                             SearchType::DescriptionOnly,
+                            SearchType::UrlOnly,
                         ];
                     }
                 }
