@@ -20,8 +20,8 @@ run_tests() {
     case "$TARGET" in
         x86_64-apple-darwin)
             $runner config --authorization "${PINBOARD_TOKEN}"
-            $runner config -d
             $runner update
+            $runner config -d
             ;;
         x86_64-unknown-linux-gnu)
             ls -ld "$alfred_workflow_data"
@@ -30,12 +30,12 @@ run_tests() {
 
             $runner config --authorization "${PINBOARD_TOKEN}"
             $runner update
-            $runner config -d
             unset alfred_debug
             $runner config -d | .circleci/json_pretty.sh
             ;;
         i686-apple-darwin)
             $runner config --authorization "${PINBOARD_TOKEN}"
+            $runner update
             $runner config -d
             ;;
         x86_64-unknown-freebsd)
@@ -44,12 +44,16 @@ run_tests() {
             ;;
         armv7-linux-androideabi)
             $runner config --authorization "${PINBOARD_TOKEN}"
+            $runner update
             $runner config -d
             ;;
         *)
             return
             ;;
     esac
+    ls -la "$alfred_workflow_data"
+    ls -la "$2"
+    rm -rf "$2"
 
 }
 
