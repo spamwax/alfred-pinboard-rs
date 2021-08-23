@@ -6,7 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.16.14] - 2021-08-23
+## [0.16.0] - 2021-08-23
+Bumped minor version since new fuzzy search engine may produce different search results.
+
 ### Added
 - Use a new fuzzy search engine.
 - Support tag renaming using a keyword.
