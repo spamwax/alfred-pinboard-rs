@@ -11,7 +11,6 @@ run_tests() {
     export alfred_version="4.5.1"
     export alfred_workflow_version=0.16.0
     export alfred_workflow_uid=hamid63
-    export pinboard_token="${PINBOARD_TOKEN}"
     export alfred_workflow_name="RustyPin"
     export alfred_workflow_bundleid=cc.hamid.alfred-pinboard-rs
     workflow_dir="$working_dir/.config/alfred-pinboard-rs"
@@ -30,8 +29,8 @@ run_tests() {
             chown -R "$USER":"$USER" "$alfred_workflow_data"
 
             $runner config --authorization "${PINBOARD_TOKEN}"
-            $runner config -d
             $runner update
+            $runner config -d
             unset alfred_debug
             $runner config -d | .circleci/json_pretty.sh
             ;;
