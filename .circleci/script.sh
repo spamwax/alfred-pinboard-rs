@@ -11,6 +11,7 @@ run_tests() {
     export alfred_version="4.5.1"
     export alfred_workflow_version=0.16.0
     export alfred_workflow_uid=hamid63
+    export pinboard_token="${PINBOARD_TOKEN}"
     export alfred_workflow_name="RustyPin"
     export alfred_workflow_bundleid=cc.hamid.alfred-pinboard-rs
     workflow_dir="$working_dir/.config/alfred-pinboard-rs"
@@ -19,7 +20,7 @@ run_tests() {
     export alfred_workflow_cache="$workflow_dir"
     case "$TARGET" in
         x86_64-apple-darwin)
-            $runner config --authorization hamid:12345
+            $runner config --authorization "${PINBOARD_TOKEN}"
             $runner config -d
             $runner self -c
             $runner self -d
@@ -29,7 +30,7 @@ run_tests() {
             ls -ld "$alfred_workflow_cache"
             chown -R "$USER":"$USER" "$alfred_workflow_data"
 
-            $runner config --authorization hamid:12345
+            $runner config --authorization "${PINBOARD_TOKEN}"
             $runner self -c
             $runner self -d
             $runner config -d
@@ -37,15 +38,15 @@ run_tests() {
             $runner config -d | .circleci/json_pretty.sh
             ;;
         i686-apple-darwin)
-            $runner config --authorization hamid:12345
+            $runner config --authorization "${PINBOARD_TOKEN}"
             $runner config -d
             ;;
         x86_64-unknown-freebsd)
-            # $runner config --authorization hamid:12345
+            # $runner config --authorization "${PINBOARD_TOKEN}"
             # $runner config -d
             ;;
         armv7-linux-androideabi)
-            $runner config --authorization hamid:12345
+            $runner config --authorization "${PINBOARD_TOKEN}"
             $runner config -d
             ;;
         *)
