@@ -61,6 +61,9 @@ use crate::commands::Runner;
 use crate::commands::config;
 
 // TODO: We need to come up with actual meaningful tests and deploy them to CIs. <23-08-21, Hamid> //
+// TODO: Always add an item that exactly reflects what user has typed. The issue is that when user
+// invokes workflow and starts typing a tag we show all tags matching the current input, this
+// causes an issue when the top item is, say, "notes", and we want to send only "note" to alfred. <23-08-21, Hamid> //
 // TODO: parse Alfred preferences and get number of visible items?
 // TODO: Check for all alfred related env. variables before doing anything else.
 //       This will prevent unnecessary loading and checking of cache files and then

@@ -53,7 +53,8 @@ run_tests() {
     esac
     ls -la "$alfred_workflow_data"
     ls -la "$2"
-    rm -rf "$2"
+    ls -la "$2/.config"
+    rm -rf "$2/.config"
 
 }
 
