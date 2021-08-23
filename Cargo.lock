@@ -43,7 +43,7 @@ dependencies = [
 
 [[package]]
 name = "alfred-pinboard-rs"
-version = "0.16.0"
+version = "0.16.1"
 dependencies = [
  "alfred",
  "alfred-rs",
@@ -1506,7 +1506,7 @@ dependencies = [
 [[package]]
 name = "rusty-pin"
 version = "0.5.5"
-source = "git+https://github.com/spamwax/rusty-pin#2dd688714a03688c0e55b7417185c4ff63254c3d"
+source = "git+https://github.com/spamwax/rusty-pin?branch=master#2dd688714a03688c0e55b7417185c4ff63254c3d"
 dependencies = [
  "chrono",
  "dirs",
