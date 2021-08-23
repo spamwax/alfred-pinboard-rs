@@ -6,8 +6,6 @@
 
 
 Manage, post and **preview** your bookmarks on [Pinboard](https://pinboard.in) right from within [Alfred app](https://www.alfredapp.com).
-### Important: [Update & Support for Alfred 3 Users](#alfred_3_support)
-### Alfred 4: If upgrading workflow from `0.15.12` (or `0.14.14` and before), you may have to directly [download](https://github.com/spamwax/alfred-pinboard-rs/releases/latest) latest version and then open it in Finder
 
 ## Features
 Pinboard is a great and reliable bookmarking service. Its [front page](https://pinboard.in) sums it all:
@@ -25,6 +23,7 @@ This plugin will let you:
   - Tap <kbd>Command+L</kbd> to show _Large_ toast of title
   - Tap <kbd>Command</kbd> to show current item's _tags_
   - Tap <kbd>Control</kbd> to show current item's extended notes/descriptioin.
+- Bookmark deletion & tag renaming (Universal Actions)
 - Automatic [updates](#misc) of workflow
 - Many options that can be easily adjusted. (see below)
 
@@ -44,6 +43,7 @@ After initial [setup](#installation--setup):
 - qutebrowser (See [known issues](#known_issues) )
 - Firefox Dev. Edition
 - Safari Tech. Preview
+- Brave Beta
 - Chrome
 
 ## Installation / Setup
@@ -136,19 +136,24 @@ You can hold down modifiers to enable different behavior:
 ---
 
 ## Usage (delete a bookmark):
-```
-pind
-```
+Either use `pind` while the bookmark you want to delete is currently on your active browrser.
+
+![image](./res/images/delete-pin.png)
+
+Or use the `Delete Pinboard Bookmark` action on a bookmark item anywhere in this Workflow or on any url entered in Alfred's window:
+
+![image](./res/images/delete_action.gif)
 
 To delete a bookmark, just make sure it is opened in your current browser's window. Then use `pind`.
 Proposed workflow for deleting a bookmark is to first open it in browser (search for it using this workflow's keyword `ps`, and hit enter) and then use `pind` keyword followed by enter.
 
-![image](./res/images/delete-pin.png)
-
 ## Usage (rename a tag):
-```
-pr old_tag new_tag
-```
+Use `pr` to search for old tags, select the desired one from Alfred and hit enter. You will be prompted to enter a new tag name. You can either choose from your current tags or enter a new one.
+![image](./res/images/tag_rename.gif)
+
+Additonally you can __Action__ on a tag item anywhere in this Workflow and use the `Rename Pinboard Tag` action to achieve the same thing. (Requires Alfred 4.5+)
+
+![image](./res/images/tag_rename_action.gif)
 
 **Note:** Pinboard tag renaming API lacks providing error message if `old_tag` is not in your tag collection!!! It basically says `success` even though no renaming was done!
 
@@ -219,6 +224,7 @@ When fuzzy search is enabled, the tags/bookmarks that contain the query letters 
 - This workflow is setup to work with Aflred 4. It may or may not work with previous version as it has not been tested for them.
 
 ## Alfred 3 Support & Issues<a name="alfred_3_support"></a>
+- Alfred 4: If upgrading workflow from `0.15.12` (or `0.14.14` and before), you may have to directly [download](https://github.com/spamwax/alfred-pinboard-rs/releases/latest) latest version and then open it in Finder
 - Alfred 4 has made some changes to internal structure of workflows. Therefore if you updated this workflow through the built-in *automatic update*, it's very *likely* that it'll stop working. If that happens, you can fix it by first deleteing & then re-installing the workflow by [downloading the last version (0.14.11)](https://github.com/spamwax/alfred-pinboard-rs/releases/tag/0.14.11) that has Alfred 3 format.
 - Moving forward, new features, changes & bug fixes will first target Alfred 4 users and then (time permitting) will be ported back to Alfred 3.
 
@@ -226,7 +232,7 @@ When fuzzy search is enabled, the tags/bookmarks that contain the query letters 
 
 I wish to add the following in the coming releases:
 
-- Replace current fuzzy search with `fzf`-like logic.
+- ~~Replace current fuzzy search with `fzf`-like logic.~~
 - ~~Let users delete a selected bookmark from witin Alfred.~~
 - ~~Add a proper logging facility to Rust code.~~ (uses log_env)
 - ~~Use a better error mechanism (maybe [failure](https://crates.io/crates/failure)?)~~

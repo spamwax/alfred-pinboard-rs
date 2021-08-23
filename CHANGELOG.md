@@ -5,9 +5,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [0.16.14] - 2021-08-23
 ### Added
 - Use a new fuzzy search engine.
-- Tag renaming and bookmark deletion through Universal Actions.
+- Support tag renaming using a keyword.
+- Add tag renaming and bookmark deletion to Universal Actions.
 
 ### Changed
 - Add Urls to default search when tag_only is false
