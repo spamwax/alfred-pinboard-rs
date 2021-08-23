@@ -37,14 +37,10 @@ impl<'api, 'pin> Runner<'api, 'pin> {
         debug!("Starting in write_output_items");
         let mut output_items = items.into_iter().collect::<Vec<alfred::Item>>();
 
-        let update_item = self.get_upgrade_item();
-        if let Ok(Some(item)) = update_item {
-            output_items.push(item);
-        } else {
-            error!(
-                "Error checking for workflow updates: {:?}",
-                update_item.unwrap_err()
-            );
+        match self.get_upgrade_item() {
+            Ok(Some(item)) => output_items.push(item),
+            Ok(None) => {}
+            Err(e) => error!("Error checking for workflow updates: {:?}", e),
         }
 
         let json_format = self.config.as_ref().unwrap().can_use_json();
