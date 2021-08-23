@@ -14,7 +14,16 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                 if check {
                     let none: Option<Vec<(&str, &str)>> = None;
                     if let Ok(item) = self.get_upgrade_item() {
-                        crate::write_to_alfred(vec![item], json_format, none);
+                        let upgrade_item = if let Some(item) = item {
+                            item
+                        } else {
+                            alfred::ItemBuilder::new("You have the latest version of workflow!")
+                                .icon_path("auto_update.png")
+                                .variable("workflow_update_ready", "0")
+                                .arg("update")
+                                .into_item()
+                        };
+                        crate::write_to_alfred(vec![upgrade_item], json_format, none);
                     } else {
                         let item =
                             alfred::ItemBuilder::new("Error in getting upgrade info!").into_item();

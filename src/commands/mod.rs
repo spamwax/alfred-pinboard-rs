@@ -39,7 +39,9 @@ impl<'api, 'pin> Runner<'api, 'pin> {
 
         let update_item = self.get_upgrade_item();
         if let Ok(item) = update_item {
-            output_items.push(item);
+            if let Some(item) = item {
+                output_items.push(item);
+            }
         } else {
             error!(
                 "Error checking for workflow updates: {:?}",
@@ -67,7 +69,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
         Ok(())
     }
 
-    fn get_upgrade_item(&self) -> Result<alfred::Item, Error> {
+    fn get_upgrade_item(&self) -> Result<Option<alfred::Item>, Error> {
         debug!("Starting in get_upgrade_item");
         self.updater.as_ref().unwrap().update_ready().map(|update| {
             if update {
@@ -80,22 +82,20 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                     .latest_avail_version()
                     .unwrap();
                 let old_version = self.updater.as_ref().unwrap().current_version();
-                alfred::ItemBuilder::new("New Version Is Available for Rusty Pin Workflow! 🎉")
-                    .subtitle(format!(
-                        "Click to download & upgrade {} ⟶ {}",
-                        old_version, new_version
-                    ))
-                    .icon_path("auto_update.png")
-                    .variable("workflow_update_ready", "1")
-                    .arg("update")
-                    .into_item()
+                Some(
+                    alfred::ItemBuilder::new("New Version Is Available for Rusty Pin Workflow! 🎉")
+                        .subtitle(format!(
+                            "Click to download & upgrade {} ⟶ {}",
+                            old_version, new_version
+                        ))
+                        .icon_path("auto_update.png")
+                        .variable("workflow_update_ready", "1")
+                        .arg("update")
+                        .into_item(),
+                )
             } else {
-                info!("Update *UNAVAILABLE*");
-                alfred::ItemBuilder::new("You have the latest version of workflow!")
-                    .icon_path("auto_update.png")
-                    .variable("workflow_update_ready", "0")
-                    .arg("update")
-                    .into_item()
+                info!("Update UNAVAILABLE: You have the latest version of workflow!");
+                None
             }
         })
     }
