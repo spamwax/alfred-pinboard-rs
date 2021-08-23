@@ -1402,12 +1402,12 @@ echo "Posted: $title"</string>
 				<key>matchmode</key>
 				<integer>2</integer>
 				<key>matchstring</key>
-				<string>Successfully posted: .*</string>
+				<string>^((?!Error: )[\s\S])*$</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.filter</string>
 			<key>uid</key>
-			<string>71EE10F6-37BC-4869-B8A8-0602D9A76863</string>
+			<string>7BF8F66E-ECC8-4BCD-86CE-5E19FD509604</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1421,14 +1421,46 @@ echo "Posted: $title"</string>
 				<key>matchmode</key>
 				<integer>2</integer>
 				<key>matchstring</key>
-				<string>^((?!Error: )[\s\S])*$</string>
+				<string>Successfully posted: .*</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.filter</string>
 			<key>uid</key>
-			<string>7BF8F66E-ECC8-4BCD-86CE-5E19FD509604</string>
+			<string>71EE10F6-37BC-4869-B8A8-0602D9A76863</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>126</integer>
+				<key>script</key>
+				<string># $tags and $description env. variables are passed in as input from previous script filter.
+
+[ "$toread" = "false" ] &amp;&amp; toread=true || toread=false
+
+ret=$(./alfred-pinboard-rs post --toread "$toread" --tags "$tags" --description "$description")
+if [ $? -ne 0 ]; then
+    echo -n "$ret"
+else
+    echo -n "$ret"
+fi</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>4F6CE11B-3454-41F1-BF65-AD752A4AC53F</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1482,38 +1514,6 @@ apr_execution_counter=$apr_execution_counter ./alfred-pinboard-rs list -t "$1"</
 			<string>A1AB9903-87A7-4041-8EB9-F9E9C06C451B</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>126</integer>
-				<key>script</key>
-				<string># $tags and $description env. variables are passed in as input from previous script filter.
-
-[ "$toread" = "false" ] &amp;&amp; toread=true || toread=false
-
-ret=$(./alfred-pinboard-rs post --toread "$toread" --tags "$tags" --description "$description")
-if [ $? -ne 0 ]; then
-    echo -n "$ret"
-else
-    echo -n "$ret"
-fi</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>4F6CE11B-3454-41F1-BF65-AD752A4AC53F</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1584,6 +1584,38 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>126</integer>
+				<key>script</key>
+				<string># $tags and $description env. variables are passed in as input from previous script filter.
+
+[ "$shared" = "false" ] &amp;&amp; shared=true || shared=false
+
+ret=$(./alfred-pinboard-rs post --shared "$shared" --tags "$tags" --description "$description")
+if [ $? -ne 0 ]; then
+    echo -n "$ret"
+else
+    echo -n "$ret"
+fi</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>75B3B3EC-5FC5-449A-A74E-A22D1D848FA7</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argument</key>
 				<string>Icons by:
 Gregor Cresnar
@@ -1630,38 +1662,6 @@ rename by iconmu from the Noun Project</string>
 				<string># $tags and $description env. variables are passed in as input from previous script filter.
 
 [ "$shared" = "false" ] &amp;&amp; shared=true || shared=false
-
-ret=$(./alfred-pinboard-rs post --shared "$shared" --tags "$tags" --description "$description")
-if [ $? -ne 0 ]; then
-    echo -n "$ret"
-else
-    echo -n "$ret"
-fi</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>75B3B3EC-5FC5-449A-A74E-A22D1D848FA7</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>126</integer>
-				<key>script</key>
-				<string># $tags and $description env. variables are passed in as input from previous script filter.
-
-[ "$shared" = "false" ] &amp;&amp; shared=true || shared=false
 [ "$toread" = "false" ] &amp;&amp; toread=true || toread=false
 
 ret=$(./alfred-pinboard-rs post --shared "$shared" --toread "$toread" --tags "$tags" --description "$description")
@@ -1681,30 +1681,6 @@ fi</string>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
 			<string>917EC178-CADB-4DD0-B8B4-B3D7F7685BBC</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>title=$(echo "$1" | sed -n '2p')
-[ ! -z "$title" ] &amp;&amp; echo "$title"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>BC2AD49B-4564-4816-B814-83431644EC9D</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -1740,21 +1716,26 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>inputstring</key>
-				<string>{query}</string>
-				<key>matchcasesensitive</key>
+				<key>concurrently</key>
 				<false/>
-				<key>matchmode</key>
-				<integer>2</integer>
-				<key>matchstring</key>
-				<string>Successfully posted: .*</string>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>title=$(echo "$1" | sed -n '2p')
+[ ! -z "$title" ] &amp;&amp; echo "$title"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.utility.filter</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>D52A87C2-E602-4F4F-A20E-DD9202A461E9</string>
+			<string>BC2AD49B-4564-4816-B814-83431644EC9D</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1772,6 +1753,25 @@ fi</string>
 			<string>alfred.workflow.utility.filter</string>
 			<key>uid</key>
 			<string>59152538-B4C0-4377-AEEA-034B5B257033</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>inputstring</key>
+				<string>{query}</string>
+				<key>matchcasesensitive</key>
+				<false/>
+				<key>matchmode</key>
+				<integer>2</integer>
+				<key>matchstring</key>
+				<string>Successfully posted: .*</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.filter</string>
+			<key>uid</key>
+			<string>D52A87C2-E602-4F4F-A20E-DD9202A461E9</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1921,6 +1921,55 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>{query}</string>
+				<key>utf8</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>C2C3C705-A4E7-44AB-BB2B-46F35B1A8E0E</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string># remove old downloads
+rm "$alfred_workflow_cache/latest_release_Rusty_Pin.alfredworkflow"
+
+# download &amp; install
+ret=$(./alfred-pinboard-rs self -d)
+echo $ret
+
+                </string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>A2DA0FE3-D7E7-47E0-9383-B42E0EFDF202</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -1967,55 +2016,6 @@ fi</string>
 			<string>03AF5169-B606-486F-B432-98CF6E2BB0F2</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>{query}</string>
-				<key>utf8</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>C2C3C705-A4E7-44AB-BB2B-46F35B1A8E0E</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string># remove old downloads
-rm "$alfred_workflow_cache/latest_release_Rusty_Pin.alfredworkflow"
-
-# download &amp; install
-ret=$(./alfred-pinboard-rs self -d)
-echo $ret
-
-                </string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>A2DA0FE3-D7E7-47E0-9383-B42E0EFDF202</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -2240,36 +2240,6 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string>{query}</string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>4</integer>
-						<key>matchstring</key>
-						<string>Error: .*</string>
-						<key>outputlabel</key>
-						<string>Error openning Alfred</string>
-						<key>uid</key>
-						<string>B651E1B4-F2E4-4A53-9C36-5ABEC4A9E37B</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>Success openning Alfred</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
-			<key>uid</key>
-			<string>3C6770D0-0781-4295-8227-41AC215BC760</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -2313,6 +2283,36 @@ fi</string>
 			<string>5BBD268D-C102-4516-86B3-7A1DA7AE6AD8</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{query}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>4</integer>
+						<key>matchstring</key>
+						<string>Error: .*</string>
+						<key>outputlabel</key>
+						<string>Error openning Alfred</string>
+						<key>uid</key>
+						<string>B651E1B4-F2E4-4A53-9C36-5ABEC4A9E37B</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>Success openning Alfred</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>3C6770D0-0781-4295-8227-41AC215BC760</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -2437,35 +2437,6 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>alignment</key>
-				<integer>0</integer>
-				<key>backgroundcolor</key>
-				<string></string>
-				<key>fadespeed</key>
-				<integer>0</integer>
-				<key>fillmode</key>
-				<integer>0</integer>
-				<key>font</key>
-				<string></string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>largetypetext</key>
-				<string>👎{query}</string>
-				<key>textcolor</key>
-				<string></string>
-				<key>wrapat</key>
-				<integer>50</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.largetype</string>
-			<key>uid</key>
-			<string>4411CFFD-1BD6-49B2-8EBB-8AE42CD82ECC</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -2509,6 +2480,35 @@ fi</string>
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
 			<string>46667F34-E27E-4FBA-83B5-4A55C6FA2FD6</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alignment</key>
+				<integer>0</integer>
+				<key>backgroundcolor</key>
+				<string></string>
+				<key>fadespeed</key>
+				<integer>0</integer>
+				<key>fillmode</key>
+				<integer>0</integer>
+				<key>font</key>
+				<string></string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>largetypetext</key>
+				<string>👎{query}</string>
+				<key>textcolor</key>
+				<string></string>
+				<key>wrapat</key>
+				<integer>50</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.largetype</string>
+			<key>uid</key>
+			<string>4411CFFD-1BD6-49B2-8EBB-8AE42CD82ECC</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -2714,27 +2714,6 @@ echo $ret</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>pa</string>
-				<key>subtext</key>
-				<string>pa username:token</string>
-				<key>text</key>
-				<string>Set Pinboard's Authorization Token</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>00892451-3E5D-421F-B3ED-367DD1560720</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -2759,6 +2738,27 @@ fi</string>
 			<string>0087168E-C986-4511-9873-B107C12CD6C0</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>pa</string>
+				<key>subtext</key>
+				<string>pa username:token</string>
+				<key>text</key>
+				<string>Set Pinboard's Authorization Token</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>00892451-3E5D-421F-B3ED-367DD1560720</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -2852,29 +2852,6 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>62</integer>
-				<key>script</key>
-				<string>tell application "Alfred 4"	search "{query}"end tell</string>
-				<key>scriptargtype</key>
-				<integer>0</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>6</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>453D2BA7-92D6-4AD0-821B-132AF0365147</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -2942,6 +2919,29 @@ fi</string>
 			<string>D5939049-C73A-4872-9625-87A9F9BE886C</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>62</integer>
+				<key>script</key>
+				<string>tell application "Alfred 4"	search "{query}"end tell</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>6</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>453D2BA7-92D6-4AD0-821B-132AF0365147</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>type</key>
@@ -3176,36 +3176,6 @@ echo $r</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string>{var:workflow_update_ready}</string>
-						<key>matchcasesensitive</key>
-						<true/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>1</string>
-						<key>outputlabel</key>
-						<string>Upgrade selected</string>
-						<key>uid</key>
-						<string>C46E626E-5D9B-45BD-868C-63395CE9C5F3</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>Pin selected</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
-			<key>uid</key>
-			<string>09E1138E-C990-4D9D-9AD7-047260212E20</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -3242,6 +3212,36 @@ fi</string>
 			<string>6A38E5F0-BA4E-466F-A8A9-5C19AE3898E9</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:workflow_update_ready}</string>
+						<key>matchcasesensitive</key>
+						<true/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>1</string>
+						<key>outputlabel</key>
+						<string>Upgrade selected</string>
+						<key>uid</key>
+						<string>C46E626E-5D9B-45BD-868C-63395CE9C5F3</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>Pin selected</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>09E1138E-C990-4D9D-9AD7-047260212E20</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -3346,6 +3346,34 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>127</integer>
+				<key>script</key>
+				<string>output=$(./alfred-pinboard-rs config --fuzzy $1)
+if [ $? -ne 0 ]; then
+    echo $output
+else
+    echo "Fuzzy set to: $1"
+fi</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>E8B55F7A-B05E-4099-9607-A79E01B06FD8</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -3417,11 +3445,11 @@ EOB
 				<key>escaping</key>
 				<integer>127</integer>
 				<key>script</key>
-				<string>output=$(./alfred-pinboard-rs config --fuzzy $1)
+				<string>output=$(./alfred-pinboard-rs config --tag-numbers $1)
 if [ $? -ne 0 ]; then
     echo $output
 else
-    echo "Fuzzy set to: $1"
+    echo "No. items to show: $1"
 fi</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
@@ -3433,7 +3461,7 @@ fi</string>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>E8B55F7A-B05E-4099-9607-A79E01B06FD8</string>
+			<string>50B75DCC-7C6D-4686-8252-E18BCFF8C554</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -3461,30 +3489,23 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>127</integer>
-				<key>script</key>
-				<string>output=$(./alfred-pinboard-rs config --tag-numbers $1)
-if [ $? -ne 0 ]; then
-    echo $output
-else
-    echo "No. items to show: $1"
-fi</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
+				<key>argumenttype</key>
 				<integer>0</integer>
+				<key>keyword</key>
+				<string>pset bookmarks</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Set max. no. of bookmarks to show</string>
+				<key>withspace</key>
+				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>50B75DCC-7C6D-4686-8252-E18BCFF8C554</string>
+			<string>28EA72D9-5950-4961-87F6-A3528D19540F</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -3517,23 +3538,30 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>pset bookmarks</string>
-				<key>subtext</key>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>127</integer>
+				<key>script</key>
+				<string>output=$(./alfred-pinboard-rs config --suggest-tags $1)
+if [ $? -ne 0 ]; then
+    echo $output
+else
+    echo "Tag suggestion: $1"
+fi</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
 				<string></string>
-				<key>text</key>
-				<string>Set max. no. of bookmarks to show</string>
-				<key>withspace</key>
-				<true/>
+				<key>type</key>
+				<integer>0</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>28EA72D9-5950-4961-87F6-A3528D19540F</string>
+			<string>916E330D-1693-4400-BBAE-51BBCB00F3A1</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -3618,34 +3646,6 @@ EOB</string>
 				<key>escaping</key>
 				<integer>127</integer>
 				<key>script</key>
-				<string>output=$(./alfred-pinboard-rs config --suggest-tags $1)
-if [ $? -ne 0 ]; then
-    echo $output
-else
-    echo "Tag suggestion: $1"
-fi</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>916E330D-1693-4400-BBAE-51BBCB00F3A1</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>127</integer>
-				<key>script</key>
 				<string>output=$(./alfred-pinboard-rs config --shared $1)
 if [ $? -ne 0 ]; then
     echo $output
@@ -3665,6 +3665,27 @@ fi</string>
 			<string>5821470E-E05D-4440-9441-84B254381A73</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>Rusty Pinboard 👍</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>8A326A12-2E76-46CD-9D4D-CCBDC541843B</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -3745,23 +3766,30 @@ EOB</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
+				<key>concurrently</key>
 				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>Rusty Pinboard 👍</string>
+				<key>escaping</key>
+				<integer>123</integer>
+				<key>script</key>
+				<string>output=$(./alfred-pinboard-rs config --tags-only $1)
+if [ $? -ne 0 ]; then
+    echo $output
+else
+    echo "Tag ONLY: $1"
+fi</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>8A326A12-2E76-46CD-9D4D-CCBDC541843B</string>
+			<string>60796C38-028C-408A-86CE-765CB170EE72</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -3791,10 +3819,7 @@ EOB</string>
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>
-
-
-cat &lt;&lt; EOB
+				<string>cat &lt;&lt; EOB
 {
     "items": [
         {
@@ -3842,62 +3867,6 @@ EOB
 			<string>1409792A-CE98-4AF0-AF9B-998FBAB435A7</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>123</integer>
-				<key>script</key>
-				<string>output=$(./alfred-pinboard-rs config --tags-only $1)
-if [ $? -ne 0 ]; then
-    echo $output
-else
-    echo "Tag ONLY: $1"
-fi</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>60796C38-028C-408A-86CE-765CB170EE72</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>127</integer>
-				<key>script</key>
-				<string>output=$(./alfred-pinboard-rs config --auto-update $1)
-if [ $? -ne 0 ]; then
-    echo $output
-else
-    echo "Auto-update of cache: $1"
-fi</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>E093D14C-64A4-4D4F-9D61-50FA6974204B</string>
-			<key>version</key>
-			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -3963,6 +3932,34 @@ EOB</string>
 			<string>7FA852D9-0250-459D-8C03-C0A5E854AFBD</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>127</integer>
+				<key>script</key>
+				<string>output=$(./alfred-pinboard-rs config --auto-update $1)
+if [ $? -ne 0 ]; then
+    echo $output
+else
+    echo "Auto-update of cache: $1"
+fi</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>E093D14C-64A4-4D4F-9D61-50FA6974204B</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
