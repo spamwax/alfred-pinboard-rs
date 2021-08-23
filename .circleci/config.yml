@@ -7,7 +7,7 @@ jobs:
         type: string
       rust:
         type: string
-        default: 1.42.0
+        default: 1.54.0
     docker:
       - image: circleci/rust:stretch
     environment:
@@ -52,7 +52,7 @@ jobs:
         type: string
       rust:
         type: string
-        default: 1.42.0
+        default: 1.54.0
     docker:
       - image: circleci/rust:stretch
     environment:
@@ -107,7 +107,7 @@ jobs:
         default: false
       rust:
         type: string
-        default: 1.42.0
+        default: 1.54.0
     macos:
       xcode: "11.0"
     environment:
@@ -165,7 +165,7 @@ workflows:
         - linux:
             name: Linux-64bit
             target: x86_64-unknown-linux-gnu
-            rust: 1.42.0
+            # rust: 1.42.0
             filters:
               branches:
                 only: /.*/
@@ -174,7 +174,7 @@ workflows:
         - tests:
             name: Linux-64bit-test
             target: x86_64-unknown-linux-gnu
-            rust: 1.42.0
+            # rust: 1.42.0
             filters:
               branches:
                 # only: [master, develop]
@@ -196,7 +196,7 @@ workflows:
     jobs:
       - macosimage:
           name: macOS-64bit-release
-          rust: 1.42.0
+          # rust: 1.42.0
           release: true
           filters:
             tags:
