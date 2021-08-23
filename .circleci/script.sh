@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # This script takes care of testing your crate
 
 set -ex
@@ -7,8 +8,8 @@ run_tests() {
     working_dir="$2"
     # runner="cargo run --target "$TARGET" --"
     export alfred_debug=1
-    export alfred_version="4.0.1"
-    export alfred_workflow_version=0.15.1
+    export alfred_version="4.5.1"
+    export alfred_workflow_version=0.16.0
     export alfred_workflow_uid=hamid63
     export alfred_workflow_name="RustyPin"
     export alfred_workflow_bundleid=cc.hamid.alfred-pinboard-rs
@@ -20,6 +21,8 @@ run_tests() {
         x86_64-apple-darwin)
             $runner config --authorization hamid:12345
             $runner config -d
+            $runner self -c
+            $runner self -d
             ;;
         x86_64-unknown-linux-gnu)
             ls -ld "$alfred_workflow_data"

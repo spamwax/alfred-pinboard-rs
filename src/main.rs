@@ -60,6 +60,7 @@ use crate::commands::Runner;
 // use commands::{config, delete, list, post, search, update};
 use crate::commands::config;
 
+// TODO: We need to come up with actual meaningful tests and deploy them to CIs. <23-08-21, Hamid> //
 // TODO: parse Alfred preferences and get number of visible items?
 // TODO: Check for all alfred related env. variables before doing anything else.
 //       This will prevent unnecessary loading and checking of cache files and then

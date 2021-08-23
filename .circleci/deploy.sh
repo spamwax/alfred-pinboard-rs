@@ -9,10 +9,10 @@ deploy() {
     unzip ghr_"$GHRELEASER_VERSION"_darwin_amd64.zip
     ghr_exe=$(pwd)/ghr_"$GHRELEASER_VERSION"_darwin_amd64/ghr
     cd "$prev_dir"
-    [ -f ./target/alfred-pinboard-rust-${CIRCLE_TAG}.alfredworkflow ]
+    [ -f ./target/alfred-pinboard-rust-"${CIRCLE_TAG}".alfredworkflow ]
     export artifacts=./target/alfred-pinboard-rust-${CIRCLE_TAG}.alfredworkflow
-    echo ${CIRCLE_PROJECT_USERNAME} ${CIRCLE_PROJECT_REPONAME} ${CIRCLE_SHA1} ${CIRCLE_TAG} ${artifacts}
-    "$ghr_exe" -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${CIRCLE_TAG} ${artifacts}
+    echo "${CIRCLE_PROJECT_USERNAME}" "${CIRCLE_PROJECT_REPONAME}" "${CIRCLE_SHA1}" "${CIRCLE_TAG}" "${artifacts}"
+    "$ghr_exe" -t "${GITHUB_TOKEN}" -u "${CIRCLE_PROJECT_USERNAME}" -r "${CIRCLE_PROJECT_REPONAME}" -c "${CIRCLE_SHA1}" -delete "${CIRCLE_TAG}" "${artifacts}"
 }
 
 if [ -n "$CIRCLE_TEST" ]; then
