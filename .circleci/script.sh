@@ -30,6 +30,8 @@ run_tests() {
             chown -R "$USER":"$USER" "$alfred_workflow_data"
 
             $runner config --authorization hamid:12345
+            $runner self -c
+            $runner self -d
             $runner config -d
             unset alfred_debug
             $runner config -d | .circleci/json_pretty.sh
