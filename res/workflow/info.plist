@@ -6,6 +6,19 @@
 	<string>cc.hamid.alfred-pinboard-rs</string>
 	<key>connections</key>
 	<dict>
+		<key>0016C9AE-9AF1-45C8-A89B-663CCA5FBF2C</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>5B7FE298-FD1C-4722-8A4D-F5D9766F720E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>0087168E-C986-4511-9873-B107C12CD6C0</key>
 		<array>
 			<dict>
@@ -56,7 +69,70 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>C4C3FAC9-E038-44BB-8345-7A89E39F8EDE</string>
+				<string>D628D994-1BDE-4B90-89A6-19287F0AB363</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>06DBC5EF-0036-44CE-8BAF-D8C097CD31DD</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>3D09B795-2B6D-47D4-B74E-9A95591F9AEE</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>F20CC730-E792-4A3E-9C0D-84F0EB1A8816</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>F297117C-7809-4B56-AAC4-4D41F1E670E8</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>09E1138E-C990-4D9D-9AD7-047260212E20</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>1B9D717F-FF2E-4913-8B69-A0AABB904100</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>C46E626E-5D9B-45BD-868C-63395CE9C5F3</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>6A38E5F0-BA4E-466F-A8A9-5C19AE3898E9</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>0CFFA3F1-8C02-47C2-8A40-79AE36473506</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>5821470E-E05D-4440-9441-84B254381A73</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -78,11 +154,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>12357CB5-92FC-4FC0-B13F-E8303700B102</key>
+		<key>1409792A-CE98-4AF0-AF9B-998FBAB435A7</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>A2481ADE-0AF6-4C3D-8E9B-E389206CD571</string>
+				<string>60796C38-028C-408A-86CE-765CB170EE72</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -129,6 +205,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>1B9D717F-FF2E-4913-8B69-A0AABB904100</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>3D09B795-2B6D-47D4-B74E-9A95591F9AEE</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>2202AECC-AE14-46AC-A4E7-0ECE9060F556</key>
 		<array>
 			<dict>
@@ -146,17 +235,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>8181252C-6CC9-4CFA-97D8-2C5097DB6AF4</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>C6A1B854-359E-4D50-9081-56FEAEFC8CBC</string>
+				<string>3C6770D0-0781-4295-8227-41AC215BC760</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -165,21 +244,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>25F462E5-343C-4BDF-B314-B96E55AE5875</key>
+		<key>28EA72D9-5950-4961-87F6-A3528D19540F</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>E0487C9A-022A-4894-8CE6-F2B54684C7D2</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>4F682CAE-BDB1-4A64-B8BB-1C149CC24751</string>
+				<string>50D10FD5-2BD8-475E-8A86-224523BA1ABE</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -201,11 +270,61 @@
 				<false/>
 			</dict>
 		</array>
-		<key>3255D630-A333-4759-9C18-A108C04EAEE6</key>
+		<key>33781265-1653-4906-AE9E-29ACD20670DE</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>9BDBE952-A169-4051-923A-0D980680261F</string>
+				<string>8A326A12-2E76-46CD-9D4D-CCBDC541843B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>350D945F-2813-4668-A3BD-0A8CA8C8B95D</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>3D09B795-2B6D-47D4-B74E-9A95591F9AEE</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>C46E626E-5D9B-45BD-868C-63395CE9C5F3</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>A2481ADE-0AF6-4C3D-8E9B-E389206CD571</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>3C6770D0-0781-4295-8227-41AC215BC760</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>2202AECC-AE14-46AC-A4E7-0ECE9060F556</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>B651E1B4-F2E4-4A53-9C36-5ABEC4A9E37B</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>BFD4441D-1EB3-4F5E-9E04-96678AD399E9</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -218,17 +337,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>6D7ED5D0-0347-46AE-81ED-D308BDF21676</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>ED8A8F0C-7FA1-4861-8FB7-76C5FAE4E673</string>
+				<string>E5B0BAE1-FE98-4828-9D22-728EA77FCF47</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -237,24 +346,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>3CFEFF60-C0B3-44A0-8761-FB5AA2F96547</key>
+		<key>3D09B795-2B6D-47D4-B74E-9A95591F9AEE</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>ACED2549-3532-4ECC-9709-96679199529D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>403451E0-718B-4D95-8546-05E9CCA25495</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>6BA4C470-B64F-4BE2-9346-38ADACABCCBA</string>
+				<string>A2DA0FE3-D7E7-47E0-9383-B42E0EFDF202</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -276,39 +372,48 @@
 				<false/>
 			</dict>
 		</array>
+		<key>41B7E9D1-65BC-4E7F-9446-BCCFBC384EC3</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>6DA1238D-B036-4CC7-9351-D41AF426C1A7</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>4AF5331F-FF20-47EA-AAB3-88DC717DF54B</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>78C19F72-991F-47BC-85D0-E69E021AC18A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>221EA45C-D3F1-4FD8-9143-CD10110D5BFC</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>453D2BA7-92D6-4AD0-821B-132AF0365147</key>
 		<array/>
 		<key>46667F34-E27E-4FBA-83B5-4A55C6FA2FD6</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>5EDAB9E7-B4EA-4022-9523-DD865A75B345</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>4AB57A0F-846D-4AA0-B3DD-DD1C7F411BAE</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>A2DA0FE3-D7E7-47E0-9383-B42E0EFDF202</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>4F682CAE-BDB1-4A64-B8BB-1C149CC24751</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>28EB0348-E6C5-4205-9AD5-B50DDFFF4DD0</string>
+				<string>350D945F-2813-4668-A3BD-0A8CA8C8B95D</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -330,11 +435,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>50AED498-A7C0-4CEE-BDDB-B4887FF49957</key>
+		<key>50B75DCC-7C6D-4686-8252-E18BCFF8C554</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>C2C3C705-A4E7-44AB-BB2B-46F35B1A8E0E</string>
+				<string>8A326A12-2E76-46CD-9D4D-CCBDC541843B</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -343,11 +448,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>50F6A6C6-7D1D-4876-92C2-4702A00D4AB2</key>
+		<key>50D10FD5-2BD8-475E-8A86-224523BA1ABE</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>78C19F72-991F-47BC-85D0-E69E021AC18A</string>
+				<string>8A326A12-2E76-46CD-9D4D-CCBDC541843B</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -355,9 +460,25 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+		</array>
+		<key>5821470E-E05D-4440-9441-84B254381A73</key>
+		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>221EA45C-D3F1-4FD8-9143-CD10110D5BFC</string>
+				<string>8A326A12-2E76-46CD-9D4D-CCBDC541843B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>590F370B-1F05-44CD-AA0A-7E887B459E5B</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>E8B55F7A-B05E-4099-9607-A79E01B06FD8</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -402,6 +523,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>5B7FE298-FD1C-4722-8A4D-F5D9766F720E</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>8A326A12-2E76-46CD-9D4D-CCBDC541843B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>5BBD268D-C102-4516-86B3-7A1DA7AE6AD8</key>
 		<array>
 			<dict>
@@ -415,70 +549,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>5D065041-109B-41B0-ADE0-62CA836178E5</key>
+		<key>60796C38-028C-408A-86CE-765CB170EE72</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>6A4A2D1D-0087-4112-8D83-7BD1C4886CBB</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>5EDAB9E7-B4EA-4022-9523-DD865A75B345</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>D91FD9FE-14F6-4291-8478-11A126B03BD0</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>12357CB5-92FC-4FC0-B13F-E8303700B102</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>5F6E4E5A-1035-498B-A2CF-B7E3ACB85009</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>799A5CC4-A7DB-4074-8044-ED7DBEFED12D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>60353C96-9D07-4EF6-B8AB-FA8EC4EF2236</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>C51D6351-6D3A-40C7-821C-C02D35C92332</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>EE0705F1-36FB-49F6-AA24-3BA82965A14C</string>
+				<string>8A326A12-2E76-46CD-9D4D-CCBDC541843B</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -513,19 +588,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>69D5C481-E826-498C-A9CC-549AE2815D10</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>BAD58837-06A2-45EE-8991-1349D183E5E8</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>6A38E5F0-BA4E-466F-A8A9-5C19AE3898E9</key>
 		<array>
 			<dict>
@@ -539,24 +601,23 @@
 				<false/>
 			</dict>
 		</array>
-		<key>6A4A2D1D-0087-4112-8D83-7BD1C4886CBB</key>
+		<key>6BE0BCA4-EBEC-4792-AC9A-33F1598B519B</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>6BA4C470-B64F-4BE2-9346-38ADACABCCBA</string>
+				<string>4411CFFD-1BD6-49B2-8EBB-8AE42CD82ECC</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
+				<key>sourceoutputuid</key>
+				<string>33264824-F128-404B-90BA-AAC9CC4DB56C</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
-		</array>
-		<key>6D7ED5D0-0347-46AE-81ED-D308BDF21676</key>
-		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>59CC5D01-8A21-4819-BCBD-A02BF648DCD1</string>
+				<string>28EB0348-E6C5-4205-9AD5-B50DDFFF4DD0</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -603,6 +664,31 @@
 				<false/>
 			</dict>
 		</array>
+		<key>75434858-9B72-456E-A107-4B11F87365A4</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>1B9D717F-FF2E-4913-8B69-A0AABB904100</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>C46E626E-5D9B-45BD-868C-63395CE9C5F3</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>A853102A-C6D7-49DB-9E51-DA57D84A095A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>75B3B3EC-5FC5-449A-A74E-A22D1D848FA7</key>
 		<array>
 			<dict>
@@ -616,37 +702,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>78C8A61E-FD70-4CD9-BEC8-66A30106E128</key>
+		<key>75C55403-2D3F-4415-9B06-6EC8B581E28B</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>C4A2975E-14BF-4A7E-B3C0-60384A4AB5A1</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>799A5CC4-A7DB-4074-8044-ED7DBEFED12D</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>6BA4C470-B64F-4BE2-9346-38ADACABCCBA</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>7A213534-8342-46AB-A4EA-4CCF95685833</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>E27BB22A-56EB-4D38-9725-99555F0EB6D1</string>
+				<string>E9FC9061-CE38-46EA-8919-604B8DC67453</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -695,7 +755,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>A853102A-C6D7-49DB-9E51-DA57D84A095A</string>
+				<string>75434858-9B72-456E-A107-4B11F87365A4</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -717,11 +777,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>8181252C-6CC9-4CFA-97D8-2C5097DB6AF4</key>
+		<key>7FA852D9-0250-459D-8C03-C0A5E854AFBD</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>2202AECC-AE14-46AC-A4E7-0ECE9060F556</string>
+				<string>E093D14C-64A4-4D4F-9D61-50FA6974204B</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -743,11 +803,24 @@
 				<false/>
 			</dict>
 		</array>
-		<key>8FBE3EBB-9672-493C-977C-95B832412F2E</key>
+		<key>8D96E594-674B-4824-8C2F-701018343534</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>C79DF9E2-8026-4F82-B31C-BCD0D4AFCE20</string>
+				<string>916E330D-1693-4400-BBAE-51BBCB00F3A1</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>916E330D-1693-4400-BBAE-51BBCB00F3A1</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>8A326A12-2E76-46CD-9D4D-CCBDC541843B</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -794,19 +867,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>93A64ECE-BB64-492B-B845-7CB85B544D40</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>A156743D-A9BB-4AFB-A0C2-D16EF45F7DD0</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>988D1146-585C-4DC6-A56B-B303B9A3F173</key>
 		<array>
 			<dict>
@@ -840,26 +900,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>9BDBE952-A169-4051-923A-0D980680261F</key>
-		<array/>
 		<key>9CB57748-F1F2-4665-A7E0-55B546C50C77</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>6A38E5F0-BA4E-466F-A8A9-5C19AE3898E9</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>A156743D-A9BB-4AFB-A0C2-D16EF45F7DD0</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>6BA4C470-B64F-4BE2-9346-38ADACABCCBA</string>
+				<string>09E1138E-C990-4D9D-9AD7-047260212E20</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -915,7 +960,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>25F462E5-343C-4BDF-B314-B96E55AE5875</string>
+				<string>6BE0BCA4-EBEC-4792-AC9A-33F1598B519B</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -928,7 +973,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>C1E87F32-A676-401C-A330-9A305B928E8E</string>
+				<string>41B7E9D1-65BC-4E7F-9446-BCCFBC384EC3</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -950,19 +995,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>A8EE818C-427B-476F-93FD-02825231464B</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>DA27F20C-DD88-4FCB-A665-CD66BFF2761D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>AB0E9CB1-D5D1-483E-B88C-DAC90C702C41</key>
 		<array>
 			<dict>
@@ -976,24 +1008,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>ACED2549-3532-4ECC-9709-96679199529D</key>
+		<key>B9AD3842-CE4A-4395-9CC2-82260B106DF4</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>6BA4C470-B64F-4BE2-9346-38ADACABCCBA</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>BAD58837-06A2-45EE-8991-1349D183E5E8</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>6BA4C470-B64F-4BE2-9346-38ADACABCCBA</string>
+				<string>33781265-1653-4906-AE9E-29ACD20670DE</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -1015,11 +1034,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>BD868971-C272-43FC-B20B-1C5471C1EBC1</key>
+		<key>C014F87B-6FD0-4F58-96A2-92B09A4086FE</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>403451E0-718B-4D95-8546-05E9CCA25495</string>
+				<string>50B75DCC-7C6D-4686-8252-E18BCFF8C554</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -1028,96 +1047,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>C1E87F32-A676-401C-A330-9A305B928E8E</key>
+		<key>C03A39F5-E473-4AC0-8DFF-25A058F60C5C</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>F55B41C7-8CBF-4F98-B7C5-9EB468713A5D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>50F6A6C6-7D1D-4876-92C2-4702A00D4AB2</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>C4A2975E-14BF-4A7E-B3C0-60384A4AB5A1</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>6BA4C470-B64F-4BE2-9346-38ADACABCCBA</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>C4C3FAC9-E038-44BB-8345-7A89E39F8EDE</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>50AED498-A7C0-4CEE-BDDB-B4887FF49957</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>4AB57A0F-846D-4AA0-B3DD-DD1C7F411BAE</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>C51D6351-6D3A-40C7-821C-C02D35C92332</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>F20CC730-E792-4A3E-9C0D-84F0EB1A8816</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>C6A1B854-359E-4D50-9081-56FEAEFC8CBC</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>BFD4441D-1EB3-4F5E-9E04-96678AD399E9</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>C79DF9E2-8026-4F82-B31C-BCD0D4AFCE20</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>6BA4C470-B64F-4BE2-9346-38ADACABCCBA</string>
+				<string>4B0B8E09-6ED8-4704-9487-A72639457250</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -1165,11 +1099,23 @@
 				<false/>
 			</dict>
 		</array>
-		<key>D91FD9FE-14F6-4291-8478-11A126B03BD0</key>
+		<key>D628D994-1BDE-4B90-89A6-19287F0AB363</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>A2DA0FE3-D7E7-47E0-9383-B42E0EFDF202</string>
+				<string>C2C3C705-A4E7-44AB-BB2B-46F35B1A8E0E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>F297117C-7809-4B56-AAC4-4D41F1E670E8</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>3D09B795-2B6D-47D4-B74E-9A95591F9AEE</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -1178,24 +1124,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>DA27F20C-DD88-4FCB-A665-CD66BFF2761D</key>
+		<key>E093D14C-64A4-4D4F-9D61-50FA6974204B</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>6BA4C470-B64F-4BE2-9346-38ADACABCCBA</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>E0487C9A-022A-4894-8CE6-F2B54684C7D2</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>4411CFFD-1BD6-49B2-8EBB-8AE42CD82ECC</string>
+				<string>8A326A12-2E76-46CD-9D4D-CCBDC541843B</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -1217,11 +1150,49 @@
 				<false/>
 			</dict>
 		</array>
-		<key>E27BB22A-56EB-4D38-9725-99555F0EB6D1</key>
+		<key>E5B0BAE1-FE98-4828-9D22-728EA77FCF47</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>6BA4C470-B64F-4BE2-9346-38ADACABCCBA</string>
+				<string>59CC5D01-8A21-4819-BCBD-A02BF648DCD1</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>F297117C-7809-4B56-AAC4-4D41F1E670E8</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>3D09B795-2B6D-47D4-B74E-9A95591F9AEE</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>E8B55F7A-B05E-4099-9607-A79E01B06FD8</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>8A326A12-2E76-46CD-9D4D-CCBDC541843B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>E9FC9061-CE38-46EA-8919-604B8DC67453</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>8A326A12-2E76-46CD-9D4D-CCBDC541843B</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -1268,32 +1239,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>ED8A8F0C-7FA1-4861-8FB7-76C5FAE4E673</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>A2DA0FE3-D7E7-47E0-9383-B42E0EFDF202</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>EE0705F1-36FB-49F6-AA24-3BA82965A14C</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>A2DA0FE3-D7E7-47E0-9383-B42E0EFDF202</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>EF1102C5-4180-496A-A4AF-1FDB7C59D7EE</key>
 		<array>
 			<dict>
@@ -1324,7 +1269,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>60353C96-9D07-4EF6-B8AB-FA8EC4EF2236</string>
+				<string>06DBC5EF-0036-44CE-8BAF-D8C097CD31DD</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -1338,19 +1283,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>A2DA0FE3-D7E7-47E0-9383-B42E0EFDF202</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>F55B41C7-8CBF-4F98-B7C5-9EB468713A5D</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>6DA1238D-B036-4CC7-9351-D41AF426C1A7</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -1400,19 +1332,30 @@ echo "$ret"</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>inputstring</key>
-				<string>{var:workflow_update_ready}</string>
-				<key>matchcasesensitive</key>
-				<true/>
-				<key>matchmode</key>
-				<integer>1</integer>
-				<key>matchstring</key>
-				<string>1</string>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:workflow_update_ready}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>1</integer>
+						<key>matchstring</key>
+						<string>1</string>
+						<key>outputlabel</key>
+						<string>Tag selected</string>
+						<key>uid</key>
+						<string>F297117C-7809-4B56-AAC4-4D41F1E670E8</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>Upgrade selected</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.utility.filter</string>
+			<string>alfred.workflow.utility.conditional</string>
 			<key>uid</key>
-			<string>6D7ED5D0-0347-46AE-81ED-D308BDF21676</string>
+			<string>E5B0BAE1-FE98-4828-9D22-728EA77FCF47</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -1448,25 +1391,6 @@ echo "Posted: $title"</string>
 			<string>0F03B46B-AD75-491E-8B5B-36ADF3E084F4</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>inputstring</key>
-				<string>{var:workflow_update_ready}</string>
-				<key>matchcasesensitive</key>
-				<true/>
-				<key>matchmode</key>
-				<integer>0</integer>
-				<key>matchstring</key>
-				<string>1</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.filter</string>
-			<key>uid</key>
-			<string>ED8A8F0C-7FA1-4861-8FB7-76C5FAE4E673</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1997,25 +1921,6 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>inputstring</key>
-				<string>{query}</string>
-				<key>matchcasesensitive</key>
-				<false/>
-				<key>matchmode</key>
-				<integer>2</integer>
-				<key>matchstring</key>
-				<string>Error: .*</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.filter</string>
-			<key>uid</key>
-			<string>F55B41C7-8CBF-4F98-B7C5-9EB468713A5D</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -2115,19 +2020,30 @@ echo $ret
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>inputstring</key>
-				<string>{var:workflow_update_ready}</string>
-				<key>matchcasesensitive</key>
-				<true/>
-				<key>matchmode</key>
-				<integer>1</integer>
-				<key>matchstring</key>
-				<string>1</string>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{query}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>4</integer>
+						<key>matchstring</key>
+						<string>Error: .*</string>
+						<key>outputlabel</key>
+						<string>Error in downloading</string>
+						<key>uid</key>
+						<string>4AF5331F-FF20-47EA-AAB3-88DC717DF54B</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>Success in downloading</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.utility.filter</string>
+			<string>alfred.workflow.utility.conditional</string>
 			<key>uid</key>
-			<string>50AED498-A7C0-4CEE-BDDB-B4887FF49957</string>
+			<string>41B7E9D1-65BC-4E7F-9446-BCCFBC384EC3</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -2135,7 +2051,7 @@ echo $ret
 			<key>type</key>
 			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
-			<string>C1E87F32-A676-401C-A330-9A305B928E8E</string>
+			<string>3D09B795-2B6D-47D4-B74E-9A95591F9AEE</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -2163,27 +2079,30 @@ echo $ret
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>inputstring</key>
-				<string>{query}</string>
-				<key>matchcasesensitive</key>
-				<false/>
-				<key>matchmode</key>
-				<integer>2</integer>
-				<key>matchstring</key>
-				<string>Download successful: .*</string>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:workflow_update_ready}</string>
+						<key>matchcasesensitive</key>
+						<true/>
+						<key>matchmode</key>
+						<integer>1</integer>
+						<key>matchstring</key>
+						<string>1</string>
+						<key>outputlabel</key>
+						<string>Pin selected</string>
+						<key>uid</key>
+						<string>F297117C-7809-4B56-AAC4-4D41F1E670E8</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>Upgrade selected</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.utility.filter</string>
+			<string>alfred.workflow.utility.conditional</string>
 			<key>uid</key>
-			<string>50F6A6C6-7D1D-4876-92C2-4702A00D4AB2</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.junction</string>
-			<key>uid</key>
-			<string>C4C3FAC9-E038-44BB-8345-7A89E39F8EDE</string>
+			<string>D628D994-1BDE-4B90-89A6-19287F0AB363</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -2260,44 +2179,6 @@ echo $ret
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>inputstring</key>
-				<string>{var:workflow_update_ready}</string>
-				<key>matchcasesensitive</key>
-				<true/>
-				<key>matchmode</key>
-				<integer>0</integer>
-				<key>matchstring</key>
-				<string>1</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.filter</string>
-			<key>uid</key>
-			<string>4AB57A0F-846D-4AA0-B3DD-DD1C7F411BAE</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>inputstring</key>
-				<string>{query}</string>
-				<key>matchcasesensitive</key>
-				<false/>
-				<key>matchmode</key>
-				<integer>2</integer>
-				<key>matchstring</key>
-				<string>Error: .*</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.filter</string>
-			<key>uid</key>
-			<string>8181252C-6CC9-4CFA-97D8-2C5097DB6AF4</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>seconds</key>
 				<string>5</string>
 			</dict>
@@ -2353,6 +2234,36 @@ fi</string>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
 			<string>51B3C295-B9CD-44D4-B1D3-19038C54735B</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{query}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>4</integer>
+						<key>matchstring</key>
+						<string>Error: .*</string>
+						<key>outputlabel</key>
+						<string>Error openning Alfred</string>
+						<key>uid</key>
+						<string>B651E1B4-F2E4-4A53-9C36-5ABEC4A9E37B</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>Success openning Alfred</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>3C6770D0-0781-4295-8227-41AC215BC760</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -2420,25 +2331,6 @@ fi</string>
 			<string>alfred.workflow.utility.argument</string>
 			<key>uid</key>
 			<string>F20CC730-E792-4A3E-9C0D-84F0EB1A8816</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>inputstring</key>
-				<string>{var:workflow_update_ready}</string>
-				<key>matchcasesensitive</key>
-				<true/>
-				<key>matchmode</key>
-				<integer>1</integer>
-				<key>matchstring</key>
-				<string>1</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.filter</string>
-			<key>uid</key>
-			<string>C51D6351-6D3A-40C7-821C-C02D35C92332</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -2515,65 +2407,30 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>inputstring</key>
-				<string>{query}</string>
-				<key>matchcasesensitive</key>
-				<false/>
-				<key>matchmode</key>
-				<integer>2</integer>
-				<key>matchstring</key>
-				<string>Success: .*</string>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:workflow_update_ready}</string>
+						<key>matchcasesensitive</key>
+						<true/>
+						<key>matchmode</key>
+						<integer>1</integer>
+						<key>matchstring</key>
+						<string>1</string>
+						<key>outputlabel</key>
+						<string>Tag selected</string>
+						<key>uid</key>
+						<string>F297117C-7809-4B56-AAC4-4D41F1E670E8</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>Upgrade selected</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.utility.filter</string>
+			<string>alfred.workflow.utility.conditional</string>
 			<key>uid</key>
-			<string>C6A1B854-359E-4D50-9081-56FEAEFC8CBC</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.junction</string>
-			<key>uid</key>
-			<string>60353C96-9D07-4EF6-B8AB-FA8EC4EF2236</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>inputstring</key>
-				<string>{var:workflow_update_ready}</string>
-				<key>matchcasesensitive</key>
-				<true/>
-				<key>matchmode</key>
-				<integer>0</integer>
-				<key>matchstring</key>
-				<string>1</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.filter</string>
-			<key>uid</key>
-			<string>EE0705F1-36FB-49F6-AA24-3BA82965A14C</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>inputstring</key>
-				<string>{var:workflow_update_ready}</string>
-				<key>matchcasesensitive</key>
-				<true/>
-				<key>matchmode</key>
-				<integer>0</integer>
-				<key>matchstring</key>
-				<string>1</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.filter</string>
-			<key>uid</key>
-			<string>D91FD9FE-14F6-4291-8478-11A126B03BD0</string>
+			<string>06DBC5EF-0036-44CE-8BAF-D8C097CD31DD</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -2658,27 +2515,30 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>inputstring</key>
-				<string>{query}</string>
-				<key>matchcasesensitive</key>
-				<false/>
-				<key>matchmode</key>
-				<integer>2</integer>
-				<key>matchstring</key>
-				<string>Error: .*</string>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:workflow_update_ready}</string>
+						<key>matchcasesensitive</key>
+						<true/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>1</string>
+						<key>outputlabel</key>
+						<string>Upgrade selected</string>
+						<key>uid</key>
+						<string>C46E626E-5D9B-45BD-868C-63395CE9C5F3</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>Pin selected</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.utility.filter</string>
+			<string>alfred.workflow.utility.conditional</string>
 			<key>uid</key>
-			<string>E0487C9A-022A-4894-8CE6-F2B54684C7D2</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.junction</string>
-			<key>uid</key>
-			<string>5EDAB9E7-B4EA-4022-9523-DD865A75B345</string>
+			<string>350D945F-2813-4668-A3BD-0A8CA8C8B95D</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -2706,29 +2566,32 @@ fi</string>
 			<integer>2</integer>
 		</dict>
 		<dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.junction</string>
-			<key>uid</key>
-			<string>25F462E5-343C-4BDF-B314-B96E55AE5875</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
 			<key>config</key>
 			<dict>
-				<key>inputstring</key>
-				<string>{var:workflow_update_ready}</string>
-				<key>matchcasesensitive</key>
-				<true/>
-				<key>matchmode</key>
-				<integer>1</integer>
-				<key>matchstring</key>
-				<string>1</string>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{query}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>4</integer>
+						<key>matchstring</key>
+						<string>Error: .*</string>
+						<key>outputlabel</key>
+						<string>Error in deleting</string>
+						<key>uid</key>
+						<string>33264824-F128-404B-90BA-AAC9CC4DB56C</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>Success in deleting</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.utility.filter</string>
+			<string>alfred.workflow.utility.conditional</string>
 			<key>uid</key>
-			<string>12357CB5-92FC-4FC0-B13F-E8303700B102</string>
+			<string>6BE0BCA4-EBEC-4792-AC9A-33F1598B519B</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -2750,25 +2613,6 @@ fi</string>
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
 			<string>28EB0348-E6C5-4205-9AD5-B50DDFFF4DD0</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>inputstring</key>
-				<string>{query}</string>
-				<key>matchcasesensitive</key>
-				<false/>
-				<key>matchmode</key>
-				<integer>2</integer>
-				<key>matchstring</key>
-				<string>Successfully deleted bookmark.*</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.filter</string>
-			<key>uid</key>
-			<string>4F682CAE-BDB1-4A64-B8BB-1C149CC24751</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -3100,1023 +2944,12 @@ fi</string>
 			<integer>3</integer>
 		</dict>
 		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>echo "$1" &gt; ~/tmp.txt
-input=$(echo "$1" | tr -s ' ')
-IFS=' '
-read -ra TAGS &lt;&lt;&lt; "$input"
-
-
-x=$(./alfred-pinboard-rs rename "${TAGS[0]}" "${TAGS[1]}")
-
-if [ $? -eq 0 ]; then
-  echo {\"alfredworkflow\": { \
-    \"arg\": \"$x\", \
-    \"variables\": {\"success\": \"true\"}}}
-else
-foo=$(echo $x | tr '"' '\"')
-  echo {\"alfredworkflow\": { \
-    \"arg\": \"\", \
-    \"variables\":  \
-    {\"result\": \" \
-{ \\\"items\\\": [ { \\\"title\\\": \\\"Error in renaming tags\\\", \\\"subtitle\\\": \\\"pr old new\\\", \\\"valid\\\": \\\"false\\\", \\\"icon\\\": { \\\"path\\\": \\\"erroricon.icns\\\" }, \\\"uid\\\": \\\"1\\\" } ] } \
-\"}}}
-
-fi</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
-			<string>3255D630-A333-4759-9C18-A108C04EAEE6</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<false/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<false/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>127</integer>
-				<key>keyword</key>
-				<string>pset fuzzy</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<false/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string></string>
-				<key>script</key>
-				<string>cat &lt;&lt; EOB
-
-&lt;?xml version="1.0"?&gt;
-
-&lt;items&gt;
-  &lt;item uid="1" arg="true" valid="YES" autocomplete="Yes"&gt;
-    &lt;title&gt;Enable Fuzzy Search&lt;/title&gt;
-	&lt;icon&gt;fuzzy.png&lt;/icon&gt;
-  &lt;/item&gt;
-
-  &lt;item uid="2" arg="false" valid="YES" autocomplete="No"&gt;
-    &lt;title&gt;Disable Fuzzy Search&lt;/title&gt;
-	&lt;icon&gt;unfuzzy.png&lt;/icon&gt;
-  &lt;/item&gt;
-&lt;/items&gt;
-
-EOB
-</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>subtext</key>
-				<string>Enable/Disable fuzzy logic search.</string>
-				<key>title</key>
-				<string>fuzzy</string>
-				<key>type</key>
-				<integer>0</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>5D065041-109B-41B0-ADE0-62CA836178E5</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>127</integer>
-				<key>script</key>
-				<string>output=$(./alfred-pinboard-rs config --fuzzy $1)
-if [ $? -ne 0 ]; then
-    echo $output
-else
-    echo "Fuzzy set to: $1"
-fi</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>6A4A2D1D-0087-4112-8D83-7BD1C4886CBB</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string>{var:success}</string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>true</string>
-						<key>outputlabel</key>
-						<string>success</string>
-						<key>uid</key>
-						<string>676F259E-6485-41FC-92EE-D8B9FE736C52</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>error</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
-			<key>uid</key>
-			<string>9BDBE952-A169-4051-923A-0D980680261F</string>
+			<string>1B9D717F-FF2E-4913-8B69-A0AABB904100</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>pset tags</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Set max. no. of tags to show.</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>8FBE3EBB-9672-493C-977C-95B832412F2E</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>127</integer>
-				<key>script</key>
-				<string>output=$(./alfred-pinboard-rs config --tag-numbers $1)
-if [ $? -ne 0 ]; then
-    echo $output
-else
-    echo "No. items to show: $1"
-fi</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>C79DF9E2-8026-4F82-B31C-BCD0D4AFCE20</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>pset bookmarks</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Set max. no. of bookmarks to show</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>A8EE818C-427B-476F-93FD-02825231464B</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>127</integer>
-				<key>script</key>
-				<string>output=$(./alfred-pinboard-rs config --bookmark-numbers $1)
-if [ $? -ne 0 ]; then
-    echo $output
-else
-    echo "No. items to show: $1"
-fi</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>DA27F20C-DD88-4FCB-A665-CD66BFF2761D</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>127</integer>
-				<key>script</key>
-				<string>output=$(./alfred-pinboard-rs config --suggest-tags $1)
-if [ $? -ne 0 ]; then
-    echo $output
-else
-    echo "Tag suggestion: $1"
-fi</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>403451E0-718B-4D95-8546-05E9CCA25495</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<false/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<false/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>127</integer>
-				<key>keyword</key>
-				<string>pset suggest_tags</string>
-				<key>queuedelaycustom</key>
-				<integer>1</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<false/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string></string>
-				<key>script</key>
-				<string>cat &lt;&lt; EOB
-{
-    "items": [
-        {
-            "subtitle": "show popular tags for the current webpage.",
-            "title": "Enable Popular Tags",
-            "arg": "true",
-            "icon": {
-                "path": "suggest.png"
-            },
-            "uid": "1"
-
-        },
-        {
-
-            "title": "Disable Popular Tags",
-            "arg": "false",
-            "icon": {
-                "path": "no_suggest.png"
-            },
-            "uid": "10"
-        },
-
-    ]
-}
-
-EOB</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>subtext</key>
-				<string>Enable/Disable Suggesting Popular Tags</string>
-				<key>title</key>
-				<string>Popular Tags</string>
-				<key>type</key>
-				<integer>0</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>BD868971-C272-43FC-B20B-1C5471C1EBC1</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<false/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<false/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>127</integer>
-				<key>keyword</key>
-				<string>pset shared</string>
-				<key>queuedelaycustom</key>
-				<integer>1</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<false/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string></string>
-				<key>script</key>
-				<string>
-cat &lt;&lt; EOB
-{
-    "items": [
-        {
-            "subtitle": "post all new bookmarks as public.",
-            "title": "Enable Shared Bookmarkings",
-            "arg": "true",
-            "icon": {
-                "path": "unlocked.png"
-            },
-            "uid": "1"
-
-        },
-        {
-            "subtitle": "post all new bookmarks as private.",
-            "title": "Enable Private Bookmarking",
-            "arg": "false",
-            "icon": {
-                "path": "locked.png"
-            },
-            "uid": "10"
-        },
-
-    ]
-}
-
-EOB</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>Shared/Private Bookmarking</string>
-				<key>type</key>
-				<integer>0</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>93A64ECE-BB64-492B-B845-7CB85B544D40</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>127</integer>
-				<key>script</key>
-				<string>output=$(./alfred-pinboard-rs config --shared $1)
-if [ $? -ne 0 ]; then
-    echo $output
-else
-    echo "Sharing Bookmarks: $1"
-fi</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>A156743D-A9BB-4AFB-A0C2-D16EF45F7DD0</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>Rusty Pinboard 👍</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>6BA4C470-B64F-4BE2-9346-38ADACABCCBA</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>68</integer>
-				<key>script</key>
-				<string>on run argv
-  set theQuery to item 1 of argv
-  tell application "Alfred 4"	search "ps " &amp; theQuery  end tell
-end run</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>6</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>3FBB91BE-C1CD-4FBB-91E9-1B7B5CF168A5</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>applescript</key>
-				<string>on alfred_script(q)
-  tell application "Alfred 4"	search q  end tell
-end alfred_script</string>
-				<key>cachescript</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.applescript</string>
-			<key>uid</key>
-			<string>B923DEE5-E806-4A3B-86C0-B2ADBBA123E0</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>123</integer>
-				<key>script</key>
-				<string>output=$(./alfred-pinboard-rs config --tags-only $1)
-if [ $? -ne 0 ]; then
-    echo $output
-else
-    echo "Tag ONLY: $1"
-fi</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>ACED2549-3532-4ECC-9709-96679199529D</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<false/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<false/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>127</integer>
-				<key>keyword</key>
-				<string>pset tagonly</string>
-				<key>queuedelaycustom</key>
-				<integer>1</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<false/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string></string>
-				<key>script</key>
-				<string>
-
-
-cat &lt;&lt; EOB
-{
-    "items": [
-        {
-
-            "title": "Search only TAG field",
-            "arg": "true",
-            "icon": {
-                "path": "tagonly.png"
-            },
-            "uid": "1"
-
-        },
-        {
-
-            "title": "Search ALL fields (tags/titles/notes/urls)",
-            "arg": "false",
-            "icon": {
-                "path": "bookmarks.png"
-            },
-            "uid": "10"
-        },
-
-    ]
-}
-
-EOB
-
-</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>Tag ONLY search?</string>
-				<key>type</key>
-				<integer>0</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>3CFEFF60-C0B3-44A0-8761-FB5AA2F96547</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<false/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<false/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>127</integer>
-				<key>keyword</key>
-				<string>pset auto</string>
-				<key>queuedelaycustom</key>
-				<integer>1</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<false/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string></string>
-				<key>script</key>
-				<string>cat &lt;&lt; EOB
-
-&lt;?xml version="1.0"?&gt;
-
-&lt;items&gt;
-  &lt;item uid="" arg="true" valid="YES"&gt;
-    &lt;title&gt;Enable Auto-updating cache&lt;/title&gt;
-	&lt;icon&gt;auto_update.png&lt;/icon&gt;
-  &lt;/item&gt;
-
-  &lt;item uid="" arg="false" valid="YES"&gt;
-    &lt;title&gt;Disable Auto-updating cache&lt;/title&gt;
-	&lt;icon&gt;no_auto_update.png&lt;/icon&gt;
-  &lt;/item&gt;
-&lt;/items&gt;
-
-EOB</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>subtext</key>
-				<string>Automatically update bookmarks cache after posting a bookmark</string>
-				<key>title</key>
-				<string>auto</string>
-				<key>type</key>
-				<integer>0</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>7A213534-8342-46AB-A4EA-4CCF95685833</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>127</integer>
-				<key>script</key>
-				<string>output=$(./alfred-pinboard-rs config --auto-update $1)
-if [ $? -ne 0 ]; then
-    echo $output
-else
-    echo "Auto-update of cache: $1"
-fi</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>E27BB22A-56EB-4D38-9725-99555F0EB6D1</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>123</integer>
-				<key>script</key>
-				<string>output=$(./alfred-pinboard-rs config --toread $1)
-if [ $? -ne 0 ]; then
-    echo $output
-else
-    echo "New bookmarks will be to-read: $1"
-fi</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>799A5CC4-A7DB-4074-8044-ED7DBEFED12D</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<false/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<false/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>127</integer>
-				<key>keyword</key>
-				<string>pset toread</string>
-				<key>queuedelaycustom</key>
-				<integer>1</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<false/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string></string>
-				<key>script</key>
-				<string>cat &lt;&lt; EOB
-
-&lt;?xml version="1.0"?&gt;
-
-&lt;items&gt;
-  &lt;item uid="tagonly" arg="true" valid="YES" autocomplete="Yes"&gt;
-    &lt;title&gt;Set new bookmars as TOREAD&lt;/title&gt;
-	&lt;icon&gt;toread.png&lt;/icon&gt;
-  &lt;/item&gt;
-
-  &lt;item uid="des" arg="false" valid="YES" autocomplete="No"&gt;
-    &lt;title&gt;Do NOT set new bookmars as TOREAD&lt;/title&gt;
-	&lt;icon&gt;toread.png&lt;/icon&gt;
-  &lt;/item&gt;
-&lt;/items&gt;
-
-EOB</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>Mark new bookmarks as 'toread'</string>
-				<key>type</key>
-				<integer>0</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>5F6E4E5A-1035-498B-A2CF-B7E3ACB85009</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>127</integer>
-				<key>script</key>
-				<string>output=$(./alfred-pinboard-rs config --check-bookmarked-page $1)
-if [ $? -ne 0 ]; then
-    echo $output
-else
-    echo "Notify if page is already bookmarked: $1"
-fi</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>C4A2975E-14BF-4A7E-B3C0-60384A4AB5A1</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<false/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<false/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>127</integer>
-				<key>keyword</key>
-				<string>pset check_bookmarked</string>
-				<key>queuedelaycustom</key>
-				<integer>1</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<false/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string></string>
-				<key>script</key>
-				<string>cat &lt;&lt; EOB
-
-&lt;?xml version="1.0"?&gt;
-
-&lt;items&gt;
-  &lt;item uid="" arg="true" valid="YES" autocomplete="Yes"&gt;
-    &lt;title&gt;Notify if page is already bookmarked&lt;/title&gt;
-	&lt;icon&gt;check_bookmarked_page.png&lt;/icon&gt;
-  &lt;/item&gt;
-
-  &lt;item uid="" arg="false" valid="YES" autocomplete="No"&gt;
-    &lt;title&gt;Do not notify if page is already bookmarked&lt;/title&gt;
-	&lt;icon&gt;no_check_bookmarked_page.png&lt;/icon&gt;
-  &lt;/item&gt;
-&lt;/items&gt;
-
-EOB</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>subtext</key>
-				<string>Enable/Disable notifying user if page is already bookmarked</string>
-				<key>title</key>
-				<string>Check if page is already bookmarked</string>
-				<key>type</key>
-				<integer>0</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>78C8A61E-FD70-4CD9-BEC8-66A30106E128</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>127</integer>
-				<key>script</key>
-				<string>output=$(./alfred-pinboard-rs config --show-urls-vs-tags $1)
-if [ $? -ne 0 ]; then
-    echo $output
-elif $1; then
-    echo "Showing urls in search"
-else
-    echo "Showing tags in search"
-fi</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>BAD58837-06A2-45EE-8991-1349D183E5E8</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<false/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<false/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>127</integer>
-				<key>keyword</key>
-				<string>pset url_tag</string>
-				<key>queuedelaycustom</key>
-				<integer>1</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<false/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string></string>
-				<key>script</key>
-				<string>cat &lt;&lt; EOB
-
-&lt;?xml version="1.0"?&gt;
-
-&lt;items&gt;
-  &lt;item uid="" arg="false" valid="YES"&gt;
-    &lt;title&gt;Show URLs in search results&lt;/title&gt;
-	&lt;icon&gt;url.png&lt;/icon&gt;
-  &lt;/item&gt;
-
-  &lt;item uid="" arg="true" valid="YES"&gt;
-    &lt;title&gt;Show TAGs in search results&lt;/title&gt;
-	&lt;icon&gt;tag.png&lt;/icon&gt;
-  &lt;/item&gt;
-&lt;/items&gt;
-
-EOB</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>Show url/tags in search results</string>
-				<key>type</key>
-				<integer>0</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>69D5C481-E826-498C-A9CC-549AE2815D10</string>
-			<key>version</key>
-			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -4229,6 +3062,55 @@ echo $r</string>
 				<integer>0</integer>
 				<key>escaping</key>
 				<integer>62</integer>
+				<key>keyword</key>
+				<string>pr</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>2</integer>
+				<key>runningsubtext</key>
+				<string>Fetching tags...</string>
+				<key>script</key>
+				<string>./alfred-pinboard-rs list --suggest false -t "$1"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string>to show all related bookmarks for</string>
+				<key>title</key>
+				<string>Find a tag</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>7D7E984F-FF88-49C8-9FFF-832C2FFC6864</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>62</integer>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -4264,51 +3146,62 @@ echo $r</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>alfredfiltersresults</key>
-				<false/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>0</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<false/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>escaping</key>
-				<integer>62</integer>
-				<key>keyword</key>
-				<string>pr</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>2</integer>
-				<key>runningsubtext</key>
-				<string>Fetching tags...</string>
-				<key>script</key>
-				<string>./alfred-pinboard-rs list --suggest false -t "$1"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>subtext</key>
-				<string>to show all related bookmarks for</string>
-				<key>title</key>
-				<string>Find a tag</string>
-				<key>type</key>
-				<integer>0</integer>
-				<key>withspace</key>
-				<true/>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:workflow_update_ready}</string>
+						<key>matchcasesensitive</key>
+						<true/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>1</string>
+						<key>outputlabel</key>
+						<string>Upgrade selected</string>
+						<key>uid</key>
+						<string>C46E626E-5D9B-45BD-868C-63395CE9C5F3</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>Pin selected</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
+			<string>alfred.workflow.utility.conditional</string>
 			<key>uid</key>
-			<string>7D7E984F-FF88-49C8-9FFF-832C2FFC6864</string>
+			<string>75434858-9B72-456E-A107-4B11F87365A4</string>
 			<key>version</key>
-			<integer>3</integer>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:workflow_update_ready}</string>
+						<key>matchcasesensitive</key>
+						<true/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>1</string>
+						<key>outputlabel</key>
+						<string>Upgrade selected</string>
+						<key>uid</key>
+						<string>C46E626E-5D9B-45BD-868C-63395CE9C5F3</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>Pin selected</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>09E1138E-C990-4D9D-9AD7-047260212E20</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -4353,6 +3246,26 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>oldtag</key>
+					<string>{query}</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>A853102A-C6D7-49DB-9E51-DA57D84A095A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>conditions</key>
 				<array>
 					<dict>
@@ -4377,26 +3290,6 @@ fi</string>
 			<string>alfred.workflow.utility.conditional</string>
 			<key>uid</key>
 			<string>91C5E428-1419-446C-8775-1F8C8D8322B0</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string></string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict>
-					<key>oldtag</key>
-					<string>{query}</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>A853102A-C6D7-49DB-9E51-DA57D84A095A</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -4450,6 +3343,1025 @@ fi</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>127</integer>
+				<key>keyword</key>
+				<string>pset fuzzy</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<false/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string>cat &lt;&lt; EOB
+
+&lt;?xml version="1.0"?&gt;
+
+&lt;items&gt;
+  &lt;item uid="1" arg="true" valid="YES" autocomplete="Yes"&gt;
+    &lt;title&gt;Enable Fuzzy Search&lt;/title&gt;
+	&lt;icon&gt;fuzzy.png&lt;/icon&gt;
+  &lt;/item&gt;
+
+  &lt;item uid="2" arg="false" valid="YES" autocomplete="No"&gt;
+    &lt;title&gt;Disable Fuzzy Search&lt;/title&gt;
+	&lt;icon&gt;unfuzzy.png&lt;/icon&gt;
+  &lt;/item&gt;
+&lt;/items&gt;
+
+EOB
+</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string>Enable/Disable fuzzy logic search.</string>
+				<key>title</key>
+				<string>fuzzy</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>590F370B-1F05-44CD-AA0A-7E887B459E5B</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>127</integer>
+				<key>script</key>
+				<string>output=$(./alfred-pinboard-rs config --fuzzy $1)
+if [ $? -ne 0 ]; then
+    echo $output
+else
+    echo "Fuzzy set to: $1"
+fi</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>E8B55F7A-B05E-4099-9607-A79E01B06FD8</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>pset tags</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Set max. no. of tags to show.</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>C014F87B-6FD0-4F58-96A2-92B09A4086FE</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>127</integer>
+				<key>script</key>
+				<string>output=$(./alfred-pinboard-rs config --tag-numbers $1)
+if [ $? -ne 0 ]; then
+    echo $output
+else
+    echo "No. items to show: $1"
+fi</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>50B75DCC-7C6D-4686-8252-E18BCFF8C554</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>127</integer>
+				<key>script</key>
+				<string>output=$(./alfred-pinboard-rs config --bookmark-numbers $1)
+if [ $? -ne 0 ]; then
+    echo $output
+else
+    echo "No. items to show: $1"
+fi</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>50D10FD5-2BD8-475E-8A86-224523BA1ABE</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>pset bookmarks</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Set max. no. of bookmarks to show</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>28EA72D9-5950-4961-87F6-A3528D19540F</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>127</integer>
+				<key>keyword</key>
+				<string>pset suggest_tags</string>
+				<key>queuedelaycustom</key>
+				<integer>1</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<false/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string>cat &lt;&lt; EOB
+{
+    "items": [
+        {
+            "subtitle": "show popular tags for the current webpage.",
+            "title": "Enable Popular Tags",
+            "arg": "true",
+            "icon": {
+                "path": "suggest.png"
+            },
+            "uid": "1"
+
+        },
+        {
+
+            "title": "Disable Popular Tags",
+            "arg": "false",
+            "icon": {
+                "path": "no_suggest.png"
+            },
+            "uid": "10"
+        },
+
+    ]
+}
+
+EOB</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string>Enable/Disable Suggesting Popular Tags</string>
+				<key>title</key>
+				<string>Popular Tags</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>8D96E594-674B-4824-8C2F-701018343534</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>127</integer>
+				<key>script</key>
+				<string>output=$(./alfred-pinboard-rs config --suggest-tags $1)
+if [ $? -ne 0 ]; then
+    echo $output
+else
+    echo "Tag suggestion: $1"
+fi</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>916E330D-1693-4400-BBAE-51BBCB00F3A1</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>127</integer>
+				<key>script</key>
+				<string>output=$(./alfred-pinboard-rs config --shared $1)
+if [ $? -ne 0 ]; then
+    echo $output
+else
+    echo "Sharing Bookmarks: $1"
+fi</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>5821470E-E05D-4440-9441-84B254381A73</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>127</integer>
+				<key>keyword</key>
+				<string>pset shared</string>
+				<key>queuedelaycustom</key>
+				<integer>1</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<false/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string>
+cat &lt;&lt; EOB
+{
+    "items": [
+        {
+            "subtitle": "post all new bookmarks as public.",
+            "title": "Enable Shared Bookmarkings",
+            "arg": "true",
+            "icon": {
+                "path": "unlocked.png"
+            },
+            "uid": "1"
+
+        },
+        {
+            "subtitle": "post all new bookmarks as private.",
+            "title": "Enable Private Bookmarking",
+            "arg": "false",
+            "icon": {
+                "path": "locked.png"
+            },
+            "uid": "10"
+        },
+
+    ]
+}
+
+EOB</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Shared/Private Bookmarking</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>0CFFA3F1-8C02-47C2-8A40-79AE36473506</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>Rusty Pinboard 👍</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>8A326A12-2E76-46CD-9D4D-CCBDC541843B</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>127</integer>
+				<key>keyword</key>
+				<string>pset tagonly</string>
+				<key>queuedelaycustom</key>
+				<integer>1</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<false/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string>
+
+
+cat &lt;&lt; EOB
+{
+    "items": [
+        {
+
+            "title": "Search only TAG field",
+            "arg": "true",
+            "icon": {
+                "path": "tagonly.png"
+            },
+            "uid": "1"
+
+        },
+        {
+
+            "title": "Search ALL fields (tags/titles/notes/urls)",
+            "arg": "false",
+            "icon": {
+                "path": "bookmarks.png"
+            },
+            "uid": "10"
+        },
+
+    ]
+}
+
+EOB
+
+</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Tag ONLY search?</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>1409792A-CE98-4AF0-AF9B-998FBAB435A7</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>123</integer>
+				<key>script</key>
+				<string>output=$(./alfred-pinboard-rs config --tags-only $1)
+if [ $? -ne 0 ]; then
+    echo $output
+else
+    echo "Tag ONLY: $1"
+fi</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>60796C38-028C-408A-86CE-765CB170EE72</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>127</integer>
+				<key>script</key>
+				<string>output=$(./alfred-pinboard-rs config --auto-update $1)
+if [ $? -ne 0 ]; then
+    echo $output
+else
+    echo "Auto-update of cache: $1"
+fi</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>E093D14C-64A4-4D4F-9D61-50FA6974204B</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>127</integer>
+				<key>keyword</key>
+				<string>pset auto</string>
+				<key>queuedelaycustom</key>
+				<integer>1</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<false/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string>cat &lt;&lt; EOB
+
+&lt;?xml version="1.0"?&gt;
+
+&lt;items&gt;
+  &lt;item uid="" arg="true" valid="YES"&gt;
+    &lt;title&gt;Enable Auto-updating cache&lt;/title&gt;
+	&lt;icon&gt;auto_update.png&lt;/icon&gt;
+  &lt;/item&gt;
+
+  &lt;item uid="" arg="false" valid="YES"&gt;
+    &lt;title&gt;Disable Auto-updating cache&lt;/title&gt;
+	&lt;icon&gt;no_auto_update.png&lt;/icon&gt;
+  &lt;/item&gt;
+&lt;/items&gt;
+
+EOB</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string>Automatically update bookmarks cache after posting a bookmark</string>
+				<key>title</key>
+				<string>auto</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>7FA852D9-0250-459D-8C03-C0A5E854AFBD</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>127</integer>
+				<key>keyword</key>
+				<string>pset toread</string>
+				<key>queuedelaycustom</key>
+				<integer>1</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<false/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string>cat &lt;&lt; EOB
+
+&lt;?xml version="1.0"?&gt;
+
+&lt;items&gt;
+  &lt;item uid="tagonly" arg="true" valid="YES" autocomplete="Yes"&gt;
+    &lt;title&gt;Set new bookmars as TOREAD&lt;/title&gt;
+	&lt;icon&gt;toread.png&lt;/icon&gt;
+  &lt;/item&gt;
+
+  &lt;item uid="des" arg="false" valid="YES" autocomplete="No"&gt;
+    &lt;title&gt;Do NOT set new bookmars as TOREAD&lt;/title&gt;
+	&lt;icon&gt;toread.png&lt;/icon&gt;
+  &lt;/item&gt;
+&lt;/items&gt;
+
+EOB</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Mark new bookmarks as 'toread'</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>B9AD3842-CE4A-4395-9CC2-82260B106DF4</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>123</integer>
+				<key>script</key>
+				<string>output=$(./alfred-pinboard-rs config --toread $1)
+if [ $? -ne 0 ]; then
+    echo $output
+else
+    echo "New bookmarks will be to-read: $1"
+fi</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>33781265-1653-4906-AE9E-29ACD20670DE</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>127</integer>
+				<key>script</key>
+				<string>output=$(./alfred-pinboard-rs config --check-bookmarked-page $1)
+if [ $? -ne 0 ]; then
+    echo $output
+else
+    echo "Notify if page is already bookmarked: $1"
+fi</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>5B7FE298-FD1C-4722-8A4D-F5D9766F720E</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>127</integer>
+				<key>keyword</key>
+				<string>pset check_bookmarked</string>
+				<key>queuedelaycustom</key>
+				<integer>1</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<false/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string>cat &lt;&lt; EOB
+
+&lt;?xml version="1.0"?&gt;
+
+&lt;items&gt;
+  &lt;item uid="" arg="true" valid="YES" autocomplete="Yes"&gt;
+    &lt;title&gt;Notify if page is already bookmarked&lt;/title&gt;
+	&lt;icon&gt;check_bookmarked_page.png&lt;/icon&gt;
+  &lt;/item&gt;
+
+  &lt;item uid="" arg="false" valid="YES" autocomplete="No"&gt;
+    &lt;title&gt;Do not notify if page is already bookmarked&lt;/title&gt;
+	&lt;icon&gt;no_check_bookmarked_page.png&lt;/icon&gt;
+  &lt;/item&gt;
+&lt;/items&gt;
+
+EOB</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string>Enable/Disable notifying user if page is already bookmarked</string>
+				<key>title</key>
+				<string>Check if page is already bookmarked</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>0016C9AE-9AF1-45C8-A89B-663CCA5FBF2C</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>127</integer>
+				<key>keyword</key>
+				<string>pset url_tag</string>
+				<key>queuedelaycustom</key>
+				<integer>1</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<false/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string>cat &lt;&lt; EOB
+
+&lt;?xml version="1.0"?&gt;
+
+&lt;items&gt;
+  &lt;item uid="" arg="false" valid="YES"&gt;
+    &lt;title&gt;Show URLs in search results&lt;/title&gt;
+	&lt;icon&gt;url.png&lt;/icon&gt;
+  &lt;/item&gt;
+
+  &lt;item uid="" arg="true" valid="YES"&gt;
+    &lt;title&gt;Show TAGs in search results&lt;/title&gt;
+	&lt;icon&gt;tag.png&lt;/icon&gt;
+  &lt;/item&gt;
+&lt;/items&gt;
+
+EOB</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Show url/tags in search results</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>75C55403-2D3F-4415-9B06-6EC8B581E28B</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>127</integer>
+				<key>script</key>
+				<string>output=$(./alfred-pinboard-rs config --show-urls-vs-tags $1)
+if [ $? -ne 0 ]; then
+    echo $output
+elif $1; then
+    echo "Showing urls in search"
+else
+    echo "Showing tags in search"
+fi</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>E9FC9061-CE38-46EA-8919-604B8DC67453</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>applescript</key>
+				<string>on alfred_script(q)
+  tell application "Alfred 4"	search q  end tell
+end alfred_script</string>
+				<key>cachescript</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.applescript</string>
+			<key>uid</key>
+			<string>1435CE84-2079-4181-8D7C-D9305E375C6F</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>echo "$1" &gt; ~/tmp.txt
+input=$(echo "$1" | tr -s ' ')
+IFS=' '
+read -ra TAGS &lt;&lt;&lt; "$input"
+
+
+x=$(./alfred-pinboard-rs rename "${TAGS[0]}" "${TAGS[1]}")
+
+if [ $? -eq 0 ]; then
+  echo {\"alfredworkflow\": { \
+    \"arg\": \"$x\", \
+    \"variables\": {\"success\": \"true\"}}}
+else
+foo=$(echo $x | tr '"' '\"')
+  echo {\"alfredworkflow\": { \
+    \"arg\": \"\", \
+    \"variables\":  \
+    {\"result\": \" \
+{ \\\"items\\\": [ { \\\"title\\\": \\\"Error in renaming tags\\\", \\\"subtitle\\\": \\\"pr old new\\\", \\\"valid\\\": \\\"false\\\", \\\"icon\\\": { \\\"path\\\": \\\"erroricon.icns\\\" }, \\\"uid\\\": \\\"1\\\" } ] } \
+\"}}}
+
+fi</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>C03A39F5-E473-4AC0-8DFF-25A058F60C5C</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:success}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>true</string>
+						<key>outputlabel</key>
+						<string>success</string>
+						<key>uid</key>
+						<string>676F259E-6485-41FC-92EE-D8B9FE736C52</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>error</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>4B0B8E09-6ED8-4704-9487-A72639457250</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>on run argv
+  set theQuery to item 1 of argv
+  tell application "Alfred 4"	search "ps " &amp; theQuery  end tell
+end run</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>6</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>544EB36F-A1E3-48BE-94FA-73366C521AC3</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>This is a Workflow to manage your Pinboard bookmarks.
@@ -4458,6 +4370,13 @@ Make sure you set your authenticaton token first before first use.
 Detailed instructions are available at https://github.com/spamwax/alfred-pinboard-rs</string>
 	<key>uidata</key>
 	<dict>
+		<key>0016C9AE-9AF1-45C8-A89B-663CCA5FBF2C</key>
+		<dict>
+			<key>xpos</key>
+			<integer>45</integer>
+			<key>ypos</key>
+			<integer>3440</integer>
+		</dict>
 		<key>0087168E-C986-4511-9873-B107C12CD6C0</key>
 		<dict>
 			<key>xpos</key>
@@ -4512,6 +4431,27 @@ rename by iconmu from the Noun Project</string>
 			<key>ypos</key>
 			<integer>805</integer>
 		</dict>
+		<key>06DBC5EF-0036-44CE-8BAF-D8C097CD31DD</key>
+		<dict>
+			<key>xpos</key>
+			<integer>210</integer>
+			<key>ypos</key>
+			<integer>1155</integer>
+		</dict>
+		<key>09E1138E-C990-4D9D-9AD7-047260212E20</key>
+		<dict>
+			<key>xpos</key>
+			<integer>645</integer>
+			<key>ypos</key>
+			<integer>2380</integer>
+		</dict>
+		<key>0CFFA3F1-8C02-47C2-8A40-79AE36473506</key>
+		<dict>
+			<key>xpos</key>
+			<integer>45</integer>
+			<key>ypos</key>
+			<integer>3040</integer>
+		</dict>
 		<key>0F03B46B-AD75-491E-8B5B-36ADF3E084F4</key>
 		<dict>
 			<key>note</key>
@@ -4521,19 +4461,26 @@ rename by iconmu from the Noun Project</string>
 			<key>ypos</key>
 			<integer>100</integer>
 		</dict>
-		<key>12357CB5-92FC-4FC0-B13F-E8303700B102</key>
+		<key>1409792A-CE98-4AF0-AF9B-998FBAB435A7</key>
 		<dict>
 			<key>xpos</key>
-			<integer>290</integer>
+			<integer>45</integer>
 			<key>ypos</key>
-			<integer>1445</integer>
+			<integer>3140</integer>
+		</dict>
+		<key>1435CE84-2079-4181-8D7C-D9305E375C6F</key>
+		<dict>
+			<key>xpos</key>
+			<integer>130</integer>
+			<key>ypos</key>
+			<integer>3790</integer>
 		</dict>
 		<key>195FDA64-D570-4C23-9B04-E319CC539797</key>
 		<dict>
 			<key>xpos</key>
-			<integer>785</integer>
+			<integer>815</integer>
 			<key>ypos</key>
-			<integer>3250</integer>
+			<integer>2200</integer>
 		</dict>
 		<key>1A981B9B-5BEE-491E-A897-46DF38627688</key>
 		<dict>
@@ -4542,10 +4489,19 @@ rename by iconmu from the Noun Project</string>
 			<key>ypos</key>
 			<integer>470</integer>
 		</dict>
+		<key>1B9D717F-FF2E-4913-8B69-A0AABB904100</key>
+		<dict>
+			<key>note</key>
+			<string>Upgrade selected.</string>
+			<key>xpos</key>
+			<integer>1025</integer>
+			<key>ypos</key>
+			<integer>2055</integer>
+		</dict>
 		<key>2202AECC-AE14-46AC-A4E7-0ECE9060F556</key>
 		<dict>
 			<key>xpos</key>
-			<integer>1440</integer>
+			<integer>1460</integer>
 			<key>ypos</key>
 			<integer>1045</integer>
 		</dict>
@@ -4563,19 +4519,19 @@ rename by iconmu from the Noun Project</string>
 			<key>ypos</key>
 			<integer>410</integer>
 		</dict>
-		<key>25F462E5-343C-4BDF-B314-B96E55AE5875</key>
-		<dict>
-			<key>xpos</key>
-			<integer>580</integer>
-			<key>ypos</key>
-			<integer>1445</integer>
-		</dict>
 		<key>282CD8F9-1BEE-4B7D-A72C-94D7CBA13073</key>
 		<dict>
 			<key>xpos</key>
 			<integer>1315</integer>
 			<key>ypos</key>
 			<integer>1900</integer>
+		</dict>
+		<key>28EA72D9-5950-4961-87F6-A3528D19540F</key>
+		<dict>
+			<key>xpos</key>
+			<integer>45</integer>
+			<key>ypos</key>
+			<integer>2840</integer>
 		</dict>
 		<key>28EB0348-E6C5-4205-9AD5-B50DDFFF4DD0</key>
 		<dict>
@@ -4598,12 +4554,26 @@ rename by iconmu from the Noun Project</string>
 			<key>ypos</key>
 			<integer>1635</integer>
 		</dict>
-		<key>3255D630-A333-4759-9C18-A108C04EAEE6</key>
+		<key>33781265-1653-4906-AE9E-29ACD20670DE</key>
 		<dict>
 			<key>xpos</key>
-			<integer>925</integer>
+			<integer>285</integer>
 			<key>ypos</key>
-			<integer>2175</integer>
+			<integer>3340</integer>
+		</dict>
+		<key>350D945F-2813-4668-A3BD-0A8CA8C8B95D</key>
+		<dict>
+			<key>xpos</key>
+			<integer>210</integer>
+			<key>ypos</key>
+			<integer>1375</integer>
+		</dict>
+		<key>3C6770D0-0781-4295-8227-41AC215BC760</key>
+		<dict>
+			<key>xpos</key>
+			<integer>1255</integer>
+			<key>ypos</key>
+			<integer>1095</integer>
 		</dict>
 		<key>3CE0B131-A3E7-4756-BB56-C0AEC7448C28</key>
 		<dict>
@@ -4612,26 +4582,12 @@ rename by iconmu from the Noun Project</string>
 			<key>ypos</key>
 			<integer>80</integer>
 		</dict>
-		<key>3CFEFF60-C0B3-44A0-8761-FB5AA2F96547</key>
+		<key>3D09B795-2B6D-47D4-B74E-9A95591F9AEE</key>
 		<dict>
 			<key>xpos</key>
-			<integer>45</integer>
+			<integer>690</integer>
 			<key>ypos</key>
-			<integer>2675</integer>
-		</dict>
-		<key>3FBB91BE-C1CD-4FBB-91E9-1B7B5CF168A5</key>
-		<dict>
-			<key>xpos</key>
-			<integer>890</integer>
-			<key>ypos</key>
-			<integer>2615</integer>
-		</dict>
-		<key>403451E0-718B-4D95-8546-05E9CCA25495</key>
-		<dict>
-			<key>xpos</key>
-			<integer>285</integer>
-			<key>ypos</key>
-			<integer>2475</integer>
+			<integer>835</integer>
 		</dict>
 		<key>41032086-9AA2-40AF-A887-9148D35771D8</key>
 		<dict>
@@ -4639,6 +4595,13 @@ rename by iconmu from the Noun Project</string>
 			<integer>920</integer>
 			<key>ypos</key>
 			<integer>580</integer>
+		</dict>
+		<key>41B7E9D1-65BC-4E7F-9446-BCCFBC384EC3</key>
+		<dict>
+			<key>xpos</key>
+			<integer>1070</integer>
+			<key>ypos</key>
+			<integer>825</integer>
 		</dict>
 		<key>4411CFFD-1BD6-49B2-8EBB-8AE42CD82ECC</key>
 		<dict>
@@ -4663,23 +4626,12 @@ rename by iconmu from the Noun Project</string>
 			<key>ypos</key>
 			<integer>1355</integer>
 		</dict>
-		<key>4AB57A0F-846D-4AA0-B3DD-DD1C7F411BAE</key>
+		<key>4B0B8E09-6ED8-4704-9487-A72639457250</key>
 		<dict>
-			<key>note</key>
-			<string>Upgrade selected.</string>
 			<key>xpos</key>
-			<integer>290</integer>
+			<integer>185</integer>
 			<key>ypos</key>
-			<integer>1015</integer>
-		</dict>
-		<key>4F682CAE-BDB1-4A64-B8BB-1C149CC24751</key>
-		<dict>
-			<key>note</key>
-			<string>Success in deleting.</string>
-			<key>xpos</key>
-			<integer>690</integer>
-			<key>ypos</key>
-			<integer>1505</integer>
+			<integer>3935</integer>
 		</dict>
 		<key>4F6CE11B-3454-41F1-BF65-AD752A4AC53F</key>
 		<dict>
@@ -4692,28 +4644,47 @@ rename by iconmu from the Noun Project</string>
 			<key>ypos</key>
 			<integer>160</integer>
 		</dict>
-		<key>50AED498-A7C0-4CEE-BDDB-B4887FF49957</key>
+		<key>50B75DCC-7C6D-4686-8252-E18BCFF8C554</key>
 		<dict>
 			<key>xpos</key>
-			<integer>290</integer>
+			<integer>285</integer>
 			<key>ypos</key>
-			<integer>835</integer>
+			<integer>2740</integer>
 		</dict>
-		<key>50F6A6C6-7D1D-4876-92C2-4702A00D4AB2</key>
+		<key>50D10FD5-2BD8-475E-8A86-224523BA1ABE</key>
 		<dict>
-			<key>note</key>
-			<string>Success in downloading.</string>
 			<key>xpos</key>
-			<integer>1190</integer>
+			<integer>285</integer>
 			<key>ypos</key>
-			<integer>905</integer>
+			<integer>2840</integer>
 		</dict>
 		<key>51B3C295-B9CD-44D4-B1D3-19038C54735B</key>
 		<dict>
 			<key>xpos</key>
-			<integer>665</integer>
+			<integer>660</integer>
 			<key>ypos</key>
 			<integer>1095</integer>
+		</dict>
+		<key>544EB36F-A1E3-48BE-94FA-73366C521AC3</key>
+		<dict>
+			<key>xpos</key>
+			<integer>145</integer>
+			<key>ypos</key>
+			<integer>4035</integer>
+		</dict>
+		<key>5821470E-E05D-4440-9441-84B254381A73</key>
+		<dict>
+			<key>xpos</key>
+			<integer>285</integer>
+			<key>ypos</key>
+			<integer>3040</integer>
+		</dict>
+		<key>590F370B-1F05-44CD-AA0A-7E887B459E5B</key>
+		<dict>
+			<key>xpos</key>
+			<integer>45</integer>
+			<key>ypos</key>
+			<integer>2640</integer>
 		</dict>
 		<key>59152538-B4C0-4377-AEEA-034B5B257033</key>
 		<dict>
@@ -4733,19 +4704,19 @@ rename by iconmu from the Noun Project</string>
 			<key>ypos</key>
 			<integer>10</integer>
 		</dict>
+		<key>5B7FE298-FD1C-4722-8A4D-F5D9766F720E</key>
+		<dict>
+			<key>xpos</key>
+			<integer>285</integer>
+			<key>ypos</key>
+			<integer>3440</integer>
+		</dict>
 		<key>5BBD268D-C102-4516-86B3-7A1DA7AE6AD8</key>
 		<dict>
 			<key>xpos</key>
 			<integer>445</integer>
 			<key>ypos</key>
 			<integer>1095</integer>
-		</dict>
-		<key>5D065041-109B-41B0-ADE0-62CA836178E5</key>
-		<dict>
-			<key>xpos</key>
-			<integer>45</integer>
-			<key>ypos</key>
-			<integer>2175</integer>
 		</dict>
 		<key>5D22F26C-5A6A-4D18-B1F9-1158B8075764</key>
 		<dict>
@@ -4754,33 +4725,19 @@ rename by iconmu from the Noun Project</string>
 			<key>ypos</key>
 			<integer>1750</integer>
 		</dict>
-		<key>5EDAB9E7-B4EA-4022-9523-DD865A75B345</key>
+		<key>60796C38-028C-408A-86CE-765CB170EE72</key>
 		<dict>
 			<key>xpos</key>
-			<integer>210</integer>
+			<integer>285</integer>
 			<key>ypos</key>
-			<integer>1385</integer>
-		</dict>
-		<key>5F6E4E5A-1035-498B-A2CF-B7E3ACB85009</key>
-		<dict>
-			<key>xpos</key>
-			<integer>45</integer>
-			<key>ypos</key>
-			<integer>2875</integer>
-		</dict>
-		<key>60353C96-9D07-4EF6-B8AB-FA8EC4EF2236</key>
-		<dict>
-			<key>xpos</key>
-			<integer>210</integer>
-			<key>ypos</key>
-			<integer>1165</integer>
+			<integer>3140</integer>
 		</dict>
 		<key>62D2A392-2CB1-4089-A999-3891C657E06E</key>
 		<dict>
 			<key>xpos</key>
-			<integer>1250</integer>
+			<integer>1280</integer>
 			<key>ypos</key>
-			<integer>3455</integer>
+			<integer>2405</integer>
 		</dict>
 		<key>64829D2F-3DDE-46EC-BE53-F60150D38CEA</key>
 		<dict>
@@ -4796,42 +4753,21 @@ rename by iconmu from the Noun Project</string>
 			<key>ypos</key>
 			<integer>170</integer>
 		</dict>
-		<key>69D5C481-E826-498C-A9CC-549AE2815D10</key>
-		<dict>
-			<key>xpos</key>
-			<integer>45</integer>
-			<key>ypos</key>
-			<integer>3075</integer>
-		</dict>
 		<key>6A38E5F0-BA4E-466F-A8A9-5C19AE3898E9</key>
 		<dict>
-			<key>xpos</key>
-			<integer>790</integer>
-			<key>ypos</key>
-			<integer>3400</integer>
-		</dict>
-		<key>6A4A2D1D-0087-4112-8D83-7BD1C4886CBB</key>
-		<dict>
-			<key>xpos</key>
-			<integer>285</integer>
-			<key>ypos</key>
-			<integer>2175</integer>
-		</dict>
-		<key>6BA4C470-B64F-4BE2-9346-38ADACABCCBA</key>
-		<dict>
-			<key>xpos</key>
-			<integer>625</integer>
-			<key>ypos</key>
-			<integer>2575</integer>
-		</dict>
-		<key>6D7ED5D0-0347-46AE-81ED-D308BDF21676</key>
-		<dict>
 			<key>note</key>
-			<string>Tag selected.</string>
+			<string>Rename pin</string>
 			<key>xpos</key>
-			<integer>350</integer>
+			<integer>825</integer>
 			<key>ypos</key>
-			<integer>40</integer>
+			<integer>2380</integer>
+		</dict>
+		<key>6BE0BCA4-EBEC-4792-AC9A-33F1598B519B</key>
+		<dict>
+			<key>xpos</key>
+			<integer>650</integer>
+			<key>ypos</key>
+			<integer>1435</integer>
 		</dict>
 		<key>6DA1238D-B036-4CC7-9351-D41AF426C1A7</key>
 		<dict>
@@ -4863,6 +4799,13 @@ rename by iconmu from the Noun Project</string>
 			<key>ypos</key>
 			<integer>1855</integer>
 		</dict>
+		<key>75434858-9B72-456E-A107-4B11F87365A4</key>
+		<dict>
+			<key>xpos</key>
+			<integer>215</integer>
+			<key>ypos</key>
+			<integer>2365</integer>
+		</dict>
 		<key>75B3B3EC-5FC5-449A-A74E-A22D1D848FA7</key>
 		<dict>
 			<key>colorindex</key>
@@ -4874,6 +4817,13 @@ rename by iconmu from the Noun Project</string>
 			<key>ypos</key>
 			<integer>310</integer>
 		</dict>
+		<key>75C55403-2D3F-4415-9B06-6EC8B581E28B</key>
+		<dict>
+			<key>xpos</key>
+			<integer>45</integer>
+			<key>ypos</key>
+			<integer>3540</integer>
+		</dict>
 		<key>78C19F72-991F-47BC-85D0-E69E021AC18A</key>
 		<dict>
 			<key>xpos</key>
@@ -4881,33 +4831,12 @@ rename by iconmu from the Noun Project</string>
 			<key>ypos</key>
 			<integer>875</integer>
 		</dict>
-		<key>78C8A61E-FD70-4CD9-BEC8-66A30106E128</key>
-		<dict>
-			<key>xpos</key>
-			<integer>45</integer>
-			<key>ypos</key>
-			<integer>2975</integer>
-		</dict>
-		<key>799A5CC4-A7DB-4074-8044-ED7DBEFED12D</key>
-		<dict>
-			<key>xpos</key>
-			<integer>285</integer>
-			<key>ypos</key>
-			<integer>2875</integer>
-		</dict>
 		<key>79A98AF9-388B-42CC-9404-EBBB587B9552</key>
 		<dict>
 			<key>xpos</key>
-			<integer>1250</integer>
+			<integer>1280</integer>
 			<key>ypos</key>
-			<integer>3315</integer>
-		</dict>
-		<key>7A213534-8342-46AB-A4EA-4CCF95685833</key>
-		<dict>
-			<key>xpos</key>
-			<integer>45</integer>
-			<key>ypos</key>
-			<integer>2775</integer>
+			<integer>2265</integer>
 		</dict>
 		<key>7BF8F66E-ECC8-4BCD-86CE-5E19FD509604</key>
 		<dict>
@@ -4932,25 +4861,23 @@ rename by iconmu from the Noun Project</string>
 			<key>note</key>
 			<string>Search for a single tag to rename. Actioning a tag will prompt you for a new tag name</string>
 			<key>xpos</key>
-			<integer>315</integer>
+			<integer>45</integer>
 			<key>ypos</key>
-			<integer>3400</integer>
+			<integer>2345</integer>
 		</dict>
 		<key>7EC64322-A665-45A9-B5BA-DA84DC916495</key>
 		<dict>
 			<key>xpos</key>
-			<integer>555</integer>
+			<integer>585</integer>
 			<key>ypos</key>
-			<integer>3230</integer>
+			<integer>2180</integer>
 		</dict>
-		<key>8181252C-6CC9-4CFA-97D8-2C5097DB6AF4</key>
+		<key>7FA852D9-0250-459D-8C03-C0A5E854AFBD</key>
 		<dict>
-			<key>note</key>
-			<string>Error in openning Alfred.</string>
 			<key>xpos</key>
-			<integer>1295</integer>
+			<integer>45</integer>
 			<key>ypos</key>
-			<integer>1045</integer>
+			<integer>3240</integer>
 		</dict>
 		<key>83A73753-C3ED-430E-8B03-C57500B672AD</key>
 		<dict>
@@ -4959,6 +4886,13 @@ rename by iconmu from the Noun Project</string>
 			<key>ypos</key>
 			<integer>470</integer>
 		</dict>
+		<key>8A326A12-2E76-46CD-9D4D-CCBDC541843B</key>
+		<dict>
+			<key>xpos</key>
+			<integer>625</integer>
+			<key>ypos</key>
+			<integer>3040</integer>
+		</dict>
 		<key>8CD4D7F7-49EA-44FF-878E-18B836627810</key>
 		<dict>
 			<key>xpos</key>
@@ -4966,12 +4900,19 @@ rename by iconmu from the Noun Project</string>
 			<key>ypos</key>
 			<integer>1755</integer>
 		</dict>
-		<key>8FBE3EBB-9672-493C-977C-95B832412F2E</key>
+		<key>8D96E594-674B-4824-8C2F-701018343534</key>
 		<dict>
 			<key>xpos</key>
 			<integer>45</integer>
 			<key>ypos</key>
-			<integer>2275</integer>
+			<integer>2940</integer>
+		</dict>
+		<key>916E330D-1693-4400-BBAE-51BBCB00F3A1</key>
+		<dict>
+			<key>xpos</key>
+			<integer>285</integer>
+			<key>ypos</key>
+			<integer>2940</integer>
 		</dict>
 		<key>917EC178-CADB-4DD0-B8B4-B3D7F7685BBC</key>
 		<dict>
@@ -4987,16 +4928,9 @@ rename by iconmu from the Noun Project</string>
 		<key>91C5E428-1419-446C-8775-1F8C8D8322B0</key>
 		<dict>
 			<key>xpos</key>
-			<integer>975</integer>
+			<integer>1015</integer>
 			<key>ypos</key>
-			<integer>3420</integer>
-		</dict>
-		<key>93A64ECE-BB64-492B-B845-7CB85B544D40</key>
-		<dict>
-			<key>xpos</key>
-			<integer>45</integer>
-			<key>ypos</key>
-			<integer>2575</integer>
+			<integer>2400</integer>
 		</dict>
 		<key>988D1146-585C-4DC6-A56B-B303B9A3F173</key>
 		<dict>
@@ -5005,26 +4939,12 @@ rename by iconmu from the Noun Project</string>
 			<key>ypos</key>
 			<integer>190</integer>
 		</dict>
-		<key>9BDBE952-A169-4051-923A-0D980680261F</key>
-		<dict>
-			<key>xpos</key>
-			<integer>1120</integer>
-			<key>ypos</key>
-			<integer>2195</integer>
-		</dict>
 		<key>9CB57748-F1F2-4665-A7E0-55B546C50C77</key>
 		<dict>
 			<key>xpos</key>
-			<integer>605</integer>
+			<integer>480</integer>
 			<key>ypos</key>
-			<integer>3400</integer>
-		</dict>
-		<key>A156743D-A9BB-4AFB-A0C2-D16EF45F7DD0</key>
-		<dict>
-			<key>xpos</key>
-			<integer>285</integer>
-			<key>ypos</key>
-			<integer>2575</integer>
+			<integer>2360</integer>
 		</dict>
 		<key>A1AB9903-87A7-4041-8EB9-F9E9C06C451B</key>
 		<dict>
@@ -5054,44 +4974,23 @@ rename by iconmu from the Noun Project</string>
 		<key>A853102A-C6D7-49DB-9E51-DA57D84A095A</key>
 		<dict>
 			<key>xpos</key>
-			<integer>520</integer>
+			<integer>395</integer>
 			<key>ypos</key>
-			<integer>3430</integer>
-		</dict>
-		<key>A8EE818C-427B-476F-93FD-02825231464B</key>
-		<dict>
-			<key>xpos</key>
-			<integer>45</integer>
-			<key>ypos</key>
-			<integer>2375</integer>
+			<integer>2390</integer>
 		</dict>
 		<key>AB0E9CB1-D5D1-483E-B88C-DAC90C702C41</key>
 		<dict>
 			<key>xpos</key>
-			<integer>315</integer>
+			<integer>165</integer>
 			<key>ypos</key>
-			<integer>3610</integer>
+			<integer>2510</integer>
 		</dict>
-		<key>ACED2549-3532-4ECC-9709-96679199529D</key>
+		<key>B9AD3842-CE4A-4395-9CC2-82260B106DF4</key>
 		<dict>
 			<key>xpos</key>
-			<integer>285</integer>
+			<integer>45</integer>
 			<key>ypos</key>
-			<integer>2675</integer>
-		</dict>
-		<key>B923DEE5-E806-4A3B-86C0-B2ADBBA123E0</key>
-		<dict>
-			<key>xpos</key>
-			<integer>1050</integer>
-			<key>ypos</key>
-			<integer>2620</integer>
-		</dict>
-		<key>BAD58837-06A2-45EE-8991-1349D183E5E8</key>
-		<dict>
-			<key>xpos</key>
-			<integer>285</integer>
-			<key>ypos</key>
-			<integer>3075</integer>
+			<integer>3340</integer>
 		</dict>
 		<key>BBFBAB3B-9592-48EF-9E70-3DDF3303690D</key>
 		<dict>
@@ -5109,13 +5008,6 @@ rename by iconmu from the Noun Project</string>
 			<key>ypos</key>
 			<integer>410</integer>
 		</dict>
-		<key>BD868971-C272-43FC-B20B-1C5471C1EBC1</key>
-		<dict>
-			<key>xpos</key>
-			<integer>45</integer>
-			<key>ypos</key>
-			<integer>2475</integer>
-		</dict>
 		<key>BFD4441D-1EB3-4F5E-9E04-96678AD399E9</key>
 		<dict>
 			<key>xpos</key>
@@ -5123,56 +5015,26 @@ rename by iconmu from the Noun Project</string>
 			<key>ypos</key>
 			<integer>1135</integer>
 		</dict>
-		<key>C1E87F32-A676-401C-A330-9A305B928E8E</key>
+		<key>C014F87B-6FD0-4F58-96A2-92B09A4086FE</key>
 		<dict>
 			<key>xpos</key>
-			<integer>1070</integer>
+			<integer>45</integer>
 			<key>ypos</key>
-			<integer>835</integer>
+			<integer>2740</integer>
+		</dict>
+		<key>C03A39F5-E473-4AC0-8DFF-25A058F60C5C</key>
+		<dict>
+			<key>xpos</key>
+			<integer>30</integer>
+			<key>ypos</key>
+			<integer>3915</integer>
 		</dict>
 		<key>C2C3C705-A4E7-44AB-BB2B-46F35B1A8E0E</key>
 		<dict>
 			<key>xpos</key>
-			<integer>445</integer>
+			<integer>375</integer>
 			<key>ypos</key>
 			<integer>805</integer>
-		</dict>
-		<key>C4A2975E-14BF-4A7E-B3C0-60384A4AB5A1</key>
-		<dict>
-			<key>xpos</key>
-			<integer>285</integer>
-			<key>ypos</key>
-			<integer>2975</integer>
-		</dict>
-		<key>C4C3FAC9-E038-44BB-8345-7A89E39F8EDE</key>
-		<dict>
-			<key>xpos</key>
-			<integer>210</integer>
-			<key>ypos</key>
-			<integer>920</integer>
-		</dict>
-		<key>C51D6351-6D3A-40C7-821C-C02D35C92332</key>
-		<dict>
-			<key>xpos</key>
-			<integer>290</integer>
-			<key>ypos</key>
-			<integer>1125</integer>
-		</dict>
-		<key>C6A1B854-359E-4D50-9081-56FEAEFC8CBC</key>
-		<dict>
-			<key>note</key>
-			<string>Success in openning Alfred.</string>
-			<key>xpos</key>
-			<integer>1295</integer>
-			<key>ypos</key>
-			<integer>1165</integer>
-		</dict>
-		<key>C79DF9E2-8026-4F82-B31C-BCD0D4AFCE20</key>
-		<dict>
-			<key>xpos</key>
-			<integer>285</integer>
-			<key>ypos</key>
-			<integer>2275</integer>
 		</dict>
 		<key>CDFD158D-8C5A-459F-9164-A4FBF4C9E314</key>
 		<dict>
@@ -5199,44 +5061,47 @@ rename by iconmu from the Noun Project</string>
 			<key>ypos</key>
 			<integer>1995</integer>
 		</dict>
-		<key>D91FD9FE-14F6-4291-8478-11A126B03BD0</key>
+		<key>D628D994-1BDE-4B90-89A6-19287F0AB363</key>
 		<dict>
-			<key>note</key>
-			<string>Upgrade selected.</string>
 			<key>xpos</key>
-			<integer>290</integer>
+			<integer>210</integer>
 			<key>ypos</key>
-			<integer>1325</integer>
+			<integer>895</integer>
 		</dict>
-		<key>DA27F20C-DD88-4FCB-A665-CD66BFF2761D</key>
+		<key>E093D14C-64A4-4D4F-9D61-50FA6974204B</key>
 		<dict>
 			<key>xpos</key>
 			<integer>285</integer>
 			<key>ypos</key>
-			<integer>2375</integer>
-		</dict>
-		<key>E0487C9A-022A-4894-8CE6-F2B54684C7D2</key>
-		<dict>
-			<key>note</key>
-			<string>Error in deleting.</string>
-			<key>xpos</key>
-			<integer>690</integer>
-			<key>ypos</key>
-			<integer>1385</integer>
+			<integer>3240</integer>
 		</dict>
 		<key>E269A06C-1525-47CC-9700-2E6CD335FA63</key>
 		<dict>
 			<key>xpos</key>
-			<integer>310</integer>
+			<integer>165</integer>
 			<key>ypos</key>
-			<integer>3230</integer>
+			<integer>2180</integer>
 		</dict>
-		<key>E27BB22A-56EB-4D38-9725-99555F0EB6D1</key>
+		<key>E5B0BAE1-FE98-4828-9D22-728EA77FCF47</key>
+		<dict>
+			<key>xpos</key>
+			<integer>295</integer>
+			<key>ypos</key>
+			<integer>70</integer>
+		</dict>
+		<key>E8B55F7A-B05E-4099-9607-A79E01B06FD8</key>
 		<dict>
 			<key>xpos</key>
 			<integer>285</integer>
 			<key>ypos</key>
-			<integer>2775</integer>
+			<integer>2640</integer>
+		</dict>
+		<key>E9FC9061-CE38-46EA-8919-604B8DC67453</key>
+		<dict>
+			<key>xpos</key>
+			<integer>285</integer>
+			<key>ypos</key>
+			<integer>3540</integer>
 		</dict>
 		<key>EA97375D-329E-4A06-8BBF-FBF7329AA9CC</key>
 		<dict>
@@ -5254,24 +5119,6 @@ rename by iconmu from the Noun Project</string>
 			<key>ypos</key>
 			<integer>1845</integer>
 		</dict>
-		<key>ED8A8F0C-7FA1-4861-8FB7-76C5FAE4E673</key>
-		<dict>
-			<key>note</key>
-			<string>Upgrade selected.</string>
-			<key>xpos</key>
-			<integer>350</integer>
-			<key>ypos</key>
-			<integer>120</integer>
-		</dict>
-		<key>EE0705F1-36FB-49F6-AA24-3BA82965A14C</key>
-		<dict>
-			<key>note</key>
-			<string>Upgrade selected.</string>
-			<key>xpos</key>
-			<integer>290</integer>
-			<key>ypos</key>
-			<integer>1215</integer>
-		</dict>
 		<key>EF1102C5-4180-496A-A4AF-1FDB7C59D7EE</key>
 		<dict>
 			<key>note</key>
@@ -5284,7 +5131,7 @@ rename by iconmu from the Noun Project</string>
 		<key>F20CC730-E792-4A3E-9C0D-84F0EB1A8816</key>
 		<dict>
 			<key>xpos</key>
-			<integer>370</integer>
+			<integer>365</integer>
 			<key>ypos</key>
 			<integer>1125</integer>
 		</dict>
@@ -5305,15 +5152,6 @@ rename by iconmu from the Noun Project</string>
 			<integer>660</integer>
 			<key>ypos</key>
 			<integer>940</integer>
-		</dict>
-		<key>F55B41C7-8CBF-4F98-B7C5-9EB468713A5D</key>
-		<dict>
-			<key>note</key>
-			<string>Error in downloading.</string>
-			<key>xpos</key>
-			<integer>1190</integer>
-			<key>ypos</key>
-			<integer>775</integer>
 		</dict>
 		<key>F7728DC2-A69E-415A-8833-57B85C8F54A8</key>
 		<dict>
