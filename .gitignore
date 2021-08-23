@@ -7,3 +7,4 @@ auth_token.txt
 build.log
 AlfredPinboardRust.alfredworkflow
 Cargo.toml.back
+run_exec.sh
