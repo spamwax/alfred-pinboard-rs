@@ -6,9 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Added
-Use a new fuzzy search engine.
+- Use a new fuzzy search engine.
+- Tag renaming and bookmark deletion through Universal Actions.
+
 ### Changed
-Add Urls to default search when tag_only is false
+- Add Urls to default search when tag_only is false
+- Don't show 'you have latest version' unless user checks for update.
+- Use conditional objects in workflow's canvas.
 
 ## [0.15.14] - 2020-07-19
 ### Added
