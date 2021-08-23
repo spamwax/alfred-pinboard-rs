@@ -38,10 +38,8 @@ impl<'api, 'pin> Runner<'api, 'pin> {
         let mut output_items = items.into_iter().collect::<Vec<alfred::Item>>();
 
         let update_item = self.get_upgrade_item();
-        if let Ok(item) = update_item {
-            if let Some(item) = item {
-                output_items.push(item);
-            }
+        if let Ok(Some(item)) = update_item {
+            output_items.push(item);
         } else {
             error!(
                 "Error checking for workflow updates: {:?}",
