@@ -22,8 +22,7 @@ run_tests() {
         x86_64-apple-darwin)
             $runner config --authorization "${PINBOARD_TOKEN}"
             $runner config -d
-            $runner self -c
-            $runner self -d
+            $runner update
             ;;
         x86_64-unknown-linux-gnu)
             ls -ld "$alfred_workflow_data"
@@ -31,9 +30,8 @@ run_tests() {
             chown -R "$USER":"$USER" "$alfred_workflow_data"
 
             $runner config --authorization "${PINBOARD_TOKEN}"
-            $runner self -c
-            $runner self -d
             $runner config -d
+            $runner update
             unset alfred_debug
             $runner config -d | .circleci/json_pretty.sh
             ;;
