@@ -27,6 +27,7 @@ echo "Building new release..."
 cd "$alfred_pinboard_rs" || exit
 
 # Bump Cargo.toml version
+echo "Bumping Cargo.toml version to $version_tag"
 python res/fix_cargo_version.py "$version_tag"
 cargo build --release > build.log 2>&1
 
