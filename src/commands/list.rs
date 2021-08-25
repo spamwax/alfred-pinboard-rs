@@ -10,13 +10,20 @@ impl<'api, 'pin> Runner<'api, 'pin> {
             SubCommand::List {
                 tags,
                 suggest,
+                no_existing_page,
                 query,
-            } => self.process(tags, suggest, query),
+            } => self.process(tags, suggest, no_existing_page, query),
             _ => unreachable!(),
         }
     }
 
-    fn process(&self, tags: bool, suggest: Option<bool>, q: Option<String>) {
+    fn process(
+        &self,
+        tags: bool,
+        suggest: Option<bool>,
+        no_existing_page: bool,
+        q: Option<String>,
+    ) {
         debug!("Starting in list::process");
         let config = self.config.as_ref().unwrap();
         let pinboard = self.pinboard.as_ref().unwrap();
@@ -148,7 +155,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                         .collect::<Vec<Item>>();
                 }
             }
-            if config.page_is_bookmarked && is_page_bookmarked(pinboard) {
+            if !no_existing_page && config.page_is_bookmarked && is_page_bookmarked(pinboard) {
                 let bookmark_present = ItemBuilder::new("You already have the bookmark!")
                     .icon_path("bookmark-delete.png")
                     .into_item();

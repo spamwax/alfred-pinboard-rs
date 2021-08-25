@@ -79,6 +79,9 @@ pub enum SubCommand {
         /// Optional query word used to narrow the output list.
         /// Only works with --tags option! To narrow down bookmarks, use `search` sub-command
         query: Option<String>,
+        /// Do not check if current page is bookmarked. Useful when renaming tags.
+        #[structopt(short = "n", long = "no-existing-page")]
+        no_existing_page: bool,
     },
     #[structopt(name = "post")]
     /// Creates a bookmark for the current page of the active browser.
