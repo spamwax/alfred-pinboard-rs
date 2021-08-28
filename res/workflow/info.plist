@@ -87,6 +87,8 @@
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
+				<key>sourceoutputuid</key>
+				<string>F297117C-7809-4B56-AAC4-4D41F1E670E8</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -97,8 +99,6 @@
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
-				<key>sourceoutputuid</key>
-				<string>F297117C-7809-4B56-AAC4-4D41F1E670E8</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -1490,8 +1490,7 @@ fi</string>
 				<key>runningsubtext</key>
 				<string>Fetching tags...</string>
 				<key>script</key>
-				<string>
-apr_execution_counter=$((apr_execution_counter + 1))
+				<string>apr_execution_counter=$((apr_execution_counter + 1))
 
 
 apr_execution_counter=$apr_execution_counter ./alfred-pinboard-rs list -t "$1"</string>
@@ -2317,26 +2316,6 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argument</key>
-				<string></string>
-				<key>passthroughargument</key>
-				<false/>
-				<key>variables</key>
-				<dict>
-					<key>selected_tag</key>
-					<string>{query}</string>
-				</dict>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.argument</string>
-			<key>uid</key>
-			<string>F20CC730-E792-4A3E-9C0D-84F0EB1A8816</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -2383,7 +2362,7 @@ fi</string>
 				<key>runningsubtext</key>
 				<string>Fetching tags...</string>
 				<key>script</key>
-				<string>./alfred-pinboard-rs list --suggest false -t "$1"</string>
+				<string>./alfred-pinboard-rs list --suggest false --no-existing-page -t "$1"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -2415,22 +2394,42 @@ fi</string>
 						<key>matchcasesensitive</key>
 						<true/>
 						<key>matchmode</key>
-						<integer>1</integer>
+						<integer>0</integer>
 						<key>matchstring</key>
 						<string>1</string>
 						<key>outputlabel</key>
-						<string>Tag selected</string>
+						<string>Upgrade selected</string>
 						<key>uid</key>
 						<string>F297117C-7809-4B56-AAC4-4D41F1E670E8</string>
 					</dict>
 				</array>
 				<key>elselabel</key>
-				<string>Upgrade selected</string>
+				<string>Tag selected</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.conditional</string>
 			<key>uid</key>
 			<string>06DBC5EF-0036-44CE-8BAF-D8C097CD31DD</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>selected_tag</key>
+					<string>{query}</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>F20CC730-E792-4A3E-9C0D-84F0EB1A8816</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -3075,15 +3074,15 @@ echo $r</string>
 				<key>runningsubtext</key>
 				<string>Fetching tags...</string>
 				<key>script</key>
-				<string>./alfred-pinboard-rs list --suggest false -t "$1"</string>
+				<string>./alfred-pinboard-rs --query-as-item list --no-existing-page --suggest false -t "$1"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
 				<string></string>
 				<key>subtext</key>
-				<string>to show all related bookmarks for</string>
+				<string>Select a tag to rename</string>
 				<key>title</key>
-				<string>Find a tag</string>
+				<string>Rename Tag</string>
 				<key>type</key>
 				<integer>0</integer>
 				<key>withspace</key>
@@ -3122,7 +3121,7 @@ echo $r</string>
 				<key>runningsubtext</key>
 				<string>Fetching tags...</string>
 				<key>script</key>
-				<string>./alfred-pinboard-rs list --suggest false -t "$1"</string>
+				<string>./alfred-pinboard-rs --query-as-item list --no-existing-page --suggest false -t "$1"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -5130,7 +5129,7 @@ rename by iconmu from the Noun Project</string>
 			<key>xpos</key>
 			<integer>365</integer>
 			<key>ypos</key>
-			<integer>1125</integer>
+			<integer>1185</integer>
 		</dict>
 		<key>F495558F-7866-454F-B070-80417D1419B6</key>
 		<dict>
@@ -5161,7 +5160,7 @@ rename by iconmu from the Noun Project</string>
 		</dict>
 	</dict>
 	<key>version</key>
-	<string>0.16.2</string>
+	<string>0.16.3</string>
 	<key>webaddress</key>
 	<string>https://github.com/spamwax/alfred-pinboard-rs</string>
 </dict>
