@@ -180,7 +180,7 @@ fn main() {
                     runner.update_cache();
                 }
                 SubCommand::List { .. } => {
-                    runner.list(opt.cmd);
+                    runner.list(opt);
                 }
                 SubCommand::Search { .. } => {
                     runner.search(opt.cmd);

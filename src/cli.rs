@@ -4,6 +4,9 @@
 pub struct Opt {
     #[structopt(name = "debug", default_value = "0", long = "debug")]
     pub debug_level: i8,
+    /// Show exact user query at the top of Alfred's item list
+    #[structopt(name = "query-as-item", short = "q", long = "query-as-item")]
+    pub query_as_item: bool,
     #[structopt(subcommand)]
     pub cmd: SubCommand,
 }

@@ -1,18 +1,22 @@
 use super::*;
 use std::{thread, time};
+use Opt;
 
 use alfred::{Item, ItemBuilder, Modifier};
 use alfred_rs::Data;
 
 impl<'api, 'pin> Runner<'api, 'pin> {
-    pub fn list(&self, cmd: SubCommand) {
+    // pub fn list(&self, cmd: SubCommand) {
+    pub fn list(&self, opt: Opt) {
+        let cmd = opt.cmd;
+        let query_item = opt.query_as_item;
         match cmd {
             SubCommand::List {
                 tags,
                 suggest,
                 no_existing_page,
                 query,
-            } => self.process(tags, suggest, no_existing_page, query),
+            } => self.process(tags, suggest, no_existing_page, query_item, query),
             _ => unreachable!(),
         }
     }
@@ -22,6 +26,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
         tags: bool,
         suggest: Option<bool>,
         no_existing_page: bool,
+        query_item: bool,
         q: Option<String>,
     ) {
         debug!("Starting in list::process");
@@ -103,28 +108,52 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                     // No result means, we couldn't find a tag using the given query
                     // Some result mean we found tags even though the query was empty as
                     // search_list_of_tags returns all tags for empty queries.
+                    last_query_word_tag = Tag::new((*last_query_word).to_string(), 0).set_new();
+                    let filter_idx;
                     let items = match results {
                         Some(i) => {
                             debug!("Found {} tags.", i.len());
+                            // If user input matches a tag, we will show it as first item
+                            if let Some(idx) = i.iter().position(|t| &t.0 == last_query_word) {
+                                popular_tags.insert(0, i[idx].clone());
+                                filter_idx = Some(idx);
+                            } else {
+                                // Otherwise we will show the tag with highest frequency matching user
+                                // input before popular/suggested tags, unless --query-as-item is set
+                                // in which case we create an alfred item with what user has typed
+                                if query_item {
+                                    popular_tags.insert(0, last_query_word_tag);
+                                    filter_idx = None;
+                                } else {
+                                    popular_tags.insert(0, i[0].clone());
+                                    filter_idx = Some(0);
+                                }
+                            }
                             i
                         }
                         None => {
                             assert!(!query_words.is_empty());
                             debug!("Didn't find any tag for `{}`", last_query_word);
-                            last_query_word_tag =
-                                Tag::new((*last_query_word).to_string(), 0).set_new();
+                            filter_idx = None;
                             vec![&last_query_word_tag]
                         }
                     };
                     let prev_tags_len = prev_tags.len();
-                    // Show the tag with highest frequency matching the last query before popular/suggested tags.
-                    popular_tags.insert(0, items[0].clone());
                     alfred_items = popular_tags
                         .iter()
+                        .enumerate()
                         // Combine popular tags and returned tags from cache
-                        .chain(items.into_iter().skip(1).take(config.tags_to_show as usize))
+                        .chain(
+                            items
+                                .into_iter()
+                                .enumerate()
+                                .filter(|&(idx, _)| {
+                                    filter_idx.is_none() || idx != filter_idx.unwrap()
+                                })
+                                .take(config.tags_to_show as usize),
+                        )
                         // Remove tags that user has already selected
-                        .filter(|tag| {
+                        .filter(|&(_, tag)| {
                             if !query_words.is_empty() {
                                 let upper = query_words.len() - 1;
                                 !query_words.as_slice()[0..upper]
@@ -135,7 +164,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                             }
                         })
                         // transform tags to Alfred items
-                        .map(|tag| {
+                        .map(|(_, tag)| {
                             let mut _args = String::with_capacity(prev_tags_len + tag.0.len());
                             _args.push_str(prev_tags);
                             _args.push_str(&tag.0);
