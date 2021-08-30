@@ -146,10 +146,20 @@ pub enum SubCommand {
         #[structopt(name = "show-only-url", long = "show-only-url", short = "U")]
         showonlyurl: bool,
 
+        /// Find pins that have a tag exactly matching the given query.\n
+        /// 'query' must be only one word.
+        /// Cannot be used with othe flags: -t -T -d -u
+        #[structopt(
+            name = "exact-tag",
+            long = "exact-tag",
+            short = "e",
+            conflicts_with_all(&["tags", "title", "description", "url"]))]
+        exacttag: bool,
+
         /// Query string to look for in all fields of bookmarks, unless modified by -t, -T or -u
         /// flags (space delimited). Bookmarks that have all of query strings will be
         /// returned.
-        #[structopt(name = "query")]
+        #[structopt(name = "query", required = true)]
         query: Vec<String>,
     },
 

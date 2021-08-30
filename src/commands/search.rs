@@ -17,45 +17,56 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                 description,
                 url,
                 showonlyurl,
+                exacttag,
                 query,
             } => {
                 info!("query: {:?}", query);
-                let mut search_fields = vec![];
-                if tags {
-                    search_fields.push(SearchType::TagOnly);
-                }
-                if title {
-                    search_fields.push(SearchType::TitleOnly);
-                }
-                if url {
-                    search_fields.push(SearchType::UrlOnly);
-                }
-                if description {
-                    search_fields.push(SearchType::DescriptionOnly);
-                }
-                // If user is not asking explicitly for search fields, then search based on
-                // configuration set by user
-                if search_fields.is_empty() {
-                    if self.config.as_ref().unwrap().tag_only_search {
-                        search_fields.push(SearchType::TagOnly);
-                    } else {
-                        search_fields = vec![
-                            SearchType::TagOnly,
-                            SearchType::TitleOnly,
-                            SearchType::DescriptionOnly,
-                            SearchType::UrlOnly,
-                        ];
-                    }
-                }
-                debug!("search fields: {:?}", search_fields);
                 let pins_to_show = self.config.as_ref().unwrap().pins_to_show;
                 let url_vs_tags = self.config.as_ref().unwrap().show_url_vs_tags;
                 let pinboard = self.pinboard.as_ref().unwrap();
-
                 let user_query = query.join(" ");
                 let variables = vec![("user_query", user_query.as_str())];
 
-                let items = process(query, &search_fields, pins_to_show, url_vs_tags, pinboard);
+                let mut search_fields = vec![];
+                // figure out which fields to search if user is not after an exact tag.
+                if !exacttag {
+                    if tags {
+                        search_fields.push(SearchType::TagOnly);
+                    }
+                    if title {
+                        search_fields.push(SearchType::TitleOnly);
+                    }
+                    if url {
+                        search_fields.push(SearchType::UrlOnly);
+                    }
+                    if description {
+                        search_fields.push(SearchType::DescriptionOnly);
+                    }
+                    // If user is not asking explicitly for search fields, then search based on
+                    // configuration set by user
+                    if search_fields.is_empty() {
+                        if self.config.as_ref().unwrap().tag_only_search {
+                            search_fields.push(SearchType::TagOnly);
+                        } else {
+                            search_fields = vec![
+                                SearchType::TagOnly,
+                                SearchType::TitleOnly,
+                                SearchType::DescriptionOnly,
+                                SearchType::UrlOnly,
+                            ];
+                        }
+                    }
+                    debug!("search fields: {:?}", search_fields);
+                }
+
+                let items = process(
+                    query,
+                    &search_fields,
+                    exacttag,
+                    pins_to_show,
+                    url_vs_tags,
+                    pinboard,
+                );
                 if showonlyurl {
                     for item in items {
                         io::stdout()
@@ -82,12 +93,22 @@ impl<'api, 'pin> Runner<'api, 'pin> {
 fn process<'a>(
     query: Vec<String>,
     search_fields: &[SearchType],
+    exacttag: bool,
     pins_to_show: u8,
     url_vs_tags: bool,
     pinboard: &'a Pinboard<'a, 'a>,
 ) -> Vec<Item<'a>> {
     debug!("Starting in search::process");
-    match pinboard.search(&query, search_fields) {
+    assert!(!query.is_empty());
+    let r = if exacttag {
+        debug!("finding all pins having exact tag: {}", query[0]);
+        pinboard.find_tag(query[0].as_str())
+    } else {
+        debug!("searching for pins containing all of {:?}", &query);
+        pinboard.search(&query, search_fields)
+    };
+    // match pinboard.search(&query, search_fields) {
+    match r {
         Err(e) => vec![crate::alfred_error_item(e.to_string())],
         Ok(r) => {
             match r {
