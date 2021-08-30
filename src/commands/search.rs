@@ -100,6 +100,7 @@ fn process<'a>(
 ) -> Vec<Item<'a>> {
     debug!("Starting in search::process");
     assert!(!query.is_empty());
+
     let r = if exacttag {
         debug!("finding all pins having exact tag: {}", query[0]);
         pinboard.find_tag(query[0].as_str())
@@ -107,7 +108,7 @@ fn process<'a>(
         debug!("searching for pins containing all of {:?}", &query);
         pinboard.search(&query, search_fields)
     };
-    // match pinboard.search(&query, search_fields) {
+
     match r {
         Err(e) => vec![crate::alfred_error_item(e.to_string())],
         Ok(r) => {
