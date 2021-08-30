@@ -6,10 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.16.3] - 2021-08-28
+## [0.16.4] - 2021-08-29
 ### Added
 - Add -e flag to search command to find pins with exact tags
 
+## [0.16.3] - 2021-08-28
 ### Added
 - Use --query-as-item global flag to always add an Alfred item based on user's exact entry.
 - Alwyas show a tag that exactly matches user's input at the top of list.

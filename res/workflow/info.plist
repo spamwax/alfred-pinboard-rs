@@ -167,31 +167,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>195FDA64-D570-4C23-9B04-E319CC539797</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>79A98AF9-388B-42CC-9404-EBBB587B9552</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>sourceoutputuid</key>
-				<string>D096E4C0-009F-4519-99F5-7CD1BB569F37</string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>62D2A392-2CB1-4089-A999-3891C657E06E</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>1A981B9B-5BEE-491E-A897-46DF38627688</key>
 		<array>
 			<dict>
@@ -540,6 +515,16 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
+				<string>F7728DC2-A69E-415A-8833-57B85C8F54A8</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>51B3C295-B9CD-44D4-B1D3-19038C54735B</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -764,19 +749,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>7EC64322-A665-45A9-B5BA-DA84DC916495</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>195FDA64-D570-4C23-9B04-E319CC539797</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>7FA852D9-0250-459D-8C03-C0A5E854AFBD</key>
 		<array>
 			<dict>
@@ -846,7 +818,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>79A98AF9-388B-42CC-9404-EBBB587B9552</string>
+				<string>5D22F26C-5A6A-4D18-B1F9-1158B8075764</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -858,7 +830,7 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>62D2A392-2CB1-4089-A999-3891C657E06E</string>
+				<string>282CD8F9-1BEE-4B7D-A72C-94D7CBA13073</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -1141,7 +1113,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>7EC64322-A665-45A9-B5BA-DA84DC916495</string>
+				<string>A2481ADE-0AF6-4C3D-8E9B-E389206CD571</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -1899,6 +1871,25 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>{query}</string>
+				<key>utf8</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>C2C3C705-A4E7-44AB-BB2B-46F35B1A8E0E</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -1914,25 +1905,6 @@ fi</string>
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
 			<string>6DA1238D-B036-4CC7-9351-D41AF426C1A7</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>{query}</string>
-				<key>utf8</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>C2C3C705-A4E7-44AB-BB2B-46F35B1A8E0E</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -2262,7 +2234,7 @@ fi</string>
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>./alfred-pinboard-rs search --tags "$selected_tag"</string>
+				<string>./alfred-pinboard-rs search --exact-tag "$selected_tag"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -2618,6 +2590,27 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>acceptsfiles</key>
+				<false/>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>acceptstext</key>
+				<false/>
+				<key>acceptsurls</key>
+				<true/>
+				<key>name</key>
+				<string>Delete Pinboard Bookmark</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.universalaction</string>
+			<key>uid</key>
+			<string>E269A06C-1525-47CC-9700-2E6CD335FA63</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
@@ -2633,35 +2626,6 @@ fi</string>
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>2DFDAFE5-6A0E-4E95-A1C5-30789A06C27C</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.junction</string>
-			<key>uid</key>
-			<string>CDFD158D-8C5A-459F-9164-A4FBF4C9E314</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>👍</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>5D22F26C-5A6A-4D18-B1F9-1158B8075764</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -2683,6 +2647,35 @@ fi</string>
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>8CD4D7F7-49EA-44FF-878E-18B836627810</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>CDFD158D-8C5A-459F-9164-A4FBF4C9E314</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>👍</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>5D22F26C-5A6A-4D18-B1F9-1158B8075764</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -2810,7 +2803,7 @@ fi</string>
 					</dict>
 				</array>
 				<key>elselabel</key>
-				<string>Show result</string>
+				<string>Error</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.conditional</string>
@@ -2947,102 +2940,6 @@ fi</string>
 			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
 			<string>1B9D717F-FF2E-4913-8B69-A0AABB904100</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>r=$(./alfred-pinboard-rs delete --url $1)
-echo $r</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>7EC64322-A665-45A9-B5BA-DA84DC916495</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>acceptsfiles</key>
-				<false/>
-				<key>acceptsmulti</key>
-				<integer>0</integer>
-				<key>acceptstext</key>
-				<false/>
-				<key>acceptsurls</key>
-				<true/>
-				<key>name</key>
-				<string>Delete Pinboard Bookmark</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.universalaction</string>
-			<key>uid</key>
-			<string>E269A06C-1525-47CC-9700-2E6CD335FA63</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string>{query}</string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>4</integer>
-						<key>matchstring</key>
-						<string>Successfully deleted bookmark.*</string>
-						<key>outputlabel</key>
-						<string>Deletion Successful</string>
-						<key>uid</key>
-						<string>D096E4C0-009F-4519-99F5-7CD1BB569F37</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string>Error in Deleting</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
-			<key>uid</key>
-			<string>195FDA64-D570-4C23-9B04-E319CC539797</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>👍</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>79A98AF9-388B-42CC-9404-EBBB587B9552</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -3283,7 +3180,7 @@ fi</string>
 					</dict>
 				</array>
 				<key>elselabel</key>
-				<string>error</string>
+				<string>Error</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.conditional</string>
@@ -3291,35 +3188,6 @@ fi</string>
 			<string>91C5E428-1419-446C-8775-1F8C8D8322B0</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alignment</key>
-				<integer>0</integer>
-				<key>backgroundcolor</key>
-				<string></string>
-				<key>fadespeed</key>
-				<integer>0</integer>
-				<key>fillmode</key>
-				<integer>0</integer>
-				<key>font</key>
-				<string></string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>largetypetext</key>
-				<string>👎{query}</string>
-				<key>textcolor</key>
-				<string></string>
-				<key>wrapat</key>
-				<integer>50</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.largetype</string>
-			<key>uid</key>
-			<string>62D2A392-2CB1-4089-A999-3891C657E06E</string>
-			<key>version</key>
-			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -4383,7 +4251,7 @@ Detailed instructions are available at https://github.com/spamwax/alfred-pinboar
 		<key>00892451-3E5D-421F-B3ED-367DD1560720</key>
 		<dict>
 			<key>colorindex</key>
-			<integer>9</integer>
+			<integer>6</integer>
 			<key>note</key>
 			<string>Add your credentials first!</string>
 			<key>xpos</key>
@@ -4437,9 +4305,9 @@ rename by iconmu from the Noun Project</string>
 		<key>09E1138E-C990-4D9D-9AD7-047260212E20</key>
 		<dict>
 			<key>xpos</key>
-			<integer>645</integer>
+			<integer>650</integer>
 			<key>ypos</key>
-			<integer>2380</integer>
+			<integer>2300</integer>
 		</dict>
 		<key>0CFFA3F1-8C02-47C2-8A40-79AE36473506</key>
 		<dict>
@@ -4470,13 +4338,6 @@ rename by iconmu from the Noun Project</string>
 			<integer>130</integer>
 			<key>ypos</key>
 			<integer>3790</integer>
-		</dict>
-		<key>195FDA64-D570-4C23-9B04-E319CC539797</key>
-		<dict>
-			<key>xpos</key>
-			<integer>815</integer>
-			<key>ypos</key>
-			<integer>2200</integer>
 		</dict>
 		<key>1A981B9B-5BEE-491E-A897-46DF38627688</key>
 		<dict>
@@ -4546,9 +4407,9 @@ rename by iconmu from the Noun Project</string>
 		<key>2DFDAFE5-6A0E-4E95-A1C5-30789A06C27C</key>
 		<dict>
 			<key>xpos</key>
-			<integer>665</integer>
+			<integer>445</integer>
 			<key>ypos</key>
-			<integer>1635</integer>
+			<integer>1565</integer>
 		</dict>
 		<key>33781265-1653-4906-AE9E-29ACD20670DE</key>
 		<dict>
@@ -4615,6 +4476,8 @@ rename by iconmu from the Noun Project</string>
 		</dict>
 		<key>46667F34-E27E-4FBA-83B5-4A55C6FA2FD6</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>1</integer>
 			<key>note</key>
 			<string>Tries to delete bookmark for active tab of browser.</string>
 			<key>xpos</key>
@@ -4657,7 +4520,7 @@ rename by iconmu from the Noun Project</string>
 		<key>51B3C295-B9CD-44D4-B1D3-19038C54735B</key>
 		<dict>
 			<key>xpos</key>
-			<integer>660</integer>
+			<integer>700</integer>
 			<key>ypos</key>
 			<integer>1095</integer>
 		</dict>
@@ -4728,13 +4591,6 @@ rename by iconmu from the Noun Project</string>
 			<key>ypos</key>
 			<integer>3140</integer>
 		</dict>
-		<key>62D2A392-2CB1-4089-A999-3891C657E06E</key>
-		<dict>
-			<key>xpos</key>
-			<integer>1280</integer>
-			<key>ypos</key>
-			<integer>2405</integer>
-		</dict>
 		<key>64829D2F-3DDE-46EC-BE53-F60150D38CEA</key>
 		<dict>
 			<key>xpos</key>
@@ -4754,9 +4610,9 @@ rename by iconmu from the Noun Project</string>
 			<key>note</key>
 			<string>Rename pin</string>
 			<key>xpos</key>
-			<integer>825</integer>
+			<integer>920</integer>
 			<key>ypos</key>
-			<integer>2380</integer>
+			<integer>2290</integer>
 		</dict>
 		<key>6BE0BCA4-EBEC-4792-AC9A-33F1598B519B</key>
 		<dict>
@@ -4798,9 +4654,9 @@ rename by iconmu from the Noun Project</string>
 		<key>75434858-9B72-456E-A107-4B11F87365A4</key>
 		<dict>
 			<key>xpos</key>
-			<integer>215</integer>
+			<integer>200</integer>
 			<key>ypos</key>
-			<integer>2365</integer>
+			<integer>2285</integer>
 		</dict>
 		<key>75B3B3EC-5FC5-449A-A74E-A22D1D848FA7</key>
 		<dict>
@@ -4827,13 +4683,6 @@ rename by iconmu from the Noun Project</string>
 			<key>ypos</key>
 			<integer>875</integer>
 		</dict>
-		<key>79A98AF9-388B-42CC-9404-EBBB587B9552</key>
-		<dict>
-			<key>xpos</key>
-			<integer>1280</integer>
-			<key>ypos</key>
-			<integer>2265</integer>
-		</dict>
 		<key>7BF8F66E-ECC8-4BCD-86CE-5E19FD509604</key>
 		<dict>
 			<key>note</key>
@@ -4848,7 +4697,7 @@ rename by iconmu from the Noun Project</string>
 			<key>note</key>
 			<string>Update cache.</string>
 			<key>xpos</key>
-			<integer>925</integer>
+			<integer>920</integer>
 			<key>ypos</key>
 			<integer>1825</integer>
 		</dict>
@@ -4859,14 +4708,7 @@ rename by iconmu from the Noun Project</string>
 			<key>xpos</key>
 			<integer>45</integer>
 			<key>ypos</key>
-			<integer>2345</integer>
-		</dict>
-		<key>7EC64322-A665-45A9-B5BA-DA84DC916495</key>
-		<dict>
-			<key>xpos</key>
-			<integer>585</integer>
-			<key>ypos</key>
-			<integer>2180</integer>
+			<integer>2265</integer>
 		</dict>
 		<key>7FA852D9-0250-459D-8C03-C0A5E854AFBD</key>
 		<dict>
@@ -4892,9 +4734,9 @@ rename by iconmu from the Noun Project</string>
 		<key>8CD4D7F7-49EA-44FF-878E-18B836627810</key>
 		<dict>
 			<key>xpos</key>
-			<integer>665</integer>
+			<integer>445</integer>
 			<key>ypos</key>
-			<integer>1755</integer>
+			<integer>1685</integer>
 		</dict>
 		<key>8D96E594-674B-4824-8C2F-701018343534</key>
 		<dict>
@@ -4924,9 +4766,9 @@ rename by iconmu from the Noun Project</string>
 		<key>91C5E428-1419-446C-8775-1F8C8D8322B0</key>
 		<dict>
 			<key>xpos</key>
-			<integer>1015</integer>
+			<integer>1120</integer>
 			<key>ypos</key>
-			<integer>2400</integer>
+			<integer>2310</integer>
 		</dict>
 		<key>988D1146-585C-4DC6-A56B-B303B9A3F173</key>
 		<dict>
@@ -4938,9 +4780,9 @@ rename by iconmu from the Noun Project</string>
 		<key>9CB57748-F1F2-4665-A7E0-55B546C50C77</key>
 		<dict>
 			<key>xpos</key>
-			<integer>480</integer>
+			<integer>445</integer>
 			<key>ypos</key>
-			<integer>2360</integer>
+			<integer>2280</integer>
 		</dict>
 		<key>A1AB9903-87A7-4041-8EB9-F9E9C06C451B</key>
 		<dict>
@@ -4954,7 +4796,7 @@ rename by iconmu from the Noun Project</string>
 		<key>A2481ADE-0AF6-4C3D-8E9B-E389206CD571</key>
 		<dict>
 			<key>xpos</key>
-			<integer>440</integer>
+			<integer>445</integer>
 			<key>ypos</key>
 			<integer>1415</integer>
 		</dict>
@@ -4970,16 +4812,16 @@ rename by iconmu from the Noun Project</string>
 		<key>A853102A-C6D7-49DB-9E51-DA57D84A095A</key>
 		<dict>
 			<key>xpos</key>
-			<integer>395</integer>
+			<integer>375</integer>
 			<key>ypos</key>
-			<integer>2390</integer>
+			<integer>2310</integer>
 		</dict>
 		<key>AB0E9CB1-D5D1-483E-B88C-DAC90C702C41</key>
 		<dict>
 			<key>xpos</key>
-			<integer>165</integer>
+			<integer>45</integer>
 			<key>ypos</key>
-			<integer>2510</integer>
+			<integer>2450</integer>
 		</dict>
 		<key>B9AD3842-CE4A-4395-9CC2-82260B106DF4</key>
 		<dict>
@@ -4991,9 +4833,9 @@ rename by iconmu from the Noun Project</string>
 		<key>BBFBAB3B-9592-48EF-9E70-3DDF3303690D</key>
 		<dict>
 			<key>xpos</key>
-			<integer>670</integer>
+			<integer>700</integer>
 			<key>ypos</key>
-			<integer>1995</integer>
+			<integer>1990</integer>
 		</dict>
 		<key>BC2AD49B-4564-4816-B814-83431644EC9D</key>
 		<dict>
@@ -5028,9 +4870,9 @@ rename by iconmu from the Noun Project</string>
 		<key>C2C3C705-A4E7-44AB-BB2B-46F35B1A8E0E</key>
 		<dict>
 			<key>xpos</key>
-			<integer>375</integer>
+			<integer>580</integer>
 			<key>ypos</key>
-			<integer>805</integer>
+			<integer>670</integer>
 		</dict>
 		<key>CDFD158D-8C5A-459F-9164-A4FBF4C9E314</key>
 		<dict>
@@ -5050,6 +4892,8 @@ rename by iconmu from the Noun Project</string>
 		</dict>
 		<key>D5939049-C73A-4872-9625-87A9F9BE886C</key>
 		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
 			<key>note</key>
 			<string>Show current settings of workflow.</string>
 			<key>xpos</key>
@@ -5074,9 +4918,9 @@ rename by iconmu from the Noun Project</string>
 		<key>E269A06C-1525-47CC-9700-2E6CD335FA63</key>
 		<dict>
 			<key>xpos</key>
-			<integer>165</integer>
+			<integer>40</integer>
 			<key>ypos</key>
-			<integer>2180</integer>
+			<integer>1525</integer>
 		</dict>
 		<key>E5B0BAE1-FE98-4828-9D22-728EA77FCF47</key>
 		<dict>
@@ -5145,9 +4989,9 @@ rename by iconmu from the Noun Project</string>
 			<key>note</key>
 			<string>Check for workflow updates.</string>
 			<key>xpos</key>
-			<integer>660</integer>
+			<integer>700</integer>
 			<key>ypos</key>
-			<integer>940</integer>
+			<integer>920</integer>
 		</dict>
 		<key>F7728DC2-A69E-415A-8833-57B85C8F54A8</key>
 		<dict>
@@ -5160,7 +5004,7 @@ rename by iconmu from the Noun Project</string>
 		</dict>
 	</dict>
 	<key>version</key>
-	<string>0.16.3</string>
+	<string>0.16.4</string>
 	<key>webaddress</key>
 	<string>https://github.com/spamwax/alfred-pinboard-rs</string>
 </dict>
