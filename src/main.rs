@@ -60,6 +60,7 @@ use crate::commands::Runner;
 // use commands::{config, delete, list, post, search, update};
 use crate::commands::config;
 
+// TODO: Add a command to search pins that have 'toread' enabled. <01-09-21, Hamid> //
 // TODO: We need to come up with actual meaningful tests and deploy them to CIs. <23-08-21, Hamid> //
 // TODO: Always add an item that exactly reflects what user has typed. The issue is that when user
 // invokes workflow and starts typing a tag we show all tags matching the current input, this
