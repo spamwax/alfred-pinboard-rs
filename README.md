@@ -1,4 +1,4 @@
-[![CircleCI](https://img.shields.io/circleci/build/gh/spamwax/alfred-pinboard-rs.svg?logo=circleci&style=for-the-badge)](https://circleci.com/gh/spamwax/alfred-pinboard-rs)
+[![Build/Test/Release Alfred Workflow](https://github.com/spamwax/alfred-pinboard-rs/actions/workflows/macos-universal.yml/badge.svg)](https://github.com/spamwax/alfred-pinboard-rs/actions/workflows/macos-universal.yml)
  [![Build status](https://ci.appveyor.com/api/projects/status/3g5uvuocs52yc444/branch/master?svg=true)](https://ci.appveyor.com/project/spamwax/alfred-pinboard-rs/branch/master) 
 
 

@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.16.5] - 2021-08-29
+### Changed
+- Workflow bundle now contains fat binaries for x86_64 and aarch64 (apple is genius, PPC to x86 to arm)
+- Switch to github actions for CI automation
+
 ## [0.16.4] - 2021-08-29
 ### Added
 - Add -e flag to search command to find pins with exact tags
