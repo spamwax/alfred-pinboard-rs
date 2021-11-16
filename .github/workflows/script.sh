@@ -71,7 +71,6 @@ src="$GITHUB_WORKSPACE"
 stage=$(mktemp -d -t tmp)
 
 echo "$GITHUB_WORKSPACE == $GITHUB_REF_NAME"
-echo "$KOSSHER"
 if [[ "$RELEASE_COMMIT" = "true" ]]; then
     ls -lh ./target/aarch64-apple-darwin/release/alfred-pinboard-rs
     ls -lh ./target/x86_64-apple-darwin/release/alfred-pinboard-rs
