@@ -32,7 +32,7 @@ python res/fix_cargo_version.py "$version_tag"
 cargo build --release > build.log 2>&1
 
 echo "Copying resoursces from Alfred's workflow dir..."
-cp "$workflow_dir"/* "$res_dir"
+cp "$workflow_dir"/* "$res_dir" || exit
 
 echo "Copying executable to workflow's folder..."
 strip target/release/alfred-pinboard-rs
@@ -42,7 +42,7 @@ echo "Updating version in info.plist"
 # version_tag=$(git describe --tags --abbrev=0)
 defaults write "$res_dir"/info.plist version "$version_tag"
 plutil -convert xml1 "$res_dir"/info.plist
-cp "$res_dir"/info.plist "$workflow_dir"
+cp "$res_dir"/info.plist "$workflow_dir" || exit
 
 echo "Creating the workflow bundle..."
 rm -f AlfredPinboardRust.alfredworkflow
@@ -56,7 +56,7 @@ mv AlfredPinboardRust.alfredworkflow "$alfred_pinboard_rs"
 rm alfred-pinboard-rs
 
 cd "$alfred_pinboard_rs" || exit
-git add .circleci
+git add .github
 git add res/workflow
 git add res/images
 git add Cargo.toml
@@ -75,7 +75,7 @@ git commit -a -m "$commit_msg"
 git tag "$version_tag"
 
 if [ -n "$push_it" ]; then
-    git push --tags
-    sleep 5
     git push
+    sleep 5
+    git push --tags
 fi
