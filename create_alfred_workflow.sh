@@ -11,7 +11,7 @@ if [ -z "$version_tag" ]; then
 fi
 
 alfred_pinboard_rs="/Volumes/Home/hamid/src/learn/rust/alfred-pinboard-rs"
-workflow_dir="$HOME/Dropbox/Alfred/Alfred.alfredpreferences/workflows/user.workflow.BE0BAA6E-408E-40A0-AEF2-922BFAA8BBF0"
+workflow_dir="$HOME/Dropbox/Alfred/Alfred.alfredpreferences/workflows/user.workflow.99CBA55A-2010-4916-9839-3C79B3219DC2"
 res_dir="$alfred_pinboard_rs/res/workflow"
 
 git checkout master || exit
