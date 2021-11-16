@@ -1,0 +1,89 @@
+on:
+  push:
+    branches:
+      - main
+      - develop
+    tags:
+      - '*'
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+  # For quickly detecting important differences in runner configurations
+
+name: Build/Test/Release Alfred Workflow
+
+env:
+  RELEASE_COMMIT: ${{ github.ref_type == 'tag' }}
+  OSX_SDK_VERSION: 11.1
+  PINBOARD_TOKEN: ${{ secrets.PINBOARD_TOKEN }}
+  KOSSHER: ${{ secrets.KOSSHER }}
+
+jobs:
+  build_universal:
+    name: Build Universal Binary
+    runs-on: macos-10.15
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          target: aarch64-apple-darwin
+          override: true
+
+      - name: Set SDKROOT
+        run: echo "SDKROOT=$(xcrun -sdk macosx$OSX_SDK_VERSION --show-sdk-path)" >> $GITHUB_ENV
+      - name: Set MACOSX_DEPLOYMENT_TARGET
+        run: echo "MACOSX_DEPLOYMENT_TARGET=$(xcrun -sdk macosx$OSX_SDK_VERSION --show-sdk-platform-version)" >> $GITHUB_ENV
+      - name: Build aarch64-apple-darwin (Debug)
+        uses: actions-rs/cargo@v1
+        if:  ${{ env.RELEASE_COMMIT != 'true' }}
+        with:
+          command: build
+          args: --target aarch64-apple-darwin
+      - name: Build aarch64-apple-darwin (Release)
+        uses: actions-rs/cargo@v1
+        if: ${{ env.RELEASE_COMMIT == 'true' }}
+        with:
+          command: build
+          args: --release --target aarch64-apple-darwin
+
+      - name: Build x86_64-apple-darwin (Debug)
+        uses: actions-rs/cargo@v1
+        if: ${{ env.RELEASE_COMMIT != 'true' }}
+        with:
+          command: build
+          args: --target x86_64-apple-darwin
+      - name: Build x86_64-apple-darwin (Release)
+        uses: actions-rs/cargo@v1
+        if: ${{ env.RELEASE_COMMIT == 'true' }}
+        with:
+          command: build
+          args: --release --target x86_64-apple-darwin
+
+      - name: Build Universal and Test/Release
+        run: .github/workflows/script.sh
+      - name: Upload for release
+        uses: actions/upload-artifact@v2
+        if: ${{ env.RELEASE_COMMIT == 'true' }}
+        with:
+          name: workflow-upload
+          path: AlfredPinboardRust-${{ github.ref_name }}.alfredworkflow
+
+  release_alfred:
+    name: Release Workflow
+    runs-on: macos-10.15
+    needs: build_universal
+    steps:
+      - uses: actions/download-artifact@v2
+        if: ${{ env.RELEASE_COMMIT == 'true' }}
+        with:
+          name: workflow-upload
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: ${{ env.RELEASE_COMMIT == 'true' }}
+        with:
+          files: AlfredPinboardRust-${{ github.ref_name }}.alfredworkflow
