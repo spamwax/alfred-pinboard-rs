@@ -146,9 +146,9 @@ pub enum SubCommand {
         #[structopt(name = "show-only-url", long = "show-only-url", short = "U")]
         showonlyurl: bool,
 
-        /// Find pins that have a tag exactly matching the given query.\n
+        /// Find pins that have a tag exactly matching the given query.
         /// 'query' must be only one word.
-        /// Cannot be used with othe flags: -t -T -d -u
+        /// Cannot be used with other flags: -t -T -d -u
         #[structopt(
             name = "exact-tag",
             long = "exact-tag",
