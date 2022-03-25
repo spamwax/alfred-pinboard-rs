@@ -84,7 +84,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
 
             // First try to get list of popular tags from Pinboard
             let tag_suggestion = suggest.unwrap_or(config.suggest_tags);
-            let mut popular_tags = if tag_suggestion {
+            let popular_tags = if tag_suggestion {
                 // if suggest.unwrap_or(config.suggest_tags) {
                 suggest_tags()
             } else {
@@ -92,6 +92,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
             };
 
             let last_query_word = query_words.last().unwrap_or(&"");
+            let mut top_items: Vec<Tag> = Vec::with_capacity(2usize);
 
             match pinboard.search_list_of_tags(last_query_word) {
                 Err(e) => crate::show_error_alfred(e.to_string()),
@@ -108,24 +109,27 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                     // Some result mean we found tags even though the query was empty as
                     // search_list_of_tags returns all tags for empty queries.
                     last_query_word_tag = Tag::new((*last_query_word).to_string(), 0).set_new();
-                    let filter_idx;
+                    let mut filter_idx = None;
                     let items = match results {
                         Some(i) => {
                             debug!("Found {} tags.", i.len());
+                            top_items.insert(0, i[0].clone());
                             // If user input matches a tag, we will show it as first item
                             if let Some(idx) = i.iter().position(|t| &t.0 == last_query_word) {
-                                popular_tags.insert(0, i[idx].clone());
-                                filter_idx = Some(idx);
+                                if idx != 0 {
+                                    top_items.insert(0, i[idx].clone());
+                                    filter_idx = Some(idx - 1); // Substract one since we will be
+                                                                // always skipping the firt tag
+                                                                // from results (i)
+                                    debug!("Found exact tag: {:?}, {}", i[idx], idx);
+                                }
                             } else {
                                 // Otherwise we will show the tag with highest frequency matching user
                                 // input before popular/suggested tags, unless --query-as-item is set
                                 // in which case we create an alfred item with what user has typed
+                                top_items.insert(0, last_query_word_tag);
                                 if query_item {
-                                    popular_tags.insert(0, last_query_word_tag);
                                     filter_idx = None;
-                                } else {
-                                    popular_tags.insert(0, i[0].clone());
-                                    filter_idx = Some(0);
                                 }
                             }
                             i
@@ -134,54 +138,65 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                             assert!(!query_words.is_empty());
                             debug!("Didn't find any tag for `{}`", last_query_word);
                             filter_idx = None;
-                            vec![&last_query_word_tag]
+                            top_items.insert(0, last_query_word_tag);
+                            vec![]
                         }
                     };
                     let prev_tags_len = prev_tags.len();
-                    alfred_items = popular_tags
-                        .iter()
-                        .enumerate()
-                        // Combine popular tags and returned tags from cache
-                        .chain(
-                            items
-                                .into_iter()
-                                .enumerate()
-                                .filter(|&(idx, _)| {
-                                    filter_idx.is_none() || idx != filter_idx.unwrap()
-                                })
-                                .take(config.tags_to_show as usize),
-                        )
-                        // Remove tags that user has already selected
-                        .filter(|&(_, tag)| {
-                            if !query_words.is_empty() {
-                                let upper = query_words.len() - 1;
-                                !query_words.as_slice()[0..upper]
-                                    .iter()
-                                    .any(|q| q == &tag.0.as_str())
-                            } else {
-                                true
-                            }
-                        })
-                        // transform tags to Alfred items
-                        .map(|(_, tag)| {
-                            let mut _args = String::with_capacity(prev_tags_len + tag.0.len());
-                            _args.push_str(prev_tags);
-                            _args.push_str(&tag.0);
-                            ItemBuilder::new(tag.0.as_str())
-                                .subtitle(tag.1.to_string())
-                                .autocomplete(_args.clone())
-                                .subtitle_mod(Modifier::Option, option_subtitle)
-                                .subtitle_mod(Modifier::Control, control_subtitle)
-                                .variable("tags", _args.clone())
-                                .variable("shared", &private_pin)
-                                .variable("toread", &toread_pin)
-                                .arg(_args)
-                                .valid(true)
-                                .icon_path("tag.png")
-                                .into_item()
-                        })
-                        .collect::<Vec<Item>>();
+                    alfred_items =
+                        top_items // Start with top_items, and
+                            .iter()
+                            .enumerate()
+                            .chain(popular_tags.iter().enumerate()) // then add popular_tags
+                            // and finally add all tags returned from search, ensuring to remove
+                            // items that are in top_results
+                            .chain(items.into_iter().skip(1).enumerate().filter(|&(idx, _)| {
+                                filter_idx.is_none() || idx != filter_idx.unwrap()
+                            }))
+                            // Remove all tags that are already present in user query list
+                            .filter(|&(_, tag)| {
+                                if !query_words.is_empty() {
+                                    let upper = query_words.len() - 1;
+                                    !query_words.as_slice()[0..upper]
+                                        .iter()
+                                        .any(|q| q == &tag.0.as_str())
+                                } else {
+                                    true
+                                }
+                            })
+                            .take(config.tags_to_show as usize)
+                            .map(|(_, tag)| {
+                                let mut _args = String::with_capacity(prev_tags_len + tag.0.len());
+                                _args.push_str(prev_tags);
+                                _args.push_str(&tag.0);
+                                ItemBuilder::new(tag.0.as_str())
+                                    .subtitle(tag.1.to_string())
+                                    .autocomplete(_args.clone())
+                                    .subtitle_mod(Modifier::Option, option_subtitle)
+                                    .subtitle_mod(Modifier::Control, control_subtitle)
+                                    .variable("tags", _args.clone())
+                                    .variable("shared", &private_pin)
+                                    .variable("toread", &toread_pin)
+                                    .arg(_args)
+                                    .valid(true)
+                                    .icon_path("tag.png")
+                                    .into_item()
+                            })
+                            .collect::<Vec<Item>>();
                 }
+            }
+            debug!("alfred_items hast {} entities", alfred_items.len());
+            if !query_words.is_empty() && alfred_items.is_empty() {
+                alfred_items = vec![ItemBuilder::new("Hit Return to bookmark the page!")
+                    .icon_path("upload.png")
+                    .arg(queries.as_str())
+                    .subtitle("You may have entered duplicate tags!")
+                    .variable("shared", &private_pin)
+                    .variable("toread", &toread_pin)
+                    .variable("tags", queries.as_str())
+                    .subtitle_mod(Modifier::Option, option_subtitle)
+                    .subtitle_mod(Modifier::Control, control_subtitle)
+                    .into_item()];
             }
             if !no_existing_page && config.page_is_bookmarked && is_page_bookmarked(pinboard) {
                 let bookmark_present = ItemBuilder::new("You already have the bookmark!")
