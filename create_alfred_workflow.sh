@@ -10,8 +10,8 @@ if [ -z "$version_tag" ]; then
     exit
 fi
 
-alfred_pinboard_rs="/Volumes/Home/hamid/src/learn/rust/alfred-pinboard-rs"
-workflow_dir="$HOME/Dropbox/Alfred/Alfred.alfredpreferences/workflows/user.workflow.99CBA55A-2010-4916-9839-3C79B3219DC2"
+alfred_pinboard_rs="/Volumes/manzel/hamid/src/learn/rust/alfred-pinboard-rs"
+workflow_dir="$HOME/Documents/Alfred.alfredpreferences/workflows/user.workflow.99CBA55A-2010-4916-9839-3C79B3219DC2"
 res_dir="$alfred_pinboard_rs/res/workflow"
 
 git checkout master || exit
