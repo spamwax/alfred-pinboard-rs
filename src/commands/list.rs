@@ -48,7 +48,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
 
         if tags {
             // Search the tags using the last 'word' in 'q'
-            let queries = q.unwrap_or_else(String::new);
+            let queries = q.unwrap_or_default();
 
             // Check if user has entered ';' which indicates they are providing a description.
             // So no need to search for tags!
@@ -80,12 +80,11 @@ impl<'api, 'pin> Runner<'api, 'pin> {
             let query_words: Vec<&str> = queries.split_whitespace().collect();
 
             let last_query_word_tag;
-            let mut popular_tags;
             let mut alfred_items = Vec::with_capacity(config.tags_to_show as usize + 1);
 
             // First try to get list of popular tags from Pinboard
             let tag_suggestion = suggest.unwrap_or(config.suggest_tags);
-            popular_tags = if tag_suggestion {
+            let mut popular_tags = if tag_suggestion {
                 // if suggest.unwrap_or(config.suggest_tags) {
                 suggest_tags()
             } else {
@@ -203,7 +202,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
             }
             let items = pinboard
                 .list_bookmarks()
-                .unwrap_or_else(Vec::new)
+                .unwrap_or_default()
                 .into_iter()
                 .take(config.pins_to_show as usize)
                 .map(|pin| {
