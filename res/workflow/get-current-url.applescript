@@ -1,85 +1,85 @@
 on appIsRunning(appName)
-    set osver to system version of (system info)
-    considering numeric strings
-        set catalina to (osver >= "10.15" and osver < "10.16")
-    end considering
-    if catalina then
-        return true
-    end if
-    tell application "System Events" to (name of processes) contains appName
-    -- set processName to run script "tell application \"System Events\" to (name of processes)"
-    -- set ret to processName contains appName
-    -- return ret
+	set osver to system version of (system info)
+	considering numeric strings
+		set catalina to (osver ³ "10.15" and osver < "10.16")
+	end considering
+	if catalina then
+		return true
+	end if
+	tell application "System Events" to (name of processes) contains appName
+	-- set processName to run script "tell application \"System Events\" to (name of processes)"
+	-- set ret to processName contains appName
+	-- return ret
 end appIsRunning
 
 
 on run
-    set theApplication to (name of (info for (path to frontmost application)))
-    set theText to ""
-    set theURL to ""
-
-    if theApplication is "Google Chrome.app" and appIsRunning("Google Chrome") then
-        set theResult to run script "tell application id \"com.google.chrome\"
+	set theApplication to (name of (info for (path to frontmost application)))
+	set theText to ""
+	set theURL to ""
+	
+	if theApplication is "Google Chrome.app" and appIsRunning("Google Chrome") then
+		set theResult to run script "tell application id \"com.google.chrome\"
         set theText to title of active tab of first window
         set theURL to get URL of active tab of first window
         return {theURL, theText}
         end tell"
-        set theURL to item 1 of theResult
-        set theText to item 2 of theResult
-
-    else if theApplication is "Opera.app" and appIsRunning("Opera") then
-        set theResult to run script "tell application id \"com.operasoftware.Opera\"
+		set theURL to item 1 of theResult
+		set theText to item 2 of theResult
+		
+	else if theApplication is "Opera.app" and appIsRunning("Opera") then
+		set theResult to run script "tell application id \"com.operasoftware.Opera\"
         set theText to title of active tab of first window
         set theURL to get URL of active tab of first window
         return {theURL, theText}
         end tell"
-        set theURL to item 1 of theResult
-        set theText to item 2 of theResult
-
-    else if theApplication is "Opera Developer.app" and appIsRunning("Opera") then
-        set theResult to run script "tell application id \"com.operasoftware.OperaDeveloper\"
+		set theURL to item 1 of theResult
+		set theText to item 2 of theResult
+		
+	else if theApplication is "Opera Developer.app" and appIsRunning("Opera") then
+		set theResult to run script "tell application id \"com.operasoftware.OperaDeveloper\"
         set theText to title of active tab of first window
         set theURL to get URL of active tab of first window
         return {theURL, theText}
         end tell"
-        set theURL to item 1 of theResult
-        set theText to item 2 of theResult
-
-    else if theApplication is "Opera Beta.pp" and appIsRunning("Opera") then
-        set theResult to run script "tell application id \"com.operasoftware.OperaNext\"
+		set theURL to item 1 of theResult
+		set theText to item 2 of theResult
+		
+	else if theApplication is "Opera Beta.pp" and appIsRunning("Opera") then
+		set theResult to run script "tell application id \"com.operasoftware.OperaNext\"
         set theText to title of active tab of first window
         set theURL to get URL of active tab of first window
         return {theURL, theText}
         end tell"
-        set theURL to item 1 of theResult
-        set theText to item 2 of theResult
-
-    else if theApplication is "Vivaldi.app" and appIsRunning("Vivaldi") then
-        set theResult to run script "tell application id \"com.vivaldi.Vivaldi\"
+		set theURL to item 1 of theResult
+		set theText to item 2 of theResult
+		
+	else if theApplication is "Vivaldi.app" and appIsRunning("Vivaldi") then
+		set theResult to run script "tell application id \"com.vivaldi.Vivaldi\"
         set theText to title of active tab of first window
         set theURL to get URL of active tab of first window
         return {theURL, theText}
         end tell"
-        set theURL to item 1 of theResult
-        set theText to item 2 of theResult
-
-    else if theApplication is "Brave Browser.app" and appIsRunning("Brave Browser") then
-        set theResult to run script "tell application id \"com.brave.Browser\"
+		set theURL to item 1 of theResult
+		set theText to item 2 of theResult
+		
+	else if theApplication is "Brave Browser.app" and appIsRunning("Brave Browser") then
+		set theResult to run script "tell application id \"com.brave.Browser\"
         set theText to title of active tab of first window
         set theURL to get URL of active tab of first window
         return {theURL, theText}
         end tell"
-        set theURL to item 1 of theResult
-        set theText to item 2 of theResult
-
-    else if theApplication is "Brave Browser Beta.app" and appIsRunning("Brave Browser Beta") then
-        set theResult to run script "tell application id \"com.brave.Browser.beta\"
+		set theURL to item 1 of theResult
+		set theText to item 2 of theResult
+		
+	else if theApplication is "Brave Browser Beta.app" and appIsRunning("Brave Browser Beta") then
+		set theResult to run script "tell application id \"com.brave.Browser.beta\"
         set theText to title of active tab of first window
         set theURL to get URL of active tab of first window
         return {theURL, theText}
         end tell"
-        set theURL to item 1 of theResult
-        set theText to item 2 of theResult
+		set theURL to item 1 of theResult
+		set theText to item 2 of theResult
 		
 	else if theApplication is "Brave Browser Nightly.app" and appIsRunning("Brave Browser Nightly") then
 		set theResult to run script "tell application id \"com.brave.Browser.nightly\"
@@ -89,47 +89,47 @@ on run
         end tell"
 		set theURL to item 1 of theResult
 		set theText to item 2 of theResult
-
-    else if theApplication is "Safari.app" and appIsRunning("Safari") then
-        set theResult to run script "tell application id \"com.apple.safari\"
+		
+	else if theApplication is "Safari.app" and appIsRunning("Safari") then
+		set theResult to run script "tell application id \"com.apple.safari\"
         set theTab to front document
         set theText to name of theTab
         set theURL to URL of theTab
         return {theURL, theText}
         end tell"
-        set theURL to item 1 of theResult
-        set theText to item 2 of theResult
-
-    else if {"Safari Technology Preview.app", "SafariTechnologyPreview.app"} contains theApplication and appIsRunning("Safari Technology Preview") then
-        set theResult to run script "tell application id \"com.apple.SafariTechnologyPreview\"
+		set theURL to item 1 of theResult
+		set theText to item 2 of theResult
+		
+	else if {"Safari Technology Preview.app", "SafariTechnologyPreview.app"} contains theApplication and appIsRunning("Safari Technology Preview") then
+		set theResult to run script "tell application id \"com.apple.SafariTechnologyPreview\"
         set theTab to front document
         set theText to name of theTab
         set theURL to URL of theTab
         return {theURL, theText}
         end tell"
-        set theURL to item 1 of theResult
-        set theText to item 2 of theResult
-
-    else if theApplication is "Chromium.app" and appIsRunning("Chromium") then
-        set theResult to run script "tell application \"Chromium\"
-        set theURL to URL of active tab of first window
-        set theText to title of active tab of first window
-        return {theURL, theText}
-        end tell"
-        set theURL to item 1 of theResult
-        set theText to item 2 of theResult
-
-    else if theApplication is "Microsoft Edge.app" and appIsRunning("Microsoft Edge") then
-        set theResult to run script "tell application id \"com.microsoft.edgemac\"
+		set theURL to item 1 of theResult
+		set theText to item 2 of theResult
+		
+	else if theApplication is "Chromium.app" and appIsRunning("Chromium") then
+		set theResult to run script "tell application \"Chromium\"
+		set theURL to URL of active tab of first window
+		set theText to title of active tab of first window
+		return {theURL, theText}
+		end tell"
+		set theURL to item 1 of theResult
+		set theText to item 2 of theResult
+		
+	else if theApplication is "Microsoft Edge.app" and appIsRunning("Microsoft Edge") then
+		set theResult to run script "tell application id \"com.microsoft.edgemac\"
         set theText to title of active tab of first window
         set theURL to get URL of active tab of first window
         return {theURL, theText}
         end tell"
-        set theURL to item 1 of theResult
-        set theText to item 2 of theResult
-
-    else if theApplication is "qutebrowser.app" and appIsRunning("qutebrowser") then
-        set theResult to run script "tell application id \"org.qt-project.Qt.QtWebEngineCore\"
+		set theURL to item 1 of theResult
+		set theText to item 2 of theResult
+				
+	else if theApplication is "qutebrowser.app" and appIsRunning("qutebrowser") then
+		set theResult to run script "tell application id \"org.qt-project.Qt.QtWebEngineCore\"
           activate
         end tell
         tell application \"System Events\"
@@ -158,15 +158,15 @@ on run
         end if
         do shell script \"pbcopy < /dev/null\"
         return {theURL, theTitle}"
-        set theURL to item 1 of theResult
-        set theText to item 2 of theResult
-
-    else if theApplication is "Firefox.app" and appIsRunning("Firefox") then
-        set externalResult to do shell script "./get-current-url-from-alfred-firefox.sh"
-        if externalResult contains "fd850fc2e63511e79f720023dfdf24ec" then
-            return externalResult
-        end if
-        set theResult to run script "tell application id \"org.mozilla.firefox\"
+		set theURL to item 1 of theResult
+		set theText to item 2 of theResult
+		
+	else if theApplication is "Firefox.app" and appIsRunning("Firefox") then
+		set externalResult to do shell script "./get-current-url-from-alfred-firefox.sh"
+		if externalResult contains "fd850fc2e63511e79f720023dfdf24ec" then
+			return externalResult
+		end if
+		set theResult to run script "tell application id \"org.mozilla.firefox\"
           activate
           set w to item 1 of window 1
           set theText to name of w
@@ -185,11 +185,11 @@ on run
         end tell
         set theURL to get the clipboard
         return {theURL, theText}"
-        set theURL to item 1 of theResult
-        set theText to item 2 of theResult
-
-    else if {"Firefox Developer Edition.app", "FirefoxDeveloperEdition.app"} contains theApplication and appIsRunning("Firefox") then
-        set theResult to run script "tell application id \"org.mozilla.firefoxdeveloperedition\"
+		set theURL to item 1 of theResult
+		set theText to item 2 of theResult
+		
+	else if {"Firefox Developer Edition.app", "FirefoxDeveloperEdition.app"} contains theApplication and appIsRunning("Firefox") then
+		set theResult to run script "tell application id \"org.mozilla.firefoxdeveloperedition\"
           activate
           set w to item 1 of window 1
           set theText to name of w
@@ -208,11 +208,11 @@ on run
         end tell
         set theURL to get the clipboard
         return {theURL, theText}"
-        set theURL to item 1 of theResult
-        set theText to item 2 of theResult
-
-    end if
-
-    return {theURL & " fd850fc2e63511e79f720023dfdf24ec " & theText}
-
+		set theURL to item 1 of theResult
+		set theText to item 2 of theResult
+		
+	end if
+	
+	return {theURL & " fd850fc2e63511e79f720023dfdf24ec " & theText}
+	
 end run
