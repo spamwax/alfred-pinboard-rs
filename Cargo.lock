@@ -37,7 +37,7 @@ dependencies = [
 
 [[package]]
 name = "alfred-pinboard-rs"
-version = "0.16.6"
+version = "0.16.7"
 dependencies = [
  "alfred",
  "alfred-rs",

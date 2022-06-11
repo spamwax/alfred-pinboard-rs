@@ -1,6 +1,6 @@
 [package]
 name = "alfred-pinboard-rs"
-version = "0.16.6"
+version = "0.16.7"
 authors = [ "Hamid Ghadyani <hamid@hamid.cc>",]
 
 [dependencies]
