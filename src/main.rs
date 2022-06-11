@@ -60,10 +60,8 @@ use crate::commands::Runner;
 // use commands::{config, delete, list, post, search, update};
 use crate::commands::config;
 
-// TODO: BIG BUG: When posting, if we enter a keyword second time, alfred doesnot show anything and
-// just defaults back to showing google search items and shit. We need to ensure that if user is
-// still typing and we cannot return any suggestions for tags, we at least show an item that say
-// 'you are ready to post' or something!
+// TODO: failure crate is deprecated & has a 'critical' security alert! Replace it with either/and
+// Anyhow/thiserror crate <11-06-22, Hamid> //
 // TODO: Add a command to search pins that have 'toread' enabled. <01-09-21, Hamid> //
 // TODO: We need to come up with actual meaningful tests and deploy them to CIs. <23-08-21, Hamid> //
 // TODO: Always add an item that exactly reflects what user has typed. The issue is that when user
