@@ -184,20 +184,20 @@ impl<'a> Config {
 
 fn get_alfred_version() -> Version {
     debug!("Starting in get_alfred_version");
-    alfred::env::version().map_or(
-        Version::parse("2.0.0").expect("Parsing 2.0.0 shouldn't fail"),
-        |ref s| {
-            Version::parse(s).unwrap_or_else(|_| {
-                if s.starts_with("4.") {
-                    Version::parse("4.0.0").expect("Parsing 4.0.0 shouldn't fail")
-                } else if s.starts_with("3.") {
-                    Version::parse("3.0.0").expect("Parsing 3.0.0 shouldn't fail")
-                } else {
-                    Version::parse("2.0.0").expect("Parsing 2.0.0 shouldn't fail")
-                }
-            })
-        },
-    )
+    let min_version = 2;
+    let v2 = Version::new(min_version, 0, 0); // If alfred_version env. cannot be found or parsed according to
+                                              // semver.org, we will return this version.
+    alfred::env::version().map_or(v2.clone(), |ref s| {
+        Version::parse(s).unwrap_or_else(|_| {
+            // Alfred version is not semver compliant, thus
+            s.find('.') // find first dot
+                .and_then(|idx| {
+                    let m = s[..idx].parse::<u64>().unwrap_or(min_version); // and parse the number before it
+                    Some(Version::new(m, 0, 0))
+                })
+                .unwrap_or(v2)
+        })
+    })
 }
 
 fn get_epoch() -> DateTime<Utc> {
