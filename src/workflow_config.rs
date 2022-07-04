@@ -57,7 +57,7 @@ pub struct Config {
     workflow_cache_dir: PathBuf,
 }
 
-impl<'a> Config {
+impl Config {
     pub fn new() -> Self {
         debug!("Starting in new");
         let mut cfg = Config {

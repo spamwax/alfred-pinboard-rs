@@ -170,6 +170,7 @@ fn main() {
 
             pinboard = setup.1;
             config = setup.0;
+            debug!("Workflow Config: {:?}", &config);
             let mut runner = Runner {
                 config: Some(config),
                 pinboard: Some(pinboard),
