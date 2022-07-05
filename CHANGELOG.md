@@ -6,6 +6,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.16.8] - 2022-07-04
+### Added
+- Improve alfred_version env. variable parsing.
+- Prepare the workflow for Alfred-5.0
+
+## [0.16.6] - 2022-05-26
+### Fixed
+- Posting not working if user enters duplicate tags
+- Normalize unicode characters before searching/comparing
+
 ## [0.16.5] - 2021-08-29
 ### Changed
 - Workflow bundle now contains fat binaries for x86_64 and aarch64 (apple is genius, PPC to x86 to arm)
