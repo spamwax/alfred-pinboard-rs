@@ -121,23 +121,23 @@ on run
 		
 	else if theApplication is "Microsoft Edge.app" and appIsRunning("Microsoft Edge") then
 		set theResult to run script "tell application id \"com.microsoft.edgemac\"
-                set theText to title of active tab of first window
-                set theURL to get URL of active tab of first window
-                return {theURL, theText}
-                end tell"
+        set theText to title of active tab of first window
+        set theURL to get URL of active tab of first window
+        return {theURL, theText}
+        end tell"
 		set theURL to item 1 of theResult
 		set theText to item 2 of theResult
-	
-    else if theApplication is "Orion.app" and appIsRunning("Orion") then
-        set theResult to run script "tell application id \"com.kagi.kagimacOS\"
+		
+	else if theApplication is "Orion.app" and appIsRunning("Orion") then
+		set theResult to run script "tell application id \"com.kagi.kagimacOS\"
         set theTab to current tab of first window
-	set theUrl to URL of theTab
-	set theText to name of theTab
-	return {theUrl, theText}
-	end tell"
-        set theURL to item 1 of theResult
-        set theText to item 2 of theResult
-
+	 set theUrl to URL of theTab
+	 set theText to name of theTab
+	 return {theUrl, theText}
+	 end tell"
+		set theURL to item 1 of theResult
+		set theText to item 2 of theResult
+		
 	else if theApplication is "qutebrowser.app" and appIsRunning("qutebrowser") then
 		set theResult to run script "tell application id \"org.qt-project.Qt.QtWebEngineCore\"
           activate

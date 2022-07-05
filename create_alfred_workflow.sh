@@ -42,7 +42,9 @@ echo "Updating version in info.plist"
 # version_tag=$(git describe --tags --abbrev=0)
 defaults write "$res_dir"/info.plist version "$version_tag"
 plutil -convert xml1 "$res_dir"/info.plist
-cp "$res_dir"/info.plist "$workflow_dir" || exit
+
+# Copy updated info.plist to my workflow_dir
+#cp "$res_dir"/info.plist "$workflow_dir" || exit
 
 echo "Creating the workflow bundle..."
 rm -f AlfredPinboardRust.alfredworkflow
