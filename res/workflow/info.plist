@@ -1347,8 +1347,7 @@ echo "$ret"</string>
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>echo "$1"
-title=$(echo "$1" | sed -n '1p' | cut -d ' ' -f 3-)
+				<string>title=$(echo "$1" | sed -n '1p' | cut -d ' ' -f 3-)
 echo "Posted: $title"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
@@ -1917,13 +1916,11 @@ fi</string>
 				<integer>102</integer>
 				<key>script</key>
 				<string># remove old downloads
-rm "$alfred_workflow_cache/latest_release_Rusty_Pin.alfredworkflow"
+rm -rf "$alfred_workflow_cache/latest_release_Rusty_Pin.alfredworkflow"
 
 # download &amp; install
 ret=$(./alfred-pinboard-rs self -d)
-echo $ret
-
-                </string>
+echo $ret</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -2170,9 +2167,9 @@ echo $ret
 				<string>filename=$(echo "$1" | cut -d ' ' -f 3-)
 
 if open -b com.runningwithcrayons.Alfred "$filename"; then
-    echo "Success: Wait! Openning Alfred to install..."
+    echo "Openning Alfred to install..."
 else
-    echo "Error: $filename Couldn't install the downloaded file!"
+    echo "Error: Couldn't install the downloaded file! ($filename)"
 fi</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
@@ -2919,7 +2916,7 @@ fi</string>
 				<key>escaping</key>
 				<integer>62</integer>
 				<key>script</key>
-				<string>tell application "Alfred 4"	search "{query}"end tell</string>
+				<string>tell application "Alfred"	search "{query}"end tell</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
 				<key>scriptfile</key>
@@ -3266,23 +3263,31 @@ fi</string>
 				<string></string>
 				<key>script</key>
 				<string>cat &lt;&lt; EOB
+{
+    "items": [
+        {
+            "title": "Enable Fuzzy Search",
+            "arg": "true",
+            "icon": {
+                "path": "fuzzy.png"
+            },
+            "uid": "1"
 
-&lt;?xml version="1.0"?&gt;
+        },
+        {
 
-&lt;items&gt;
-  &lt;item uid="1" arg="true" valid="YES" autocomplete="Yes"&gt;
-    &lt;title&gt;Enable Fuzzy Search&lt;/title&gt;
-	&lt;icon&gt;fuzzy.png&lt;/icon&gt;
-  &lt;/item&gt;
+            "title": "Disable Fuzzy Search",
+            "arg": "false",
+            "icon": {
+                "path": "unfuzzy.png"
+            },
+            "uid": "10"
+        },
 
-  &lt;item uid="2" arg="false" valid="YES" autocomplete="No"&gt;
-    &lt;title&gt;Disable Fuzzy Search&lt;/title&gt;
-	&lt;icon&gt;unfuzzy.png&lt;/icon&gt;
-  &lt;/item&gt;
-&lt;/items&gt;
+    ]
+}
 
-EOB
-</string>
+EOB</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -3764,20 +3769,29 @@ EOB
 				<key>script</key>
 				<string>cat &lt;&lt; EOB
 
-&lt;?xml version="1.0"?&gt;
+{
+    "items": [
+        {
+            "title": "Enable Cache Auto-updating",
+            "arg": "true",
+            "icon": {
+                "path": "auto_update.png"
+            },
+            "uid": "1"
 
-&lt;items&gt;
-  &lt;item uid="" arg="true" valid="YES"&gt;
-    &lt;title&gt;Enable Auto-updating cache&lt;/title&gt;
-	&lt;icon&gt;auto_update.png&lt;/icon&gt;
-  &lt;/item&gt;
+        },
+        {
 
-  &lt;item uid="" arg="false" valid="YES"&gt;
-    &lt;title&gt;Disable Auto-updating cache&lt;/title&gt;
-	&lt;icon&gt;no_auto_update.png&lt;/icon&gt;
-  &lt;/item&gt;
-&lt;/items&gt;
+            "title": "Disable Cache Auto-updating",
+            "arg": "false",
+            "icon": {
+                "path": "no_auto_update.png"
+            },
+            "uid": "10"
+        },
 
+    ]
+}
 EOB</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
@@ -3855,21 +3869,31 @@ fi</string>
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>cat &lt;&lt; EOB
+				<string>
+cat &lt;&lt; EOB
+{
+    "items": [
+        {
+            "title": "Set new bookmars as TOREAD",
+            "arg": "true",
+            "icon": {
+                "path": "toread.png"
+            },
+            "uid": "1"
 
-&lt;?xml version="1.0"?&gt;
+        },
+        {
 
-&lt;items&gt;
-  &lt;item uid="tagonly" arg="true" valid="YES" autocomplete="Yes"&gt;
-    &lt;title&gt;Set new bookmars as TOREAD&lt;/title&gt;
-	&lt;icon&gt;toread.png&lt;/icon&gt;
-  &lt;/item&gt;
+            "title": "Do NOT set new bookmars as TOREAD",
+            "arg": "false",
+            "icon": {
+                "path": "toread.png"
+            },
+            "uid": "10"
+        },
 
-  &lt;item uid="des" arg="false" valid="YES" autocomplete="No"&gt;
-    &lt;title&gt;Do NOT set new bookmars as TOREAD&lt;/title&gt;
-	&lt;icon&gt;toread.png&lt;/icon&gt;
-  &lt;/item&gt;
-&lt;/items&gt;
+    ]
+}
 
 EOB</string>
 				<key>scriptargtype</key>
@@ -3977,20 +4001,29 @@ fi</string>
 				<string></string>
 				<key>script</key>
 				<string>cat &lt;&lt; EOB
+{
+    "items": [
+        {
+            "title": "Notify if page is already bookmarked",
+            "arg": "true",
+            "icon": {
+                "path": "check_bookmarked_page.png"
+            },
+            "uid": "1"
 
-&lt;?xml version="1.0"?&gt;
+        },
+        {
 
-&lt;items&gt;
-  &lt;item uid="" arg="true" valid="YES" autocomplete="Yes"&gt;
-    &lt;title&gt;Notify if page is already bookmarked&lt;/title&gt;
-	&lt;icon&gt;check_bookmarked_page.png&lt;/icon&gt;
-  &lt;/item&gt;
+            "title": "Do not notify if page is already bookmarked",
+            "arg": "false",
+            "icon": {
+                "path": "no_check_bookmarked_page.png"
+            },
+            "uid": "10"
+        },
 
-  &lt;item uid="" arg="false" valid="YES" autocomplete="No"&gt;
-    &lt;title&gt;Do not notify if page is already bookmarked&lt;/title&gt;
-	&lt;icon&gt;no_check_bookmarked_page.png&lt;/icon&gt;
-  &lt;/item&gt;
-&lt;/items&gt;
+    ]
+}
 
 EOB</string>
 				<key>scriptargtype</key>
@@ -4042,20 +4075,29 @@ EOB</string>
 				<string></string>
 				<key>script</key>
 				<string>cat &lt;&lt; EOB
+{
+    "items": [
+        {
+            "title": "Show URLs in search results",
+            "arg": "true",
+            "icon": {
+                "path": "url.png"
+            },
+            "uid": "1"
 
-&lt;?xml version="1.0"?&gt;
+        },
+        {
 
-&lt;items&gt;
-  &lt;item uid="" arg="false" valid="YES"&gt;
-    &lt;title&gt;Show URLs in search results&lt;/title&gt;
-	&lt;icon&gt;url.png&lt;/icon&gt;
-  &lt;/item&gt;
+            "title": "Show TAGs in search results",
+            "arg": "false",
+            "icon": {
+                "path": "tag.png"
+            },
+            "uid": "10"
+        },
 
-  &lt;item uid="" arg="true" valid="YES"&gt;
-    &lt;title&gt;Show TAGs in search results&lt;/title&gt;
-	&lt;icon&gt;tag.png&lt;/icon&gt;
-  &lt;/item&gt;
-&lt;/items&gt;
+    ]
+}
 
 EOB</string>
 				<key>scriptargtype</key>
@@ -4113,7 +4155,7 @@ fi</string>
 			<dict>
 				<key>applescript</key>
 				<string>on alfred_script(q)
-  tell application "Alfred 4"	search q  end tell
+  tell application "Alfred"	search q  end tell
 end alfred_script</string>
 				<key>cachescript</key>
 				<false/>
@@ -4209,7 +4251,7 @@ fi</string>
 				<key>script</key>
 				<string>on run argv
   set theQuery to item 1 of argv
-  tell application "Alfred 4"	search "ps " &amp; theQuery  end tell
+  tell application "Alfred"	search "ps " &amp; theQuery  end tell
 end run</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
