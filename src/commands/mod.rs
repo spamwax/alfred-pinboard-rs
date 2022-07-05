@@ -1,4 +1,3 @@
-use alfred;
 use std::io;
 use std::{env, process};
 
@@ -18,7 +17,6 @@ mod upgrade;
 
 mod browser_info;
 
-use super::Error;
 use alfred_rs::updater::GithubReleaser;
 use alfred_rs::updater::Updater;
 
@@ -29,7 +27,11 @@ pub(super) struct Runner<'api, 'pin> {
 }
 
 impl<'api, 'pin> Runner<'api, 'pin> {
-    fn write_output_items<'a, 'b, I, J>(&self, items: I, vars: Option<J>) -> Result<(), Error>
+    fn write_output_items<'a, 'b, I, J>(
+        &self,
+        items: I,
+        vars: Option<J>,
+    ) -> Result<(), Box<dyn std::error::Error>>
     where
         I: IntoIterator<Item = alfred::Item<'a>>,
         J: IntoIterator<Item = (&'b str, &'b str)>,
@@ -51,7 +53,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
             .unwrap()
             .auth_token
             .find(':')
-            .ok_or_else(|| failure::err_msg("Bad Auth. Token!"))?;
+            .ok_or_else(|| "Bad Auth. Token!".to_string())?;
         let username = &self.config.as_ref().unwrap().auth_token.as_str()[..idx];
         let mut variables = vec![("username", username)];
         if let Some(items) = vars {
@@ -63,21 +65,27 @@ impl<'api, 'pin> Runner<'api, 'pin> {
         Ok(())
     }
 
-    fn get_upgrade_item(&self) -> Result<Option<alfred::Item>, Error> {
+    fn get_upgrade_item(&self) -> Result<Option<alfred::Item>, Box<dyn std::error::Error>> {
         debug!("Starting in get_upgrade_item");
-        self.updater.as_ref().unwrap().update_ready().map(|update| {
-            if update {
-                info!("Update is available");
-                // Since an update is available `latest_version().unwrap()` will not fail
-                let new_version = self
-                    .updater
-                    .as_ref()
-                    .unwrap()
-                    .latest_avail_version()
-                    .unwrap();
-                let old_version = self.updater.as_ref().unwrap().current_version();
-                Some(
-                    alfred::ItemBuilder::new("New Version Is Available for Rusty Pin Workflow! 🎉")
+        self.updater
+            .as_ref()
+            .unwrap()
+            .update_ready()
+            .map(|update| {
+                if update {
+                    info!("Update is available");
+                    // Since an update is available `latest_version().unwrap()` will not fail
+                    let new_version = self
+                        .updater
+                        .as_ref()
+                        .unwrap()
+                        .latest_avail_version()
+                        .unwrap();
+                    let old_version = self.updater.as_ref().unwrap().current_version();
+                    Some(
+                        alfred::ItemBuilder::new(
+                            "New Version Is Available for Rusty Pin Workflow! 🎉",
+                        )
                         .subtitle(format!(
                             "Click to download & upgrade {} ⟶ {}",
                             old_version, new_version
@@ -86,11 +94,12 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                         .variable("workflow_update_ready", "1")
                         .arg("update")
                         .into_item(),
-                )
-            } else {
-                info!("Update UNAVAILABLE: You have the latest version of workflow!");
-                None
-            }
-        })
+                    )
+                } else {
+                    info!("Update UNAVAILABLE: You have the latest version of workflow!");
+                    None
+                }
+            })
+            .map_err(|e| e.into())
     }
 }

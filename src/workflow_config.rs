@@ -4,10 +4,7 @@ use std::fs::{create_dir_all, File};
 use std::io::BufReader;
 use std::path::PathBuf;
 
-use alfred;
 use alfred_rs::Data;
-use failure::Error;
-use serde_json;
 
 use semver::{Version, VersionReq};
 
@@ -81,19 +78,22 @@ impl Config {
         cfg
     }
 
-    pub fn setup() -> Result<Config, Error> {
+    pub fn setup() -> Result<Config, Box<dyn std::error::Error>> {
         debug!("Starting in setup");
         let (data_dir, cache_dir) = Config::get_workflow_dirs();
         let config = Config::read(data_dir, cache_dir)?;
         Ok(config)
     }
 
-    fn read(mut data_dir: PathBuf, cached_dir: PathBuf) -> Result<Config, Error> {
+    fn read(
+        mut data_dir: PathBuf,
+        cached_dir: PathBuf,
+    ) -> Result<Config, Box<dyn std::error::Error>> {
         debug!("Starting in read");
         data_dir.push(CONFIG_FILE_NAME);
         if data_dir.exists() {
             let config = Data::load(&data_dir)?;
-            let config: Result<Config, Error> = config
+            let config: Result<Config, Box<dyn std::error::Error>> = config
                 .get(CONFIG_KEY_NAME)
                 .map_or_else(
                     || {
@@ -118,13 +118,13 @@ impl Config {
         }
     }
 
-    pub fn save(&self) -> Result<(), Error> {
+    pub fn save(&self) -> Result<(), Box<dyn std::error::Error>> {
         debug!("Starting in save");
         create_dir_all(&self.data_dir())?;
 
         let mut mydata = Data::load(CONFIG_FILE_NAME)?;
         mydata.clear();
-        mydata.set(CONFIG_KEY_NAME, self)
+        mydata.set(CONFIG_KEY_NAME, self).map_err(|e| e.into())
     }
 
     pub fn discover_dirs(&mut self) {
@@ -191,11 +191,10 @@ fn get_alfred_version() -> Version {
         Version::parse(s).unwrap_or_else(|_| {
             // Alfred version is not semver compliant, thus
             s.find('.') // find first dot
-                .and_then(|idx| {
+                .map_or(v2, |idx| {
                     let m = s[..idx].parse::<u64>().unwrap_or(min_version); // and parse the number before it
-                    Some(Version::new(m, 0, 0))
+                    Version::new(m, 0, 0)
                 })
-                .unwrap_or(v2)
         })
     })
 }

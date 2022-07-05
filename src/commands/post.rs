@@ -1,4 +1,4 @@
-use super::*;
+use super::{io, PinBuilder, Runner, SubCommand};
 use crate::AlfredError;
 use std::io::Write;
 
@@ -12,7 +12,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                     .write_all(s.as_bytes())
                     .expect("Couldn't write to stdout");
                 if self.config.as_ref().unwrap().auto_update_cache {
-                    self.update_cache()
+                    self.update_cache();
                 }
             }
             Err(e) => {
@@ -24,7 +24,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
         }
     }
 
-    fn perform_post(&mut self, cmd: SubCommand) -> Result<String, Error> {
+    fn perform_post(&mut self, cmd: SubCommand) -> Result<String, Box<dyn std::error::Error>> {
         debug!("Starting in perform_post");
         let input_tags: Vec<String>;
         let input_desc;

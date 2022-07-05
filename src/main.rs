@@ -12,8 +12,6 @@
 
 extern crate chrono;
 
-#[macro_use]
-extern crate failure;
 extern crate dirs;
 extern crate semver;
 extern crate serde;
@@ -31,11 +29,7 @@ extern crate env_logger;
 #[macro_use]
 extern crate log;
 
-#[macro_use]
-extern crate if_chain;
-
 extern crate alfred;
-extern crate alfred_rs;
 extern crate rusty_pin;
 
 use std::borrow::Cow;
@@ -45,9 +39,9 @@ use std::io;
 use std::process;
 
 use alfred_rs::Updater;
-use failure::Error;
 use rusty_pin::Pinboard;
 use structopt::StructOpt;
+use thiserror::Error;
 
 mod cli;
 mod commands;
@@ -78,19 +72,21 @@ use crate::commands::config;
 // TODO: Separate findinig the browser's info into a new separate sud-command so that delete.rs
 // does one thing which is deleting and not trying to find the browser's. <07-04-20, hamid>
 
-#[derive(Debug, Fail)]
+#[derive(Debug, Error)]
 pub enum AlfredError {
-    #[fail(display = "Config file may be corrupted")]
+    #[error("Corrupted config file. Set API token again!")]
     ConfigFileErr,
-    #[fail(display = "Missing config file (did you set API token?)")]
+    #[error("Missing config file (did you set API token?)")]
     MissingConfigFile,
-    #[fail(display = "Cache: {}", _0)]
+    #[error("Cache: {0}")]
     CacheUpdateFailed(String),
-    #[fail(display = "Post: {}", _0)]
+    #[error("Post: {0}")]
     Post2PinboardFailed(String),
-    #[fail(display = "Delete: {}", _0)]
+    #[error("Delete: {0}")]
     DeleteFailed(String),
-    #[fail(display = "What did you do?")]
+    #[error("osascript error: {0}")]
+    OsascriptError(String),
+    #[error("What did you do?")]
     Other,
 }
 
@@ -112,6 +108,7 @@ fn main() {
     // env::set_var("RUST_LOG", "rusty_pin=debug,alfred_pinboard_rs=debug");
     // If user has Alfred's debug panel open, print all debug info
     // by setting RUST_LOG environment variable.
+    use env::var_os;
     if alfred::env::is_debug() {
         env::set_var(
             "RUST_LOG",
@@ -124,7 +121,6 @@ fn main() {
     let opt: Opt = Opt::from_args();
 
     debug!("Checking if alfred_workflow_* env. variables");
-    use env::var_os;
     let env_flags = (
         var_os("alfred_workflow_version").is_some(),
         var_os("alfred_workflow_data").is_some(),
@@ -198,13 +194,14 @@ fn main() {
                 SubCommand::Rename { .. } => {
                     runner.rename(&opt.cmd);
                 }
-                _ => unimplemented!(),
+                SubCommand::Config { .. } => unimplemented!(), // We have already checked for this
+                                                               // variant
             }
         }
     }
 }
 
-fn setup<'a, 'p>() -> Result<(Config, Pinboard<'a, 'p>), Error> {
+fn setup<'a, 'p>() -> Result<(Config, Pinboard<'a, 'p>), Box<dyn std::error::Error>> {
     debug!("Starting in setup");
     let config = Config::setup()?;
     let mut pinboard = Pinboard::new(config.auth_token.clone(), alfred::env::workflow_cache())?;

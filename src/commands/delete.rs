@@ -2,8 +2,7 @@
 /// If no URL is provided, this command will fetch browser's tab info and show and Alfred item that
 /// can be used for deletion in next step.
 ///
-use super::browser_info;
-use super::*;
+use super::{browser_info, io, Runner, SubCommand};
 use crate::AlfredError;
 use alfred::ItemBuilder;
 use std::io::Write;
@@ -42,7 +41,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
         &mut self,
         url: Option<String>,
         tag: Option<String>,
-    ) -> Result<String, Error> {
+    ) -> Result<String, Box<dyn std::error::Error>> {
         if let Some(tag) = tag {
             debug!("  tag: {}", tag);
             self.pinboard
@@ -79,7 +78,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                 Err(e) => {
                     error!("Couldn't get browser info: {:?}", e);
                     ItemBuilder::new("Couldn't get browser's info!")
-                        .subtitle("Error")
+                        .subtitle(e.to_string())
                         .icon_path("erroricon.icns")
                         .into_item()
                 }

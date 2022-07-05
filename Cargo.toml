@@ -2,6 +2,7 @@
 name = "alfred-pinboard-rs"
 version = "0.16.8"
 authors = [ "Hamid Ghadyani <hamid@hamid.cc>",]
+edition = "2021"
 
 [dependencies]
 alfred = "4.0.1"
@@ -10,16 +11,15 @@ serde_derive = "1.0"
 serde_json = "1.0"
 structopt = "0.3.15"
 semver = "1.0.4"
-failure = "0.1.8"
-if_chain = "1.0.1"
-dirs = "3.0"
+thiserror = "1.0"
+dirs = "4.0"
 log = "0.4"
 env_logger = "0.9"
 
 [features]
 
 [dependencies.alfred-rs]
-version = "0.6"
+version = "0.7.0"
 
 [dependencies.rusty-pin]
 git = "https://github.com/spamwax/rusty-pin"

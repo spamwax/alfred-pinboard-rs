@@ -1,4 +1,4 @@
-use failure::{err_msg, Error};
+use crate::AlfredError;
 use std::process::Command;
 
 #[derive(Debug)]
@@ -9,16 +9,16 @@ pub struct BrowserActiveTabInfo {
 
 const OSASCRIPT_OUTPUT_SPECIAL_SEPERATOR: &str = " fd850fc2e63511e79f720023dfdf24ec ";
 
-pub fn get() -> Result<BrowserActiveTabInfo, Error> {
+pub fn get() -> Result<BrowserActiveTabInfo, Box<dyn std::error::Error>> {
     debug!("Starting in browser_info::get");
     let output = Command::new("osascript")
         .arg("-s")
         .arg("so")
         .arg("get-current-url.applescript")
         .output()
-        .map_err(|e| err_msg(format!("{:?}: osascript", e)))?;
+        .map_err(|e| AlfredError::OsascriptError(e.to_string()))?;
     if !output.status.success() {
-        return Err(err_msg(format!("osascript error: code {}", output.status)));
+        return Err(AlfredError::OsascriptError(output.status.to_string()).into());
     }
     // Get output of above command
     let osascript_result = String::from_utf8(output.stdout)?;
@@ -38,7 +38,7 @@ pub fn get() -> Result<BrowserActiveTabInfo, Error> {
 
     // If theTitle is missing use theURL for title as well.
     let tab_info = match (tab_info[0].is_empty(), tab_info[1].is_empty()) {
-        (true, _) => Err(err_msg("Cannot get browser's URL")),
+        (true, _) => Err("Cannot get browser's URL".into()),
         (false, true) => Ok(BrowserActiveTabInfo {
             url: tab_info[0].to_string(),
             title: tab_info[0].to_string(),
