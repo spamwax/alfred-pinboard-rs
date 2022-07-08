@@ -24,7 +24,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
         }
     }
 
-    fn perform_post(&mut self, cmd: SubCommand) -> Result<String, Error> {
+    fn perform_post(&mut self, cmd: SubCommand) -> Result<String, Box<dyn std::error::Error>> {
         debug!("Starting in perform_post");
         let input_tags: Vec<String>;
         let input_desc;

@@ -19,7 +19,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
         }
     }
 
-    fn update(&mut self) -> Result<String, Error> {
+    fn update(&mut self) -> Result<String, Box<dyn std::error::Error>> {
         info!("Starting in update_cache");
         match self
             .pinboard

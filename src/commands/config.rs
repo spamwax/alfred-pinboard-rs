@@ -26,7 +26,7 @@ pub fn run(x: SubCommand) {
             config = Config::setup().unwrap_or_else(|err| {
                 if_chain! {
                     if auth_token.is_some();
-                    if let Some(AlfredError::MissingConfigFile) = err.as_fail().downcast_ref::<AlfredError>();
+                    if let Some(AlfredError::MissingConfigFile) = err.downcast_ref::<AlfredError>();
                     then {
                         let mut config = Config::new();
                         config.auth_token = auth_token.as_ref().unwrap().clone();

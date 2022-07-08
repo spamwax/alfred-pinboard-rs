@@ -42,7 +42,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
         &mut self,
         url: Option<String>,
         tag: Option<String>,
-    ) -> Result<String, Error> {
+    ) -> Result<String, Box<dyn std::error::Error>> {
         if let Some(tag) = tag {
             debug!("  tag: {}", tag);
             self.pinboard
@@ -79,7 +79,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                 Err(e) => {
                     error!("Couldn't get browser info: {:?}", e);
                     ItemBuilder::new("Couldn't get browser's info!")
-                        .subtitle("Error")
+                        .subtitle(e.to_string())
                         .icon_path("erroricon.icns")
                         .into_item()
                 }

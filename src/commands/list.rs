@@ -1,6 +1,6 @@
 use super::*;
+use crate::cli::Opt;
 use std::{thread, time};
-use Opt;
 
 use alfred::{Item, ItemBuilder, Modifier};
 use alfred_rs::Data;
@@ -309,7 +309,7 @@ fn suggest_tags() -> Vec<Tag> {
     popular_tags
 }
 /// Retrieves popular tags from a Web API call for first run and caches them for subsequent runs.
-fn retrieve_popular_tags(exec_counter: usize) -> Result<Vec<Tag>, Error> {
+fn retrieve_popular_tags(exec_counter: usize) -> Result<Vec<Tag>, Box<dyn std::error::Error>> {
     debug!("Starting in get_suggested_tags");
 
     // TODO: Don't create another pinboard instance. use the one list.rs receives to be shared with
@@ -343,9 +343,8 @@ fn retrieve_popular_tags(exec_counter: usize) -> Result<Vec<Tag>, Error> {
             "**** reading suggested tags from cache file: {:?}",
             ptags_fn
         );
-        use failure::err_msg;
         tags = Data::load_from_file(ptags_fn)
-            .map_or(Err(err_msg("bad popular tags cache file")), Ok)?;
+            .map_or(Err("bad popular tags cache file".to_string()), Ok)?;
     }
     Ok(tags
         .into_iter()
