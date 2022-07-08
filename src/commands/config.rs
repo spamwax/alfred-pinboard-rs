@@ -1,5 +1,4 @@
 use super::*;
-use crate::AlfredError;
 use chrono::prelude::Local;
 
 pub fn run(x: SubCommand) {
@@ -23,19 +22,25 @@ pub fn run(x: SubCommand) {
             show_url_vs_tags,
         } => {
             print_config = display;
-            config = Config::setup().unwrap_or_else(|err| {
-                if_chain! {
-                    if auth_token.is_some();
-                    if let Some(AlfredError::MissingConfigFile) = err.downcast_ref::<AlfredError>();
-                    then {
-                        let mut config = Config::new();
-                        config.auth_token = auth_token.as_ref().unwrap().clone();
-                        config
-                    } else {
-                        crate::show_error_alfred(err.to_string());
-                        process::exit(1);
-                    }
+            let mut token = String::new();
+            if auth_token.is_some() {
+                if auth_token.as_ref().unwrap().find(':').is_some() {
+                    token = auth_token.as_ref().unwrap().clone();
+                } else {
+                    crate::show_error_alfred("Invalid Auth Token format!".to_string());
+                    process::exit(1);
                 }
+            }
+            config = Config::setup().unwrap_or_else(|err| {
+                info!("{}", err.to_string());
+                let mut config = Config::new();
+                if auth_token.is_some() {
+                    config.auth_token = token;
+                } else {
+                    crate::show_error_alfred(err.to_string());
+                    process::exit(1);
+                }
+                config
             });
             config.auth_token.update(auth_token);
             config.pins_to_show.update(number_pins);

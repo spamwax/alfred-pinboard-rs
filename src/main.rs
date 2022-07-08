@@ -29,11 +29,7 @@ extern crate env_logger;
 #[macro_use]
 extern crate log;
 
-#[macro_use]
-extern crate if_chain;
-
 extern crate alfred;
-extern crate alfred_rs;
 extern crate rusty_pin;
 
 use std::borrow::Cow;
@@ -78,7 +74,7 @@ use crate::commands::config;
 
 #[derive(Debug, Error)]
 pub enum AlfredError {
-    #[error("Config file may be corrupted")]
+    #[error("Corrupted config file. Set API token again!")]
     ConfigFileErr,
     #[error("Missing config file (did you set API token?)")]
     MissingConfigFile,
@@ -198,7 +194,8 @@ fn main() {
                 SubCommand::Rename { .. } => {
                     runner.rename(&opt.cmd);
                 }
-                _ => unimplemented!(),
+                SubCommand::Config { .. } => unimplemented!(), // We have already checked for this
+                                                               // variant
             }
         }
     }
