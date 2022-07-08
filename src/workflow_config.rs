@@ -191,11 +191,10 @@ fn get_alfred_version() -> Version {
         Version::parse(s).unwrap_or_else(|_| {
             // Alfred version is not semver compliant, thus
             s.find('.') // find first dot
-                .map(|idx| {
+                .map_or(v2, |idx| {
                     let m = s[..idx].parse::<u64>().unwrap_or(min_version); // and parse the number before it
                     Version::new(m, 0, 0)
                 })
-                .unwrap_or(v2)
         })
     })
 }

@@ -2,8 +2,7 @@
 /// If no URL is provided, this command will fetch browser's tab info and show and Alfred item that
 /// can be used for deletion in next step.
 ///
-use super::browser_info;
-use super::*;
+use super::{browser_info, io, Runner, SubCommand};
 use crate::AlfredError;
 use alfred::ItemBuilder;
 use std::io::Write;

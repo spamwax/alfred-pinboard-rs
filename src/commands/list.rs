@@ -1,4 +1,4 @@
-use super::*;
+use super::{browser_info, env, Config, Pinboard, Runner, SubCommand, Tag};
 use crate::cli::Opt;
 use std::{thread, time};
 
@@ -68,7 +68,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                     .subtitle_mod(Modifier::Option, option_subtitle)
                     .subtitle_mod(Modifier::Control, control_subtitle);
                 if !pin_info[1].is_empty() {
-                    item = item.variable("description", pin_info[1])
+                    item = item.variable("description", pin_info[1]);
                 }
                 let item = vec![item.into_item()];
                 if let Err(e) = self.write_output_items(item, Option::<Vec<(&str, &str)>>::None) {
@@ -143,46 +143,47 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                         }
                     };
                     let prev_tags_len = prev_tags.len();
-                    alfred_items =
-                        top_items // Start with top_items, and
-                            .iter()
-                            .enumerate()
-                            .chain(popular_tags.iter().enumerate()) // then add popular_tags
-                            // and finally add all tags returned from search, ensuring to remove
-                            // items that are in top_results
-                            .chain(items.into_iter().skip(1).enumerate().filter(|&(idx, _)| {
+                    alfred_items = top_items // Start with top_items, and
+                        .iter()
+                        .enumerate()
+                        .chain(popular_tags.iter().enumerate()) // then add popular_tags
+                        // and finally add all tags returned from search, ensuring to remove
+                        // items that are in top_results
+                        .chain(
+                            items.into_iter().skip(1).enumerate().filter(|&(idx, _)| {
                                 filter_idx.is_none() || idx != filter_idx.unwrap()
-                            }))
-                            // Remove all tags that are already present in user query list
-                            .filter(|&(_, tag)| {
-                                if !query_words.is_empty() {
-                                    let upper = query_words.len() - 1;
-                                    !query_words.as_slice()[0..upper]
-                                        .iter()
-                                        .any(|q| q == &tag.0.as_str())
-                                } else {
-                                    true
-                                }
-                            })
-                            .take(config.tags_to_show as usize)
-                            .map(|(_, tag)| {
-                                let mut _args = String::with_capacity(prev_tags_len + tag.0.len());
-                                _args.push_str(prev_tags);
-                                _args.push_str(&tag.0);
-                                ItemBuilder::new(tag.0.as_str())
-                                    .subtitle(tag.1.to_string())
-                                    .autocomplete(_args.clone())
-                                    .subtitle_mod(Modifier::Option, option_subtitle)
-                                    .subtitle_mod(Modifier::Control, control_subtitle)
-                                    .variable("tags", _args.clone())
-                                    .variable("shared", &private_pin)
-                                    .variable("toread", &toread_pin)
-                                    .arg(_args)
-                                    .valid(true)
-                                    .icon_path("tag.png")
-                                    .into_item()
-                            })
-                            .collect::<Vec<Item>>();
+                            }),
+                        )
+                        // Remove all tags that are already present in user query list
+                        .filter(|&(_, tag)| {
+                            if query_words.is_empty() {
+                                true
+                            } else {
+                                let upper = query_words.len() - 1;
+                                !query_words.as_slice()[0..upper]
+                                    .iter()
+                                    .any(|q| q == &tag.0.as_str())
+                            }
+                        })
+                        .take(config.tags_to_show as usize)
+                        .map(|(_, tag)| {
+                            let mut item_args = String::with_capacity(prev_tags_len + tag.0.len());
+                            item_args.push_str(prev_tags);
+                            item_args.push_str(&tag.0);
+                            ItemBuilder::new(tag.0.as_str())
+                                .subtitle(tag.1.to_string())
+                                .autocomplete(item_args.clone())
+                                .subtitle_mod(Modifier::Option, option_subtitle)
+                                .subtitle_mod(Modifier::Control, control_subtitle)
+                                .variable("tags", item_args.clone())
+                                .variable("shared", &private_pin)
+                                .variable("toread", &toread_pin)
+                                .arg(item_args)
+                                .valid(true)
+                                .icon_path("tag.png")
+                                .into_item()
+                        })
+                        .collect::<Vec<Item>>();
                 }
             }
             debug!("alfred_items hast {} entities", alfred_items.len());
@@ -213,7 +214,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                 warn!(
                     "Ignoring search query, will spit out {} of bookmarks.",
                     config.pins_to_show
-                )
+                );
             }
             let items = pinboard
                 .list_bookmarks()
@@ -262,7 +263,7 @@ fn is_page_bookmarked(pinboard: &Pinboard) -> bool {
             }
             Err(_) => false,
         };
-        let _ = Data::save_to_file("bookmark_exists.json", &found);
+        let _r = Data::save_to_file("bookmark_exists.json", &found);
         debug!("bookmark found from browser info: {}", found);
     } else {
         found = Data::load_from_file("bookmark_exists.json").unwrap_or(false);
@@ -272,13 +273,13 @@ fn is_page_bookmarked(pinboard: &Pinboard) -> bool {
 }
 
 fn suggest_tags() -> Vec<Tag> {
+    use std::sync::mpsc;
     let mut popular_tags = vec![];
     let exec_counter = env::var("apr_execution_counter")
         .unwrap_or_else(|_| "1".to_string())
         .parse::<usize>()
         .unwrap_or(1);
 
-    use std::sync::mpsc;
     let (tx, rx) = mpsc::channel();
     let thread_handle = thread::spawn(move || {
         warn!("inside spawn thread, about to call get_suggested_tags");
@@ -344,7 +345,7 @@ fn retrieve_popular_tags(exec_counter: usize) -> Result<Vec<Tag>, Box<dyn std::e
             ptags_fn
         );
         tags = Data::load_from_file(ptags_fn)
-            .map_or(Err("bad popular tags cache file".to_string()), Ok)?;
+            .ok_or_else(|| "bad popular tags cache file".to_string())?;
     }
     Ok(tags
         .into_iter()

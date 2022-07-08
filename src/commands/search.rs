@@ -1,4 +1,4 @@
-use super::*;
+use super::{io, Pinboard, Runner, SubCommand};
 use alfred::{Item, ItemBuilder, Modifier};
 
 use rusty_pin::pinboard::SearchType;
@@ -129,11 +129,10 @@ fn process<'a>(
                     // - holding modifiers to
                     //   show extended text, tags or open the link in https://pinboard.in
                     .map(|pin| {
-                        let _none: Option<String> = None;
-                        let (subtitle, modifier_subtitle) = if !url_vs_tags {
-                            (pin.url.as_ref(), pin.tags.as_ref())
-                        } else {
+                        let (subtitle, modifier_subtitle) = if url_vs_tags {
                             (pin.tags.as_ref(), pin.url.as_ref())
+                        } else {
+                            (pin.url.as_ref(), pin.tags.as_ref())
                         };
                         ItemBuilder::new(pin.title.as_ref())
                             .subtitle(subtitle)

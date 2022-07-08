@@ -108,6 +108,7 @@ fn main() {
     // env::set_var("RUST_LOG", "rusty_pin=debug,alfred_pinboard_rs=debug");
     // If user has Alfred's debug panel open, print all debug info
     // by setting RUST_LOG environment variable.
+    use env::var_os;
     if alfred::env::is_debug() {
         env::set_var(
             "RUST_LOG",
@@ -120,7 +121,6 @@ fn main() {
     let opt: Opt = Opt::from_args();
 
     debug!("Checking if alfred_workflow_* env. variables");
-    use env::var_os;
     let env_flags = (
         var_os("alfred_workflow_version").is_some(),
         var_os("alfred_workflow_data").is_some(),
