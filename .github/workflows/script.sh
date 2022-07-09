@@ -16,7 +16,7 @@ build_alfred_bundle() {
 
     # TODO Update this to package the right artifacts
     # res_dir="$src/res/workflow"
-    res_dir="$src/res/workflow/"
+    res_dir="$src/res/workflow"
 
     # echo "Copying executable to workflow's folder..."
     strip target/aarch64-apple-darwin/release/alfred-pinboard-rs || true

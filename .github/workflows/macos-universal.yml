@@ -11,7 +11,7 @@ on:
   workflow_dispatch:
   # For quickly detecting important differences in runner configurations
 
-name: Build/Test/Release Alfred Workflow
+name: alfred-workflow
 
 env:
   RELEASE_COMMIT: ${{ github.ref_type == 'tag' }}
