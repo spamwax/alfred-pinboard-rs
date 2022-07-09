@@ -23,6 +23,8 @@ run_tests() {
     $runner config --authorization "${PINBOARD_TOKEN}"
     $runner update
     $runner config -d
+    sleep 2
+    echo
     $runner search -U rust async
     ls -la "$alfred_workflow_data"
     sleep 2

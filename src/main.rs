@@ -120,7 +120,7 @@ fn main() {
     debug!("Parsing input arguments.");
     let opt: Opt = Opt::from_args();
 
-    debug!("Checking if alfred_workflow_* env. variables");
+    debug!("Looking for alfred_workflow_* env. vars");
     let env_flags = (
         var_os("alfred_workflow_version").is_some(),
         var_os("alfred_workflow_data").is_some(),

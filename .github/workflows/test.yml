@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
   # For quickly detecting important differences in runner configurations
 
-name: alfred-workflow
+name: tests
 
 env:
   RELEASE_COMMIT: ${{ github.ref_type == 'tag' }}
@@ -14,7 +14,7 @@ env:
 
 jobs:
   build_universal:
-    name: Build Universal Binary
+    name: non-fat on ubuntu
     runs-on: ubuntu-latest
     if: ${{ github.ref_type == 'branch' && github.ref_name == 'develop' }}
     steps:
