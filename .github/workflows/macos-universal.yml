@@ -19,9 +19,30 @@ env:
   PINBOARD_TOKEN: ${{ secrets.PINBOARD_TOKEN }}
 
 jobs:
+  check_if_tagged:
+    # A commit on master that's tagged will trigger the next job twice!
+    # Once for master commit and once for tag commit. To avoid this, we wil
+    # figure out if the commit is tagged.
+    # If it is, the next job will only be triggered for tag commit.
+    # (for only ref_type='tag') and not the master commit.
+    # If it is not tagged, then outputs.istagged=0, which will allow a
+    # master commit/event to run the next job
+    name: Check if tagged
+    runs-on: macos-10.15
+    output:
+      istagged: ${{ steps.master_is_tagged.outputs.tagged }}
+    steps:
+      - name: Check if commit is tagged
+        id: master_is_tagged
+        run: |
+          value=$(git describe --tags --abbrev=0 --exact-match ${{ github.sha }}) || true
+          [ -n "$value" ] && value=1 || value=0
+          echo "::set-output name=tagged::$value"
   build_universal:
     name: Build Universal Binary
     runs-on: macos-10.15
+    needs: check_if_tagged
+    if: ${{ ${{needs.check_if_tagged.outputs.istagged}} == 0 || github.ref_type == 'tag' }}
     steps:
       - uses: actions/checkout@v2
         with:

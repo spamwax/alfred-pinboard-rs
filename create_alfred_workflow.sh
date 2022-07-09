@@ -76,6 +76,8 @@ git pull origin master
 git commit -a -m "$commit_msg"
 git tag "$version_tag"
 
+# Using atomic push may prevent runner to be triggered twice on a tag push:
+# git push --atomic origin master 1.2.3
 if [ -n "$push_it" ]; then
     git push
     sleep 5
