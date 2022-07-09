@@ -29,7 +29,7 @@ jobs:
     # master commit/event to run the next job
     name: Check if tagged
     runs-on: macos-10.15
-    output:
+    outputs:
       istagged: ${{ steps.master_is_tagged.outputs.tagged }}
     steps:
       - name: Check if commit is tagged
