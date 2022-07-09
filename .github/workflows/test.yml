@@ -1,0 +1,37 @@
+on:
+  push:
+    branches:
+      - develop
+  workflow_dispatch:
+  # For quickly detecting important differences in runner configurations
+
+name: alfred-workflow
+
+env:
+  RELEASE_COMMIT: ${{ github.ref_type == 'tag' }}
+  OSX_SDK_VERSION: 11.1
+  PINBOARD_TOKEN: ${{ secrets.PINBOARD_TOKEN }}
+
+jobs:
+  build_universal:
+    name: Build Universal Binary
+    runs-on: ubuntu-latest
+    if: ${{ github.ref_type == 'branch' && github.ref_name == 'develop' }}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          override: true
+
+      - name: Build x86_64 (Debug)
+        uses: actions-rs/cargo@v1
+        if: ${{ env.RELEASE_COMMIT != 'true' }}
+        with:
+          command: build
+
+      - name: Run tests
+        run: .github/workflows/run_tests.sh ${{ github.workspace }}/target/debug/alfred-pinboard-rs
