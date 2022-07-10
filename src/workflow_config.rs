@@ -1,4 +1,5 @@
 use chrono::prelude::*;
+use core::fmt;
 use dirs::home_dir;
 use std::fs::{create_dir_all, File};
 use std::io::BufReader;
@@ -15,7 +16,29 @@ pub(crate) const CONFIG_KEY_NAME: &str = "settings";
 
 const FILE_BUF_SIZE: usize = 4 * 1024 * 1024;
 
-#[derive(Debug, Serialize, Deserialize)]
+/// Debug is directly implemented so that we do not show the auth_token in Alfred's debug window.
+impl fmt::Debug for Config {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        f.debug_struct("Config")
+            .field("alfred_version", &self.alfred_version)
+            .field("pins_to_show", &self.pins_to_show)
+            .field("tags_to_show", &self.tags_to_show)
+            .field("tags_only_search", &self.tag_only_search)
+            .field("fuzzy_search", &self.fuzzy_search)
+            .field("private_new_pin", &self.private_new_pin)
+            .field("toread_new_pin", &self.toread_new_pin)
+            .field("suggest_tags", &self.suggest_tags)
+            .field("page_is_bookmarked", &self.page_is_bookmarked)
+            .field("show_url_vs_tags", &self.show_url_vs_tags)
+            .field("auto_update_cache", &self.auto_update_cache)
+            .field("update_time", &self.update_time)
+            .field("workflow_data_dir", &self.workflow_data_dir)
+            .field("workflow_cache_dir", &self.workflow_cache_dir)
+            .finish()
+    }
+}
+
+#[derive(Serialize, Deserialize)]
 pub struct Config {
     /// Which version of Alfred we are being executed under
     #[serde(skip, default = "get_alfred_version")]
