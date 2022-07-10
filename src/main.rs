@@ -54,13 +54,8 @@ use crate::commands::Runner;
 // use commands::{config, delete, list, post, search, update};
 use crate::commands::config;
 
-// TODO: failure crate is deprecated & has a 'critical' security alert! Replace it with either/and
-// Anyhow/thiserror crate <11-06-22, Hamid> //
 // TODO: Add a command to search pins that have 'toread' enabled. <01-09-21, Hamid> //
 // TODO: We need to come up with actual meaningful tests and deploy them to CIs. <23-08-21, Hamid> //
-// TODO: Always add an item that exactly reflects what user has typed. The issue is that when user
-// invokes workflow and starts typing a tag we show all tags matching the current input, this
-// causes an issue when the top item is, say, "notes", and we want to send only "note" to alfred. <23-08-21, Hamid> //
 // TODO: parse Alfred preferences and get number of visible items?
 // TODO: running ./alfred-pinboard-rs update from command line panics (starting from
 //       fetch_latest_release)
@@ -69,7 +64,7 @@ use crate::commands::config;
 // TODO: Dont show full JSON errors after alfred's window has closed, just send a notification <01-04-20, hamid>
 // TODO: Can we do something about failure of parsing user's bookmarks or when the network times out
 // TODO: Try to reduce number of calls to get_browser_info in list.rs <04-04-20, hamid>
-// TODO: Separate findinig the browser's info into a new separate sud-command so that delete.rs
+// TODO: Separate finding the browser's info into a new separate sud-command so that delete.rs
 // does one thing which is deleting and not trying to find the browser's. <07-04-20, hamid>
 
 #[derive(Debug, Error)]
@@ -172,13 +167,10 @@ fn main() {
                     updater.set_interval(0);
                 }
             }
-            // updater.set_version("0.13.1");
-            // updater.set_interval(60);
             updater.init().expect("cannot start updater!");
 
             pinboard = setup.1;
             config = setup.0;
-            debug!("workflow_version: {:?}", alfred::env::workflow_version());
             debug!("Workflow Config: {:?}", &config);
             let mut runner = Runner {
                 config: Some(config),
