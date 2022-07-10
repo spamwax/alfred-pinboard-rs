@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.16.9] - 2022-07-10
+### Fixed
+- Workaround for #143. Alfred early access has prerelease in its version. It breaks the logic of checking for minimum Alfred version with json support. (Since SemVer doesn't like comparing non-prerelease versions with standard ones)
+- CI builds will not run twice for commits with a tag. Hopefully!
+
 ## [0.16.8] - 2022-07-04
 ### Added
 - Improve alfred_version env. variable parsing.
