@@ -146,9 +146,16 @@ impl Config {
     pub fn can_use_json(&self) -> bool {
         // Alfred v3 & above support reading/writing Items in json format
         debug!("Starting in can_use_json");
-        let required_version =
-            VersionReq::parse(">= 3").expect("Couldn't parse >= 3 version string");
-        required_version.matches(&self.alfred_version)
+        let version_3 =
+            VersionReq::parse(">=3").expect("Couldn't parse >= 3, >=5.0.0-E version string");
+        // SemVer only allows versions with prerelease to match with a comparator that has a
+        // prerelease requirement in it. Alfred 5.0 early access is causing a lot of
+        // issues, hence the ">=5.0.0-E" bit was added
+        let version_ea = VersionReq::parse(">=5.0.0-E").unwrap();
+        let r = version_3.matches(&self.alfred_version) || version_ea.matches(&self.alfred_version);
+        debug!("alfred_version: {:?}", &self.alfred_version);
+        debug!("can_use_json: {}", r);
+        r
     }
 
     fn get_workflow_dirs() -> (PathBuf, PathBuf) {
