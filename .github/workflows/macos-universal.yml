@@ -31,9 +31,13 @@ jobs:
     outputs:
       istagged: ${{ steps.master_is_tagged.outputs.tagged }}
     steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
       - name: Check if commit is tagged
         id: master_is_tagged
         run: |
+          cd ${{ github.workspace }}
           value=$(git describe --tags --abbrev=0 --exact-match ${{ github.sha }}) || true
           [ -n "$value" ] && value=1 || value=0
           echo "::set-output name=tagged::$value"
