@@ -16,7 +16,7 @@ pub(crate) const CONFIG_KEY_NAME: &str = "settings";
 
 const FILE_BUF_SIZE: usize = 4 * 1024 * 1024;
 
-/// Debug is directly implemented so that we do not show the auth_token in Alfred's debug window.
+/// Debug is directly implemented so that we do not show the `Config.auth_token` in Alfred's debug window.
 impl fmt::Debug for Config {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         f.debug_struct("Config")

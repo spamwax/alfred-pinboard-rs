@@ -148,60 +148,61 @@ fn main() {
 
     let pinboard;
     let config;
-    debug!("Deciding on which command branch");
-    match opt.cmd {
-        SubCommand::Config { .. } => config::run(opt.cmd),
-        _ => {
-            // If user is not configuring, we will abort upon any errors.
-            let setup = setup().unwrap_or_else(|err| {
-                show_error_alfred(err.to_string());
-                process::exit(1);
-            });
+    debug!("Input cli command is {:?}", &opt.cmd);
+    // Separate Config subcommand from rest of cli commands since during config we may run into
+    // errors that cannot be fixed.
+    if let SubCommand::Config { .. } = opt.cmd {
+        config::run(opt.cmd)
+    // Otherwise, if user is not configuring, we will abort upon any errors.
+    } else {
+        let setup = setup().unwrap_or_else(|err| {
+            show_error_alfred(err.to_string());
+            process::exit(1);
+        });
 
-            let mut updater = Updater::gh("spamwax/alfred-pinboard-rs").unwrap();
+        let mut updater = Updater::gh("spamwax/alfred-pinboard-rs").unwrap();
 
-            // If running ./alfred-pinboard-rs self -c, we have to make a network call
-            // We do this by forcing the check interval to be zero
-            if let SubCommand::SelfUpdate { check, .. } = opt.cmd {
-                if check {
-                    updater.set_interval(0);
-                }
+        // If running ./alfred-pinboard-rs self -c, we have to make a network call
+        // We do this by forcing the check interval to be zero
+        if let SubCommand::SelfUpdate { check, .. } = opt.cmd {
+            if check {
+                updater.set_interval(0);
             }
-            updater.init().expect("cannot start updater!");
+        }
+        updater.init().expect("cannot start updater!");
 
-            pinboard = setup.1;
-            config = setup.0;
-            debug!("Workflow Config: {:?}", &config);
-            let mut runner = Runner {
-                config: Some(config),
-                pinboard: Some(pinboard),
-                updater: Some(updater),
-            };
-            match opt.cmd {
-                SubCommand::Update => {
-                    runner.update_cache();
-                }
-                SubCommand::List { .. } => {
-                    runner.list(opt);
-                }
-                SubCommand::Search { .. } => {
-                    runner.search(opt.cmd);
-                }
-                SubCommand::Post { .. } => {
-                    runner.post(opt.cmd);
-                }
-                SubCommand::Delete { .. } => {
-                    runner.delete(opt.cmd);
-                }
-                SubCommand::SelfUpdate { .. } => {
-                    runner.upgrade(&opt.cmd);
-                }
-                SubCommand::Rename { .. } => {
-                    runner.rename(&opt.cmd);
-                }
-                SubCommand::Config { .. } => unimplemented!(), // We have already checked for this
-                                                               // variant
+        pinboard = setup.1;
+        config = setup.0;
+        debug!("Workflow Config: {:?}", &config);
+        let mut runner = Runner {
+            config: Some(config),
+            pinboard: Some(pinboard),
+            updater: Some(updater),
+        };
+        match opt.cmd {
+            SubCommand::Update => {
+                runner.update_cache();
             }
+            SubCommand::List { .. } => {
+                runner.list(opt);
+            }
+            SubCommand::Search { .. } => {
+                runner.search(opt.cmd);
+            }
+            SubCommand::Post { .. } => {
+                runner.post(opt.cmd);
+            }
+            SubCommand::Delete { .. } => {
+                runner.delete(opt.cmd);
+            }
+            SubCommand::SelfUpdate { .. } => {
+                runner.upgrade(&opt.cmd);
+            }
+            SubCommand::Rename { .. } => {
+                runner.rename(&opt.cmd);
+            }
+            // We have already checked for this variant
+            SubCommand::Config { .. } => unimplemented!(),
         }
     }
 }
