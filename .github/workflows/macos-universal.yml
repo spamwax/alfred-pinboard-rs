@@ -34,8 +34,10 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: recursive
+          fetch-depth: 0
       - name: Check if commit is tagged
         id: master_is_tagged
+        # git fetch --prune --unshallow --tags
         run: |
           cd ${{ github.workspace }}
           value=$(git describe --tags --abbrev=0 --exact-match ${{ github.sha }}) || true
