@@ -1,6 +1,6 @@
 [package]
 name = "alfred-pinboard-rs"
-version = "0.16.9"
+version = "0.16.10"
 authors = [ "Hamid Ghadyani <hamid@hamid.cc>",]
 edition = "2021"
 
