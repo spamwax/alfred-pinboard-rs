@@ -2101,7 +2101,8 @@ echo $ret</string>
 				<key>runningsubtext</key>
 				<string>Checking...</string>
 				<key>script</key>
-				<string>./alfred-pinboard-rs self -c</string>
+				<string>./alfred-pinboard-rs self -c
+</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -5045,7 +5046,7 @@ rename by iconmu from the Noun Project</string>
 		</dict>
 	</dict>
 	<key>version</key>
-	<string>0.16.8</string>
+	<string>0.16.10</string>
 	<key>webaddress</key>
 	<string>https://github.com/spamwax/alfred-pinboard-rs</string>
 </dict>
