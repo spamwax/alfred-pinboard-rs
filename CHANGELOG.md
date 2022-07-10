@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.16.11] - 2022-07-10
+### Changed
+- 'pconf' can now output both json & xml
+- 'pset' commands (again) use xml format
+
 ## [0.16.10] - 2022-07-10
 ### Fixed
 - Don't print auth_token when printing Config

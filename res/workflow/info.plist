@@ -3264,30 +3264,19 @@ fi</string>
 				<string></string>
 				<key>script</key>
 				<string>cat &lt;&lt; EOB
-{
-    "items": [
-        {
-            "title": "Enable Fuzzy Search",
-            "arg": "true",
-            "icon": {
-                "path": "fuzzy.png"
-            },
-            "uid": "1"
+&lt;?xml version="1.0"?&gt;
 
-        },
-        {
+&lt;items&gt;
+  &lt;item uid="1" arg="true" valid="YES" autocomplete="Yes"&gt;
+    &lt;title&gt;Enable Fuzzy Search&lt;/title&gt;
+	&lt;icon&gt;fuzzy.png&lt;/icon&gt;
+  &lt;/item&gt;
 
-            "title": "Disable Fuzzy Search",
-            "arg": "false",
-            "icon": {
-                "path": "unfuzzy.png"
-            },
-            "uid": "10"
-        },
-
-    ]
-}
-
+  &lt;item uid="2" arg="false" valid="YES" autocomplete="No"&gt;
+    &lt;title&gt;Disable Fuzzy Search&lt;/title&gt;
+	&lt;icon&gt;unfuzzy.png&lt;/icon&gt;
+  &lt;/item&gt;
+&lt;/items&gt;
 EOB</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
@@ -3464,31 +3453,21 @@ fi</string>
 				<string></string>
 				<key>script</key>
 				<string>cat &lt;&lt; EOB
-{
-    "items": [
-        {
-            "subtitle": "show popular tags for the current webpage.",
-            "title": "Enable Popular Tags",
-            "arg": "true",
-            "icon": {
-                "path": "suggest.png"
-            },
-            "uid": "1"
+&lt;?xml version="1.0"?&gt;
 
-        },
-        {
+&lt;items&gt;
+  &lt;item uid="1" arg="true" valid="YES" autocomplete="Yes"&gt;
+    &lt;title&gt;Enable Popular Tags&lt;/title&gt;
+    &lt;subtitle&gt;Show popular tags for the current webpage&lt;/subtitle&gt;
+	&lt;icon&gt;suggest.png&lt;/icon&gt;
+  &lt;/item&gt;
 
-            "title": "Disable Popular Tags",
-            "arg": "false",
-            "icon": {
-                "path": "no_suggest.png"
-            },
-            "uid": "10"
-        },
-
-    ]
-}
-
+  &lt;item uid="10" arg="false" valid="YES" autocomplete="No"&gt;
+    &lt;title&gt;Disable Popular Tags&lt;/title&gt;
+    &lt;subtitle&gt;Hide popular tags for the current webpage&lt;/subtitle&gt;
+	&lt;icon&gt;no_suggest.png&lt;/icon&gt;
+  &lt;/item&gt;
+&lt;/items&gt;
 EOB</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
@@ -3589,30 +3568,21 @@ fi</string>
 				<key>script</key>
 				<string>
 cat &lt;&lt; EOB
-{
-    "items": [
-        {
-            "subtitle": "post all new bookmarks as public.",
-            "title": "Enable Shared Bookmarkings",
-            "arg": "true",
-            "icon": {
-                "path": "unlocked.png"
-            },
-            "uid": "1"
+&lt;?xml version="1.0"?&gt;
 
-        },
-        {
-            "subtitle": "post all new bookmarks as private.",
-            "title": "Enable Private Bookmarking",
-            "arg": "false",
-            "icon": {
-                "path": "locked.png"
-            },
-            "uid": "10"
-        },
+&lt;items&gt;
+  &lt;item uid="1" arg="true" valid="YES" autocomplete="Yes"&gt;
+    &lt;title&gt;Enable Shared Bookmarking&lt;/title&gt;
+    &lt;subtitle&gt;Post all new bookmarksas as public&lt;/subtitle&gt;
+	&lt;icon&gt;unlocked.png&lt;/icon&gt;
+  &lt;/item&gt;
 
-    ]
-}
+  &lt;item uid="10" arg="false" valid="YES" autocomplete="No"&gt;
+    &lt;title&gt;Enable Private Bookmarking&lt;/title&gt;
+    &lt;subtitle&gt;Post all new bookmarks as private&lt;/subtitle&gt;
+	&lt;icon&gt;locked.png&lt;/icon&gt;
+  &lt;/item&gt;
+&lt;/items&gt;
 
 EOB</string>
 				<key>scriptargtype</key>
@@ -3692,31 +3662,19 @@ fi</string>
 				<string></string>
 				<key>script</key>
 				<string>cat &lt;&lt; EOB
-{
-    "items": [
-        {
+&lt;?xml version="1.0"?&gt;
 
-            "title": "Search only TAG field",
-            "arg": "true",
-            "icon": {
-                "path": "tagonly.png"
-            },
-            "uid": "1"
+&lt;items&gt;
+  &lt;item uid="1" arg="true" valid="YES" autocomplete="Yes"&gt;
+    &lt;title&gt;Search only TAG field&lt;/title&gt;
+	&lt;icon&gt;tagonly.png&lt;/icon&gt;
+  &lt;/item&gt;
 
-        },
-        {
-
-            "title": "Search ALL fields (tags/titles/notes/urls)",
-            "arg": "false",
-            "icon": {
-                "path": "bookmarks.png"
-            },
-            "uid": "10"
-        },
-
-    ]
-}
-
+  &lt;item uid="10" arg="false" valid="YES" autocomplete="No"&gt;
+    &lt;title&gt;Search ALL fields (tags/titles/notes/urls)&lt;/title&gt;
+	&lt;icon&gt;bookmarks.png&lt;/icon&gt;
+  &lt;/item&gt;
+&lt;/items&gt;
 EOB
 
 </string>
@@ -3770,29 +3728,21 @@ EOB
 				<key>script</key>
 				<string>cat &lt;&lt; EOB
 
-{
-    "items": [
-        {
-            "title": "Enable Cache Auto-updating",
-            "arg": "true",
-            "icon": {
-                "path": "auto_update.png"
-            },
-            "uid": "1"
+&lt;?xml version="1.0"?&gt;
 
-        },
-        {
+&lt;items&gt;
+  &lt;item uid="" arg="true" valid="YES"&gt;
+    &lt;title&gt;Enable Cache Auto-updating&lt;/title&gt;
+	&lt;icon&gt;auto_update.png&lt;/icon&gt;
+  &lt;/item&gt;
 
-            "title": "Disable Cache Auto-updating",
-            "arg": "false",
-            "icon": {
-                "path": "no_auto_update.png"
-            },
-            "uid": "10"
-        },
+  &lt;item uid="" arg="false" valid="YES"&gt;
+    &lt;title&gt;Disable Cache Auto-updating&lt;/title&gt;
+	&lt;icon&gt;no_auto_update.png&lt;/icon&gt;
+  &lt;/item&gt;
+&lt;/items&gt;
 
-    ]
-}
+
 EOB</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
@@ -3870,31 +3820,20 @@ fi</string>
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>
-cat &lt;&lt; EOB
-{
-    "items": [
-        {
-            "title": "Set new bookmars as TOREAD",
-            "arg": "true",
-            "icon": {
-                "path": "toread.png"
-            },
-            "uid": "1"
+				<string>cat &lt;&lt; EOB
+&lt;?xml version="1.0"?&gt;
 
-        },
-        {
+&lt;items&gt;
+  &lt;item uid="tagonly" arg="true" valid="YES" autocomplete="Yes"&gt;
+    &lt;title&gt;Set new bookmarks as TOREAD&lt;/title&gt;
+	&lt;icon&gt;toread.png&lt;/icon&gt;
+  &lt;/item&gt;
 
-            "title": "Do NOT set new bookmars as TOREAD",
-            "arg": "false",
-            "icon": {
-                "path": "toread.png"
-            },
-            "uid": "10"
-        },
-
-    ]
-}
+  &lt;item uid="des" arg="false" valid="YES" autocomplete="No"&gt;
+    &lt;title&gt;Do not set new bookmarks as TOREAD&lt;/title&gt;
+	&lt;icon&gt;no_toread.png&lt;/icon&gt;
+  &lt;/item&gt;
+&lt;/items&gt;
 
 EOB</string>
 				<key>scriptargtype</key>
@@ -4002,29 +3941,19 @@ fi</string>
 				<string></string>
 				<key>script</key>
 				<string>cat &lt;&lt; EOB
-{
-    "items": [
-        {
-            "title": "Notify if page is already bookmarked",
-            "arg": "true",
-            "icon": {
-                "path": "check_bookmarked_page.png"
-            },
-            "uid": "1"
+&lt;?xml version="1.0"?&gt;
 
-        },
-        {
+&lt;items&gt;
+  &lt;item uid="" arg="true" valid="YES" autocomplete="Yes"&gt;
+    &lt;title&gt;Notify if page is already bookmarked&lt;/title&gt;
+	&lt;icon&gt;check_bookmarked_page.png&lt;/icon&gt;
+  &lt;/item&gt;
 
-            "title": "Do not notify if page is already bookmarked",
-            "arg": "false",
-            "icon": {
-                "path": "no_check_bookmarked_page.png"
-            },
-            "uid": "10"
-        },
-
-    ]
-}
+  &lt;item uid="" arg="false" valid="YES" autocomplete="No"&gt;
+    &lt;title&gt;Do not notify if page is already bookmarked&lt;/title&gt;
+	&lt;icon&gt;no_check_bookmarked_page.png&lt;/icon&gt;
+  &lt;/item&gt;
+&lt;/items&gt;
 
 EOB</string>
 				<key>scriptargtype</key>
@@ -4076,29 +4005,19 @@ EOB</string>
 				<string></string>
 				<key>script</key>
 				<string>cat &lt;&lt; EOB
-{
-    "items": [
-        {
-            "title": "Show URLs in search results",
-            "arg": "true",
-            "icon": {
-                "path": "url.png"
-            },
-            "uid": "1"
+&lt;?xml version="1.0"?&gt;
 
-        },
-        {
+&lt;items&gt;
+  &lt;item uid="" arg="false" valid="YES"&gt;
+    &lt;title&gt;Show URLs in search results&lt;/title&gt;
+	&lt;icon&gt;url.png&lt;/icon&gt;
+  &lt;/item&gt;
 
-            "title": "Show TAGs in search results",
-            "arg": "false",
-            "icon": {
-                "path": "tag.png"
-            },
-            "uid": "10"
-        },
-
-    ]
-}
+  &lt;item uid="" arg="true" valid="YES"&gt;
+    &lt;title&gt;Show TAGs in search results&lt;/title&gt;
+	&lt;icon&gt;tag.png&lt;/icon&gt;
+  &lt;/item&gt;
+&lt;/items&gt;
 
 EOB</string>
 				<key>scriptargtype</key>
@@ -5046,7 +4965,7 @@ rename by iconmu from the Noun Project</string>
 		</dict>
 	</dict>
 	<key>version</key>
-	<string>0.16.10</string>
+	<string>0.16.11</string>
 	<key>webaddress</key>
 	<string>https://github.com/spamwax/alfred-pinboard-rs</string>
 </dict>
