@@ -138,6 +138,18 @@ fn main() {
             process::exit(1);
         }
     }
+    debug!(
+        "alfred_workflow_version: {:?}",
+        var_os("alfred_workflow_version")
+    );
+    debug!("alfred_workflow_data: {:?}", var_os("alfred_workflow_data"));
+    debug!(
+        "alfred_workflow_cache: {:?}",
+        var_os("alfred_workflow_cache")
+    );
+    debug!("alfred_workflow_uid: {:?}", var_os("alfred_workflow_uid"));
+    debug!("alfred_workflow_name: {:?}", var_os("alfred_workflow_name"));
+    debug!("alfred_version: {:?}", var_os("alfred_version"));
 
     let pinboard;
     let config;

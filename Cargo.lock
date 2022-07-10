@@ -41,9 +41,9 @@ dependencies = [
 
 [[package]]
 name = "alfred-rs"
-version = "0.7.0"
+version = "0.7.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c358db5d6602cd02e8f2a8999edf89368b6e1a7608e63a8e86f5bee846afa6c6"
+checksum = "8796837a0a14539c2106a265e04feb1eb8552d2285cd1744af54413a1498fc52"
 dependencies = [
  "alfred",
  "anyhow",

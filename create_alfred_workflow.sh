@@ -23,12 +23,12 @@ if ! cargo +nightly clippy; then
     exit
 fi
 
-echo "Building new release..."
 cd "$alfred_pinboard_rs" || exit
 
 # Bump Cargo.toml version
 echo "Bumping Cargo.toml version to $version_tag"
 python res/fix_cargo_version.py "$version_tag"
+echo "Building new release..."
 cargo build --release > build.log 2>&1
 
 echo "Copying resoursces from Alfred's workflow dir..."

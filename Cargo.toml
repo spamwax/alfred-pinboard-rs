@@ -19,7 +19,7 @@ env_logger = "0.9"
 [features]
 
 [dependencies.alfred-rs]
-version = "0.7.0"
+version = "0.7"
 
 [dependencies.rusty-pin]
 git = "https://github.com/spamwax/rusty-pin"
