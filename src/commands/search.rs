@@ -90,6 +90,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
 }
 
 // TODO: Write this function using From<Iterator> trait. <11-02-18, Hamid> //
+#[allow(clippy::needless_pass_by_value)]
 fn process<'a>(
     query: Vec<String>,
     search_fields: &[SearchType],

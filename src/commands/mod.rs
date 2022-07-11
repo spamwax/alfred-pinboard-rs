@@ -100,6 +100,6 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                     None
                 }
             })
-            .map_err(|e| e.into())
+            .map_err(Into::into)
     }
 }

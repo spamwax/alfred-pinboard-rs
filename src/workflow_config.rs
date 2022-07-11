@@ -38,6 +38,7 @@ impl fmt::Debug for Config {
     }
 }
 
+#[allow(clippy::struct_excessive_bools)]
 #[derive(Serialize, Deserialize)]
 pub struct Config {
     /// Which version of Alfred we are being executed under
@@ -121,7 +122,7 @@ impl Config {
                 .map_or_else(
                     || {
                         // println!("--> Resorting to old config file format.");
-                        File::open(&data_dir).map_err(|e| e.into()).and_then(|fp| {
+                        File::open(&data_dir).map_err(Into::into).and_then(|fp| {
                             let buf_reader = BufReader::with_capacity(FILE_BUF_SIZE, fp);
                             serde_json::from_reader(buf_reader)
                                 .map_err(|_| From::from(AlfredError::ConfigFileErr))
@@ -147,7 +148,7 @@ impl Config {
 
         let mut mydata = Data::load(CONFIG_FILE_NAME)?;
         mydata.clear();
-        mydata.set(CONFIG_KEY_NAME, self).map_err(|e| e.into())
+        mydata.set(CONFIG_KEY_NAME, self).map_err(Into::into)
     }
 
     pub fn discover_dirs(&mut self) {

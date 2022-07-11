@@ -21,6 +21,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
         }
     }
 
+    #[allow(clippy::too_many_lines)]
     fn process(
         &self,
         tags: bool,

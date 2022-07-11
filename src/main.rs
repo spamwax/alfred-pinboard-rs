@@ -124,15 +124,12 @@ fn main() {
         var_os("alfred_workflow_name").is_some(),
         var_os("alfred_version").is_some(),
     );
-    match env_flags {
-        (true, true, true, true, true, true) => (),
-        _ => {
-            show_error_alfred(
-                "Your workflow is not set up properly. Check alfred_workflow_* env var.",
-            );
-            process::exit(1);
-        }
+    if let (true, true, true, true, true, true) = env_flags {
+    } else {
+        show_error_alfred("Your workflow is not set up properly. Check alfred_workflow_* env var.");
+        process::exit(1);
     }
+
     debug!(
         "alfred_workflow_version: {:?}",
         var_os("alfred_workflow_version")
@@ -152,7 +149,7 @@ fn main() {
     // Separate Config subcommand from rest of cli commands since during config we may run into
     // errors that cannot be fixed.
     if let SubCommand::Config { .. } = opt.cmd {
-        config::run(opt.cmd)
+        config::run(opt.cmd);
     // Otherwise, if user is not configuring, we will abort upon any errors.
     } else {
         let setup = setup().unwrap_or_else(|err| {
