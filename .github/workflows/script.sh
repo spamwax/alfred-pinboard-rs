@@ -37,16 +37,21 @@ src="$GITHUB_WORKSPACE"
 stage=$(mktemp -d -t tmp)
 
 echo "$GITHUB_WORKSPACE == $GITHUB_REF_NAME"
-if [[ "$RELEASE_COMMIT" = "true" ]]; then
-    ls -lh ./target/aarch64-apple-darwin/release/alfred-pinboard-rs
-    ls -lh ./target/x86_64-apple-darwin/release/alfred-pinboard-rs
-
-    strip target/aarch64-apple-darwin/release/alfred-pinboard-rs || true
-    strip target/x86_64-apple-darwin/release/alfred-pinboard-rs || true
-    lipo -create -output alfred-pinboard-rs target/aarch64-apple-darwin/release/alfred-pinboard-rs target/x86_64-apple-darwin/release/alfred-pinboard-rs
-    strip ./alfred-pinboard-rs || true
-    chmod u+x ./alfred-pinboard-rs
-    .github/workflows/run_tests.sh ./alfred-pinboard-rs
-    build_alfred_bundle "$src" "$stage"
+if [[ "$RELEASE_COMMIT" == "true" ]]; then
+  build_type=release
+else
+  build_type=debug
 fi
+ls -lh ./target/aarch64-apple-darwin/"$build_type"/alfred-pinboard-rs
+ls -lh ./target/x86_64-apple-darwin/"$build_type"/alfred-pinboard-rs
 
+strip target/aarch64-apple-darwin/"$build_type"/alfred-pinboard-rs || true
+strip target/x86_64-apple-darwin/"$build_type"/alfred-pinboard-rs || true
+lipo -create -output alfred-pinboard-rs target/aarch64-apple-darwin/"$build_type"/alfred-pinboard-rs target/x86_64-apple-darwin/"$build_type"/alfred-pinboard-rs
+strip ./alfred-pinboard-rs || true
+chmod u+x ./alfred-pinboard-rs
+if [[ "$RELEASE_COMMIT" == "true" ]]; then
+  build_alfred_bundle "$src" "$stage"
+else
+  .github/workflows/run_tests.sh ./alfred-pinboard-rs
+fi

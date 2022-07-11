@@ -14,7 +14,7 @@ env:
 
 jobs:
   build_universal:
-    name: non-fat on ubuntu
+    name: Run non-fat tests on ubuntu
     runs-on: ubuntu-latest
     if: ${{ github.ref_type == 'branch' && github.ref_name == 'develop' }}
     steps:

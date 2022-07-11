@@ -6,7 +6,7 @@ on:
       - '*'
   pull_request:
     branches:
-      - main
+      - master
   workflow_dispatch:
   # For quickly detecting important differences in runner configurations
 
@@ -27,7 +27,17 @@ jobs:
     # If it is not tagged, then outputs.istagged=0, which will allow a
     # master commit/event to run the next job
     name: Check if tagged
-    runs-on: macos-10.15
+    strategy:
+      matrix:
+        os: [macos-10.15, macos-11, macos-12]
+        rust: [1.56.0, stable]
+      exclude:
+        - os: macos-latest
+          rust: 1.56.0
+        - os: macos-12
+          rust: 1.56.0
+
+    runs-on: ${{ matrix.os }}
     outputs:
       istagged: ${{ steps.master_is_tagged.outputs.tagged }}
     steps:
@@ -45,7 +55,7 @@ jobs:
           echo "::set-output name=tagged::$value"
   build_universal:
     name: Build Universal Binary
-    runs-on: macos-10.15
+    runs-on: ${{ macos.os }}
     needs: check_if_tagged
     if: ${{ needs.check_if_tagged.outputs.istagged == 0 || github.ref_type == 'tag' }}
     steps:
@@ -55,7 +65,7 @@ jobs:
       - uses: actions-rs/toolchain@v1
         with:
           profile: minimal
-          toolchain: stable
+          toolchain: ${{ matrix.rust }}
           target: aarch64-apple-darwin
           override: true
 
@@ -93,7 +103,7 @@ jobs:
         run: .github/workflows/script.sh
       - name: Upload for release
         uses: actions/upload-artifact@v2
-        if: ${{ env.RELEASE_COMMIT == 'true' }}
+        if: ${{ github.ref_type == 'tag' && matrix.rust == 'stable' && matrix.os == 'macos-10.15' }}
         with:
           name: workflow-upload
           path: AlfredPinboardRust-${{ github.ref_name }}.alfredworkflow
@@ -102,13 +112,12 @@ jobs:
     name: Release Workflow
     runs-on: macos-10.15
     needs: build_universal
+    if: ${{ github.ref_type == 'tag' && matrix.rust == 'stable' && matrix.os == 'macos-10.15' }}
     steps:
       - uses: actions/download-artifact@v2
-        if: ${{ env.RELEASE_COMMIT == 'true' }}
         with:
           name: workflow-upload
       - name: Release
         uses: softprops/action-gh-release@v1
-        if: ${{ env.RELEASE_COMMIT == 'true' }}
         with:
           files: AlfredPinboardRust-${{ github.ref_name }}.alfredworkflow
