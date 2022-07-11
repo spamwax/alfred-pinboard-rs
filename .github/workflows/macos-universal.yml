@@ -55,7 +55,7 @@ jobs:
           echo "::set-output name=tagged::$value"
   build_universal:
     name: Build Universal Binary
-    runs-on: ${{ macos.os }}
+    runs-on: ${{ matrix.os }}
     needs: check_if_tagged
     if: ${{ needs.check_if_tagged.outputs.istagged == 0 || github.ref_type == 'tag' }}
     steps:
