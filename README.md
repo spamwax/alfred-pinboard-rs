@@ -1,9 +1,8 @@
-[![Build/Test/Release Alfred Workflow](https://github.com/spamwax/alfred-pinboard-rs/actions/workflows/macos-universal.yml/badge.svg)](https://github.com/spamwax/alfred-pinboard-rs/actions/workflows/macos-universal.yml)
- [![Build status](https://ci.appveyor.com/api/projects/status/3g5uvuocs52yc444/branch/master?svg=true)](https://ci.appveyor.com/project/spamwax/alfred-pinboard-rs/branch/master) 
-
-
 # Alfred Workflow for Pinboard
 
+[![Build/Test/Release Alfred Workflow](https://github.com/spamwax/alfred-pinboard-rs/actions/workflows/macos-universal.yml/badge.svg)](https://github.com/spamwax/alfred-pinboard-rs/actions/workflows/macos-universal.yml)
+![alfred-pinboard-rs](https://github.com/spamwax/alfred-pinboard-rs/actions/workflows/lint.yml/badge.svg)
+ [![Build status](https://ci.appveyor.com/api/projects/status/3g5uvuocs52yc444/branch/master?svg=true)](https://ci.appveyor.com/project/spamwax/alfred-pinboard-rs/branch/master) 
 
 Manage, post and **preview** your bookmarks on [Pinboard](https://pinboard.in) right from within [Alfred app](https://www.alfredapp.com).
 

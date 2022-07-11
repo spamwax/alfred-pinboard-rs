@@ -80,6 +80,6 @@ git tag "$version_tag"
 # git push --atomic origin master 1.2.3
 if [ -n "$push_it" ]; then
     git push
-    sleep 5
+    sleep 2
     git push --tags
 fi
