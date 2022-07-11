@@ -102,6 +102,7 @@ jobs:
       - name: Grow fat, test, and make alfredworkflow
         run: .github/workflows/script.sh
       - name: Upload for release
+        id: upload_artifact
         uses: actions/upload-artifact@v2
         if: ${{ github.ref_type == 'tag' && matrix.rust == 'stable' && matrix.os == 'macos-10.15' }}
         with:
@@ -111,8 +112,7 @@ jobs:
   release_alfred:
     name: Release Workflow
     runs-on: macos-10.15
-    needs: build_universal
-    if: ${{ github.ref_type == 'tag' && matrix.rust == 'stable' && matrix.os == 'macos-10.15' }}
+    needs: build_universal.steps.upload_artifact
     steps:
       - uses: actions/download-artifact@v2
         with:
