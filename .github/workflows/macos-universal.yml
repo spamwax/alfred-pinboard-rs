@@ -55,6 +55,15 @@ jobs:
           echo "::set-output name=tagged::$value"
   build_universal:
     name: Build Universal Binary
+    strategy:
+      matrix:
+        os: [macos-10.15, macos-11, macos-12]
+        rust: [1.56.0, stable]
+        exclude:
+          - os: macos-11
+            rust: 1.56.0
+          - os: macos-12
+            rust: 1.56.0
     runs-on: ${{ matrix.os }}
     needs: check_if_tagged
     if: ${{ needs.check_if_tagged.outputs.istagged == 0 || github.ref_type == 'tag' }}
