@@ -39,7 +39,7 @@ jobs:
 
     runs-on: ${{ matrix.os }}
     outputs:
-      istagged: ${{ steps.master_is_tagged.outputs.tagged }}
+      istagged: ${{ steps.master_is_tagged.outputs.tagged-${{ matrix.os }}-${{  matrix.rust  }} }}
     steps:
       - uses: actions/checkout@v2
         with:
@@ -52,7 +52,7 @@ jobs:
           cd ${{ github.workspace }}
           value=$(git describe --tags --abbrev=0 --exact-match ${{ github.sha }}) || true
           [ -n "$value" ] && value=1 || value=0
-          echo "::set-output name=tagged::$value"
+          echo "::set-output name=tagged-${{ matrix.os }}-${{ matrix.rust }}::$value"
   build_universal:
     name: Build Universal Binary
     strategy:
