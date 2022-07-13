@@ -3218,8 +3218,10 @@ fi</string>
 				<string>output=$(./alfred-pinboard-rs config --fuzzy $1)
 if [ $? -ne 0 ]; then
     echo $output
+elif [[ "$1" == "true" ]]; then
+	echo "will use fuzzy logic when searching."
 else
-    echo "Fuzzy set to: $1"
+    echo "will not use fuzzy logic when searching."
 fi</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
@@ -3310,7 +3312,7 @@ EOB</string>
 if [ $? -ne 0 ]; then
     echo $output
 else
-    echo "No. items to show: $1"
+    echo "No. tags to show: $1"
 fi</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
@@ -3380,7 +3382,7 @@ fi</string>
 if [ $? -ne 0 ]; then
     echo $output
 else
-    echo "No. items to show: $1"
+    echo "No. bookmarks to show when searching: $1"
 fi</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
@@ -3407,8 +3409,10 @@ fi</string>
 				<string>output=$(./alfred-pinboard-rs config --suggest-tags $1)
 if [ $? -ne 0 ]; then
     echo $output
+elif [[ "$1" == "true" ]]; then
+	echo "will show 3 popular tags when bookmarking a webpage."
 else
-    echo "Tag suggestion: $1"
+    echo "will not show 3 popular tags when bookmarking a webpage."
 fi</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
@@ -3500,8 +3504,10 @@ EOB</string>
 				<string>output=$(./alfred-pinboard-rs config --shared $1)
 if [ $? -ne 0 ]; then
     echo $output
+elif [[ "$1" == "true" ]]; then
+	echo "will mark all new bookmarks as public."
 else
-    echo "Sharing Bookmarks: $1"
+    echo "will mark all new bookmarks as private."
 fi</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
@@ -3616,8 +3622,10 @@ EOB</string>
 				<string>output=$(./alfred-pinboard-rs config --tags-only $1)
 if [ $? -ne 0 ]; then
     echo $output
+elif [[ "$1" == "true" ]]; then
+	echo "will only use 'tags' of bookmarks when searching."
 else
-    echo "Tag ONLY: $1"
+    echo "will look use most fields of bookmarks when searching."
 fi</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
@@ -3775,8 +3783,10 @@ EOB</string>
 				<string>output=$(./alfred-pinboard-rs config --auto-update $1)
 if [ $? -ne 0 ]; then
     echo $output
+elif [[ "$1" == "true" ]]; then
+	echo "will automatically update local cache of your bookmarks."
 else
-    echo "Auto-update of cache: $1"
+    echo "will not automatically update local cache of your bookmarks."
 fi</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
@@ -3867,8 +3877,10 @@ EOB</string>
 				<string>output=$(./alfred-pinboard-rs config --toread $1)
 if [ $? -ne 0 ]; then
     echo $output
+elif [[ "$1" == "true" ]]; then
+    echo "will mark all new bookmarks as 'to-read'"
 else
-    echo "New bookmarks will be to-read: $1"
+    echo "will not mark all new bookmarks as 'to-read'"
 fi</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
@@ -3895,8 +3907,10 @@ fi</string>
 				<string>output=$(./alfred-pinboard-rs config --check-bookmarked-page $1)
 if [ $? -ne 0 ]; then
     echo $output
+elif [[ "$1" == "true" ]]; then
+    echo "will notify if page is already bookmarked."
 else
-    echo "Notify if page is already bookmarked: $1"
+    echo "will not notify if page is already bookmarked."
 fi</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
@@ -4051,10 +4065,10 @@ EOB</string>
 				<string>output=$(./alfred-pinboard-rs config --show-urls-vs-tags $1)
 if [ $? -ne 0 ]; then
     echo $output
-elif $1; then
-    echo "Showing urls in search"
+elif [[ "$1" == "false" ]]; then
+    echo "will show urls in search results."
 else
-    echo "Showing tags in search"
+    echo "will show tags in search results."
 fi</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
@@ -4965,7 +4979,7 @@ rename by iconmu from the Noun Project</string>
 		</dict>
 	</dict>
 	<key>version</key>
-	<string>0.16.11</string>
+	<string>0.16.12</string>
 	<key>webaddress</key>
 	<string>https://github.com/spamwax/alfred-pinboard-rs</string>
 </dict>

@@ -1,6 +1,6 @@
 [package]
 name = "alfred-pinboard-rs"
-version = "0.16.11"
+version = "0.16.12"
 authors = [ "Hamid Ghadyani <hamid@hamid.cc>",]
 edition = "2021"
 
@@ -31,9 +31,6 @@ features = [ "serde",]
 
 [profile.release]
 lto = true
-opt-level = 3       # All optimizations.
-codegen-units = 1   # Reduce number of codegen units to increase optimizations.
-strip = true        # Strip symbols from binary
 
 [package.metadata.docs.rs]
 targets = [ "x86_64-apple-ios", "x86_64-apple-darwin",]
