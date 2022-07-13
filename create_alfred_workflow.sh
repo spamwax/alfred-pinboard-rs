@@ -11,7 +11,7 @@ if [ -z "$version_tag" ]; then
 fi
 
 alfred_pinboard_rs="/Volumes/manzel/hamid/src/learn/rust/alfred-pinboard-rs"
-workflow_dir="$HOME/Documents/Alfred.alfredpreferences/workflows/user.workflow.99CBA55A-2010-4916-9839-3C79B3219DC2"
+workflow_dir="$HOME/Documents/Alfred.alfredpreferences/workflows/user.workflow.7F236DA2-2C66-4C31-B1D5-7DFDCB7CA715"
 res_dir="$alfred_pinboard_rs/res/workflow"
 
 git checkout master || exit
@@ -29,7 +29,7 @@ cd "$alfred_pinboard_rs" || exit
 echo "Bumping Cargo.toml version to $version_tag"
 python res/fix_cargo_version.py "$version_tag"
 echo "Building new release..."
-cargo build --release > build.log 2>&1
+cargo build > build.log 2>&1
 
 echo "Copying resoursces from Alfred's workflow dir..."
 cp "$workflow_dir"/* "$res_dir" || exit
