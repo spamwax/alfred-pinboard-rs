@@ -110,6 +110,7 @@ jobs:
 
       - name: Grow fat, test, and make alfredworkflow
         run: .github/workflows/script.sh
+
       - name: Upload for release
         id: upload_artifact
         uses: actions/upload-artifact@v2
