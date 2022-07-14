@@ -4,6 +4,8 @@
 <dict>
 	<key>bundleid</key>
 	<string>cc.hamid.alfred-pinboard-rs</string>
+	<key>category</key>
+	<string>Productivity</string>
 	<key>connections</key>
 	<dict>
 		<key>0016C9AE-9AF1-45C8-A89B-663CCA5FBF2C</key>
@@ -1323,6 +1325,8 @@ echo "$ret"</string>
 				</array>
 				<key>elselabel</key>
 				<string>Upgrade selected</string>
+				<key>hideelse</key>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.conditional</string>
@@ -1834,12 +1838,14 @@ fi</string>
 			<dict>
 				<key>browser</key>
 				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
 				<string>https://pinboard.in/search/u:{var:username}?query={query}</string>
-				<key>utf8</key>
-				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
@@ -1872,12 +1878,14 @@ fi</string>
 			<dict>
 				<key>browser</key>
 				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
 				<string>{query}</string>
-				<key>utf8</key>
-				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
@@ -1949,7 +1957,7 @@ echo $ret</string>
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>escaping</key>
-				<integer>126</integer>
+				<integer>122</integer>
 				<key>keyword</key>
 				<string>ps</string>
 				<key>queuedelaycustom</key>
@@ -1963,9 +1971,17 @@ echo $ret</string>
 				<key>runningsubtext</key>
 				<string>Searching...</string>
 				<key>script</key>
-				<string>./alfred-pinboard-rs search $1</string>
+				<string>#set -o noglob
+#echo "$1" &gt; ~/foo.txt
+#./alfred-pinboard-rs search $1
+#set +o noglob
+
+set -o noglob
+./alfred-pinboard-rs search {query}
+
+set +o noglob</string>
 				<key>scriptargtype</key>
-				<integer>1</integer>
+				<integer>0</integer>
 				<key>scriptfile</key>
 				<string></string>
 				<key>subtext</key>
@@ -2006,6 +2022,8 @@ echo $ret</string>
 				</array>
 				<key>elselabel</key>
 				<string>Success in downloading</string>
+				<key>hideelse</key>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.conditional</string>
@@ -2065,6 +2083,8 @@ echo $ret</string>
 				</array>
 				<key>elselabel</key>
 				<string>Upgrade selected</string>
+				<key>hideelse</key>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.conditional</string>
@@ -2191,12 +2211,14 @@ fi</string>
 			<dict>
 				<key>browser</key>
 				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
 				<key>spaces</key>
 				<string></string>
 				<key>url</key>
 				<string>{query}</string>
-				<key>utf8</key>
-				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
@@ -2274,6 +2296,8 @@ fi</string>
 				</array>
 				<key>elselabel</key>
 				<string>Success openning Alfred</string>
+				<key>hideelse</key>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.conditional</string>
@@ -2374,6 +2398,8 @@ fi</string>
 				</array>
 				<key>elselabel</key>
 				<string>Tag selected</string>
+				<key>hideelse</key>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.conditional</string>
@@ -2502,6 +2528,8 @@ fi</string>
 				</array>
 				<key>elselabel</key>
 				<string>Pin selected</string>
+				<key>hideelse</key>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.conditional</string>
@@ -2555,6 +2583,8 @@ fi</string>
 				</array>
 				<key>elselabel</key>
 				<string>Success in deleting</string>
+				<key>hideelse</key>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.conditional</string>
@@ -2771,6 +2801,8 @@ fi</string>
 				</array>
 				<key>elselabel</key>
 				<string>Error</string>
+				<key>hideelse</key>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.conditional</string>
@@ -2801,6 +2833,8 @@ fi</string>
 				</array>
 				<key>elselabel</key>
 				<string>Error</string>
+				<key>hideelse</key>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.conditional</string>
@@ -3058,6 +3092,8 @@ fi</string>
 				</array>
 				<key>elselabel</key>
 				<string>Pin selected</string>
+				<key>hideelse</key>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.conditional</string>
@@ -3128,6 +3164,8 @@ fi</string>
 				</array>
 				<key>elselabel</key>
 				<string>Pin selected</string>
+				<key>hideelse</key>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.conditional</string>
@@ -3178,6 +3216,8 @@ fi</string>
 				</array>
 				<key>elselabel</key>
 				<string>Error</string>
+				<key>hideelse</key>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.conditional</string>
@@ -4167,6 +4207,8 @@ fi</string>
 				</array>
 				<key>elselabel</key>
 				<string>error</string>
+				<key>hideelse</key>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.conditional</string>
@@ -4212,16 +4254,16 @@ Detailed instructions are available at https://github.com/spamwax/alfred-pinboar
 		<key>0016C9AE-9AF1-45C8-A89B-663CCA5FBF2C</key>
 		<dict>
 			<key>xpos</key>
-			<integer>45</integer>
+			<real>45</real>
 			<key>ypos</key>
-			<integer>3440</integer>
+			<real>3440</real>
 		</dict>
 		<key>0087168E-C986-4511-9873-B107C12CD6C0</key>
 		<dict>
 			<key>xpos</key>
-			<integer>285</integer>
+			<real>285</real>
 			<key>ypos</key>
-			<integer>1835</integer>
+			<real>1835</real>
 		</dict>
 		<key>00892451-3E5D-421F-B3ED-367DD1560720</key>
 		<dict>
@@ -4230,9 +4272,9 @@ Detailed instructions are available at https://github.com/spamwax/alfred-pinboar
 			<key>note</key>
 			<string>Add your credentials first!</string>
 			<key>xpos</key>
-			<integer>45</integer>
+			<real>45</real>
 			<key>ypos</key>
-			<integer>1835</integer>
+			<real>1835</real>
 		</dict>
 		<key>013B2DEB-D66D-4D01-8528-0696630F8DEF</key>
 		<dict>
@@ -4257,197 +4299,197 @@ Raashid.A
 Information by Kevin White from the Noun Project
 rename by iconmu from the Noun Project</string>
 			<key>xpos</key>
-			<integer>60</integer>
+			<real>60</real>
 			<key>ypos</key>
-			<integer>310</integer>
+			<real>310</real>
 		</dict>
 		<key>03AF5169-B606-486F-B432-98CF6E2BB0F2</key>
 		<dict>
 			<key>note</key>
 			<string>Find bookmarks using query.</string>
 			<key>xpos</key>
-			<integer>40</integer>
+			<real>40</real>
 			<key>ypos</key>
-			<integer>805</integer>
+			<real>805</real>
 		</dict>
 		<key>06DBC5EF-0036-44CE-8BAF-D8C097CD31DD</key>
 		<dict>
 			<key>xpos</key>
-			<integer>210</integer>
+			<real>210</real>
 			<key>ypos</key>
-			<integer>1155</integer>
+			<real>1155</real>
 		</dict>
 		<key>09E1138E-C990-4D9D-9AD7-047260212E20</key>
 		<dict>
 			<key>xpos</key>
-			<integer>650</integer>
+			<real>650</real>
 			<key>ypos</key>
-			<integer>2300</integer>
+			<real>2300</real>
 		</dict>
 		<key>0CFFA3F1-8C02-47C2-8A40-79AE36473506</key>
 		<dict>
 			<key>xpos</key>
-			<integer>45</integer>
+			<real>45</real>
 			<key>ypos</key>
-			<integer>3040</integer>
+			<real>3040</real>
 		</dict>
 		<key>0F03B46B-AD75-491E-8B5B-36ADF3E084F4</key>
 		<dict>
 			<key>note</key>
 			<string>Show successful posting.</string>
 			<key>xpos</key>
-			<integer>1120</integer>
+			<real>1120</real>
 			<key>ypos</key>
-			<integer>100</integer>
+			<real>100</real>
 		</dict>
 		<key>1409792A-CE98-4AF0-AF9B-998FBAB435A7</key>
 		<dict>
 			<key>xpos</key>
-			<integer>45</integer>
+			<real>45</real>
 			<key>ypos</key>
-			<integer>3140</integer>
+			<real>3140</real>
 		</dict>
 		<key>1435CE84-2079-4181-8D7C-D9305E375C6F</key>
 		<dict>
 			<key>xpos</key>
-			<integer>130</integer>
+			<real>130</real>
 			<key>ypos</key>
-			<integer>3790</integer>
+			<real>3790</real>
 		</dict>
 		<key>1A981B9B-5BEE-491E-A897-46DF38627688</key>
 		<dict>
 			<key>xpos</key>
-			<integer>375</integer>
+			<real>375</real>
 			<key>ypos</key>
-			<integer>470</integer>
+			<real>470</real>
 		</dict>
 		<key>1B9D717F-FF2E-4913-8B69-A0AABB904100</key>
 		<dict>
 			<key>note</key>
 			<string>Upgrade selected.</string>
 			<key>xpos</key>
-			<integer>1025</integer>
+			<real>1025</real>
 			<key>ypos</key>
-			<integer>2055</integer>
+			<real>2055</real>
 		</dict>
 		<key>2202AECC-AE14-46AC-A4E7-0ECE9060F556</key>
 		<dict>
 			<key>xpos</key>
-			<integer>1460</integer>
+			<real>1460</real>
 			<key>ypos</key>
-			<integer>1045</integer>
+			<real>1045</real>
 		</dict>
 		<key>221EA45C-D3F1-4FD8-9143-CD10110D5BFC</key>
 		<dict>
 			<key>xpos</key>
-			<integer>1120</integer>
+			<real>1120</real>
 			<key>ypos</key>
-			<integer>1075</integer>
+			<real>1075</real>
 		</dict>
 		<key>2338607E-BB4F-4C20-B121-B2C3A10C1C6E</key>
 		<dict>
 			<key>xpos</key>
-			<integer>1295</integer>
+			<real>1295</real>
 			<key>ypos</key>
-			<integer>410</integer>
+			<real>410</real>
 		</dict>
 		<key>282CD8F9-1BEE-4B7D-A72C-94D7CBA13073</key>
 		<dict>
 			<key>xpos</key>
-			<integer>1315</integer>
+			<real>1315</real>
 			<key>ypos</key>
-			<integer>1900</integer>
+			<real>1900</real>
 		</dict>
 		<key>28EA72D9-5950-4961-87F6-A3528D19540F</key>
 		<dict>
 			<key>xpos</key>
-			<integer>45</integer>
+			<real>45</real>
 			<key>ypos</key>
-			<integer>2840</integer>
+			<real>2840</real>
 		</dict>
 		<key>28EB0348-E6C5-4205-9AD5-B50DDFFF4DD0</key>
 		<dict>
 			<key>xpos</key>
-			<integer>920</integer>
+			<real>920</real>
 			<key>ypos</key>
-			<integer>1475</integer>
+			<real>1475</real>
 		</dict>
 		<key>2CEC8590-363C-4F9E-810F-E15D3C433F90</key>
 		<dict>
 			<key>xpos</key>
-			<integer>1295</integer>
+			<real>1295</real>
 			<key>ypos</key>
-			<integer>170</integer>
+			<real>170</real>
 		</dict>
 		<key>2DFDAFE5-6A0E-4E95-A1C5-30789A06C27C</key>
 		<dict>
 			<key>xpos</key>
-			<integer>445</integer>
+			<real>445</real>
 			<key>ypos</key>
-			<integer>1565</integer>
+			<real>1565</real>
 		</dict>
 		<key>33781265-1653-4906-AE9E-29ACD20670DE</key>
 		<dict>
 			<key>xpos</key>
-			<integer>285</integer>
+			<real>285</real>
 			<key>ypos</key>
-			<integer>3340</integer>
+			<real>3340</real>
 		</dict>
 		<key>350D945F-2813-4668-A3BD-0A8CA8C8B95D</key>
 		<dict>
 			<key>xpos</key>
-			<integer>210</integer>
+			<real>210</real>
 			<key>ypos</key>
-			<integer>1375</integer>
+			<real>1375</real>
 		</dict>
 		<key>3C6770D0-0781-4295-8227-41AC215BC760</key>
 		<dict>
 			<key>xpos</key>
-			<integer>1255</integer>
+			<real>1255</real>
 			<key>ypos</key>
-			<integer>1095</integer>
+			<real>1095</real>
 		</dict>
 		<key>3CE0B131-A3E7-4756-BB56-C0AEC7448C28</key>
 		<dict>
 			<key>xpos</key>
-			<integer>230</integer>
+			<real>230</real>
 			<key>ypos</key>
-			<integer>80</integer>
+			<real>80</real>
 		</dict>
 		<key>3D09B795-2B6D-47D4-B74E-9A95591F9AEE</key>
 		<dict>
 			<key>xpos</key>
-			<integer>690</integer>
+			<real>690</real>
 			<key>ypos</key>
-			<integer>835</integer>
+			<real>835</real>
 		</dict>
 		<key>41032086-9AA2-40AF-A887-9148D35771D8</key>
 		<dict>
 			<key>xpos</key>
-			<integer>920</integer>
+			<real>920</real>
 			<key>ypos</key>
-			<integer>580</integer>
+			<real>580</real>
 		</dict>
 		<key>41B7E9D1-65BC-4E7F-9446-BCCFBC384EC3</key>
 		<dict>
 			<key>xpos</key>
-			<integer>1070</integer>
+			<real>1070</real>
 			<key>ypos</key>
-			<integer>825</integer>
+			<real>825</real>
 		</dict>
 		<key>4411CFFD-1BD6-49B2-8EBB-8AE42CD82ECC</key>
 		<dict>
 			<key>xpos</key>
-			<integer>920</integer>
+			<real>920</real>
 			<key>ypos</key>
-			<integer>1355</integer>
+			<real>1355</real>
 		</dict>
 		<key>453D2BA7-92D6-4AD0-821B-132AF0365147</key>
 		<dict>
 			<key>xpos</key>
-			<integer>285</integer>
+			<real>285</real>
 			<key>ypos</key>
-			<integer>1995</integer>
+			<real>1995</real>
 		</dict>
 		<key>46667F34-E27E-4FBA-83B5-4A55C6FA2FD6</key>
 		<dict>
@@ -4456,16 +4498,16 @@ rename by iconmu from the Noun Project</string>
 			<key>note</key>
 			<string>Tries to delete bookmark for active tab of browser.</string>
 			<key>xpos</key>
-			<integer>40</integer>
+			<real>40</real>
 			<key>ypos</key>
-			<integer>1355</integer>
+			<real>1355</real>
 		</dict>
 		<key>4B0B8E09-6ED8-4704-9487-A72639457250</key>
 		<dict>
 			<key>xpos</key>
-			<integer>185</integer>
+			<real>185</real>
 			<key>ypos</key>
-			<integer>3935</integer>
+			<real>3935</real>
 		</dict>
 		<key>4F6CE11B-3454-41F1-BF65-AD752A4AC53F</key>
 		<dict>
@@ -4474,164 +4516,164 @@ rename by iconmu from the Noun Project</string>
 			<key>note</key>
 			<string>Toggle TOREAD setting!</string>
 			<key>xpos</key>
-			<integer>450</integer>
+			<real>450</real>
 			<key>ypos</key>
-			<integer>160</integer>
+			<real>160</real>
 		</dict>
 		<key>50B75DCC-7C6D-4686-8252-E18BCFF8C554</key>
 		<dict>
 			<key>xpos</key>
-			<integer>285</integer>
+			<real>285</real>
 			<key>ypos</key>
-			<integer>2740</integer>
+			<real>2740</real>
 		</dict>
 		<key>50D10FD5-2BD8-475E-8A86-224523BA1ABE</key>
 		<dict>
 			<key>xpos</key>
-			<integer>285</integer>
+			<real>285</real>
 			<key>ypos</key>
-			<integer>2840</integer>
+			<real>2840</real>
 		</dict>
 		<key>51B3C295-B9CD-44D4-B1D3-19038C54735B</key>
 		<dict>
 			<key>xpos</key>
-			<integer>700</integer>
+			<real>700</real>
 			<key>ypos</key>
-			<integer>1095</integer>
+			<real>1095</real>
 		</dict>
 		<key>544EB36F-A1E3-48BE-94FA-73366C521AC3</key>
 		<dict>
 			<key>xpos</key>
-			<integer>145</integer>
+			<real>145</real>
 			<key>ypos</key>
-			<integer>4035</integer>
+			<real>4035</real>
 		</dict>
 		<key>5821470E-E05D-4440-9441-84B254381A73</key>
 		<dict>
 			<key>xpos</key>
-			<integer>285</integer>
+			<real>285</real>
 			<key>ypos</key>
-			<integer>3040</integer>
+			<real>3040</real>
 		</dict>
 		<key>590F370B-1F05-44CD-AA0A-7E887B459E5B</key>
 		<dict>
 			<key>xpos</key>
-			<integer>45</integer>
+			<real>45</real>
 			<key>ypos</key>
-			<integer>2640</integer>
+			<real>2640</real>
 		</dict>
 		<key>59152538-B4C0-4377-AEEA-034B5B257033</key>
 		<dict>
 			<key>note</key>
 			<string>Error in cache update.</string>
 			<key>xpos</key>
-			<integer>900</integer>
+			<real>900</real>
 			<key>ypos</key>
-			<integer>440</integer>
+			<real>440</real>
 		</dict>
 		<key>59CC5D01-8A21-4819-BCBD-A02BF648DCD1</key>
 		<dict>
 			<key>colorindex</key>
 			<integer>4</integer>
 			<key>xpos</key>
-			<integer>450</integer>
+			<real>450</real>
 			<key>ypos</key>
-			<integer>10</integer>
+			<real>15</real>
 		</dict>
 		<key>5B7FE298-FD1C-4722-8A4D-F5D9766F720E</key>
 		<dict>
 			<key>xpos</key>
-			<integer>285</integer>
+			<real>285</real>
 			<key>ypos</key>
-			<integer>3440</integer>
+			<real>3440</real>
 		</dict>
 		<key>5BBD268D-C102-4516-86B3-7A1DA7AE6AD8</key>
 		<dict>
 			<key>xpos</key>
-			<integer>445</integer>
+			<real>445</real>
 			<key>ypos</key>
-			<integer>1095</integer>
+			<real>1095</real>
 		</dict>
 		<key>5D22F26C-5A6A-4D18-B1F9-1158B8075764</key>
 		<dict>
 			<key>xpos</key>
-			<integer>1315</integer>
+			<real>1315</real>
 			<key>ypos</key>
-			<integer>1750</integer>
+			<real>1750</real>
 		</dict>
 		<key>60796C38-028C-408A-86CE-765CB170EE72</key>
 		<dict>
 			<key>xpos</key>
-			<integer>285</integer>
+			<real>285</real>
 			<key>ypos</key>
-			<integer>3140</integer>
+			<real>3140</real>
 		</dict>
 		<key>64829D2F-3DDE-46EC-BE53-F60150D38CEA</key>
 		<dict>
 			<key>xpos</key>
-			<integer>1120</integer>
+			<real>1120</real>
 			<key>ypos</key>
-			<integer>580</integer>
+			<real>580</real>
 		</dict>
 		<key>68426E77-6C32-41BA-A11F-8B90F20AABEE</key>
 		<dict>
 			<key>xpos</key>
-			<integer>1000</integer>
+			<real>1000</real>
 			<key>ypos</key>
-			<integer>170</integer>
+			<real>170</real>
 		</dict>
 		<key>6A38E5F0-BA4E-466F-A8A9-5C19AE3898E9</key>
 		<dict>
 			<key>note</key>
 			<string>Rename pin</string>
 			<key>xpos</key>
-			<integer>920</integer>
+			<real>920</real>
 			<key>ypos</key>
-			<integer>2290</integer>
+			<real>2290</real>
 		</dict>
 		<key>6BE0BCA4-EBEC-4792-AC9A-33F1598B519B</key>
 		<dict>
 			<key>xpos</key>
-			<integer>650</integer>
+			<real>650</real>
 			<key>ypos</key>
-			<integer>1435</integer>
+			<real>1435</real>
 		</dict>
 		<key>6DA1238D-B036-4CC7-9351-D41AF426C1A7</key>
 		<dict>
 			<key>xpos</key>
-			<integer>1295</integer>
+			<real>1295</real>
 			<key>ypos</key>
-			<integer>745</integer>
+			<real>745</real>
 		</dict>
 		<key>6FCE34C9-B61B-4C75-8443-DD17F968A46E</key>
 		<dict>
 			<key>xpos</key>
-			<integer>1530</integer>
+			<real>1530</real>
 			<key>ypos</key>
-			<integer>1015</integer>
+			<real>1015</real>
 		</dict>
 		<key>71EE10F6-37BC-4869-B8A8-0602D9A76863</key>
 		<dict>
 			<key>note</key>
 			<string>Success in posting.</string>
 			<key>xpos</key>
-			<integer>795</integer>
+			<real>795</real>
 			<key>ypos</key>
-			<integer>130</integer>
+			<real>130</real>
 		</dict>
 		<key>72B7C67C-93D9-4FF4-A1CA-B4546C14A1F0</key>
 		<dict>
 			<key>xpos</key>
-			<integer>445</integer>
+			<real>445</real>
 			<key>ypos</key>
-			<integer>1855</integer>
+			<real>1855</real>
 		</dict>
 		<key>75434858-9B72-456E-A107-4B11F87365A4</key>
 		<dict>
 			<key>xpos</key>
-			<integer>200</integer>
+			<real>200</real>
 			<key>ypos</key>
-			<integer>2285</integer>
+			<real>2285</real>
 		</dict>
 		<key>75B3B3EC-5FC5-449A-A74E-A22D1D848FA7</key>
 		<dict>
@@ -4640,92 +4682,92 @@ rename by iconmu from the Noun Project</string>
 			<key>note</key>
 			<string>Toggle SHARED bookmark setting!</string>
 			<key>xpos</key>
-			<integer>450</integer>
+			<real>450</real>
 			<key>ypos</key>
-			<integer>310</integer>
+			<real>310</real>
 		</dict>
 		<key>75C55403-2D3F-4415-9B06-6EC8B581E28B</key>
 		<dict>
 			<key>xpos</key>
-			<integer>45</integer>
+			<real>45</real>
 			<key>ypos</key>
-			<integer>3540</integer>
+			<real>3540</real>
 		</dict>
 		<key>78C19F72-991F-47BC-85D0-E69E021AC18A</key>
 		<dict>
 			<key>xpos</key>
-			<integer>1295</integer>
+			<real>1295</real>
 			<key>ypos</key>
-			<integer>875</integer>
+			<real>875</real>
 		</dict>
 		<key>7BF8F66E-ECC8-4BCD-86CE-5E19FD509604</key>
 		<dict>
 			<key>note</key>
 			<string>Success in cache update.</string>
 			<key>xpos</key>
-			<integer>900</integer>
+			<real>905</real>
 			<key>ypos</key>
-			<integer>130</integer>
+			<real>130</real>
 		</dict>
 		<key>7D0D3480-DBAF-4261-B304-169C58BDA745</key>
 		<dict>
 			<key>note</key>
 			<string>Update cache.</string>
 			<key>xpos</key>
-			<integer>920</integer>
+			<real>920</real>
 			<key>ypos</key>
-			<integer>1825</integer>
+			<real>1825</real>
 		</dict>
 		<key>7D7E984F-FF88-49C8-9FFF-832C2FFC6864</key>
 		<dict>
 			<key>note</key>
 			<string>Search for a single tag to rename. Actioning a tag will prompt you for a new tag name</string>
 			<key>xpos</key>
-			<integer>45</integer>
+			<real>45</real>
 			<key>ypos</key>
-			<integer>2265</integer>
+			<real>2265</real>
 		</dict>
 		<key>7FA852D9-0250-459D-8C03-C0A5E854AFBD</key>
 		<dict>
 			<key>xpos</key>
-			<integer>45</integer>
+			<real>45</real>
 			<key>ypos</key>
-			<integer>3240</integer>
+			<real>3240</real>
 		</dict>
 		<key>83A73753-C3ED-430E-8B03-C57500B672AD</key>
 		<dict>
 			<key>xpos</key>
-			<integer>580</integer>
+			<real>580</real>
 			<key>ypos</key>
-			<integer>470</integer>
+			<real>470</real>
 		</dict>
 		<key>8A326A12-2E76-46CD-9D4D-CCBDC541843B</key>
 		<dict>
 			<key>xpos</key>
-			<integer>625</integer>
+			<real>625</real>
 			<key>ypos</key>
-			<integer>3040</integer>
+			<real>3040</real>
 		</dict>
 		<key>8CD4D7F7-49EA-44FF-878E-18B836627810</key>
 		<dict>
 			<key>xpos</key>
-			<integer>445</integer>
+			<real>445</real>
 			<key>ypos</key>
-			<integer>1685</integer>
+			<real>1685</real>
 		</dict>
 		<key>8D96E594-674B-4824-8C2F-701018343534</key>
 		<dict>
 			<key>xpos</key>
-			<integer>45</integer>
+			<real>45</real>
 			<key>ypos</key>
-			<integer>2940</integer>
+			<real>2940</real>
 		</dict>
 		<key>916E330D-1693-4400-BBAE-51BBCB00F3A1</key>
 		<dict>
 			<key>xpos</key>
-			<integer>285</integer>
+			<real>285</real>
 			<key>ypos</key>
-			<integer>2940</integer>
+			<real>2940</real>
 		</dict>
 		<key>917EC178-CADB-4DD0-B8B4-B3D7F7685BBC</key>
 		<dict>
@@ -4734,136 +4776,136 @@ rename by iconmu from the Noun Project</string>
 			<key>note</key>
 			<string>Toggle SHARED and TOREAD bookmark setting!</string>
 			<key>xpos</key>
-			<integer>190</integer>
+			<real>190</real>
 			<key>ypos</key>
-			<integer>390</integer>
+			<real>390</real>
 		</dict>
 		<key>91C5E428-1419-446C-8775-1F8C8D8322B0</key>
 		<dict>
 			<key>xpos</key>
-			<integer>1120</integer>
+			<real>1120</real>
 			<key>ypos</key>
-			<integer>2310</integer>
+			<real>2310</real>
 		</dict>
 		<key>988D1146-585C-4DC6-A56B-B303B9A3F173</key>
 		<dict>
 			<key>xpos</key>
-			<integer>680</integer>
+			<real>680</real>
 			<key>ypos</key>
-			<integer>190</integer>
+			<real>190</real>
 		</dict>
 		<key>9CB57748-F1F2-4665-A7E0-55B546C50C77</key>
 		<dict>
 			<key>xpos</key>
-			<integer>445</integer>
+			<real>445</real>
 			<key>ypos</key>
-			<integer>2280</integer>
+			<real>2280</real>
 		</dict>
 		<key>A1AB9903-87A7-4041-8EB9-F9E9C06C451B</key>
 		<dict>
 			<key>note</key>
 			<string>Post a bookmark of active browser's tab.</string>
 			<key>xpos</key>
-			<integer>40</integer>
+			<real>40</real>
 			<key>ypos</key>
-			<integer>160</integer>
+			<real>160</real>
 		</dict>
 		<key>A2481ADE-0AF6-4C3D-8E9B-E389206CD571</key>
 		<dict>
 			<key>xpos</key>
-			<integer>445</integer>
+			<real>445</real>
 			<key>ypos</key>
-			<integer>1415</integer>
+			<real>1415</real>
 		</dict>
 		<key>A2DA0FE3-D7E7-47E0-9383-B42E0EFDF202</key>
 		<dict>
 			<key>note</key>
 			<string>Download &amp; Install</string>
 			<key>xpos</key>
-			<integer>920</integer>
+			<real>920</real>
 			<key>ypos</key>
-			<integer>805</integer>
+			<real>805</real>
 		</dict>
 		<key>A853102A-C6D7-49DB-9E51-DA57D84A095A</key>
 		<dict>
 			<key>xpos</key>
-			<integer>375</integer>
+			<real>375</real>
 			<key>ypos</key>
-			<integer>2310</integer>
+			<real>2310</real>
 		</dict>
 		<key>AB0E9CB1-D5D1-483E-B88C-DAC90C702C41</key>
 		<dict>
 			<key>xpos</key>
-			<integer>45</integer>
+			<real>45</real>
 			<key>ypos</key>
-			<integer>2450</integer>
+			<real>2450</real>
 		</dict>
 		<key>B9AD3842-CE4A-4395-9CC2-82260B106DF4</key>
 		<dict>
 			<key>xpos</key>
-			<integer>45</integer>
+			<real>45</real>
 			<key>ypos</key>
-			<integer>3340</integer>
+			<real>3340</real>
 		</dict>
 		<key>BBFBAB3B-9592-48EF-9E70-3DDF3303690D</key>
 		<dict>
 			<key>xpos</key>
-			<integer>700</integer>
+			<real>700</real>
 			<key>ypos</key>
-			<integer>1990</integer>
+			<real>1990</real>
 		</dict>
 		<key>BC2AD49B-4564-4816-B814-83431644EC9D</key>
 		<dict>
 			<key>note</key>
 			<string>Show error in cache update.</string>
 			<key>xpos</key>
-			<integer>1120</integer>
+			<real>1120</real>
 			<key>ypos</key>
-			<integer>410</integer>
+			<real>410</real>
 		</dict>
 		<key>BFD4441D-1EB3-4F5E-9E04-96678AD399E9</key>
 		<dict>
 			<key>xpos</key>
-			<integer>1530</integer>
+			<real>1530</real>
 			<key>ypos</key>
-			<integer>1135</integer>
+			<real>1135</real>
 		</dict>
 		<key>C014F87B-6FD0-4F58-96A2-92B09A4086FE</key>
 		<dict>
 			<key>xpos</key>
-			<integer>45</integer>
+			<real>45</real>
 			<key>ypos</key>
-			<integer>2740</integer>
+			<real>2740</real>
 		</dict>
 		<key>C03A39F5-E473-4AC0-8DFF-25A058F60C5C</key>
 		<dict>
 			<key>xpos</key>
-			<integer>30</integer>
+			<real>30</real>
 			<key>ypos</key>
-			<integer>3915</integer>
+			<real>3915</real>
 		</dict>
 		<key>C2C3C705-A4E7-44AB-BB2B-46F35B1A8E0E</key>
 		<dict>
 			<key>xpos</key>
-			<integer>580</integer>
+			<real>580</real>
 			<key>ypos</key>
-			<integer>670</integer>
+			<real>670</real>
 		</dict>
 		<key>CDFD158D-8C5A-459F-9164-A4FBF4C9E314</key>
 		<dict>
 			<key>xpos</key>
-			<integer>825</integer>
+			<real>825</real>
 			<key>ypos</key>
-			<integer>1725</integer>
+			<real>1725</real>
 		</dict>
 		<key>D52A87C2-E602-4F4F-A20E-DD9202A461E9</key>
 		<dict>
 			<key>note</key>
 			<string>Success in posting.</string>
 			<key>xpos</key>
-			<integer>800</integer>
+			<real>800</real>
 			<key>ypos</key>
-			<integer>440</integer>
+			<real>440</real>
 		</dict>
 		<key>D5939049-C73A-4872-9625-87A9F9BE886C</key>
 		<dict>
@@ -4872,112 +4914,114 @@ rename by iconmu from the Noun Project</string>
 			<key>note</key>
 			<string>Show current settings of workflow.</string>
 			<key>xpos</key>
-			<integer>45</integer>
+			<real>45</real>
 			<key>ypos</key>
-			<integer>1995</integer>
+			<real>1995</real>
 		</dict>
 		<key>D628D994-1BDE-4B90-89A6-19287F0AB363</key>
 		<dict>
 			<key>xpos</key>
-			<integer>210</integer>
+			<real>210</real>
 			<key>ypos</key>
-			<integer>895</integer>
+			<real>895</real>
 		</dict>
 		<key>E093D14C-64A4-4D4F-9D61-50FA6974204B</key>
 		<dict>
 			<key>xpos</key>
-			<integer>285</integer>
+			<real>285</real>
 			<key>ypos</key>
-			<integer>3240</integer>
+			<real>3240</real>
 		</dict>
 		<key>E269A06C-1525-47CC-9700-2E6CD335FA63</key>
 		<dict>
 			<key>xpos</key>
-			<integer>40</integer>
+			<real>40</real>
 			<key>ypos</key>
-			<integer>1525</integer>
+			<real>1525</real>
 		</dict>
 		<key>E5B0BAE1-FE98-4828-9D22-728EA77FCF47</key>
 		<dict>
 			<key>xpos</key>
-			<integer>295</integer>
+			<real>295</real>
 			<key>ypos</key>
-			<integer>70</integer>
+			<real>70</real>
 		</dict>
 		<key>E8B55F7A-B05E-4099-9607-A79E01B06FD8</key>
 		<dict>
 			<key>xpos</key>
-			<integer>285</integer>
+			<real>285</real>
 			<key>ypos</key>
-			<integer>2640</integer>
+			<real>2640</real>
 		</dict>
 		<key>E9FC9061-CE38-46EA-8919-604B8DC67453</key>
 		<dict>
 			<key>xpos</key>
-			<integer>285</integer>
+			<real>285</real>
 			<key>ypos</key>
-			<integer>3540</integer>
+			<real>3540</real>
 		</dict>
 		<key>EA97375D-329E-4A06-8BBF-FBF7329AA9CC</key>
 		<dict>
 			<key>note</key>
 			<string>Show successful cache update.</string>
 			<key>xpos</key>
-			<integer>1120</integer>
+			<real>1120</real>
 			<key>ypos</key>
-			<integer>240</integer>
+			<real>240</real>
 		</dict>
 		<key>EC26DEC8-AB37-411E-BFB2-73C7CB76C41C</key>
 		<dict>
 			<key>xpos</key>
-			<integer>1120</integer>
+			<real>1120</real>
 			<key>ypos</key>
-			<integer>1845</integer>
+			<real>1845</real>
 		</dict>
 		<key>EF1102C5-4180-496A-A4AF-1FDB7C59D7EE</key>
 		<dict>
 			<key>note</key>
 			<string>Error in posting.</string>
 			<key>xpos</key>
-			<integer>800</integer>
+			<real>800</real>
 			<key>ypos</key>
-			<integer>610</integer>
+			<real>610</real>
 		</dict>
 		<key>F20CC730-E792-4A3E-9C0D-84F0EB1A8816</key>
 		<dict>
 			<key>xpos</key>
-			<integer>365</integer>
+			<real>365</real>
 			<key>ypos</key>
-			<integer>1185</integer>
+			<real>1185</real>
 		</dict>
 		<key>F495558F-7866-454F-B070-80417D1419B6</key>
 		<dict>
 			<key>note</key>
 			<string>Search for a single tag. Actioning on an item will then show all bookmarks containing that tag.</string>
 			<key>xpos</key>
-			<integer>40</integer>
+			<real>40</real>
 			<key>ypos</key>
-			<integer>1135</integer>
+			<real>1135</real>
 		</dict>
 		<key>F5143EEF-D67B-4518-A5BA-1DFFD993A314</key>
 		<dict>
 			<key>note</key>
 			<string>Check for workflow updates.</string>
 			<key>xpos</key>
-			<integer>700</integer>
+			<real>700</real>
 			<key>ypos</key>
-			<integer>920</integer>
+			<real>920</real>
 		</dict>
 		<key>F7728DC2-A69E-415A-8833-57B85C8F54A8</key>
 		<dict>
 			<key>note</key>
 			<string>Find bookmark on Pinboard's site.</string>
 			<key>xpos</key>
-			<integer>375</integer>
+			<real>375</real>
 			<key>ypos</key>
-			<integer>600</integer>
+			<real>600</real>
 		</dict>
 	</dict>
+	<key>userconfigurationconfig</key>
+	<array/>
 	<key>version</key>
 	<string>0.16.12</string>
 	<key>webaddress</key>

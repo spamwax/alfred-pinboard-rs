@@ -1,8 +1,9 @@
 # Alfred Workflow for Pinboard
 
 [![Build/Test/Release Alfred Workflow](https://github.com/spamwax/alfred-pinboard-rs/actions/workflows/macos-universal.yml/badge.svg)](https://github.com/spamwax/alfred-pinboard-rs/actions/workflows/macos-universal.yml)
-![alfred-pinboard-rs](https://github.com/spamwax/alfred-pinboard-rs/actions/workflows/lint.yml/badge.svg)
- [![Build status](https://ci.appveyor.com/api/projects/status/3g5uvuocs52yc444/branch/master?svg=true)](https://ci.appveyor.com/project/spamwax/alfred-pinboard-rs/branch/master) 
+[![Clippy Lints](https://github.com/spamwax/alfred-pinboard-rs/actions/workflows/lint.yml/badge.svg)](https://github.com/spamwax/alfred-pinboard-rs/actions/workflows/lint.yml)
+[![Build status](https://ci.appveyor.com/api/projects/status/3g5uvuocs52yc444/branch/master?svg=true)](https://ci.appveyor.com/project/spamwax/alfred-pinboard-rs/branch/master) 
+[![SemVer](https://img.shields.io/github/v/tag/spamwax/alfred-pinboard-rs?color=green&label=SemVer&logo=semver&sort=semver)](CHANGELOG.md)
 
 Manage, post and **preview** your bookmarks on [Pinboard](https://pinboard.in) right from within [Alfred app](https://www.alfredapp.com).
 
@@ -36,6 +37,7 @@ After initial [setup](#installation--setup):
 - Safari
 - Chromium
 - Firefox (See [known issues](#known_issues) & a workaround)
+- Orion
 - Opera
 - Vivaldi
 - Brave
@@ -154,8 +156,7 @@ Additonally you can __Action__ on a tag item anywhere in this Workflow and use t
 
 ![image](./res/images/tag_rename_action.gif)
 
-**Note:** Pinboard tag renaming API lacks providing error message if `old_tag` is not in your tag collection!!! It basically says `success` even though no renaming was done!
-
+**Note:** See [known issues](#known_issues) for some limitations caused by Pinboard's API issues.
 
 ## Settings<a name="config"></a>
 
@@ -220,24 +221,20 @@ When fuzzy search is enabled, the tags/bookmarks that contain the query letters 
 ## Known Issues<a name="known_issues"></a>
 - **Firefox**: While tag suggestions and "Check if page is bookmarked" options are enabled, posting bookmark from Firefox is broken. Deleting bookmarks using `pind` won't work when Firefox is your active browser. Reason: Firefox does not properly support interacting with it programatically. As a workaround you can install the [alfred-firefox](https://github.com/deanishe/alfred-firefox) workflow. You will **not** be using that workflow directly, this workflow will use one of `alfred-firefox` functions to work around the mentioned issue.
 - If you get `cannot be opened because the developer cannot be verified.` error, check out [this issue](https://github.com/spamwax/alfred-pinboard-rs/issues/120) as well as the [post](https://www.alfredforum.com/topic/13824-workflow-fail-with-developer-cannot-be-verified-errors-in-catalina/?do=findComment&comment=72101) on Alfred forum
+- Renaming a tag will not be reflected immediately in local cache. It seems that Pinboard takes up to a minute to internally update your tags! Additionally, Pinboard's tag renaming API lacks providing error message if `old_tag` is not in your tag collection!!! It basically says `success` even though no renaming was done!
 - This workflow is setup to work with Aflred 4. It may or may not work with previous version as it has not been tested for them.
 
-## Alfred 3 Support & Issues<a name="alfred_3_support"></a>
-- Alfred 4: If upgrading workflow from `0.15.12` (or `0.14.14` and before), you may have to directly [download](https://github.com/spamwax/alfred-pinboard-rs/releases/latest) latest version and then open it in Finder
-- Alfred 4 has made some changes to internal structure of workflows. Therefore if you updated this workflow through the built-in *automatic update*, it's very *likely* that it'll stop working. If that happens, you can fix it by first deleteing & then re-installing the workflow by [downloading the last version (0.14.11)](https://github.com/spamwax/alfred-pinboard-rs/releases/tag/0.14.11) that has Alfred 3 format.
-- Moving forward, new features, changes & bug fixes will first target Alfred 4 users and then (time permitting) will be ported back to Alfred 3.
+## Alfred 4 Support & Issues<a name="alfred_4_support"></a>
+- Alfred 4 users: If upgrading workflow from `0.16.12` (or `0.16.7` and before), you may have to directly [download](https://github.com/spamwax/alfred-pinboard-rs/releases/latest) latest version and then open it in Finder
+- Alfred 5 has made some changes to internal structure of workflows. Therefore if you updated this workflow through the built-in *automatic update*, it's *likely* that it'll stop working. If that happens, you can fix it by first deleteing & then re-installing the workflow by [downloading the last version (0.16.12)](https://github.com/spamwax/alfred-pinboard-rs/releases/tag/0.16.12) that has Alfred 4 format.
+- Moving forward, new features, changes & bug fixes will first target Alfred 5 users and then (time permitting) will be ported back to Alfred 4.
 
 ## TODO
 
 I wish to add the following in the coming releases:
 
-- ~~Replace current fuzzy search with `fzf`-like logic.~~
-- ~~Let users delete a selected bookmark from witin Alfred.~~
-- ~~Add a proper logging facility to Rust code.~~ (uses log_env)
-- ~~Use a better error mechanism (maybe [failure](https://crates.io/crates/failure)?)~~
-
 ## Feedback / Bugs
-This is my first non-trivial project using Rust language so so your [feedback or bug](https://github.com/spamwax/alfred-pinboard-rs/compare) reports are greatly appreciated.
+This is my first non-trivial project using Rust language so so your [feedback or bug](https://github.com/spamwax/alfred-pinboard-rs/discussions) reports are greatly appreciated.
 
 ## License
 This open source software is licensed under [MIT License](./LICENSE.md).

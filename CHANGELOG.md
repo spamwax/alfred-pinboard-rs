@@ -5,6 +5,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- Release for Alfred 5
+- Add support for Orion browser.
+### Changed
+- Add a flag to update() function to control a force update of the cache.
+
+## [0.16.12] - 2222-07-13
+### Changed
+- Improve notifications messages
+- Use codegen=1 option of cargo to improve lto
 
 ## [0.16.11] - 2022-07-10
 ### Changed

@@ -4,8 +4,8 @@ use std::io::Write;
 
 #[allow(clippy::option_map_unit_fn)]
 impl<'api, 'pin> Runner<'api, 'pin> {
-    pub fn update_cache(&mut self) {
-        match self.update() {
+    pub fn update_cache(&mut self, force: bool) {
+        match self.update(force) {
             Ok(s) => io::stdout()
                 .write_all(s.as_bytes())
                 .expect("Couldn't write to stdout"),
@@ -19,7 +19,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
         }
     }
 
-    fn update(&mut self) -> Result<String, Box<dyn std::error::Error>> {
+    fn update(&mut self, force: bool) -> Result<String, Box<dyn std::error::Error>> {
         info!("Starting in update_cache");
         match self
             .pinboard
@@ -35,7 +35,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                 .into())
             }
             Ok(needs_update) => {
-                if needs_update {
+                if needs_update || force {
                     debug!("  cache neeeds updating.");
                     self.pinboard
                         .as_mut()

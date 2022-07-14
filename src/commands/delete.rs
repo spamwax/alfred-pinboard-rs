@@ -24,7 +24,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                     .write_all(s.as_bytes())
                     .expect("Couldn't write to stdout");
                 if self.config.as_ref().unwrap().auto_update_cache {
-                    self.update_cache();
+                    self.update_cache(false);
                 }
             }
             Err(e) => {

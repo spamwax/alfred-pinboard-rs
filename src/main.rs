@@ -54,6 +54,8 @@ use crate::commands::Runner;
 // use commands::{config, delete, list, post, search, update};
 use crate::commands::config;
 
+// TODO: Implement Debug for SubCommand in cli.rs so we don't show auth_token in Alfred's debug
+//       window.  <09-10-, Hamidme> //
 // TODO: Add a command to search pins that have 'toread' enabled. <01-09-21, Hamid> //
 // TODO: We need to come up with actual meaningful tests and deploy them to CIs. <23-08-21, Hamid> //
 // TODO: parse Alfred preferences and get number of visible items?
@@ -178,7 +180,7 @@ fn main() {
         };
         match opt.cmd {
             SubCommand::Update => {
-                runner.update_cache();
+                runner.update_cache(false);
             }
             SubCommand::List { .. } => {
                 runner.list(opt);

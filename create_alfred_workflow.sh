@@ -19,7 +19,7 @@ cargo update || exit
 cargo generate-lockfile
 
 # Run clippy
-if ! cargo +nightly clippy; then
+if ! cargo clippy --tests --workspace -- -Dclippy::all -Dclippy::pedantic -D warnings; then
     exit
 fi
 
