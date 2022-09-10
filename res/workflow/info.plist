@@ -3665,7 +3665,7 @@ if [ $? -ne 0 ]; then
 elif [[ "$1" == "true" ]]; then
 	echo "will only use 'tags' of bookmarks when searching."
 else
-    echo "will look use most fields of bookmarks when searching."
+    echo "will use most fields of bookmarks when searching."
 fi</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
@@ -5023,7 +5023,7 @@ rename by iconmu from the Noun Project</string>
 	<key>userconfigurationconfig</key>
 	<array/>
 	<key>version</key>
-	<string>0.16.12</string>
+	<string>0.17.0</string>
 	<key>webaddress</key>
 	<string>https://github.com/spamwax/alfred-pinboard-rs</string>
 </dict>
