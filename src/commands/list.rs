@@ -111,6 +111,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                     // search_list_of_tags returns all tags for empty queries.
                     last_query_word_tag = Tag::new((*last_query_word).to_string(), 0).set_new();
                     let mut filter_idx = None;
+                    #[allow(clippy::single_match_else)]
                     let items = match results {
                         Some(i) => {
                             debug!("Found {} tags.", i.len());
@@ -339,7 +340,7 @@ fn retrieve_popular_tags(exec_counter: usize) -> Result<Vec<Tag>, Box<dyn std::e
             Ok(tags) => tags,
         };
         info!("popular tags: {:?}", tags);
-        Data::save_to_file(&ptags_fn, &tags)?;
+        Data::save_to_file(ptags_fn, &tags)?;
     } else {
         warn!(
             "**** reading suggested tags from cache file: {:?}",

@@ -144,7 +144,7 @@ impl Config {
 
     pub fn save(&self) -> Result<(), Box<dyn std::error::Error>> {
         debug!("Starting in save");
-        create_dir_all(&self.data_dir())?;
+        create_dir_all(self.data_dir())?;
 
         let mut mydata = Data::load(CONFIG_FILE_NAME)?;
         mydata.clear();
