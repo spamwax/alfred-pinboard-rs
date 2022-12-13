@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# TODO: WHen a PR is merged, copying content of $workflow_dir will possibly overwrite the content of PR!
+# We need to find a way of fixing this while making sure changes that I make to $workflow_dir can also be automatically
+# added for release creation. <13-12-22, hamid> #
 # set -x
 version_tag=$1
 msg=$2
