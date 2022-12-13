@@ -2,6 +2,9 @@ on:
   push:
     branches:
       - develop
+  pull_request:
+    branches:
+      - master
   workflow_dispatch:
   # For quickly detecting important differences in runner configurations
 
@@ -16,7 +19,7 @@ jobs:
   build_universal:
     name: Run non-fat tests on ubuntu
     runs-on: ubuntu-latest
-    if: ${{ github.ref_type == 'branch' && github.ref_name == 'develop' }}
+    # if: ${{ github.ref_type == 'branch' && github.ref_name == 'develop' }}
     steps:
       - uses: actions/checkout@v2
         with:

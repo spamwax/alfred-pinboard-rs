@@ -4,9 +4,6 @@ on:
       - master
     tags:
       - '*'
-  pull_request:
-    branches:
-      - master
   workflow_dispatch:
   # For quickly detecting important differences in runner configurations
 
