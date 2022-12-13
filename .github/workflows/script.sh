@@ -53,5 +53,5 @@ chmod u+x ./alfred-pinboard-rs
 if [[ "$RELEASE_COMMIT" == "true" ]]; then
   build_alfred_bundle "$src" "$stage"
 else
-  .github/workflows/run_tests.sh ./alfred-pinboard-rs
+  .github/workflows/run_tests.sh ./alfred-pinboard-rs "$PINBOARD_TOKEN"
 fi
