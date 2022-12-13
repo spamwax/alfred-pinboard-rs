@@ -20,12 +20,19 @@ run_tests() {
     mkdir -p "$workflow_dir"
     export alfred_workflow_data="$workflow_dir"
     export alfred_workflow_cache="$workflow_dir"
-    $runner config --authorization "${PINBOARD_TOKEN}"
-    $runner update
+    if grep -Eq '[0-9]+/merge' <<< "$GITHUB_REF_NAME"; then
+        echo "This is a pull request!"
+        PINBOARD_TOKEN="hamid:123456"
+        $runner config --authorization "${PINBOARD_TOKEN}"
+    else
+        echo "This is NOT a pull request"
+        $runner config --authorization "${PINBOARD_TOKEN}"
+        $runner update
+        sleep 2
+        $runner search -U rust async
+    fi
     $runner config -d
-    sleep 2
     echo
-    $runner search -U rust async
     ls -la "$alfred_workflow_data"
     sleep 2
     ls -la "$2"
