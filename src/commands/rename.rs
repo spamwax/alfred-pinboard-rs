@@ -26,7 +26,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
         debug!("  matching result: {:?}", &r);
         if let Err(e) = r {
             io::stdout()
-                .write_all(format!("Error: {}", e).as_ref())
+                .write_all(format!("Error: {e}").as_ref())
                 .expect("Couldn't write to stdout");
             process::exit(1);
         } else {

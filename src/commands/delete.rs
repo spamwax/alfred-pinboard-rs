@@ -14,10 +14,7 @@ use std::io::Write;
 impl<'api, 'pin> Runner<'api, 'pin> {
     pub fn delete(&mut self, cmd: SubCommand) {
         debug!("Starting in delete");
-        let (url, tag) = match cmd {
-            SubCommand::Delete { url, tag } => (url, tag),
-            _ => unreachable!(),
-        };
+        let SubCommand::Delete { url, tag } = cmd else { unreachable!() };
         match self.perform_delete(url, tag) {
             Ok(s) if !s.is_empty() => {
                 io::stdout()

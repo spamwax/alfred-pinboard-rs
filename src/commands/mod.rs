@@ -87,8 +87,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                             "New Version Is Available for Rusty Pin Workflow! 🎉",
                         )
                         .subtitle(format!(
-                            "Click to download & upgrade {} ⟶ {}",
-                            old_version, new_version
+                            "Click to download & upgrade {old_version} ⟶ {new_version}"
                         ))
                         .icon_path("auto_update.png")
                         .variable("workflow_update_ready", "1")
