@@ -27,10 +27,10 @@ jobs:
     strategy:
       matrix:
         os: [macos-11, macos-12]
-        rust: [1.56.0, stable]
+        rust: [1.60.0, stable]
         exclude:
           - os: macos-12
-            rust: 1.56.0
+            rust: 1.60.0
 
     runs-on: ${{ matrix.os }}
     outputs:
@@ -54,10 +54,10 @@ jobs:
     strategy:
       matrix:
         os: [macos-11, macos-12]
-        rust: [1.56.0, stable]
+        rust: [1.60.0, stable]
         exclude:
           - os: macos-12
-            rust: 1.56.0
+            rust: 1.60.0
     runs-on: ${{ matrix.os }}
     needs: check_if_tagged
     if: ${{ needs.check_if_tagged.outputs.istagged == 0 || github.ref_type == 'tag' }}
@@ -72,6 +72,8 @@ jobs:
           target: aarch64-apple-darwin
           override: true
 
+      - name: Show macOS Version
+        run: sw_vers
       - name: Set SDKROOT
         run: echo "SDKROOT=$(xcrun -sdk macosx$OSX_SDK_VERSION --show-sdk-path)" >> $GITHUB_ENV
       - name: Set MACOSX_DEPLOYMENT_TARGET
