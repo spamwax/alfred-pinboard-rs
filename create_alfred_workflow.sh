@@ -36,6 +36,15 @@ if ! cargo clippy --tests --workspace -- -Dclippy::all -Dclippy::pedantic -D war
     exit
 fi
 
+# Use rustc 1.65 (should be the same as macos-universal.yml) to ensure that github's workflow doesn't fail
+MRV=1.65
+printf "\n-> %sSetting rustc to %s%s%s\n" "${CYAN}" "${RED}" "$MRV" "${NC}"
+rustup override set "$MRV"
+cargo build > "build_$MRV.log" || exit
+# Switch back to stable
+printf "\n-> %sSetting rustc to %s%s%s\n" "${CYAN}" "${RED}" "stable" "${NC}"
+rustup override set stable
+
 # Bump Cargo.toml version
 echo "Bumping Cargo.toml version to $version_tag"
 python res/fix_cargo_version.py "$version_tag" || exit
