@@ -26,11 +26,9 @@ jobs:
     name: Check if tagged
     strategy:
       matrix:
-        os: [macos-10.15, macos-11, macos-12]
+        os: [macos-11, macos-12]
         rust: [1.56.0, stable]
         exclude:
-          - os: macos-11
-            rust: 1.56.0
           - os: macos-12
             rust: 1.56.0
 
@@ -55,11 +53,9 @@ jobs:
     name: Build Universal Binary
     strategy:
       matrix:
-        os: [macos-10.15, macos-11, macos-12]
+        os: [macos-11, macos-12]
         rust: [1.56.0, stable]
         exclude:
-          - os: macos-11
-            rust: 1.56.0
           - os: macos-12
             rust: 1.56.0
     runs-on: ${{ matrix.os }}
@@ -112,14 +108,14 @@ jobs:
       - name: Upload for release
         id: upload_artifact
         uses: actions/upload-artifact@v2
-        if: ${{ github.ref_type == 'tag' && matrix.rust == 'stable' && matrix.os == 'macos-10.15' }}
+        if: ${{ github.ref_type == 'tag' && matrix.rust == 'stable' && matrix.os == 'macos-11' }}
         with:
           name: workflow-upload
           path: AlfredPinboardRust-${{ github.ref_name }}.alfredworkflow
 
   release_alfred:
     name: Release Workflow
-    runs-on: macos-10.15
+    runs-on: macos-11
     needs: build_universal
     if: ${{ github.ref_type == 'tag' }}
     steps:
