@@ -5024,7 +5024,7 @@ rename by iconmu from the Noun Project</string>
 	<key>userconfigurationconfig</key>
 	<array/>
 	<key>version</key>
-	<string>0.17.0</string>
+	<string>0.17.1</string>
 	<key>webaddress</key>
 	<string>https://github.com/spamwax/alfred-pinboard-rs</string>
 </dict>

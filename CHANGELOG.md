@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.17.1] - 2023-06-22
+### Added
+- Add support for Arch browser
+- Use newer rustc version in github's Actions.
+- Update workflow's icon.
+
 ## [0.17.0] - 2022-09-10
 ### Added
 - First release for new Alfred 5
