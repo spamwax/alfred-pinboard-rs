@@ -5,6 +5,8 @@ CMakeLists.txt
 auth_token.txt
 .rustfmt.toml
 build.log
+build_*.log
 AlfredPinboardRust.alfredworkflow
 Cargo.toml.back
 run_exec.sh
+alfred-pinboard-rs
