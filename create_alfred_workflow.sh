@@ -17,25 +17,32 @@ alfred_pinboard_rs="/Volumes/manzel/hamid/src/learn/rust/alfred-pinboard-rs"
 workflow_dir="$HOME/Documents/Alfred.alfredpreferences/workflows/user.workflow.7F236DA2-2C66-4C31-B1D5-7DFDCB7CA715"
 res_dir="$alfred_pinboard_rs/res/workflow"
 
+cd "$alfred_pinboard_rs" || exit
 git checkout master || exit
+
+echo "Copying resoursces from Alfred's workflow dir..."
+cp -r "$workflow_dir"/* "$res_dir" || exit
+if ! git diff --name-only --diff-filter=AMDR --quiet "$res_dir"; then
+    echo "$res_dir"
+    echo "  is different than git repo."
+    echo "  Check if we are not overwriting changes from PRs or upstream."
+    git diff --name-status --diff-filter=AMDR "$res_dir"
+    exit
+fi
 cargo update || exit
-cargo generate-lockfile
 
 # Run clippy
 if ! cargo clippy --tests --workspace -- -Dclippy::all -Dclippy::pedantic -D warnings; then
     exit
 fi
 
-cd "$alfred_pinboard_rs" || exit
-
 # Bump Cargo.toml version
 echo "Bumping Cargo.toml version to $version_tag"
-python res/fix_cargo_version.py "$version_tag"
+python res/fix_cargo_version.py "$version_tag" || exit
+cargo generate-lockfile || exit
+
 echo "Building new release..."
 cargo build > build.log 2>&1
-
-echo "Copying resoursces from Alfred's workflow dir..."
-cp "$workflow_dir"/* "$res_dir" || exit
 
 echo "Copying executable to workflow's folder..."
 strip target/release/alfred-pinboard-rs
