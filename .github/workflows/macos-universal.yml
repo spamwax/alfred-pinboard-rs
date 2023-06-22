@@ -47,7 +47,6 @@ jobs:
           cd ${{ github.workspace }}
           value=$(git describe --tags --abbrev=0 --exact-match ${{ github.sha }}) || true
           [ -n "$value" ] && value=1 || value=0
-          # echo "::set-output name=tagged::$value"
           echo "tagged=$value" >> $GITHUB_OUTPUT
   build_universal:
     name: Build Universal Binary
