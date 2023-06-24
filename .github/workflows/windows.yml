@@ -1,0 +1,38 @@
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+    branches:
+      - master
+  workflow_dispatch:
+  # For quickly detecting important differences in runner cinfiguratons.
+
+name: Windows build
+
+env:
+  RELEASE_COMMIT: ${{ github.ref_type == 'tag' }}
+  PINBOARD_TOKEN: ${{ secrets.PINBOARD_TOKEN }}
+
+jobs:
+  build_windows:
+    name: Run non-fat testh on Windows
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          override: true
+
+      - name: Build x86_64 on Windows
+        uses: actions-rs/cargo@v1
+        if: ${{ env.RELEASE_COMMIT != 'true' }}
+        with:
+          command: build
+
+      - name: Run tests
+        run: .github/workflows/run_tests_win.bat {{ github.workspace }}/target/debug/alfred-pinboard-rs
