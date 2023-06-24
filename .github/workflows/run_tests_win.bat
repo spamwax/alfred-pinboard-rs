@@ -1,3 +1,5 @@
+set executable=%1
+
 set RUST_BACKTRACE=1
 set alfred_debug=1
 set alfred_version=4.0.1
@@ -10,11 +12,10 @@ set alfred_workflow_cache="%GITHUB_WORKSPACE%\data_cache"
 
 REM set TARGET=x86_64-pc-windows-msvc
 set working_dir="%GITHUB_WORKSPACE%"
-mkdir "%GITHUB_WORKSPACE%"
+
+dir %working_dir%
 
 cargo build &&
 cargo run -- config --authorization hamid:12345 &&
 cargo run -- config -d &&
 cargo test -- --nocapture --test-threads=1
-
-
