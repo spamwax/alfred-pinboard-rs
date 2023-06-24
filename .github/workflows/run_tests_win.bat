@@ -15,7 +15,7 @@ set working_dir="%GITHUB_WORKSPACE%"
 
 dir %working_dir%
 
-cargo build &&
-cargo run -- config --authorization hamid:12345 &&
-cargo run -- config -d &&
+cargo build && ^
+cargo run -- config --authorization hamid:12345 && ^
+cargo run -- config -d && ^
 cargo test -- --nocapture --test-threads=1

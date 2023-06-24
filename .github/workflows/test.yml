@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
   # For quickly detecting important differences in runner configurations
 
-name: tests
+name: tests on linux
 
 env:
   RELEASE_COMMIT: ${{ github.ref_type == 'tag' }}
