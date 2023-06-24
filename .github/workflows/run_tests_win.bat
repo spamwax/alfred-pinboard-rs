@@ -1,5 +1,7 @@
 set executable=%1
 
+echo %executable%
+
 set RUST_BACKTRACE=1
 set alfred_debug=1
 set alfred_version=4.0.1
