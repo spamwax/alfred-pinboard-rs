@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
   # For quickly detecting important differences in runner cinfiguratons.
 
-name: windows build
+name: windows tests
 
 env:
   RELEASE_COMMIT: ${{ github.ref_type == 'tag' }}
