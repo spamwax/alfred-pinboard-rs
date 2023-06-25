@@ -1,3 +1,5 @@
+use core::fmt;
+
 #[derive(StructOpt, Debug)]
 #[structopt(name = "alfred-pinboard")]
 /// Command line component of Alfred Workflow for Pinboard (Written in Rust!)
@@ -12,7 +14,7 @@ pub struct Opt {
 }
 
 /// CLI verbs/commands and their options.
-#[derive(StructOpt, Debug)]
+#[derive(StructOpt)]
 pub enum SubCommand {
     #[structopt(name = "config")]
     /// Configures options and settings of interacting with API and searching items.
@@ -178,4 +180,95 @@ pub enum SubCommand {
         #[structopt(name = "download", short = "d")]
         download: bool,
     },
+}
+
+// We implement fmt::Debug so that auth_token is not leaked on debug logs when the user sets
+// it using `./alfred-pinboard-rs config --authorization`
+impl fmt::Debug for SubCommand {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match self {
+            SubCommand::Config {
+                display,
+                auth_token: _,
+                number_pins,
+                number_tags,
+                shared,
+                toread,
+                fuzzy,
+                tags_only,
+                auto_update,
+                suggest_tags,
+                check_bookmarked_page,
+                show_url_vs_tags,
+            } => f
+                .debug_struct("Config")
+                .field("display", display)
+                .field("auth_token", &"***".to_owned())
+                .field("number_pins", number_pins)
+                .field("number_tags", number_tags)
+                .field("shared", shared)
+                .field("toread", toread)
+                .field("fuzzy", fuzzy)
+                .field("tags_only", tags_only)
+                .field("auto_update", auto_update)
+                .field("suggest_tags", suggest_tags)
+                .field("check_bookmarked_page", check_bookmarked_page)
+                .field("show_url_vs_tags", show_url_vs_tags)
+                .finish(),
+            SubCommand::List {
+                tags,
+                suggest,
+                query,
+                no_existing_page,
+            } => f
+                .debug_struct("List")
+                .field("tags", tags)
+                .field("suggest", suggest)
+                .field("query", query)
+                .field("no_existing_page", no_existing_page)
+                .finish(),
+            SubCommand::Post {
+                tags,
+                description,
+                shared,
+                toread,
+            } => f
+                .debug_struct("Post")
+                .field("tags", tags)
+                .field("description", description)
+                .field("shared", shared)
+                .field("toread", toread)
+                .finish(),
+            SubCommand::Delete { url, tag } => f
+                .debug_struct("Delete")
+                .field("url", url)
+                .field("tag", tag)
+                .finish(),
+            SubCommand::Rename { tags } => f.debug_struct("Rename").field("tags", tags).finish(),
+            SubCommand::Search {
+                tags,
+                title,
+                description,
+                url,
+                showonlyurl,
+                exacttag,
+                query,
+            } => f
+                .debug_struct("Search")
+                .field("tags", tags)
+                .field("title", title)
+                .field("descriptionb", description)
+                .field("url", url)
+                .field("showonlyurl", showonlyurl)
+                .field("exacttag", exacttag)
+                .field("query", query)
+                .finish(),
+            SubCommand::Update => write!(f, "{}", "Update"),
+            SubCommand::SelfUpdate { check, download } => f
+                .debug_struct("SelfUpdate")
+                .field("check", check)
+                .field("download", download)
+                .finish(),
+        }
+    }
 }
