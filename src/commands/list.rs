@@ -6,7 +6,6 @@ use alfred::{Item, ItemBuilder, Modifier};
 use alfred_rs::Data;
 
 impl<'api, 'pin> Runner<'api, 'pin> {
-    // pub fn list(&self, cmd: SubCommand) {
     pub fn list(&self, opt: Opt) {
         let cmd = opt.cmd;
         let query_item = opt.query_as_item;
@@ -322,16 +321,9 @@ fn retrieve_popular_tags(exec_counter: usize) -> Result<Vec<Tag>, Box<dyn std::e
     let config = Config::setup()?;
     let pinboard = Pinboard::new(config.auth_token, alfred::env::workflow_cache())?;
 
-    // let ptags_fn = config.cache_dir().join("popular.tags.cache");
     let ptags_fn = "popular.tags.cache";
     let tags;
-    // let metadata = fs::metadata("foo.txt")?;
 
-    // if let Ok(time) = metadata.created() {
-    //     println!("{:?}", time);
-    // } else {
-    //     println!("Not supported on this platform");
-    // }
     if exec_counter == 1 {
         let tab_info = browser_info::get()?;
         warn!("tab_info.url: {:?}", tab_info.url);

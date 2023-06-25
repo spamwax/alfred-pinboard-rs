@@ -13,7 +13,6 @@ impl<'api, 'pin> Runner<'api, 'pin> {
                 let msg = ["Error: ", e.to_string().as_str()].concat();
                 io::stdout()
                     .write_all(msg.as_bytes())
-                    // .write_all(e.to_string().as_bytes())
                     .expect("Couldn't write to stdout");
             }
         }
