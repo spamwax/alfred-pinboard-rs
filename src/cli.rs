@@ -263,7 +263,7 @@ impl fmt::Debug for SubCommand {
                 .field("exacttag", exacttag)
                 .field("query", query)
                 .finish(),
-            SubCommand::Update => write!(f, "{}", "Update"),
+            SubCommand::Update => write!(f, "Update"),
             SubCommand::SelfUpdate { check, download } => f
                 .debug_struct("SelfUpdate")
                 .field("check", check)
