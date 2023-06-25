@@ -189,7 +189,7 @@ impl fmt::Debug for SubCommand {
         match self {
             SubCommand::Config {
                 display,
-                auth_token: _,
+                auth_token,
                 number_pins,
                 number_tags,
                 shared,
@@ -200,21 +200,23 @@ impl fmt::Debug for SubCommand {
                 suggest_tags,
                 check_bookmarked_page,
                 show_url_vs_tags,
-            } => f
-                .debug_struct("Config")
-                .field("display", display)
-                .field("auth_token", &"***".to_owned())
-                .field("number_pins", number_pins)
-                .field("number_tags", number_tags)
-                .field("shared", shared)
-                .field("toread", toread)
-                .field("fuzzy", fuzzy)
-                .field("tags_only", tags_only)
-                .field("auto_update", auto_update)
-                .field("suggest_tags", suggest_tags)
-                .field("check_bookmarked_page", check_bookmarked_page)
-                .field("show_url_vs_tags", show_url_vs_tags)
-                .finish(),
+            } => {
+                let token_string = auth_token.as_ref().map_or("None", |_| "***");
+                f.debug_struct("Config")
+                    .field("display", display)
+                    .field("auth_token", &token_string)
+                    .field("number_pins", number_pins)
+                    .field("number_tags", number_tags)
+                    .field("shared", shared)
+                    .field("toread", toread)
+                    .field("fuzzy", fuzzy)
+                    .field("tags_only", tags_only)
+                    .field("auto_update", auto_update)
+                    .field("suggest_tags", suggest_tags)
+                    .field("check_bookmarked_page", check_bookmarked_page)
+                    .field("show_url_vs_tags", show_url_vs_tags)
+                    .finish()
+            }
             SubCommand::List {
                 tags,
                 suggest,
