@@ -35,4 +35,4 @@ jobs:
           command: build
 
       - name: Run tests
-        run: .github/workflows/run_tests_win.bat {{ github.workspace }}/target/debug/alfred-pinboard-rs
+        run: .github/workflows/run_tests_win.bat ${{ github.workspace }}/target/debug/alfred-pinboard-rs
