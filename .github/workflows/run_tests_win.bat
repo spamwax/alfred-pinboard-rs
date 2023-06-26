@@ -2,8 +2,8 @@ set executable=%1
 
 echo %executable%
 
-Rem Turns the echo off so that each command will not be shown when executed
 @echo off
+
 set RUST_BACKTRACE=1
 set alfred_debug=1
 set alfred_version=4.5.1
@@ -14,10 +14,7 @@ set alfred_workflow_bundleid="cc.hamid.alfred-pinboard-rs"
 set alfred_workflow_data=%GITHUB_WORKSPACE%\data_cache
 set alfred_workflow_cache=%GITHUB_WORKSPACE%\data_cache
 
-REM set TARGET=x86_64-pc-windows-msvc
 set working_dir="%GITHUB_WORKSPACE%"
-
-echo on
 
 dir %working_dir%
 mkdir %alfred_workflow_data%
