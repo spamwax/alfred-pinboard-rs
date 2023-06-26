@@ -103,7 +103,7 @@ impl Config {
     }
 
     pub fn setup() -> Result<Config, Box<dyn std::error::Error>> {
-        debug!("Starting in setup");
+        debug!("Starting in workflow_config::setup");
         let (data_dir, cache_dir) = Config::get_workflow_dirs();
         let config = Config::read(data_dir, cache_dir)?;
         Ok(config)

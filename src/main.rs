@@ -207,7 +207,7 @@ fn main() {
 }
 
 fn setup<'a, 'p>() -> Result<(Config, Pinboard<'a, 'p>), Box<dyn std::error::Error>> {
-    debug!("Starting in setup");
+    debug!("Starting in main::setup");
     let config = Config::setup()?;
     let mut pinboard = Pinboard::new(config.auth_token.clone(), alfred::env::workflow_cache())?;
     pinboard.enable_fuzzy_search(config.fuzzy_search);
