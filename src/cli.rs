@@ -201,7 +201,7 @@ impl fmt::Debug for SubCommand {
                 check_bookmarked_page,
                 show_url_vs_tags,
             } => {
-                let token = auth_token.as_ref().map_or(None, |_| Some("***"));
+                let token = auth_token.as_ref().map(|_| Some("***"));
                 f.debug_struct("Config")
                     .field("display", display)
                     .field("auth_token", &token)
