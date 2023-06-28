@@ -327,7 +327,7 @@ fn retrieve_popular_tags(exec_counter: usize) -> Result<Vec<Tag>, Box<dyn std::e
     if exec_counter == 1 {
         let tab_info = browser_info::get()?;
         warn!("tab_info.url: {:?}", tab_info.url);
-        tags = match pinboard.popular_tags(&tab_info.url) {
+        tags = match pinboard.pinboard.popular_tags(&tab_info.url) {
             Err(e) => vec![format!("ERROR: fetching popular tags: {:?}", e)],
             Ok(tags) => tags,
         };

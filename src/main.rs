@@ -32,6 +32,7 @@ extern crate log;
 extern crate alfred;
 extern crate rusty_pin;
 
+use chrono::Utc;
 use std::borrow::Cow;
 use std::collections::HashMap;
 use std::env;
@@ -208,14 +209,34 @@ fn main() {
 
 fn setup<'a, 'p>() -> Result<(Config, Pinboard<'a, 'p>), Box<dyn std::error::Error>> {
     debug!("Starting in main::setup");
-    let config = Config::setup()?;
+    let mut config = Config::setup()?;
     let mut pinboard = Pinboard::new(config.auth_token.clone(), alfred::env::workflow_cache())?;
-    pinboard.enable_fuzzy_search(config.fuzzy_search);
-    pinboard.enable_tag_only_search(config.tag_only_search);
-    pinboard.enable_private_new_pin(config.private_new_pin);
-    pinboard.enable_toread_new_pin(config.toread_new_pin);
 
-    Ok((config, pinboard))
+    if let rusty_pin::pinboard::CacheState::Hot = pinboard.cache_state {
+        config.update_time = Utc::now();
+        debug!("We have a HOT cache!!!");
+        config.save().map_err(|e| {
+            error!("{}", e.to_string());
+            crate::AlfredError::CacheUpdateFailed(
+                "saving cache update timestamp failed.".to_string(),
+            )
+        })?;
+        debug!("{:?}", config);
+    } else {
+        debug!("We have a COLD cache!!!");
+    }
+    pinboard.pinboard.enable_fuzzy_search(config.fuzzy_search);
+    pinboard
+        .pinboard
+        .enable_tag_only_search(config.tag_only_search);
+    pinboard
+        .pinboard
+        .enable_private_new_pin(config.private_new_pin);
+    pinboard
+        .pinboard
+        .enable_toread_new_pin(config.toread_new_pin);
+
+    Ok((config, pinboard.pinboard))
 }
 
 fn write_to_alfred<'a, 'b, I, J>(items: I, supports_json: bool, vars: Option<J>)
