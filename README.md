@@ -238,3 +238,8 @@ This is my first non-trivial project using Rust language so so your [feedback or
 
 ## License
 This open source software is licensed under [MIT License](./LICENSE.md).
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=spamwax/alfred-pinboard-rs&type=Date)](https://star-history.com/#spamwax/alfred-pinboard-rs&Date)
+
