@@ -49,22 +49,28 @@ fi
 MRV=1.65
 printf "\n-> %sSetting rustc to %s%s%s\n" "${CYAN}" "${RED}" "$MRV" "${NC}"
 rustup override set "$MRV"
-cargo build > "build_$MRV.log" || exit
+cargo update
+cargo fmt || printf 'cargo fmt %sfailed!%s\n' "${RED}" "${NC}"
+cargo clippy --tests --workspace -- -Dclippy::all -Dclippy::pedantic -D warnings || printf 'cargo clippy %sfailed!%s\n' "${RED}" "${NC}"
+cargo build > "build_$MRV.log" || printf 'cargo build %sfailed!%s\n' "${RED}" "${NC}"
+
 # Switch back to stable
 printf "\n-> %sSetting rustc to %s%s%s\n" "${CYAN}" "${RED}" "stable" "${NC}"
 rustup override set stable
+cargo fmt || printf 'cargo fmt %sfailed!%s\n' "${RED}" "${NC}"
+cargo clippy --tests --workspace -- -Dclippy::all -Dclippy::pedantic -D warnings || printf 'cargo clippy %sfailed!%s\n' "${RED}" "${NC}"
 
 # Bump Cargo.toml version
 printf "\n-> %sBumping Cargo.toml version to %s%s%s\n" "${CYAN}" "${RED}" "$version_tag" "${NC}"
 python res/fix_cargo_version.py "$version_tag" || exit
 cargo generate-lockfile || exit
 
-printf "\n-> %sBuilding new release...%s\n" "${CYAN}" "${NC}"
+printf "\n-> %sBuilding the crate...%s\n" "${CYAN}" "${NC}"
 cargo build > build.log 2>&1
 
 printf "\n-> %sCopying executable to workflow's folder...%s\n" "${CYAN}" "${NC}"
-strip target/release/alfred-pinboard-rs
-cp target/release/alfred-pinboard-rs "$res_dir"
+strip target/debug/alfred-pinboard-rs
+cp target/debug/alfred-pinboard-rs "$res_dir"
 
 printf "\n-> %sUpdating version in info.plist%s\n" "${CYAN}" "${NC}"
 # version_tag=$(git describe --tags --abbrev=0)

@@ -69,6 +69,8 @@ use crate::commands::config;
 // TODO: Try to reduce number of calls to get_browser_info in list.rs <04-04-20, hamid>
 // TODO: Separate finding the browser's info into a new separate sud-command so that delete.rs
 // does one thing which is deleting and not trying to find the browser's. <07-04-20, hamid>
+// TODO: Implement one of the more common fuzzy search algorithms (such as fzf or ) instead of just
+// using REGEX to find the entered tokens.
 
 #[derive(Debug, Error)]
 pub enum AlfredError {

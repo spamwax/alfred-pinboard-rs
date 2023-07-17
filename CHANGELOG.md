@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- Don't show auth_token in logs when 'config' subcommand is used with --authorization option.
+- Don't re-downolad pins if rusty-pin just did a fresh download.
+- Bump dependency versions (env_logger, dirs)
 
 ## [0.17.1] - 2023-06-22
 ### Added
