@@ -96,6 +96,7 @@ If you want to add extra description to the bookmark you can add it after a semi
 If the current page is already saved, you will be notified. However the workflow assumes that:
 
 - `http://example.com/list.html`
+- `http://www.example.com/list.html`
 - `https://example.com/list.html`
 - `http://example.com/list.html#fragment`
 

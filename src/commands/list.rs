@@ -250,9 +250,11 @@ fn is_page_bookmarked(pinboard: &Pinboard) -> bool {
         found = match tab_info {
             Ok(tab_info) => {
                 debug!("tab_info: {:?}", tab_info);
+                debug!("looking for {:?}", &tab_info.url);
                 pinboard
                     .find_url(&tab_info.url)
                     .map(|op| {
+                        debug!("pinboard.find_url says {:?}", &op);
                         if let Some(vp) = op {
                             assert!(!vp.is_empty());
                             !vp.is_empty()
