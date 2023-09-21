@@ -38,6 +38,7 @@ After initial [setup](#installation--setup):
 - Chromium
 - Firefox (See [known issues](#known_issues) & a workaround)
 - Orion
+- Arc
 - Opera
 - Vivaldi
 - Brave
