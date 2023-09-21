@@ -36,7 +36,7 @@ jobs:
     outputs:
       istagged: ${{ steps.master_is_tagged.outputs.tagged }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           submodules: recursive
           fetch-depth: 0
@@ -61,7 +61,7 @@ jobs:
     needs: check_if_tagged
     if: ${{ needs.check_if_tagged.outputs.istagged == 0 || github.ref_type == 'tag' }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           submodules: recursive
       - uses: actions-rs/toolchain@v1
