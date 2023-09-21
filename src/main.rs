@@ -55,13 +55,9 @@ use crate::commands::Runner;
 // use commands::{config, delete, list, post, search, update};
 use crate::commands::config;
 
-// TODO: Implement Debug for SubCommand in cli.rs so we don't show auth_token in Alfred's debug
-//       window.  <09-10-2022, Hamid> //
 // TODO: Add a command to search pins that have 'toread' enabled. <01-09-21, Hamid> //
 // TODO: We need to come up with actual meaningful tests and deploy them to CIs. <23-08-21, Hamid> //
 // TODO: parse Alfred preferences and get number of visible items?
-// TODO: running ./alfred-pinboard-rs update from command line panics (starting from
-//       fetch_latest_release)
 // TODO: Make sure that we don't show any json-like error in macOS's notification (check issue#27)
 // TODO: add an option to disable/enable update checks
 // TODO: Dont show full JSON errors after alfred's window has closed, just send a notification <01-04-20, hamid>
