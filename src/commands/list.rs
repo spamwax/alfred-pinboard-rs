@@ -290,7 +290,7 @@ fn suggest_tags() -> Vec<Tag> {
         if let Ok(pt) = r {
             let tx_result = tx.send(pt);
             match tx_result {
-                Ok(_) => warn!("Sent the popular tags from child thread"),
+                Ok(()) => warn!("Sent the popular tags from child thread"),
                 Err(e) => warn!("Failed to send popular tags: {:?}", e),
             }
         } else {

@@ -24,9 +24,9 @@ pub fn run(x: SubCommand) {
         } => {
             print_config = display;
             let mut token = String::new();
-            if auth_token.is_some() {
-                if auth_token.as_ref().unwrap().find(':').is_some() {
-                    token = auth_token.as_ref().unwrap().clone();
+            if let Some(atoken) = &auth_token {
+                if atoken.find(':').is_some() {
+                    token.clone_from(atoken);
                 } else {
                     crate::show_error_alfred("Invalid Auth Token format!".to_string());
                     process::exit(1);
