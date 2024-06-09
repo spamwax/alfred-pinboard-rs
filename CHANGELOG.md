@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Don't show auth_token in logs when 'config' subcommand is used with --authorization option.
 - Don't re-downolad pins if rusty-pin just did a fresh download.
 - Bump dependency versions (env_logger, dirs)
+- Don't show auth_token(***) when it is empty
+- Improve cache update detection
+- Don't double-wrap auth_token in another Option<>
 
 ## [0.17.1] - 2023-06-22
 ### Added
