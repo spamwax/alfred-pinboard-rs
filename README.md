@@ -49,7 +49,7 @@ After initial [setup](#installation--setup):
 
 ## Installation / Setup
 After [downloading](https://github.com/spamwax/alfred-pinboard-rs/releases/latest) the latest version of the workflow and installing it in Alfred, you need to do a one-time setup to authenticate the Workflow. This Workflow only uses username/token method so you won't need to enter your password. (This is the *suggested* way of using Pinboard's API).
-If you don't have a token, get one from Pinbaord's [setting's page](https://pinboard.in/settings/password).
+If you don't have a token, get one from Pinboard's [setting's page](https://pinboard.in/settings/password).
 
 Then invoke Alfred and enter your username:token after the ***"pa"*** keyword:
 
