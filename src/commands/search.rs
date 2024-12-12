@@ -159,7 +159,10 @@ fn process<'a>(
                             host_str = if parsed_url.scheme().contains("http") {
                                 vec![parsed_url.host_str().unwrap_or_default()]
                             } else {
-                                vec![parsed_url.scheme(), parsed_url.host_str().unwrap_or_default()]
+                                vec![
+                                    parsed_url.scheme(),
+                                    parsed_url.host_str().unwrap_or_default(),
+                                ]
                             };
                             path_segments = parsed_url
                                 .path_segments()
