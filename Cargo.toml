@@ -15,6 +15,7 @@ thiserror = "1.0"
 dirs = "5.0"
 log = "0.4"
 env_logger = "0.10"
+url = {version = "2.2", features = ["serde"] }
 
 [features]
 

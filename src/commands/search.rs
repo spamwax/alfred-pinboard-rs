@@ -2,7 +2,7 @@ use super::{io, Pinboard, Runner, SubCommand};
 use alfred::{Item, ItemBuilder, Modifier};
 
 use rusty_pin::pinboard::SearchType;
-
+use url::Url;
 use std::borrow::Cow;
 use std::io::Write;
 
@@ -135,6 +135,37 @@ fn process<'a>(
                         } else {
                             (pin.url.as_ref(), pin.tags.as_ref())
                         };
+                        // Convert pin's url and path segments to space delimited string so it can be
+                        // used to find the pin on piaboard.in website.
+                        // For example, if pin's url is https://pinboard.in/u:hamid/b:1234567890,
+                        // it will be converted to "pinboard.in u:hamid b:1234567890".
+                        // If pin's url is not a valid http URL, it will be converted using its scheme.
+                        // For example, if pin's url is "data:text/plain,Hello?World#", it will be converted to "datd text plain,Hello".
+                        // TODO: For URLs that have spaces or special characters that will be encoded to stuff like %20,
+                        // query_to_be_used_on_pinboardsite text used to find the pin on pinboard.in website will likely not work!
+                        // This is due to the fact that pinboard.in search is weak an cannot handle such queries.
+                        // One solution will be using another URL/URI crate such as "uriparse"?
+                        debug!("Building search query_to_be_used_on_pinboardsite!");
+                        let _url = Url::parse(pin.url.as_ref()).unwrap();
+                        let mut _host_str;
+                        let _path_segments;
+                        let query_to_be_used_on_pinboardsite = if !_url.cannot_be_a_base() {
+                            _host_str = if _url.scheme().contains("http") {
+                                vec!(_url.host_str().unwrap_or_default())
+                            } else {
+                                vec!(_url.scheme(), _url.host_str().unwrap_or_default())
+                            };
+                            _path_segments = _url.path_segments().map(|path| path.collect::<Vec<_>>()).unwrap_or_default();
+                            _host_str.extend(_path_segments);
+                            _host_str.join(" ").trim().to_owned()
+                        } else {
+                            _host_str = vec!(_url.scheme());
+                            let _path = _url.path().to_string().replace("/", " ");
+                            _path_segments = vec!(&_path);
+                            _host_str.extend(_path_segments);
+                            _host_str.join(" ").trim().to_owned()
+                        };
+                        debug!("query_to_be_used_on_pinboardsite: {}", &query_to_be_used_on_pinboardsite);
                         ItemBuilder::new(pin.title.as_ref())
                             .subtitle(subtitle)
                             .arg(pin.url.as_ref())
@@ -159,13 +190,14 @@ fn process<'a>(
                             .modifier(
                                 Modifier::Option,
                                 // subtitle
-                                Some("Show bookmark in https://pinboard.in"),
+                                Some("Find bookmark in https://pinboard.in"),
                                 // Pinboard's website currently doesn't like extra stuff in
                                 // search query's string.
                                 // Workaround: Search for item's all tags plus strictly
                                 // ascii words in its title.
                                 // arg
-                                Some(pin.url.clone()),
+                                Some(query_to_be_used_on_pinboardsite),
+                                // Some(pin.url.clone()),
                                 // Some(
                                 //     [
                                 //         pin.tags.as_ref(),
