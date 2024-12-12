@@ -2,9 +2,9 @@ use super::{io, Pinboard, Runner, SubCommand};
 use alfred::{Item, ItemBuilder, Modifier};
 
 use rusty_pin::pinboard::SearchType;
-use url::Url;
 use std::borrow::Cow;
 use std::io::Write;
+use url::Url;
 
 // TODO: Investigate why content of text_copy is not used within Alfred when user presses ⌘-C
 impl<'api, 'pin> Runner<'api, 'pin> {
@@ -151,21 +151,27 @@ fn process<'a>(
                         let _path_segments;
                         let query_to_be_used_on_pinboardsite = if !_url.cannot_be_a_base() {
                             _host_str = if _url.scheme().contains("http") {
-                                vec!(_url.host_str().unwrap_or_default())
+                                vec![_url.host_str().unwrap_or_default()]
                             } else {
-                                vec!(_url.scheme(), _url.host_str().unwrap_or_default())
+                                vec![_url.scheme(), _url.host_str().unwrap_or_default()]
                             };
-                            _path_segments = _url.path_segments().map(|path| path.collect::<Vec<_>>()).unwrap_or_default();
+                            _path_segments = _url
+                                .path_segments()
+                                .map(|path| path.collect::<Vec<_>>())
+                                .unwrap_or_default();
                             _host_str.extend(_path_segments);
                             _host_str.join(" ").trim().to_owned()
                         } else {
-                            _host_str = vec!(_url.scheme());
+                            _host_str = vec![_url.scheme()];
                             let _path = _url.path().to_string().replace("/", " ");
-                            _path_segments = vec!(&_path);
+                            _path_segments = vec![&_path];
                             _host_str.extend(_path_segments);
                             _host_str.join(" ").trim().to_owned()
                         };
-                        debug!("query_to_be_used_on_pinboardsite: {}", &query_to_be_used_on_pinboardsite);
+                        debug!(
+                            "query_to_be_used_on_pinboardsite: {}",
+                            &query_to_be_used_on_pinboardsite
+                        );
                         ItemBuilder::new(pin.title.as_ref())
                             .subtitle(subtitle)
                             .arg(pin.url.as_ref())
