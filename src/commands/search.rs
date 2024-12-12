@@ -7,7 +7,7 @@ use std::io::Write;
 use url::Url;
 
 // TODO: Investigate why content of text_copy is not used within Alfred when user presses ⌘-C
-impl<'api, 'pin> Runner<'api, 'pin> {
+impl Runner<'_, '_> {
     pub fn search(&mut self, cmd: SubCommand) {
         debug!("Starting in search::run");
         match cmd {

@@ -1,7 +1,7 @@
 use super::{io, process, Runner, SubCommand};
 use std::io::Write;
 
-impl<'api, 'pin> Runner<'api, 'pin> {
+impl Runner<'_, '_> {
     pub fn upgrade(&self, cmd: &SubCommand) {
         debug!("Starting in upgrade");
         match *cmd {

@@ -5,10 +5,11 @@ use std::{thread, time};
 use alfred::{Item, ItemBuilder, Modifier};
 use alfred_rs::Data;
 
-impl<'api, 'pin> Runner<'api, 'pin> {
+impl Runner<'_, '_> {
     pub fn list(&self, opt: Opt) {
         let cmd = opt.cmd;
         let query_item = opt.query_as_item;
+        let _ = opt.debug_level;
         match cmd {
             SubCommand::List {
                 tags,

@@ -26,7 +26,7 @@ pub(super) struct Runner<'api, 'pin> {
     pub updater: Option<Updater<GithubReleaser>>,
 }
 
-impl<'api, 'pin> Runner<'api, 'pin> {
+impl Runner<'_, '_> {
     fn write_output_items<'a, 'b, I, J>(
         &self,
         items: I,
