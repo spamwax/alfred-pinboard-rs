@@ -146,27 +146,27 @@ fn process<'a>(
                         // This is due to the fact that pinboard.in search is weak an cannot handle such queries.
                         // One solution will be using another URL/URI crate such as "uriparse"?
                         debug!("Building search query_to_be_used_on_pinboardsite!");
-                        let _url = Url::parse(pin.url.as_ref()).unwrap();
-                        let mut _host_str;
-                        let _path_segments;
-                        let query_to_be_used_on_pinboardsite = if !_url.cannot_be_a_base() {
-                            _host_str = if _url.scheme().contains("http") {
-                                vec![_url.host_str().unwrap_or_default()]
-                            } else {
-                                vec![_url.scheme(), _url.host_str().unwrap_or_default()]
-                            };
-                            _path_segments = _url
-                                .path_segments()
-                                .map(|path| path.collect::<Vec<_>>())
-                                .unwrap_or_default();
-                            _host_str.extend(_path_segments);
-                            _host_str.join(" ").trim().to_owned()
+                        let parsed_url = Url::parse(pin.url.as_ref()).unwrap();
+                        let mut host_str;
+                        let path_segments;
+                        let query_to_be_used_on_pinboardsite = if parsed_url.cannot_be_a_base() {
+                            host_str = vec![parsed_url.scheme()];
+                            let path = parsed_url.path().replace('/', " ").to_string();
+                            path_segments = vec![path.as_str()];
+                            host_str.extend(path_segments);
+                            host_str.join(" ").trim().to_owned()
                         } else {
-                            _host_str = vec![_url.scheme()];
-                            let _path = _url.path().to_string().replace("/", " ");
-                            _path_segments = vec![&_path];
-                            _host_str.extend(_path_segments);
-                            _host_str.join(" ").trim().to_owned()
+                            host_str = if parsed_url.scheme().contains("http") {
+                                vec![parsed_url.host_str().unwrap_or_default()]
+                            } else {
+                                vec![parsed_url.scheme(), parsed_url.host_str().unwrap_or_default()]
+                            };
+                            path_segments = parsed_url
+                                .path_segments()
+                                .map(std::iter::Iterator::collect::<Vec<_>>)
+                                .unwrap_or_default();
+                            host_str.extend(path_segments);
+                            host_str.join(" ").trim().to_owned()
                         };
                         debug!(
                             "query_to_be_used_on_pinboardsite: {}",
