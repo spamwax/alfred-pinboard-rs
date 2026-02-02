@@ -1,240 +1,216 @@
-# Alfred Workflow for Pinboard
+# Alfred Chrome Bookmarks 书签管理工作流
 
-[![Build/Test/Release Alfred Workflow](https://github.com/spamwax/alfred-pinboard-rs/actions/workflows/macos-universal.yml/badge.svg)](https://github.com/spamwax/alfred-pinboard-rs/actions/workflows/macos-universal.yml)
-[![Clippy Lints](https://github.com/spamwax/alfred-pinboard-rs/actions/workflows/lint.yml/badge.svg)](https://github.com/spamwax/alfred-pinboard-rs/actions/workflows/lint.yml)
-[![Build status](https://ci.appveyor.com/api/projects/status/3g5uvuocs52yc444/branch/master?svg=true)](https://ci.appveyor.com/project/spamwax/alfred-pinboard-rs/branch/master) 
-[![SemVer](https://img.shields.io/github/v/tag/spamwax/alfred-pinboard-rs?color=green&label=SemVer&logo=semver&sort=semver)](CHANGELOG.md)
+一个强大的Alfred工作流，用于管理Chrome书签并支持多标签(tag)维度搜索。
 
-Manage, post and **preview** your bookmarks on [Pinboard](https://pinboard.in) right from within [Alfred app](https://www.alfredapp.com).
+## ✨ 功能特性
 
-## Features
-Pinboard is a great and reliable bookmarking service. Its [front page](https://pinboard.in) sums it all:
-"**Social Bookmarking for Introverts. Pinboard is a fast, no-nonsense bookmarking site.**"
+- 📖 **读取Chrome本地书签** - 直接访问Chrome书签文件，无需额外导出
+- 🏷️ **多标签系统** - 为书签添加多个自定义标签
+- 🔍 **强大的搜索** - 支持按标题、URL、标签进行搜索
+- ⚡ **模糊搜索** - 使用模糊匹配算法快速找到书签
+- 🎯 **多标签过滤** - 同时按多个标签进行AND查询
+- 💾 **本地存储** - 标签信息存储在本地SQLite数据库中
 
-This plugin will let you:
+## 📦 安装
 
-- _**post**_ a bookmark to Pinboard right from Alfred, with:
-  - Fetching bookmark information from active browser's window
-  - _tag_ auto-completion to show your current tags.
-  - _popular_ tags for the current _url_
-  - and more ...
-- _**search**_ your current bookmarks
-  - Tap <kbd>Shift</kbd> to show a preview of selected item without opening browser.
-  - Tap <kbd>Command+L</kbd> to show _Large_ toast of title
-  - Tap <kbd>Command</kbd> to show current item's _tags_
-  - Tap <kbd>Control</kbd> to show current item's extended notes/descriptioin.
-- Bookmark deletion & tag renaming (Universal Actions)
-- Automatic [updates](#misc) of workflow
-- Many options that can be easily adjusted. (see below)
+### 从源码构建
 
-### TLDR;
-After initial [setup](#installation--setup):
-- For posting you just need to enter the Workflow's keyword ( `p` ) into Alfred's window and follow it with couple of tags and an optional description. The workflow will then post a bookmark for the window/tab of the active browser to Pinboard.
+```bash
+# 克隆仓库
+git clone https://github.com/your-username/alfred-chrome-bookmarks.git
+cd alfred-chrome-bookmarks
 
-- For searching, use ( `ps` ) and then type the search keywords.
+# 构建release版本
+cargo build --release
 
-### Supported Browsers:
-- Safari
-- Chromium
-- Firefox (See [known issues](#known_issues) & a workaround)
-- Orion
-- Opera
-- Vivaldi
-- Brave
-- qutebrowser (See [known issues](#known_issues) )
-- Firefox Dev. Edition
-- Safari Tech. Preview
-- Brave Beta
-- Chrome
-
-## Installation / Setup
-After [downloading](https://github.com/spamwax/alfred-pinboard-rs/releases/latest) the latest version of the workflow and installing it in Alfred, you need to do a one-time setup to authenticate the Workflow. This Workflow only uses username/token method so you won't need to enter your password. (This is the *suggested* way of using Pinboard's API).
-If you don't have a token, get one from Pinbaord's [setting's page](https://pinboard.in/settings/password).
-
-Then invoke Alfred and enter your username:token after the ***"pa"*** keyword:
-
-![image](./res/images/authentication.png)
-
-This workflow will keep a local cache of the tags and bookmarks that you have in Pinboard, and, by default, automatically update the cache. (See [manual updates](#cache_update) )
-
----
-
-## Usage (post a bookmark):
-The syntax to post a bookmark to Pinboard is :
-
-```
-p tag1 tag2 tag3 ; some optional note (semi-colon & note are optional)
+# 二进制文件位于: target/release/alfred-chrome-bookmarks
 ```
 
-The workflow will show a list of your current tags as you are typing:
+## 🚀 使用方法
 
-![image](./res/images/non-fuzzy-search-tags.png)
+### 在Alfred中搜索书签
 
-The number below each tag shows how many times you have used it in Pinboard bookmarks.
-You can move Alfred's highlighter to the desired tag and hit '**Tab**' to **autocomplete** it.
-
-To finish the process just press Enter.
-
-- If tag suggestion feature is enabled (see `pset suggest_tags`), 3 popular tags based on current active webpage will be added to the list of your tags. The list is fetched from Pinboard's API and is often helpful. However this feature will add a 1 second delay to showing the tag list after first keystroke. This delay is disabled for consequent keystrokes as the fetched popular tags are cached.
-
-  ![image](./res/images/popular-tags.png)
-
-#### Modifiers (<kbd>Control ⌃, Option ⌥</kbd>)
-You can hold down modifiers to one-time change some of your settings:
-
-- <kbd>Control ⌃</kbd> : will toggle `toread` setting momentarily.
-- <kbd>Option ⌥</kbd> : will toggle `shared` setting momentarily.
-
-
-After entering last desired tag, you can hit enter to post the bookmark.
-If you want to add extra description to the bookmark you can add it after a semi-colon:
-
-![image](./res/images/adding-notes.png)
-
-#### Already saved bookmark
-If the current page is already saved, you will be notified. However the workflow assumes that:
-
-- `http://example.com/list.html`
-- `https://example.com/list.html`
-- `http://example.com/list.html#fragment`
-
-are all different bookmarks and will not notify you about duplication!
-
-  ![image](./res/images/already-saved.png)
-
----
-
-## Usage (search bookmarks):
-Searching your bookmarks is easy.
+设置Alfred Workflow后，直接在Alfred中输入关键词搜索：
 
 ```
-ps query1 query2 query3 ...
+cb github rust
 ```
 
-Workflow will use the text you enter in Alfred and show list of bookmarks that contain **all** of the search keywords in any of the bookmarks information (Description of bookmark, its tags, its url and its extended notes). However, these search fields can be adjusted, see [settings](#config).
+### 命令行使用
 
-So **the more** search keywords you enter **the less** results will be displayed as it tries to find the bookmarks that contain ***all*** of the keywords.
+#### 搜索书签
 
-The search result is ordered in descending order of dates they were posted to your Pinboard account.
+```bash
+# 基础搜索
+./alfred-chrome-bookmarks search rust
 
-![image](./res/images/bookmarks-search-results.png)
+# 按标签过滤 (AND查询)
+./alfred-chrome-bookmarks search --tags work,dev rust
 
-To show tags (instead of URLs) in search results subtitles, use `pset url_tag`:
+# 使用模糊搜索
+./alfred-chrome-bookmarks search --fuzzy githb
 
-![image](./res/images/url_vs_tag.png)
+# 限制结果数量
+./alfred-chrome-bookmarks search --limit 10 javascript
+```
 
-#### Modifier keys (<kbd>Command ⌘, Control ⌃, Option ⌥</kbd>)
-You can hold down modifiers to enable different behavior:
+#### 标签管理
 
-- <kbd>Control ⌃</kbd> : will show the extended description of selected bookmark.
-- <kbd>Command ⌘</kbd> : will show tags of selected bookmark.
-- <kbd>Option ⌥</kbd> : Holding `⌥` and pressing enter will open the bookmark in [Pinboard's website](https://pinboard.in).
-- <kbd>Command ⌘</kbd> + <kbd>Option ⌥</kbd> : Hitting Return ⏎ key with these combo modifiers will copy the bookmark's URL to clipboard.
-- <kbd>Shift ⇧</kbd>: **Tap** ⇧ to load a preview of bookmark without opening your browser 😎 ⤵︎
+```bash
+# 添加标签
+./alfred-chrome-bookmarks tag "https://github.com/rust-lang/rust" rust programming
 
-![image](./res/images/quicklook-preview.png)
+# 列出所有标签
+./alfred-chrome-bookmarks tags
+
+# 搜索特定标签
+./alfred-chrome-bookmarks tags work
+
+# 显示书签的标签
+./alfred-chrome-bookmarks show "https://github.com/rust-lang/rust"
+
+# 删除标签
+./alfred-chrome-bookmarks untag "https://github.com/rust-lang/rust" rust
+
+# 重命名标签
+./alfred-chrome-bookmarks rename old-tag new-tag
+```
+
+#### 其他命令
+
+```bash
+# 刷新书签缓存
+./alfred-chrome-bookmarks refresh
+
+# 显示统计信息
+./alfred-chrome-bookmarks stats
+```
+
+## ⚙️ 配置
+
+### Chrome书签路径
+
+默认情况下，程序会自动查找Chrome书签文件：
+
+- macOS: `~/Library/Application Support/Google/Chrome/Default/Bookmarks`
+- 支持多个Profile: `Profile 1`, `Profile 2` 等
+
+### 数据存储
+
+标签数据存储在：
+
+- Alfred环境: `$alfred_workflow_data/tags.db`
+- 非Alfred环境: `~/.alfred-chrome-bookmarks/tags.db`
+
+## 🎨 在Alfred中设置工作流
+
+1. 打开Alfred Preferences → Workflows
+2. 点击 + → Blank Workflow
+3. 添加Script Filter:
+   - Keyword: `cb`
+   - Script: `/path/to/alfred-chrome-bookmarks search {query}`
+   - Title: `{title}`
+   - Subtitle: `{subtitle}`
+   - Arg: `{arg}`
+4. 添加Open URL动作，连接到Script Filter，URL设置为 `{query}`
+5. （可选）添加其他命令的Script Filter
+
+示例Alfred workflow配置见下方。
+
+## 🛠️ 技术栈
+
+- **语言**: Rust 2021
+- **数据库**: SQLite (rusqlite)
+- **模糊搜索**: fuzzy-matcher
+- **Alfred集成**: alfred-rs
+
+## 📝 命令行接口
+
+```bash
+alfred-chrome-bookmarks <SUBCOMMAND>
+
+子命令:
+    search, s      搜索书签
+    tag, t         为书签添加标签
+    untag, ut      从书签删除标签
+    tags, lt       列出所有标签
+    show, sh       显示书签的标签
+    rename, r      重命名标签
+    refresh, rf    刷新Chrome书签缓存
+    stats, st      显示统计信息
+```
+
+## 💡 使用案例
+
+### 场景1: 组织工作书签
+
+```bash
+# 标记工作相关书签
+./alfred-chrome-bookmarks tag "https://jira.company.com" work project-a
+./alfred-chrome-bookmarks tag "https://confluence.company.com" work documentation
+
+# 在Alfred中快速搜索: cb --tags work
+```
+
+### 场景2: 学习资源管理
+
+```bash
+# 标记学习资源
+./alfred-chrome-bookmarks tag "https://rust-lang.org" rust learning tutorial
+./alfred-chrome-bookmarks tag "https://doc.rust-lang.org" rust documentation
+
+# 查找所有Rust学习资源: cb --tags rust,learning
+```
+
+### 场景3: 项目管理
+
+```bash
+# 为不同项目添加标签
+./alfred-chrome-bookmarks tag "https://github.com/project-a" github project-a
+./alfred-chrome-bookmarks tag "https://github.com/project-b" github project-b
+
+# 查看特定项目: cb --tags project-a
+```
+
+## 🔧 故障排除
+
+### Chrome书签文件未找到
+
+确保Chrome已经安装，或者检查书签文件路径是否正确。
+
+### 数据库错误
+
+如果遇到数据库错误，可以删除数据库文件重新开始：
+
+```bash
+rm ~/.alfred-chrome-bookmarks/tags.db
+```
+
+### 搜索结果为空
+
+1. 确保Chrome书签文件存在且可读
+2. 尝试使用模糊搜索 (`--fuzzy`)
+3. 检查标签拼写是否正确
+
+## 📊 性能
+
+- 书签加载: 毫秒级
+- 搜索响应: 毫秒级 (基于索引)
+- 数据库大小: 轻量级 (< 1MB，取决于标签数量)
+
+## 🔮 未来计划
+
+- [ ] 支持Firefox书签
+- [ ] 书签自动同步
+- [ ] 标签自动建议
+- [ ] 书签导入/导出
+- [ ] Web界面
+- [ ] 书签分析和统计
+
+## 📄 许可证
+
+本项目采用MIT许可证。
 
 ---
 
-## Usage (delete a bookmark):
-Either use `pind` while the bookmark you want to delete is currently on your active browrser.
-
-![image](./res/images/delete-pin.png)
-
-Or use the `Delete Pinboard Bookmark` action on a bookmark item anywhere in this Workflow or on any url entered in Alfred's window:
-
-![image](./res/images/delete_action.gif)
-
-To delete a bookmark, just make sure it is opened in your current browser's window. Then use `pind`.
-Proposed workflow for deleting a bookmark is to first open it in browser (search for it using this workflow's keyword `ps`, and hit enter) and then use `pind` keyword followed by enter.
-
-## Usage (rename a tag):
-Use `pr` to search for old tags, select the desired one from Alfred and hit enter. You will be prompted to enter a new tag name. You can either choose from your current tags or enter a new one.
-![image](./res/images/tag_rename.gif)
-
-Additonally you can __Action__ on a tag item anywhere in this Workflow and use the `Rename Pinboard Tag` action to achieve the same thing. (Requires Alfred 4.5+)
-
-![image](./res/images/tag_rename_action.gif)
-
-**Note:** See [known issues](#known_issues) for some limitations caused by Pinboard's API issues.
-
-## Settings<a name="config"></a>
-
-You can configure the behavior of workflow by entering `pconf` in Alfred:
-
-![image](./res/images/configuration.png)
-
-Selecting each setting and hitting ⏎ (<kbd>Enter</kbd>) will let you adjust it:
-
-![image](./res/images/set-fuzzy.png)
-
-On top of using `pconf`, you can directly type following commands to also adjust the settings:
-
-- `pset fuzzy`: Enable/disable fuzzy search.
-- `pset suggest_tags`: When posting a new bookmark, list popular tags for the active page. Note that this information is fetched from Pinboard and sometimes is not very _accurate_.
-- `pset shared`: Mark all new bookmarks as _shared_.
-- `pset toread`: Mark all new bookmarks as _toread_.
-- `pset check_bookmarked`: Notify if active page is already bookmarked.
-- `pset tagonly`: Only search within _tag_ field while doing any look-up.
-- `pset auto`: After posting a new bookmark, automatically update the local cache.
-- `pset tags`: Set number of tags to show: `pset tags 25`
-- `pset bookmarks`: Set number of bookmarks to show: `pset bookmarks 12`
-- `pset url_tag`: Show either URLs or tags in search results subtitles
-
-### Manual cache update<a name="cache_update"></a>
-
-To manually update the cache, you need to issue the ***`pu`*** command:
-
-![image](./res/images/update.png)
-
----
-
-Most of configuration settings are self-explanatory. However `fuzzy` search may need a demo.
-
-When fuzzy search is enabled, the tags/bookmarks that contain the query letters in the given order are displayed:
-
-  ![image](./res/images/fuzzy-search-tags.png)
-
-  Otherwise, _normal_ search will search for consecutive characters in query:
-
-  ![image](./res/images/non-fuzzy-search-tags.png)
-
----
-
-## Misc.<a name="misc"></a>
-- Workflow will check for newever version of itself every 24 hours. This check only takes place when you actually use one of its keywords (no background service is ever used). You can also manually check for updates using `pcheck`.
-
-![image](./res/images/upgrade_available.png)
-
-- This workflow tries to show some helpful errors in different cases.
-
-![image](./res/images/error-1.png)
-![image](./res/images/error-2.png)
-![image](./res/images/error-3.png)
-
-- If you want to change some behavior take a look at Alfred's workflow page:
-
-![image](./res/images/workflow-screenshot.png)
-
----
-
-## Known Issues<a name="known_issues"></a>
-- **Firefox**: While tag suggestions and "Check if page is bookmarked" options are enabled, posting bookmark from Firefox is broken. Deleting bookmarks using `pind` won't work when Firefox is your active browser. Reason: Firefox does not properly support interacting with it programatically. As a workaround you can install the [alfred-firefox](https://github.com/deanishe/alfred-firefox) workflow. You will **not** be using that workflow directly, this workflow will use one of `alfred-firefox` functions to work around the mentioned issue.
-- If you get `cannot be opened because the developer cannot be verified.` error, check out [this issue](https://github.com/spamwax/alfred-pinboard-rs/issues/120) as well as the [post](https://www.alfredforum.com/topic/13824-workflow-fail-with-developer-cannot-be-verified-errors-in-catalina/?do=findComment&comment=72101) on Alfred forum
-- Renaming a tag will not be reflected immediately in local cache. It seems that Pinboard takes up to a minute to internally update your tags! Additionally, Pinboard's tag renaming API lacks providing error message if `old_tag` is not in your tag collection!!! It basically says `success` even though no renaming was done!
-- This workflow is setup to work with Aflred 5. It may or may not work with previous version as it has not been tested for them.
-
-## Alfred 4 Support & Issues<a name="alfred_4_support"></a>
-- Alfred 4 users: If upgrading workflow from `0.16.12` (or `0.16.7` and before), you may have to directly [download](https://github.com/spamwax/alfred-pinboard-rs/releases/latest) latest version and then open it in Finder
-- Alfred 5 has made some changes to internal structure of workflows. Therefore if you updated this workflow through the built-in *automatic update*, it's *likely* that it'll stop working. If that happens, you can fix it by first deleteing & then re-installing the workflow by [downloading the last version (0.16.12)](https://github.com/spamwax/alfred-pinboard-rs/releases/tag/0.16.12) that has Alfred 4 format.
-- Moving forward, new features, changes & bug fixes will first target Alfred 5 users and then (time permitting) will be ported back to Alfred 4.
-
-## TODO
-
-I wish to add the following in the coming releases:
-
-## Feedback / Bugs
-This is my first non-trivial project using Rust language so so your [feedback or bug](https://github.com/spamwax/alfred-pinboard-rs/discussions) reports are greatly appreciated.
-
-## License
-This open source software is licensed under [MIT License](./LICENSE.md).
+**享受更高效的书签管理体验！** 🚀
