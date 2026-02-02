@@ -1,7 +1,7 @@
 [package]
-name = "alfred-pinboard-rs"
-version = "0.17.1"
-authors = [ "Hamid Ghadyani <hamid@hamid.cc>",]
+name = "alfred-chrome-bookmarks"
+version = "0.1.0"
+authors = [ "Claude AI",]
 edition = "2021"
 
 [dependencies]
@@ -10,20 +10,15 @@ serde = "1.0"
 serde_derive = "1.0"
 serde_json = "1.0"
 structopt = "0.3.15"
-semver = "1.0.4"
 thiserror = "1.0"
 dirs = "5.0"
 log = "0.4"
 env_logger = "0.10"
-
-[features]
+rusqlite = { version = "0.32", features = ["bundled"] }
+fuzzy-matcher = "0.3"
 
 [dependencies.alfred-rs]
 version = "0.7"
-
-[dependencies.rusty-pin]
-git = "https://github.com/spamwax/rusty-pin"
-branch = "master"
 
 [dependencies.chrono]
 version = "0.4"

@@ -1,265 +1,331 @@
-// #![cfg_attr(feature = "dev", feature(plugin))]
-// #![cfg_attr(feature = "dev", plugin(clippy))]
-// #![cfg_attr(
-//     feature = "dev",
-//     warn(
-//         cast_possible_truncation, cast_possible_wrap, cast_precision_loss, cast_sign_loss, mut_mut,
-//         non_ascii_literal, result_unwrap_used, shadow_reuse, shadow_same, unicode_not_nfc,
-//         wrong_self_convention, wrong_pub_self_convention
-//     )
-// )]
-// #![cfg_attr(feature = "dev", allow(string_extend_chars))]
-
-extern crate chrono;
-
 extern crate dirs;
-extern crate semver;
 extern crate serde;
 
-#[macro_use]
 extern crate serde_derive;
 extern crate serde_json;
 
-#[macro_use]
 extern crate structopt;
-// extern crate structopt_derive;
 
 extern crate env_logger;
 
-#[macro_use]
-extern crate log;
-
 extern crate alfred;
-extern crate rusty_pin;
 
 use std::borrow::Cow;
-use std::collections::HashMap;
-use std::env;
 use std::io;
 use std::process;
-
-use alfred_rs::Updater;
-use rusty_pin::Pinboard;
 use structopt::StructOpt;
 use thiserror::Error;
 
+mod bookmark;
 mod cli;
-mod commands;
-mod workflow_config;
+mod searcher;
+mod tag_manager;
 
+use crate::bookmark::{ChromeBookmark, ChromeBookmarks, get_chrome_bookmarks_path};
 use crate::cli::{Opt, SubCommand};
-use crate::workflow_config::Config;
-
-use crate::commands::Runner;
-// use commands::{config, delete, list, post, search, update};
-use crate::commands::config;
-
-// TODO: Implement Debug for SubCommand in cli.rs so we don't show auth_token in Alfred's debug
-//       window.  <09-10-, Hamidme> //
-// TODO: Add a command to search pins that have 'toread' enabled. <01-09-21, Hamid> //
-// TODO: We need to come up with actual meaningful tests and deploy them to CIs. <23-08-21, Hamid> //
-// TODO: parse Alfred preferences and get number of visible items?
-// TODO: running ./alfred-pinboard-rs update from command line panics (starting from
-//       fetch_latest_release)
-// TODO: Make sure that we don't show any json-like error in macOS's notification (check issue#27)
-// TODO: add an option to disable/enable update checks
-// TODO: Dont show full JSON errors after alfred's window has closed, just send a notification <01-04-20, hamid>
-// TODO: Can we do something about failure of parsing user's bookmarks or when the network times out
-// TODO: Try to reduce number of calls to get_browser_info in list.rs <04-04-20, hamid>
-// TODO: Separate finding the browser's info into a new separate sud-command so that delete.rs
-// does one thing which is deleting and not trying to find the browser's. <07-04-20, hamid>
+use crate::searcher::BookmarkSearcher;
+use crate::tag_manager::TagManager;
 
 #[derive(Debug, Error)]
-pub enum AlfredError {
-    #[error("Corrupted config file. Set API token again!")]
-    ConfigFileErr,
-    #[error("Missing config file (did you set API token?)")]
-    MissingConfigFile,
-    #[error("Cache: {0}")]
-    CacheUpdateFailed(String),
-    #[error("Post: {0}")]
-    Post2PinboardFailed(String),
-    #[error("Delete: {0}")]
-    DeleteFailed(String),
-    #[error("osascript error: {0}")]
-    OsascriptError(String),
-    #[error("What did you do?")]
-    Other,
+pub enum AppError {
+    #[error("Chrome书签文件未找到")]
+    BookmarksNotFound,
+    #[error("读取书签失败: {0}")]
+    BookmarksReadError(String),
+    #[error("数据库错误: {0}")]
+    DatabaseError(String),
+    #[error("书签未找到: {0}")]
+    BookmarkNotFound(String),
+    #[error("其他错误: {0}")]
+    Other(String),
 }
 
 fn main() {
-    /*
-         - export alfred_workflow_version=0.11.1
-         - export alfred_workflow_data=$HOME/tmp/apr
-         - export alfred_workflow_cache=$HOME/tmp/apr/
-         - export alfred_workflow_uid=hamid63
-         - export alfred_workflow_name="Rusty Pin"
-         - export alfred_workflow_bundleid=cc.hamid.alfred-pinboard-rs
-         - export alfred_version=3.6
-    */
-    // env::set_var("alfred_workflow_data", "/Volumes/Home/hamid/tmp/rust");
-    // env::set_var("alfred_workflow_cache", "/Volumes/Home/hamid/tmp/rust");
-    // env::set_var("alfred_workflow_uid", "hamid63");
-    // env::set_var("alfred_workflow_name", "alfred-pinboard-rs");
-    // env::set_var("alfred_version", "3.6");
-    // env::set_var("RUST_LOG", "rusty_pin=debug,alfred_pinboard_rs=debug");
-    // If user has Alfred's debug panel open, print all debug info
-    // by setting RUST_LOG environment variable.
-    use env::var_os;
-    if alfred::env::is_debug() {
-        env::set_var(
-            "RUST_LOG",
-            "rusty_pin=debug,alfred_rs=debug,alfred_pinboard_rs=debug",
-        );
-    }
     env_logger::init();
 
-    debug!("Parsing input arguments.");
     let opt: Opt = Opt::from_args();
 
-    debug!("Looking for alfred_workflow_* env. vars");
-    let env_flags = (
-        var_os("alfred_workflow_version").is_some(),
-        var_os("alfred_workflow_data").is_some(),
-        var_os("alfred_workflow_cache").is_some(),
-        var_os("alfred_workflow_uid").is_some(),
-        var_os("alfred_workflow_name").is_some(),
-        var_os("alfred_version").is_some(),
-    );
-    if let (true, true, true, true, true, true) = env_flags {
-    } else {
-        show_error_alfred("Your workflow is not set up properly. Check alfred_workflow_* env var.");
+    if let Err(e) = run(opt) {
+        show_error_alfred(e.to_string());
         process::exit(1);
     }
+}
 
-    debug!(
-        "alfred_workflow_version: {:?}",
-        var_os("alfred_workflow_version")
-    );
-    debug!("alfred_workflow_data: {:?}", var_os("alfred_workflow_data"));
-    debug!(
-        "alfred_workflow_cache: {:?}",
-        var_os("alfred_workflow_cache")
-    );
-    debug!("alfred_workflow_uid: {:?}", var_os("alfred_workflow_uid"));
-    debug!("alfred_workflow_name: {:?}", var_os("alfred_workflow_name"));
-    debug!("alfred_version: {:?}", var_os("alfred_version"));
-
-    let pinboard;
-    let config;
-    debug!("Input cli command is {:?}", &opt.cmd);
-    // Separate Config subcommand from rest of cli commands since during config we may run into
-    // errors that cannot be fixed.
-    if let SubCommand::Config { .. } = opt.cmd {
-        config::run(opt.cmd);
-    // Otherwise, if user is not configuring, we will abort upon any errors.
+fn run(opt: Opt) -> Result<(), Box<dyn std::error::Error>> {
+    // 获取数据目录
+    let data_dir = if let Ok(dir) = std::env::var("alfred_workflow_data") {
+        std::path::PathBuf::from(dir)
     } else {
-        let setup = setup().unwrap_or_else(|err| {
-            show_error_alfred(err.to_string());
-            process::exit(1);
-        });
+        dirs::home_dir()
+            .ok_or(AppError::Other("无法获取home目录".to_string()))?
+            .join(".alfred-chrome-bookmarks")
+    };
 
-        let mut updater = Updater::gh("spamwax/alfred-pinboard-rs").unwrap();
+    // 确保数据目录存在
+    std::fs::create_dir_all(&data_dir)?;
 
-        // If running ./alfred-pinboard-rs self -c, we have to make a network call
-        // We do this by forcing the check interval to be zero
-        if let SubCommand::SelfUpdate { check, .. } = opt.cmd {
-            if check {
-                updater.set_interval(0);
-            }
+    // 初始化tag管理器
+    let tag_db_path = data_dir.join("tags.db");
+    let tag_manager = TagManager::new(tag_db_path)
+        .map_err(|e| AppError::DatabaseError(e.to_string()))?;
+
+    match opt.cmd {
+        SubCommand::Search {
+            query,
+            tags,
+            fuzzy,
+            limit,
+        } => {
+            handle_search(query, tags, fuzzy, limit, &tag_manager)?;
         }
-        updater.init().expect("cannot start updater!");
+        SubCommand::Tag { bookmark, tags } => {
+            handle_tag(bookmark, tags, &tag_manager)?;
+        }
+        SubCommand::Untag { bookmark, tag } => {
+            handle_untag(bookmark, tag, &tag_manager)?;
+        }
+        SubCommand::ListTags { prefix } => {
+            handle_list_tags(prefix, &tag_manager)?;
+        }
+        SubCommand::ShowTags { bookmark } => {
+            handle_show_tags(bookmark, &tag_manager)?;
+        }
+        SubCommand::RenameTag { old_tag, new_tag } => {
+            handle_rename_tag(old_tag, new_tag, &tag_manager)?;
+        }
+        SubCommand::Refresh => {
+            show_info_alfred("Chrome书签已刷新");
+        }
+        SubCommand::Stats => {
+            handle_stats(&tag_manager)?;
+        }
+    }
 
-        pinboard = setup.1;
-        config = setup.0;
-        debug!("Workflow Config: {:?}", &config);
-        let mut runner = Runner {
-            config: Some(config),
-            pinboard: Some(pinboard),
-            updater: Some(updater),
+    Ok(())
+}
+
+fn load_chrome_bookmarks() -> Result<Vec<ChromeBookmark>, Box<dyn std::error::Error>> {
+    let bookmarks_path = get_chrome_bookmarks_path()
+        .ok_or(AppError::BookmarksNotFound)?;
+
+    let chrome_bookmarks = ChromeBookmarks::from_file(bookmarks_path)
+        .map_err(|e| AppError::BookmarksReadError(e.to_string()))?;
+
+    Ok(chrome_bookmarks.extract_all_bookmarks())
+}
+
+fn handle_search(
+    query: Vec<String>,
+    tags: Option<String>,
+    fuzzy: bool,
+    limit: usize,
+    tag_manager: &TagManager,
+) -> Result<(), Box<dyn std::error::Error>> {
+    let bookmarks = load_chrome_bookmarks()?;
+    let searcher = BookmarkSearcher::new();
+
+    let query_str = query.join(" ");
+    let search_tags: Vec<String> = if let Some(tags_str) = tags {
+        tags_str.split(',').map(|s| s.trim().to_string()).collect()
+    } else {
+        Vec::new()
+    };
+
+    let results = searcher.search(&bookmarks, tag_manager, &query_str, &search_tags, fuzzy)?;
+
+    let mut items = Vec::new();
+    let mut subtitles = Vec::new();
+
+    for result in results.iter().take(limit) {
+        let tags_str = result.tags.join(", ");
+        let subtitle = if tags_str.is_empty() {
+            result.bookmark.url.clone()
+        } else {
+            format!("🏷 {} | {}", tags_str, result.bookmark.url)
         };
-        match opt.cmd {
-            SubCommand::Update => {
-                runner.update_cache(false);
-            }
-            SubCommand::List { .. } => {
-                runner.list(opt);
-            }
-            SubCommand::Search { .. } => {
-                runner.search(opt.cmd);
-            }
-            SubCommand::Post { .. } => {
-                runner.post(opt.cmd);
-            }
-            SubCommand::Delete { .. } => {
-                runner.delete(opt.cmd);
-            }
-            SubCommand::SelfUpdate { .. } => {
-                runner.upgrade(&opt.cmd);
-            }
-            SubCommand::Rename { .. } => {
-                runner.rename(&opt.cmd);
-            }
-            // We have already checked for this variant
-            SubCommand::Config { .. } => unimplemented!(),
+        subtitles.push(subtitle);
+    }
+
+    for (i, result) in results.iter().take(limit).enumerate() {
+        let item = alfred::ItemBuilder::new(&result.bookmark.name)
+            .subtitle(&subtitles[i])
+            .arg(&result.bookmark.url)
+            .valid(true)
+            .into_item();
+
+        items.push(item);
+    }
+
+    if items.is_empty() {
+        items.push(
+            alfred::ItemBuilder::new("未找到书签")
+                .subtitle("尝试使用不同的关键词")
+                .valid(false)
+                .into_item(),
+        );
+    }
+
+    alfred::json::write_items(io::stdout(), &items)?;
+    Ok(())
+}
+
+fn handle_tag(
+    bookmark: String,
+    tags: Vec<String>,
+    tag_manager: &TagManager,
+) -> Result<(), Box<dyn std::error::Error>> {
+    let bookmarks = load_chrome_bookmarks()?;
+
+    // 查找书签
+    let found_bookmark = bookmarks
+        .iter()
+        .find(|b| b.url == bookmark || b.id == bookmark)
+        .ok_or_else(|| AppError::BookmarkNotFound(bookmark.clone()))?;
+
+    // 添加tags
+    tag_manager.add_tags(&found_bookmark.id, &tags)
+        .map_err(|e| AppError::DatabaseError(e.to_string()))?;
+
+    show_info_alfred(format!("已为书签添加tags: {}", tags.join(", ")));
+    Ok(())
+}
+
+fn handle_untag(
+    bookmark: String,
+    tag: String,
+    tag_manager: &TagManager,
+) -> Result<(), Box<dyn std::error::Error>> {
+    let bookmarks = load_chrome_bookmarks()?;
+
+    let found_bookmark = bookmarks
+        .iter()
+        .find(|b| b.url == bookmark || b.id == bookmark)
+        .ok_or_else(|| AppError::BookmarkNotFound(bookmark.clone()))?;
+
+    tag_manager.remove_tag(&found_bookmark.id, &tag)
+        .map_err(|e| AppError::DatabaseError(e.to_string()))?;
+
+    show_info_alfred(format!("已删除tag: {}", tag));
+    Ok(())
+}
+
+fn handle_list_tags(
+    prefix: Option<String>,
+    tag_manager: &TagManager,
+) -> Result<(), Box<dyn std::error::Error>> {
+    let searcher = BookmarkSearcher::new();
+    let suggestions = searcher.get_tag_suggestions(tag_manager, &prefix.unwrap_or_default())?;
+
+    let mut items = Vec::new();
+    let mut subtitles = Vec::new();
+
+    for (_tag, count) in &suggestions {
+        subtitles.push(format!("使用次数: {}", count));
+    }
+
+    for (i, (tag, _count)) in suggestions.iter().enumerate() {
+        let item = alfred::ItemBuilder::new(tag)
+            .subtitle(&subtitles[i])
+            .arg(tag)
+            .valid(true)
+            .into_item();
+
+        items.push(item);
+    }
+
+    if items.is_empty() {
+        items.push(
+            alfred::ItemBuilder::new("没有tags")
+                .subtitle("使用 'tag' 命令添加tags")
+                .valid(false)
+                .into_item(),
+        );
+    }
+
+    alfred::json::write_items(io::stdout(), &items)?;
+    Ok(())
+}
+
+fn handle_show_tags(
+    bookmark: String,
+    tag_manager: &TagManager,
+) -> Result<(), Box<dyn std::error::Error>> {
+    let bookmarks = load_chrome_bookmarks()?;
+
+    let found_bookmark = bookmarks
+        .iter()
+        .find(|b| b.url == bookmark || b.id == bookmark)
+        .ok_or_else(|| AppError::BookmarkNotFound(bookmark.clone()))?;
+
+    let tags = tag_manager.get_tags(&found_bookmark.id)
+        .map_err(|e| AppError::DatabaseError(e.to_string()))?;
+
+    let mut items = Vec::new();
+    if tags.is_empty() {
+        items.push(
+            alfred::ItemBuilder::new("此书签没有tags")
+                .subtitle(&found_bookmark.name)
+                .valid(false)
+                .into_item(),
+        );
+    } else {
+        for tag in &tags {
+            let item = alfred::ItemBuilder::new(tag)
+                .subtitle(&found_bookmark.name)
+                .arg(tag)
+                .valid(true)
+                .into_item();
+
+            items.push(item);
         }
     }
+
+    alfred::json::write_items(io::stdout(), &items)?;
+    Ok(())
 }
 
-fn setup<'a, 'p>() -> Result<(Config, Pinboard<'a, 'p>), Box<dyn std::error::Error>> {
-    debug!("Starting in setup");
-    let config = Config::setup()?;
-    let mut pinboard = Pinboard::new(config.auth_token.clone(), alfred::env::workflow_cache())?;
-    pinboard.enable_fuzzy_search(config.fuzzy_search);
-    pinboard.enable_tag_only_search(config.tag_only_search);
-    pinboard.enable_private_new_pin(config.private_new_pin);
-    pinboard.enable_toread_new_pin(config.toread_new_pin);
+fn handle_rename_tag(
+    old_tag: String,
+    new_tag: String,
+    tag_manager: &TagManager,
+) -> Result<(), Box<dyn std::error::Error>> {
+    let updated = tag_manager.rename_tag(&old_tag, &new_tag)
+        .map_err(|e| AppError::DatabaseError(e.to_string()))?;
 
-    Ok((config, pinboard))
+    show_info_alfred(format!("已重命名tag，影响{}个书签", updated));
+    Ok(())
 }
 
-fn write_to_alfred<'a, 'b, I, J>(items: I, supports_json: bool, vars: Option<J>)
-where
-    I: IntoIterator<Item = alfred::Item<'a>>,
-    J: IntoIterator<Item = (&'b str, &'b str)>,
-{
-    let exec_counter = env::var("apr_execution_counter").unwrap_or_else(|_| "1".to_string());
-    let output_items = items.into_iter().collect::<Vec<alfred::Item>>();
-    let mut variables: HashMap<&str, &str> = HashMap::new();
+fn handle_stats(tag_manager: &TagManager) -> Result<(), Box<dyn std::error::Error>> {
+    let bookmarks = load_chrome_bookmarks()?;
+    let tagged_count = tag_manager.get_bookmark_count()
+        .map_err(|e| AppError::DatabaseError(e.to_string()))?;
+    let all_tags = tag_manager.get_all_tags()
+        .map_err(|e| AppError::DatabaseError(e.to_string()))?;
 
-    variables.insert("apr_execution_counter", exec_counter.as_str());
-    if let Some(items) = vars {
-        items.into_iter().for_each(|(k, v)| {
-            variables.insert(k, v);
-        });
-    }
+    let info = format!(
+        "Chrome书签总数: {}\n已标记书签: {}\nTags总数: {}",
+        bookmarks.len(),
+        tagged_count,
+        all_tags.len()
+    );
 
-    debug!("variables: {:?}", variables);
-    // Depending on alfred version use either json or xml output.
-    if supports_json {
-        alfred::json::Builder::with_items(output_items.as_slice())
-            .variables(variables)
-            .write(io::stdout())
-            .expect("Couldn't write items to Alfred");
-    } else {
-        alfred::xml::write_items(io::stdout(), &output_items)
-            .expect("Couldn't write items to Alfred");
-    }
+    show_info_alfred(info);
+    Ok(())
 }
+
 fn show_error_alfred<'a, T: Into<Cow<'a, str>>>(s: T) {
-    debug!("Starting in show_error_alfred");
-    let item = alfred::ItemBuilder::new("Error")
+    let item = alfred::ItemBuilder::new("错误")
         .subtitle(s)
-        .icon_path("erroricon.icns")
+        .valid(false)
         .into_item();
-    alfred::json::write_items(io::stdout(), &[item]).expect("Can't write to stdout");
-    std::process::exit(1);
+    let _ = alfred::json::write_items(io::stdout(), &[item]);
 }
 
-fn alfred_error_item<'a, T: Into<Cow<'a, str>>>(s: T) -> alfred::Item<'a> {
-    debug!("Starting in alfred_error");
-    alfred::ItemBuilder::new("Error")
+fn show_info_alfred<'a, T: Into<Cow<'a, str>>>(s: T) {
+    let item = alfred::ItemBuilder::new("信息")
         .subtitle(s)
-        .icon_path("erroricon.icns")
-        .into_item()
+        .valid(false)
+        .into_item();
+    let _ = alfred::json::write_items(io::stdout(), &[item]);
 }
