@@ -1,4 +1,5 @@
 use serde::{Deserialize, Serialize};
+use std::io::BufWriter;
 use std::path::PathBuf;
 
 /// Chrome书签项
@@ -10,6 +11,15 @@ pub struct ChromeBookmark {
     pub date_added: String,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub folder_path: Option<String>,
+    /// 预计算的小写名称，用于加速搜索
+    #[serde(skip)]
+    pub name_lower: String,
+    /// 预计算的小写URL
+    #[serde(skip)]
+    pub url_lower: String,
+    /// 预计算的小写文件夹路径
+    #[serde(skip)]
+    pub folder_path_lower: Option<String>,
 }
 
 /// Chrome书签文件的根结构
@@ -69,12 +79,16 @@ impl ChromeBookmarks {
     fn extract_from_node(&self, node: &BookmarkNode, folder_path: &str, bookmarks: &mut Vec<ChromeBookmark>) {
         if node.node_type == "url" {
             if let (Some(url), Some(date_added)) = (&node.url, &node.date_added) {
+                let folder_path_str = folder_path.to_string();
                 bookmarks.push(ChromeBookmark {
+                    name_lower: node.name.to_lowercase(),
+                    url_lower: url.to_lowercase(),
+                    folder_path_lower: Some(folder_path_str.to_lowercase()),
                     id: node.id.clone(),
                     name: node.name.clone(),
                     url: url.clone(),
                     date_added: date_added.clone(),
-                    folder_path: Some(folder_path.to_string()),
+                    folder_path: Some(folder_path_str),
                 });
             }
         } else if node.node_type == "folder" {
@@ -107,4 +121,61 @@ pub fn get_chrome_bookmarks_path() -> Option<PathBuf> {
         }
     }
     None
+}
+
+/// 带mtime缓存的书签加载器
+/// 将解析后的书签序列化到本地缓存文件，只有Chrome书签文件变化时才重新解析
+pub struct BookmarkCache {
+    cache_path: PathBuf,
+    mtime_path: PathBuf,
+}
+
+impl BookmarkCache {
+    pub fn new(data_dir: &PathBuf) -> Self {
+        BookmarkCache {
+            cache_path: data_dir.join("bookmarks_cache.json"),
+            mtime_path: data_dir.join("bookmarks_mtime"),
+        }
+    }
+
+    /// 加载书签，使用缓存（如果Chrome书签文件未变化）
+    pub fn load(&self, bookmarks_path: &PathBuf) -> Result<Vec<ChromeBookmark>, Box<dyn std::error::Error>> {
+        let source_mtime = std::fs::metadata(bookmarks_path)?
+            .modified()?
+            .duration_since(std::time::UNIX_EPOCH)?
+            .as_secs();
+
+        // 检查缓存是否仍然有效
+        if let Ok(cached_mtime_str) = std::fs::read_to_string(&self.mtime_path) {
+            if let Ok(cached_mtime) = cached_mtime_str.trim().parse::<u64>() {
+                if cached_mtime == source_mtime {
+                    if let Ok(cached_data) = std::fs::read(&self.cache_path) {
+                        if let Ok(bookmarks) = serde_json::from_slice::<Vec<ChromeBookmark>>(&cached_data) {
+                            // 反序列化后需要重建lowercase字段（serde skip）
+                            let bookmarks = bookmarks.into_iter().map(|mut b| {
+                                b.name_lower = b.name.to_lowercase();
+                                b.url_lower = b.url.to_lowercase();
+                                b.folder_path_lower = b.folder_path.as_ref().map(|p| p.to_lowercase());
+                                b
+                            }).collect();
+                            return Ok(bookmarks);
+                        }
+                    }
+                }
+            }
+        }
+
+        // 缓存失效，重新解析
+        let chrome_bookmarks = ChromeBookmarks::from_file(bookmarks_path.clone())?;
+        let bookmarks = chrome_bookmarks.extract_all_bookmarks();
+
+        // 写入缓存（忽略写入失败，不影响功能）
+        if let Ok(file) = std::fs::File::create(&self.cache_path) {
+            let writer = BufWriter::new(file);
+            let _ = serde_json::to_writer(writer, &bookmarks);
+        }
+        let _ = std::fs::write(&self.mtime_path, source_mtime.to_string());
+
+        Ok(bookmarks)
+    }
 }

@@ -4,7 +4,7 @@ use fuzzy_matcher::skim::SkimMatcherV2;
 use fuzzy_matcher::FuzzyMatcher;
 
 /// 搜索结果
-#[derive(Debug, Clone)]
+#[derive(Debug)]
 pub struct SearchResult {
     pub bookmark: ChromeBookmark,
     pub tags: Vec<String>,
@@ -23,14 +23,7 @@ impl BookmarkSearcher {
         }
     }
 
-    /// 搜索书签
-    ///
-    /// 参数:
-    /// - bookmarks: 所有Chrome书签
-    /// - tag_manager: tag管理器
-    /// - query: 搜索查询
-    /// - search_tags: 要搜索的tags（AND查询）
-    /// - fuzzy: 是否使用模糊搜索
+    /// 搜索书签（优化版：批量加载tags，使用预计算lowercase，提前终止）
     pub fn search(
         &self,
         bookmarks: &[ChromeBookmark],
@@ -38,44 +31,48 @@ impl BookmarkSearcher {
         query: &str,
         search_tags: &[String],
         fuzzy: bool,
+        limit: usize,
     ) -> Result<Vec<SearchResult>, Box<dyn std::error::Error>> {
-        let mut results = Vec::new();
+        // 批量加载所有书签tags（一次SQL查询替代N次）
+        let all_tags = tag_manager.get_all_bookmark_tags()
+            .unwrap_or_default();
 
         // 先按tags过滤
-        let filtered_bookmarks = if !search_tags.is_empty() {
-            let bookmark_ids = tag_manager.find_bookmarks_by_tags(search_tags)?;
-            let id_set: std::collections::HashSet<_> = bookmark_ids.into_iter().collect();
-            bookmarks
-                .iter()
-                .filter(|b| id_set.contains(&b.id))
-                .collect::<Vec<_>>()
+        let tag_filtered_ids = if !search_tags.is_empty() {
+            Some(
+                tag_manager.find_bookmarks_by_tags(search_tags)?
+                    .into_iter()
+                    .collect::<std::collections::HashSet<_>>(),
+            )
         } else {
-            bookmarks.iter().collect::<Vec<_>>()
+            None
         };
 
-        // 如果没有查询词，返回所有过滤后的结果
-        if query.is_empty() {
-            for bookmark in filtered_bookmarks {
-                let tags = tag_manager.get_tags(&bookmark.id).unwrap_or_default();
-                results.push(SearchResult {
-                    bookmark: bookmark.clone(),
-                    tags,
-                    score: 0,
-                });
-            }
-            return Ok(results);
-        }
+        let query_lower = query.to_lowercase();
+        let mut results = Vec::new();
 
-        // 按查询词搜索
-        for bookmark in filtered_bookmarks {
-            let score = if fuzzy {
+        for bookmark in bookmarks {
+            // tag过滤
+            if let Some(ref id_set) = tag_filtered_ids {
+                if !id_set.contains(&bookmark.id) {
+                    continue;
+                }
+            }
+
+            // 如果没有查询词，直接收集
+            let score = if query.is_empty() {
+                0
+            } else if fuzzy {
                 self.fuzzy_search(bookmark, query)
             } else {
-                self.exact_search(bookmark, query)
+                self.exact_search(bookmark, &query_lower)
             };
 
-            if score > 0 {
-                let tags = tag_manager.get_tags(&bookmark.id).unwrap_or_default();
+            if query.is_empty() || score > 0 {
+                let tags = all_tags
+                    .get(&bookmark.id)
+                    .cloned()
+                    .unwrap_or_default();
                 results.push(SearchResult {
                     bookmark: bookmark.clone(),
                     tags,
@@ -85,7 +82,12 @@ impl BookmarkSearcher {
         }
 
         // 按分数排序
-        results.sort_by(|a, b| b.score.cmp(&a.score));
+        if !query.is_empty() {
+            results.sort_unstable_by(|a, b| b.score.cmp(&a.score));
+        }
+
+        // 截断到limit
+        results.truncate(limit);
 
         Ok(results)
     }
@@ -94,44 +96,45 @@ impl BookmarkSearcher {
     fn fuzzy_search(&self, bookmark: &ChromeBookmark, query: &str) -> i64 {
         let mut max_score = 0i64;
 
-        // 搜索标题
         if let Some(score) = self.fuzzy_matcher.fuzzy_match(&bookmark.name, query) {
-            max_score = max_score.max(score * 2); // 标题权重更高
+            max_score = max_score.max(score * 2);
         }
 
-        // 搜索URL
         if let Some(score) = self.fuzzy_matcher.fuzzy_match(&bookmark.url, query) {
             max_score = max_score.max(score);
         }
 
-        // 搜索文件夹路径
         if let Some(ref folder_path) = bookmark.folder_path {
             if let Some(score) = self.fuzzy_matcher.fuzzy_match(folder_path, query) {
-                max_score = max_score.max(score / 2); // 文件夹权重较低
+                max_score = max_score.max(score / 2);
             }
         }
 
         max_score
     }
 
-    /// 精确搜索（包含匹配）
-    fn exact_search(&self, bookmark: &ChromeBookmark, query: &str) -> i64 {
-        let query_lower = query.to_lowercase();
+    /// 精确搜索（使用预计算的lowercase字段）
+    fn exact_search(&self, bookmark: &ChromeBookmark, query_lower: &str) -> i64 {
         let mut score = 0i64;
 
-        // 搜索标题
-        if bookmark.name.to_lowercase().contains(&query_lower) {
+        if bookmark.name_lower.contains(query_lower) {
             score += 200;
+            // 额外加分：完全匹配标题
+            if bookmark.name_lower == query_lower {
+                score += 100;
+            }
+            // 额外加分：以查询开头
+            if bookmark.name_lower.starts_with(query_lower) {
+                score += 50;
+            }
         }
 
-        // 搜索URL
-        if bookmark.url.to_lowercase().contains(&query_lower) {
+        if bookmark.url_lower.contains(query_lower) {
             score += 100;
         }
 
-        // 搜索文件夹路径
-        if let Some(ref folder_path) = bookmark.folder_path {
-            if folder_path.to_lowercase().contains(&query_lower) {
+        if let Some(ref folder_lower) = bookmark.folder_path_lower {
+            if folder_lower.contains(query_lower) {
                 score += 50;
             }
         }
@@ -148,13 +151,16 @@ impl BookmarkSearcher {
         let all_tags = tag_manager.get_all_tags()?;
 
         let prefix_lower = prefix.to_lowercase();
-        let mut suggestions: Vec<(String, usize)> = all_tags
-            .into_iter()
-            .filter(|(tag, _)| tag.to_lowercase().contains(&prefix_lower))
-            .collect();
+        let mut suggestions: Vec<(String, usize)> = if prefix_lower.is_empty() {
+            all_tags.into_iter().collect()
+        } else {
+            all_tags
+                .into_iter()
+                .filter(|(tag, _)| tag.to_lowercase().contains(&prefix_lower))
+                .collect()
+        };
 
-        // 按使用次数排序
-        suggestions.sort_by(|a, b| b.1.cmp(&a.1));
+        suggestions.sort_unstable_by(|a, b| b.1.cmp(&a.1));
 
         Ok(suggestions)
     }

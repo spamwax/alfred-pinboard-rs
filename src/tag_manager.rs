@@ -12,6 +12,15 @@ impl TagManager {
     pub fn new(db_path: PathBuf) -> Result<Self> {
         let conn = Connection::open(db_path)?;
 
+        // 性能优化: WAL模式 + 内存临时表 + 宽松同步
+        conn.execute_batch(
+            "PRAGMA journal_mode = WAL;
+             PRAGMA synchronous = NORMAL;
+             PRAGMA temp_store = MEMORY;
+             PRAGMA cache_size = -2000;
+             PRAGMA mmap_size = 268435456;",
+        )?;
+
         // 创建表
         conn.execute(
             "CREATE TABLE IF NOT EXISTS bookmark_tags (
@@ -64,6 +73,7 @@ impl TagManager {
     }
 
     /// 删除书签的所有tags
+    #[allow(dead_code)]
     pub fn remove_all_tags(&self, bookmark_id: &str) -> Result<()> {
         self.conn.execute(
             "DELETE FROM bookmark_tags WHERE bookmark_id = ?1",
@@ -136,6 +146,7 @@ impl TagManager {
     }
 
     /// 查找包含任一指定tag的书签ID（OR查询）
+    #[allow(dead_code)]
     pub fn find_bookmarks_by_any_tag(&self, tags: &[String]) -> Result<Vec<String>> {
         if tags.is_empty() {
             return Ok(Vec::new());
@@ -164,6 +175,25 @@ impl TagManager {
             params![new_tag, old_tag],
         )?;
         Ok(updated)
+    }
+
+    /// 批量获取所有书签的tags（避免N+1查询）
+    pub fn get_all_bookmark_tags(&self) -> Result<HashMap<String, Vec<String>>> {
+        let mut stmt = self.conn.prepare(
+            "SELECT bookmark_id, tag FROM bookmark_tags ORDER BY bookmark_id, tag",
+        )?;
+
+        let mut result: HashMap<String, Vec<String>> = HashMap::new();
+        let rows = stmt.query_map([], |row| {
+            Ok((row.get::<_, String>(0)?, row.get::<_, String>(1)?))
+        })?;
+
+        for row in rows {
+            let (bookmark_id, tag) = row?;
+            result.entry(bookmark_id).or_default().push(tag);
+        }
+
+        Ok(result)
     }
 
     /// 获取数据库中的书签总数
