@@ -2,13 +2,13 @@ use crate::bookmark::ChromeBookmark;
 use crate::tag_manager::TagManager;
 use fuzzy_matcher::skim::SkimMatcherV2;
 use fuzzy_matcher::FuzzyMatcher;
+use std::cmp::Ordering;
+use std::collections::BinaryHeap;
 
 /// 搜索结果
 #[derive(Debug)]
 pub struct SearchResult {
     pub bookmark: ChromeBookmark,
-    pub tags: Vec<String>,
-    pub score: i64,
 }
 
 /// 搜索器
@@ -23,7 +23,7 @@ impl BookmarkSearcher {
         }
     }
 
-    /// 搜索书签（优化版：批量加载tags，使用预计算lowercase，提前终止）
+    /// 搜索书签（优化版：使用预计算lowercase，Top-K选择，提前终止）
     pub fn search(
         &self,
         bookmarks: &[ChromeBookmark],
@@ -33,17 +33,17 @@ impl BookmarkSearcher {
         fuzzy: bool,
         limit: usize,
     ) -> Result<Vec<SearchResult>, Box<dyn std::error::Error>> {
-        // 批量加载所有书签tags（一次SQL查询替代N次）
-        let all_tags = tag_manager.get_all_bookmark_tags()
-            .unwrap_or_default();
+        if limit == 0 {
+            return Ok(Vec::new());
+        }
 
         // 先按tags过滤
         let tag_filtered_ids = if !search_tags.is_empty() {
-            Some(
-                tag_manager.find_bookmarks_by_tags(search_tags)?
-                    .into_iter()
-                    .collect::<std::collections::HashSet<_>>(),
-            )
+            let ids = tag_manager.find_bookmarks_by_tags(search_tags)?;
+            if ids.is_empty() {
+                return Ok(Vec::new());
+            }
+            Some(ids.into_iter().collect::<std::collections::HashSet<_>>())
         } else {
             None
         };
@@ -51,7 +51,59 @@ impl BookmarkSearcher {
         let query_lower = query.to_lowercase();
         let mut results = Vec::new();
 
-        for bookmark in bookmarks {
+        if query.is_empty() {
+            for bookmark in bookmarks {
+                if let Some(ref id_set) = tag_filtered_ids {
+                    if !id_set.contains(&bookmark.id) {
+                        continue;
+                    }
+                }
+
+                results.push(SearchResult {
+                    bookmark: bookmark.clone(),
+                });
+
+                if results.len() >= limit {
+                    break;
+                }
+            }
+
+            return Ok(results);
+        }
+
+        #[derive(Debug)]
+        struct HeapItem {
+            score: i64,
+            idx: usize,
+            bookmark: ChromeBookmark,
+        }
+
+        impl PartialEq for HeapItem {
+            fn eq(&self, other: &Self) -> bool {
+                self.score == other.score && self.idx == other.idx
+            }
+        }
+
+        impl Eq for HeapItem {}
+
+        impl Ord for HeapItem {
+            fn cmp(&self, other: &Self) -> Ordering {
+                match self.score.cmp(&other.score) {
+                    Ordering::Equal => other.idx.cmp(&self.idx),
+                    other => other,
+                }
+            }
+        }
+
+        impl PartialOrd for HeapItem {
+            fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+                Some(self.cmp(other))
+            }
+        }
+
+        let mut heap: BinaryHeap<std::cmp::Reverse<HeapItem>> = BinaryHeap::new();
+
+        for (idx, bookmark) in bookmarks.iter().enumerate() {
             // tag过滤
             if let Some(ref id_set) = tag_filtered_ids {
                 if !id_set.contains(&bookmark.id) {
@@ -59,35 +111,48 @@ impl BookmarkSearcher {
                 }
             }
 
-            // 如果没有查询词，直接收集
-            let score = if query.is_empty() {
-                0
-            } else if fuzzy {
+            let score = if fuzzy {
                 self.fuzzy_search(bookmark, query)
             } else {
                 self.exact_search(bookmark, &query_lower)
             };
 
-            if query.is_empty() || score > 0 {
-                let tags = all_tags
-                    .get(&bookmark.id)
-                    .cloned()
-                    .unwrap_or_default();
-                results.push(SearchResult {
-                    bookmark: bookmark.clone(),
-                    tags,
-                    score,
-                });
+            if score <= 0 {
+                continue;
+            }
+
+            let candidate = HeapItem {
+                score,
+                idx,
+                bookmark: bookmark.clone(),
+            };
+
+            if heap.len() < limit {
+                heap.push(std::cmp::Reverse(candidate));
+                continue;
+            }
+
+            if let Some(smallest) = heap.peek() {
+                let better = score > smallest.0.score || (score == smallest.0.score && idx < smallest.0.idx);
+                if better {
+                    heap.pop();
+                    heap.push(std::cmp::Reverse(candidate));
+                }
             }
         }
 
-        // 按分数排序
-        if !query.is_empty() {
-            results.sort_unstable_by(|a, b| b.score.cmp(&a.score));
-        }
+        let mut items: Vec<HeapItem> = heap.into_iter().map(|item| item.0).collect();
+        items.sort_unstable_by(|a, b| {
+            b.score
+                .cmp(&a.score)
+                .then_with(|| a.idx.cmp(&b.idx))
+        });
 
-        // 截断到limit
-        results.truncate(limit);
+        for item in items {
+            results.push(SearchResult {
+                bookmark: item.bookmark,
+            });
+        }
 
         Ok(results)
     }
@@ -169,5 +234,89 @@ impl BookmarkSearcher {
 impl Default for BookmarkSearcher {
     fn default() -> Self {
         Self::new()
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::tag_manager::TagManager;
+    use tempfile::tempdir;
+
+    fn bookmark(id: &str, name: &str, url: &str, folder: Option<&str>) -> ChromeBookmark {
+        ChromeBookmark {
+            id: id.to_string(),
+            name: name.to_string(),
+            url: url.to_string(),
+            date_added: "0".to_string(),
+            folder_path: folder.map(|p| p.to_string()),
+            name_lower: name.to_lowercase(),
+            url_lower: url.to_lowercase(),
+            folder_path_lower: folder.map(|p| p.to_lowercase()),
+        }
+    }
+
+    fn tag_manager() -> (TagManager, tempfile::TempDir) {
+        let dir = tempdir().expect("tempdir");
+        let db_path = dir.path().join("tags.db");
+        (TagManager::new(db_path).expect("manager"), dir)
+    }
+
+    #[test]
+    fn exact_search_ranks_full_match_first() {
+        let (manager, _dir) = tag_manager();
+        let searcher = BookmarkSearcher::new();
+        let bookmarks = vec![
+            bookmark("1", "rust", "https://rust-lang.org", None),
+            bookmark("2", "rust-lang", "https://example.com", None),
+            bookmark("3", "other", "https://other.com", None),
+        ];
+
+        let results = searcher
+            .search(&bookmarks, &manager, "rust", &[], false, 10)
+            .expect("search");
+        assert_eq!(results.first().unwrap().bookmark.id, "1");
+    }
+
+    #[test]
+    fn search_filters_by_tags_and_limits() {
+        let (manager, _dir) = tag_manager();
+        manager
+            .add_tags("1", &vec!["work".into()])
+            .expect("add tags");
+        manager
+            .add_tags("2", &vec!["personal".into()])
+            .expect("add tags");
+
+        let searcher = BookmarkSearcher::new();
+        let bookmarks = vec![
+            bookmark("1", "alpha", "https://a.com", None),
+            bookmark("2", "beta", "https://b.com", None),
+            bookmark("3", "gamma", "https://c.com", None),
+        ];
+
+        let results = searcher
+            .search(&bookmarks, &manager, "", &vec!["work".into()], false, 1)
+            .expect("search");
+        assert_eq!(results.len(), 1);
+        assert_eq!(results[0].bookmark.id, "1");
+    }
+
+    #[test]
+    fn empty_query_returns_first_n_in_order() {
+        let (manager, _dir) = tag_manager();
+        let searcher = BookmarkSearcher::new();
+        let bookmarks = vec![
+            bookmark("1", "one", "https://1.com", None),
+            bookmark("2", "two", "https://2.com", None),
+            bookmark("3", "three", "https://3.com", None),
+        ];
+
+        let results = searcher
+            .search(&bookmarks, &manager, "", &[], false, 2)
+            .expect("search");
+        assert_eq!(results.len(), 2);
+        assert_eq!(results[0].bookmark.id, "1");
+        assert_eq!(results[1].bookmark.id, "2");
     }
 }

@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
-use std::io::BufWriter;
-use std::path::PathBuf;
+use std::io::{BufWriter, Write};
+use std::path::{Path, PathBuf};
 
 /// Chrome书签项
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -102,25 +102,75 @@ impl ChromeBookmarks {
 
 /// 获取Chrome书签文件路径
 pub fn get_chrome_bookmarks_path() -> Option<PathBuf> {
-    if let Some(home) = dirs::home_dir() {
-        // macOS Chrome默认路径
-        let chrome_path = home.join("Library/Application Support/Google/Chrome/Default/Bookmarks");
-        if chrome_path.exists() {
-            return Some(chrome_path);
-        }
+    dirs::home_dir().and_then(|home| get_chrome_bookmarks_path_from_home(&home))
+}
 
-        // 尝试其他Profile
-        for profile_num in 1..10 {
-            let profile_path = home.join(format!(
-                "Library/Application Support/Google/Chrome/Profile {}/Bookmarks",
-                profile_num
-            ));
-            if profile_path.exists() {
-                return Some(profile_path);
+fn get_chrome_bookmarks_path_from_home(home: &Path) -> Option<PathBuf> {
+    let mut candidates = Vec::new();
+
+    // macOS Chrome默认路径
+    let chrome_path = home.join("Library/Application Support/Google/Chrome/Default/Bookmarks");
+    if chrome_path.exists() {
+        candidates.push(chrome_path);
+    }
+
+    // 尝试其他Profile
+    for profile_num in 1..10 {
+        let profile_path = home.join(format!(
+            "Library/Application Support/Google/Chrome/Profile {}/Bookmarks",
+            profile_num
+        ));
+        if profile_path.exists() {
+            candidates.push(profile_path);
+        }
+    }
+
+    select_latest_bookmarks(candidates)
+}
+
+fn select_latest_bookmarks(mut candidates: Vec<PathBuf>) -> Option<PathBuf> {
+    if candidates.is_empty() {
+        return None;
+    }
+
+    let mut selected: Option<(std::time::SystemTime, u64, PathBuf)> = None;
+
+    for path in candidates.drain(..) {
+        let metadata = match std::fs::metadata(&path) {
+            Ok(meta) => meta,
+            Err(_) => continue,
+        };
+        let modified = metadata.modified().unwrap_or(std::time::SystemTime::UNIX_EPOCH);
+        let size = metadata.len();
+
+        match selected {
+            None => selected = Some((modified, size, path)),
+            Some((best_time, best_size, _)) => {
+                if modified > best_time || (modified == best_time && size > best_size) {
+                    selected = Some((modified, size, path));
+                }
             }
         }
     }
-    None
+
+    selected.map(|(_, _, path)| path)
+}
+
+pub fn compute_bookmarks_fingerprint(bookmarks_path: &Path) -> Result<String, Box<dyn std::error::Error>> {
+    let metadata = std::fs::metadata(bookmarks_path)?;
+    let mtime_nanos = metadata
+        .modified()?
+        .duration_since(std::time::UNIX_EPOCH)?
+        .as_nanos();
+    let canonical = bookmarks_path
+        .canonicalize()
+        .unwrap_or_else(|_| bookmarks_path.to_path_buf());
+    Ok(format!(
+        "{}-{}-{}",
+        mtime_nanos,
+        metadata.len(),
+        canonical.to_string_lossy()
+    ))
 }
 
 /// 带mtime缓存的书签加载器
@@ -138,44 +188,230 @@ impl BookmarkCache {
         }
     }
 
+    pub fn invalidate(&self) {
+        let _ = std::fs::remove_file(&self.cache_path);
+        let _ = std::fs::remove_file(&self.mtime_path);
+    }
+
     /// 加载书签，使用缓存（如果Chrome书签文件未变化）
     pub fn load(&self, bookmarks_path: &PathBuf) -> Result<Vec<ChromeBookmark>, Box<dyn std::error::Error>> {
-        let source_mtime = std::fs::metadata(bookmarks_path)?
-            .modified()?
-            .duration_since(std::time::UNIX_EPOCH)?
-            .as_secs();
+        let source_fingerprint = Self::fingerprint(bookmarks_path)?;
 
         // 检查缓存是否仍然有效
-        if let Ok(cached_mtime_str) = std::fs::read_to_string(&self.mtime_path) {
-            if let Ok(cached_mtime) = cached_mtime_str.trim().parse::<u64>() {
-                if cached_mtime == source_mtime {
-                    if let Ok(cached_data) = std::fs::read(&self.cache_path) {
-                        if let Ok(bookmarks) = serde_json::from_slice::<Vec<ChromeBookmark>>(&cached_data) {
-                            // 反序列化后需要重建lowercase字段（serde skip）
-                            let bookmarks = bookmarks.into_iter().map(|mut b| {
-                                b.name_lower = b.name.to_lowercase();
-                                b.url_lower = b.url.to_lowercase();
-                                b.folder_path_lower = b.folder_path.as_ref().map(|p| p.to_lowercase());
-                                b
-                            }).collect();
-                            return Ok(bookmarks);
-                        }
-                    }
+        if let Ok(cached_fingerprint) = std::fs::read_to_string(&self.mtime_path) {
+            if cached_fingerprint.trim() == source_fingerprint {
+                if let Some(bookmarks) = self.load_cached() {
+                    return Ok(bookmarks);
                 }
             }
         }
 
         // 缓存失效，重新解析
-        let chrome_bookmarks = ChromeBookmarks::from_file(bookmarks_path.clone())?;
+        let chrome_bookmarks = match ChromeBookmarks::from_file(bookmarks_path.clone()) {
+            Ok(parsed) => parsed,
+            Err(err) => {
+                if let Some(bookmarks) = self.load_cached() {
+                    return Ok(bookmarks);
+                }
+                return Err(err);
+            }
+        };
         let bookmarks = chrome_bookmarks.extract_all_bookmarks();
 
         // 写入缓存（忽略写入失败，不影响功能）
-        if let Ok(file) = std::fs::File::create(&self.cache_path) {
-            let writer = BufWriter::new(file);
-            let _ = serde_json::to_writer(writer, &bookmarks);
+        if let Ok(json) = serde_json::to_vec(&bookmarks) {
+            let _ = Self::write_atomic(&self.cache_path, &json);
         }
-        let _ = std::fs::write(&self.mtime_path, source_mtime.to_string());
+        let _ = Self::write_atomic(&self.mtime_path, source_fingerprint.as_bytes());
 
         Ok(bookmarks)
+    }
+
+    fn load_cached(&self) -> Option<Vec<ChromeBookmark>> {
+        let cached_data = std::fs::read(&self.cache_path).ok()?;
+        let bookmarks = serde_json::from_slice::<Vec<ChromeBookmark>>(&cached_data).ok()?;
+
+        let bookmarks = bookmarks
+            .into_iter()
+            .map(|mut b| {
+                b.name_lower = b.name.to_lowercase();
+                b.url_lower = b.url.to_lowercase();
+                b.folder_path_lower = b.folder_path.as_ref().map(|p| p.to_lowercase());
+                b
+            })
+            .collect();
+
+        Some(bookmarks)
+    }
+
+    fn fingerprint(bookmarks_path: &Path) -> Result<String, Box<dyn std::error::Error>> {
+        compute_bookmarks_fingerprint(bookmarks_path)
+    }
+
+    fn write_atomic(path: &Path, data: &[u8]) -> std::io::Result<()> {
+        let tmp_path = path.with_extension("tmp");
+        if let Ok(file) = std::fs::File::create(&tmp_path) {
+            let mut writer = BufWriter::new(file);
+            writer.write_all(data)?;
+            writer.flush()?;
+            let _ = writer.get_ref().sync_all();
+            std::fs::rename(tmp_path, path)?;
+        }
+        Ok(())
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use std::fs;
+    use tempfile::tempdir;
+
+    fn write_bookmarks(path: &Path, include_other: bool) {
+        let other_section = if include_other {
+            r#"
+    "other": {
+      "type": "folder",
+      "id": "2",
+      "name": "Other Bookmarks",
+      "children": [
+        {
+          "type": "url",
+          "id": "20",
+          "name": "Other",
+          "url": "https://other.com",
+          "date_added": "3"
+        }
+      ]
+    }"#
+        } else {
+            r#"
+    "other": {
+      "type": "folder",
+      "id": "2",
+      "name": "Other Bookmarks",
+      "children": []
+    }"#
+        };
+
+        let json = format!(
+            r#"{{
+  "roots": {{
+    "bookmark_bar": {{
+      "type": "folder",
+      "id": "1",
+      "name": "Bookmark Bar",
+      "children": [
+        {{
+          "type": "url",
+          "id": "10",
+          "name": "Rust",
+          "url": "https://rust-lang.org",
+          "date_added": "1"
+        }},
+        {{
+          "type": "folder",
+          "id": "11",
+          "name": "Sub",
+          "children": [
+            {{
+              "type": "url",
+              "id": "12",
+              "name": "Example",
+              "url": "https://example.com",
+              "date_added": "2"
+            }}
+          ]
+        }}
+      ]
+    }},{}
+  }}
+}}"#,
+            other_section
+        );
+        fs::write(path, json).expect("write bookmarks");
+    }
+
+    #[test]
+    fn extract_all_bookmarks_builds_paths_and_lowercase() {
+        let dir = tempdir().expect("tempdir");
+        let path = dir.path().join("Bookmarks");
+        write_bookmarks(&path, true);
+
+        let parsed = ChromeBookmarks::from_file(path).expect("parse bookmarks");
+        let bookmarks = parsed.extract_all_bookmarks();
+        assert_eq!(bookmarks.len(), 3);
+
+        let rust = bookmarks.iter().find(|b| b.id == "10").unwrap();
+        assert_eq!(rust.name_lower, "rust");
+        assert_eq!(rust.url_lower, "https://rust-lang.org");
+
+        let nested = bookmarks.iter().find(|b| b.id == "12").unwrap();
+        assert_eq!(nested.folder_path.as_deref(), Some("书签栏/Bookmark Bar/Sub"));
+        assert_eq!(nested.folder_path_lower.as_deref(), Some("书签栏/bookmark bar/sub"));
+    }
+
+    #[test]
+    fn get_chrome_bookmarks_path_from_home_selects_latest_profile() {
+        let dir = tempdir().expect("tempdir");
+        let home = dir.path();
+
+        let default_path = home.join("Library/Application Support/Google/Chrome/Default");
+        fs::create_dir_all(&default_path).expect("create default");
+        fs::write(default_path.join("Bookmarks"), "{}").expect("write default");
+
+        let profile_path = home.join("Library/Application Support/Google/Chrome/Profile 1");
+        fs::create_dir_all(&profile_path).expect("create profile");
+        fs::write(profile_path.join("Bookmarks"), "{\"bigger\":true}").expect("write profile");
+
+        let found_profile = get_chrome_bookmarks_path_from_home(home).expect("find latest");
+        assert!(found_profile.ends_with("Profile 1/Bookmarks"));
+
+        fs::remove_file(profile_path.join("Bookmarks")).expect("remove profile");
+        let found_default = get_chrome_bookmarks_path_from_home(home).expect("find default");
+        assert!(found_default.ends_with("Default/Bookmarks"));
+    }
+
+    #[test]
+    fn bookmark_cache_invalidates_on_change_and_can_be_cleared() {
+        let dir = tempdir().expect("tempdir");
+        let data_dir = dir.path().to_path_buf();
+        let bookmarks_path = dir.path().join("Bookmarks");
+
+        write_bookmarks(&bookmarks_path, true);
+        let cache = BookmarkCache::new(&data_dir);
+        let first = cache.load(&bookmarks_path).expect("first load");
+        assert_eq!(first.len(), 3);
+
+        write_bookmarks(&bookmarks_path, false);
+
+        let second = cache.load(&bookmarks_path).expect("second load");
+        assert_eq!(second.len(), 2);
+
+        let cache_file = data_dir.join("bookmarks_cache.json");
+        let mtime_file = data_dir.join("bookmarks_mtime");
+        assert!(cache_file.exists());
+        assert!(mtime_file.exists());
+
+        cache.invalidate();
+        assert!(!cache_file.exists());
+        assert!(!mtime_file.exists());
+    }
+
+    #[test]
+    fn bookmark_cache_falls_back_when_parse_fails() {
+        let dir = tempdir().expect("tempdir");
+        let data_dir = dir.path().to_path_buf();
+        let bookmarks_path = dir.path().join("Bookmarks");
+
+        write_bookmarks(&bookmarks_path, true);
+        let cache = BookmarkCache::new(&data_dir);
+        let first = cache.load(&bookmarks_path).expect("first load");
+        assert_eq!(first.len(), 3);
+
+        fs::write(&bookmarks_path, "{ invalid json").expect("write invalid");
+
+        let fallback = cache.load(&bookmarks_path).expect("fallback load");
+        assert_eq!(fallback.len(), 3);
     }
 }

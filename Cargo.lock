@@ -34,6 +34,7 @@ dependencies = [
  "serde",
  "serde_json",
  "structopt",
+ "tempfile",
  "thiserror",
 ]
 
@@ -118,7 +119,17 @@ dependencies = [
  "libc",
  "option-ext",
  "redox_users",
- "windows-sys",
+ "windows-sys 0.48.0",
+]
+
+[[package]]
+name = "errno"
+version = "0.3.14"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "39cab71617ae0d63f51a36d69f866391735b51691dbda63cf6f96d042b63efeb"
+dependencies = [
+ "libc",
+ "windows-sys 0.61.2",
 ]
 
 [[package]]
@@ -132,6 +143,12 @@ name = "fallible-streaming-iterator"
 version = "0.1.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7360491ce676a36bf9bb3c56c1aa791658183a54d2744120f27285738d90465a"
+
+[[package]]
+name = "fastrand"
+version = "2.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "37909eebbb50d72f9059c3b6d82c0463f2ff062c9e95845c43a6c9c0355411be"
 
 [[package]]
 name = "find-msvc-tools"
@@ -157,6 +174,18 @@ dependencies = [
  "cfg-if",
  "libc",
  "wasi",
+]
+
+[[package]]
+name = "getrandom"
+version = "0.3.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "899def5c37c4fd7b2664648c28120ecec138e4d395b459e5ca34f9cce2dd77fd"
+dependencies = [
+ "cfg-if",
+ "libc",
+ "r-efi",
+ "wasip2",
 ]
 
 [[package]]
@@ -209,9 +238,9 @@ checksum = "e2abad23fbc42b3700f2f279844dc832adb2b2eb069b2df918f455c4e18cc646"
 
 [[package]]
 name = "libc"
-version = "0.2.146"
+version = "0.2.180"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f92be4933c13fd498862a9e02a3055f8a8d9c039ce33db97306fd5a6caa7f29b"
+checksum = "bcc35a38544a891a5f7c865aca548a982ccb3b8650a5b06d0fd33a10283c56fc"
 
 [[package]]
 name = "libsqlite3-sys"
@@ -225,10 +254,16 @@ dependencies = [
 ]
 
 [[package]]
-name = "once_cell"
-version = "1.18.0"
+name = "linux-raw-sys"
+version = "0.11.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "dd8b5dd2ae5ed71462c540258bedcb51965123ad7e7ccf4b9a8cafaa4a63576d"
+checksum = "df1d3c3b53da64cf5760482273a98e575c651a67eec7f77df96b5b642de8f039"
+
+[[package]]
+name = "once_cell"
+version = "1.21.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "42f5e15c9953c5e4ccceeb2e7382a716482c34515315f7b03532b8b4e8393d2d"
 
 [[package]]
 name = "option-ext"
@@ -285,6 +320,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "r-efi"
+version = "5.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "69cdb34c158ceb288df11e18b4bd39de994f6657d83847bdffdbd7f346754b0f"
+
+[[package]]
 name = "redox_syscall"
 version = "0.2.16"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -299,7 +340,7 @@ version = "0.4.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b033d837a7cf162d7993aded9304e30a83213c648b6e389db233191f891e5c2b"
 dependencies = [
- "getrandom",
+ "getrandom 0.2.10",
  "redox_syscall",
  "thiserror",
 ]
@@ -316,6 +357,19 @@ dependencies = [
  "hashlink",
  "libsqlite3-sys",
  "smallvec",
+]
+
+[[package]]
+name = "rustix"
+version = "1.1.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "146c9e247ccc180c1f61615433868c99f3de3ae256a30a43b49f67c2d9171f34"
+dependencies = [
+ "bitflags 2.10.0",
+ "errno",
+ "libc",
+ "linux-raw-sys",
+ "windows-sys 0.61.2",
 ]
 
 [[package]]
@@ -420,6 +474,19 @@ dependencies = [
 ]
 
 [[package]]
+name = "tempfile"
+version = "3.24.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "655da9c7eb6305c55742045d5a8d2037996d61d8de95806335c7c86ce0f82e9c"
+dependencies = [
+ "fastrand",
+ "getrandom 0.3.4",
+ "once_cell",
+ "rustix",
+ "windows-sys 0.61.2",
+]
+
+[[package]]
 name = "textwrap"
 version = "0.11.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -501,6 +568,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9c8d87e72b64a3b4db28d11ce29237c246188f4f51057d65a7eab63b7987e423"
 
 [[package]]
+name = "wasip2"
+version = "1.0.2+wasi-0.2.9"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9517f9239f02c069db75e65f174b3da828fe5f5b945c4dd26bd25d89c03ebcf5"
+dependencies = [
+ "wit-bindgen",
+]
+
+[[package]]
 name = "winapi"
 version = "0.3.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -523,12 +599,27 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "712e227841d057c1ee1cd2fb22fa7e5a5461ae8e48fa2ca79ec42cfc1931183f"
 
 [[package]]
+name = "windows-link"
+version = "0.2.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f0805222e57f7521d6a62e36fa9163bc891acd422f971defe97d64e70d0a4fe5"
+
+[[package]]
 name = "windows-sys"
 version = "0.48.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "677d2418bec65e3338edb076e806bc1ec15693c5d0104683f2efe857f61056a9"
 dependencies = [
  "windows-targets",
+]
+
+[[package]]
+name = "windows-sys"
+version = "0.61.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ae137229bcbd6cdf0f7b80a31df61766145077ddf49416a728b02cb3921ff3fc"
+dependencies = [
+ "windows-link",
 ]
 
 [[package]]
@@ -587,6 +678,12 @@ name = "windows_x86_64_msvc"
 version = "0.48.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1a515f5799fe4961cb532f983ce2b23082366b898e52ffbce459c86f67c8378a"
+
+[[package]]
+name = "wit-bindgen"
+version = "0.51.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d7249219f66ced02969388cf2bb044a09756a083d0fab1e566056b04d9fbcaa5"
 
 [[package]]
 name = "zerocopy"

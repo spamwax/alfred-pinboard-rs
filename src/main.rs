@@ -1,4 +1,5 @@
 use std::borrow::Cow;
+use std::collections::HashSet;
 use std::io::{self, BufWriter, Write};
 use std::process;
 use structopt::StructOpt;
@@ -9,7 +10,7 @@ mod cli;
 mod searcher;
 mod tag_manager;
 
-use crate::bookmark::{BookmarkCache, ChromeBookmark, get_chrome_bookmarks_path};
+use crate::bookmark::{BookmarkCache, compute_bookmarks_fingerprint, get_chrome_bookmarks_path};
 use crate::cli::{Opt, SubCommand};
 use crate::searcher::BookmarkSearcher;
 use crate::tag_manager::TagManager;
@@ -46,13 +47,37 @@ fn run(opt: Opt) -> Result<(), Box<dyn std::error::Error>> {
             .join(".alfred-chrome-bookmarks")
     };
 
+    let cache_dir = if let Ok(dir) = std::env::var("alfred_workflow_cache") {
+        std::path::PathBuf::from(dir)
+    } else {
+        data_dir.clone()
+    };
+
     std::fs::create_dir_all(&data_dir)?;
+    if cache_dir != data_dir {
+        std::fs::create_dir_all(&cache_dir)?;
+    }
 
     let tag_db_path = data_dir.join("tags.db");
     let tag_manager = TagManager::new(tag_db_path)
         .map_err(|e| AppError::DatabaseError(e.to_string()))?;
 
-    let bookmark_cache = BookmarkCache::new(&data_dir);
+    let bookmark_cache = BookmarkCache::new(&cache_dir);
+
+    let needs_index = matches!(
+        opt.cmd,
+        SubCommand::Search { .. }
+            | SubCommand::Tag { .. }
+            | SubCommand::Untag { .. }
+            | SubCommand::ShowTags { .. }
+            | SubCommand::Stats
+    );
+
+    if needs_index {
+        let bookmarks_path = get_chrome_bookmarks_path()
+            .ok_or(AppError::BookmarksNotFound)?;
+        ensure_bookmark_index(&tag_manager, &bookmark_cache, &bookmarks_path)?;
+    }
 
     match opt.cmd {
         SubCommand::Search {
@@ -61,40 +86,61 @@ fn run(opt: Opt) -> Result<(), Box<dyn std::error::Error>> {
             fuzzy,
             limit,
         } => {
-            handle_search(query, tags, fuzzy, limit, &tag_manager, &bookmark_cache)?;
+            handle_search(query, tags, fuzzy, limit, &tag_manager)?;
         }
         SubCommand::Tag { bookmark, tags } => {
-            handle_tag(bookmark, tags, &tag_manager, &bookmark_cache)?;
+            handle_tag(bookmark, tags, &tag_manager)?;
         }
         SubCommand::Untag { bookmark, tag } => {
-            handle_untag(bookmark, tag, &tag_manager, &bookmark_cache)?;
+            handle_untag(bookmark, tag, &tag_manager)?;
         }
         SubCommand::ListTags { prefix } => {
             handle_list_tags(prefix, &tag_manager)?;
         }
         SubCommand::ShowTags { bookmark } => {
-            handle_show_tags(bookmark, &tag_manager, &bookmark_cache)?;
+            handle_show_tags(bookmark, &tag_manager)?;
         }
         SubCommand::RenameTag { old_tag, new_tag } => {
             handle_rename_tag(old_tag, new_tag, &tag_manager)?;
         }
         SubCommand::Refresh => {
+            let bookmarks_path = get_chrome_bookmarks_path()
+                .ok_or(AppError::BookmarksNotFound)?;
+            bookmark_cache.invalidate();
+            tag_manager
+                .clear_bookmarks_index()
+                .map_err(|e| AppError::DatabaseError(e.to_string()))?;
+            ensure_bookmark_index(&tag_manager, &bookmark_cache, &bookmarks_path)?;
             show_info_alfred("Chrome书签已刷新");
         }
         SubCommand::Stats => {
-            handle_stats(&tag_manager, &bookmark_cache)?;
+            handle_stats(&tag_manager)?;
         }
     }
 
     Ok(())
 }
 
-fn load_chrome_bookmarks(cache: &BookmarkCache) -> Result<Vec<ChromeBookmark>, Box<dyn std::error::Error>> {
-    let bookmarks_path = get_chrome_bookmarks_path()
-        .ok_or(AppError::BookmarksNotFound)?;
+fn ensure_bookmark_index(
+    tag_manager: &TagManager,
+    cache: &BookmarkCache,
+    bookmarks_path: &std::path::Path,
+) -> Result<(), Box<dyn std::error::Error>> {
+    let fingerprint = compute_bookmarks_fingerprint(bookmarks_path)?;
+    if !tag_manager
+        .bookmarks_need_refresh(&fingerprint)
+        .map_err(|e| AppError::DatabaseError(e.to_string()))?
+    {
+        return Ok(());
+    }
 
-    cache.load(&bookmarks_path)
-        .map_err(|e| AppError::BookmarksReadError(e.to_string()).into())
+    let bookmarks = cache
+        .load(&bookmarks_path.to_path_buf())
+        .map_err(|e| AppError::BookmarksReadError(e.to_string()))?;
+    tag_manager
+        .replace_bookmarks(&bookmarks, &fingerprint)
+        .map_err(|e| AppError::DatabaseError(e.to_string()))?;
+    Ok(())
 }
 
 fn handle_search(
@@ -103,19 +149,45 @@ fn handle_search(
     fuzzy: bool,
     limit: usize,
     tag_manager: &TagManager,
-    cache: &BookmarkCache,
 ) -> Result<(), Box<dyn std::error::Error>> {
-    let bookmarks = load_chrome_bookmarks(cache)?;
     let searcher = BookmarkSearcher::new();
 
     let query_str = query.join(" ");
     let search_tags: Vec<String> = if let Some(tags_str) = tags {
-        tags_str.split(',').map(|s| s.trim().to_string()).filter(|s| !s.is_empty()).collect()
+        normalize_tags(tags_str.split(','))
     } else {
         Vec::new()
     };
 
-    let results = searcher.search(&bookmarks, tag_manager, &query_str, &search_tags, fuzzy, limit)?;
+    let fallback_search = || -> Result<Vec<crate::bookmark::ChromeBookmark>, Box<dyn std::error::Error>> {
+        let bookmarks = tag_manager
+            .load_all_bookmarks()
+            .map_err(|e| AppError::DatabaseError(e.to_string()))?;
+        let results = searcher.search(&bookmarks, tag_manager, &query_str, &search_tags, fuzzy, limit)?;
+        Ok(results.into_iter().map(|result| result.bookmark).collect())
+    };
+
+    let bookmarks = if query_str.is_empty() {
+        if search_tags.is_empty() {
+            tag_manager
+                .list_bookmarks(limit)
+                .map_err(|e| AppError::DatabaseError(e.to_string()))?
+        } else {
+            tag_manager
+                .list_bookmarks_by_tags(&search_tags, limit)
+                .map_err(|e| AppError::DatabaseError(e.to_string()))?
+        }
+    } else if !fuzzy {
+        match tag_manager
+            .search_bookmarks_fts(&query_str, &search_tags, limit)
+            .map_err(|e| AppError::DatabaseError(e.to_string()))?
+        {
+            Some(results) => results,
+            None => fallback_search()?,
+        }
+    } else {
+        fallback_search()?
+    };
 
     // 预计算所有字符串，确保它们的生命周期足够长
     struct PrecomputedStrings {
@@ -124,13 +196,26 @@ fn handle_search(
         opt_subtitle: String,
     }
 
-    let precomputed: Vec<PrecomputedStrings> = results.iter().take(limit).map(|result| {
-        let tags_str = result.tags.join(", ");
-        let domain = extract_domain(&result.bookmark.url);
+    let result_ids: Vec<String> = bookmarks
+        .iter()
+        .map(|bookmark| bookmark.id.clone())
+        .collect();
+
+    let tags_map = tag_manager
+        .get_tags_for_bookmarks(&result_ids)
+        .unwrap_or_default();
+
+    let precomputed: Vec<PrecomputedStrings> = bookmarks.iter().take(limit).map(|bookmark| {
+        let tags_str = tags_map
+            .get(&bookmark.id)
+            .cloned()
+            .unwrap_or_default()
+            .join(", ");
+        let domain = extract_domain(&bookmark.url);
         PrecomputedStrings {
-            subtitle: build_subtitle(&tags_str, &result.bookmark.folder_path, &domain),
-            cmd_subtitle: format!("复制URL: {}", result.bookmark.url),
-            opt_subtitle: format!("📂 {}", result.bookmark.folder_path.as_deref().unwrap_or("未分类")),
+            subtitle: build_subtitle(&tags_str, &bookmark.folder_path, &domain),
+            cmd_subtitle: format!("复制URL: {}", bookmark.url),
+            opt_subtitle: format!("📂 {}", bookmark.folder_path.as_deref().unwrap_or("未分类")),
         }
     }).collect();
 
@@ -139,17 +224,17 @@ fn handle_search(
 
     let mut items = Vec::with_capacity(precomputed.len() + 1);
 
-    for (result, strings) in results.iter().take(limit).zip(precomputed.iter()) {
-        let item = alfred::ItemBuilder::new(&result.bookmark.name)
+    for (bookmark, strings) in bookmarks.iter().take(limit).zip(precomputed.iter()) {
+        let item = alfred::ItemBuilder::new(&bookmark.name)
             .subtitle(&strings.subtitle)
-            .arg(&result.bookmark.url)
-            .uid(&result.bookmark.id)
-            .quicklook_url(&result.bookmark.url)
+            .arg(&bookmark.url)
+            .uid(&bookmark.id)
+            .quicklook_url(&bookmark.url)
             .valid(true)
             .modifier(
                 alfred::Modifier::Command,
                 Some(&strings.cmd_subtitle),
-                Some(&result.bookmark.url),
+                Some(&bookmark.url),
                 true,
                 None,
             )
@@ -160,8 +245,8 @@ fn handle_search(
                 false,
                 None,
             )
-            .text_copy(&result.bookmark.url)
-            .text_large_type(&result.bookmark.name)
+            .text_copy(&bookmark.url)
+            .text_large_type(&bookmark.name)
             .into_item();
 
         items.push(item);
@@ -198,6 +283,27 @@ fn extract_domain(url: &str) -> String {
         .to_string()
 }
 
+fn normalize_tags<I, S>(tags: I) -> Vec<String>
+where
+    I: IntoIterator<Item = S>,
+    S: AsRef<str>,
+{
+    let mut seen = HashSet::new();
+    let mut normalized = Vec::new();
+
+    for tag in tags {
+        let trimmed = tag.as_ref().trim();
+        if trimmed.is_empty() {
+            continue;
+        }
+        if seen.insert(trimmed.to_string()) {
+            normalized.push(trimmed.to_string());
+        }
+    }
+
+    normalized
+}
+
 /// 构建改进的subtitle
 fn build_subtitle(tags_str: &str, folder_path: &Option<String>, domain: &str) -> String {
     let mut parts = Vec::new();
@@ -230,19 +336,25 @@ fn handle_tag(
     bookmark: String,
     tags: Vec<String>,
     tag_manager: &TagManager,
-    cache: &BookmarkCache,
 ) -> Result<(), Box<dyn std::error::Error>> {
-    let bookmarks = load_chrome_bookmarks(cache)?;
-
-    let found_bookmark = bookmarks
-        .iter()
-        .find(|b| b.url == bookmark || b.id == bookmark)
+    let found_bookmark = tag_manager
+        .get_bookmark_by_id_or_url(&bookmark)
+        .map_err(|e| AppError::DatabaseError(e.to_string()))?
         .ok_or_else(|| AppError::BookmarkNotFound(bookmark.clone()))?;
 
-    tag_manager.add_tags(&found_bookmark.id, &tags)
+    let tags = normalize_tags(tags);
+    if tags.is_empty() {
+        return Err(AppError::Other("未提供有效的tag".to_string()).into());
+    }
+
+    let added = tag_manager.add_tags(&found_bookmark.id, &tags)
         .map_err(|e| AppError::DatabaseError(e.to_string()))?;
 
-    show_info_alfred(format!("已为书签添加tags: {}", tags.join(", ")));
+    show_info_alfred(format!(
+        "已为书签添加{}个tags: {}",
+        added,
+        tags.join(", ")
+    ));
     Ok(())
 }
 
@@ -250,14 +362,16 @@ fn handle_untag(
     bookmark: String,
     tag: String,
     tag_manager: &TagManager,
-    cache: &BookmarkCache,
 ) -> Result<(), Box<dyn std::error::Error>> {
-    let bookmarks = load_chrome_bookmarks(cache)?;
-
-    let found_bookmark = bookmarks
-        .iter()
-        .find(|b| b.url == bookmark || b.id == bookmark)
+    let found_bookmark = tag_manager
+        .get_bookmark_by_id_or_url(&bookmark)
+        .map_err(|e| AppError::DatabaseError(e.to_string()))?
         .ok_or_else(|| AppError::BookmarkNotFound(bookmark.clone()))?;
+
+    let tag = tag.trim().to_string();
+    if tag.is_empty() {
+        return Err(AppError::Other("未提供有效的tag".to_string()).into());
+    }
 
     tag_manager.remove_tag(&found_bookmark.id, &tag)
         .map_err(|e| AppError::DatabaseError(e.to_string()))?;
@@ -311,13 +425,10 @@ fn handle_list_tags(
 fn handle_show_tags(
     bookmark: String,
     tag_manager: &TagManager,
-    cache: &BookmarkCache,
 ) -> Result<(), Box<dyn std::error::Error>> {
-    let bookmarks = load_chrome_bookmarks(cache)?;
-
-    let found_bookmark = bookmarks
-        .iter()
-        .find(|b| b.url == bookmark || b.id == bookmark)
+    let found_bookmark = tag_manager
+        .get_bookmark_by_id_or_url(&bookmark)
+        .map_err(|e| AppError::DatabaseError(e.to_string()))?
         .ok_or_else(|| AppError::BookmarkNotFound(bookmark.clone()))?;
 
     let tags = tag_manager.get_tags(&found_bookmark.id)
@@ -368,18 +479,19 @@ fn handle_rename_tag(
     Ok(())
 }
 
-fn handle_stats(tag_manager: &TagManager, cache: &BookmarkCache) -> Result<(), Box<dyn std::error::Error>> {
-    let bookmarks = load_chrome_bookmarks(cache)?;
+fn handle_stats(tag_manager: &TagManager) -> Result<(), Box<dyn std::error::Error>> {
+    let total_bookmarks = tag_manager.get_total_bookmarks()
+        .map_err(|e| AppError::DatabaseError(e.to_string()))?;
     let tagged_count = tag_manager.get_bookmark_count()
         .map_err(|e| AppError::DatabaseError(e.to_string()))?;
-    let all_tags = tag_manager.get_all_tags()
+    let tag_count = tag_manager.get_tag_count()
         .map_err(|e| AppError::DatabaseError(e.to_string()))?;
 
     let info = format!(
         "Chrome书签: {} | 已标记: {} | Tags: {}",
-        bookmarks.len(),
+        total_bookmarks,
         tagged_count,
-        all_tags.len()
+        tag_count
     );
 
     show_info_alfred(info);
