@@ -76,7 +76,12 @@ impl ChromeBookmarks {
         bookmarks
     }
 
-    fn extract_from_node(&self, node: &BookmarkNode, folder_path: &str, bookmarks: &mut Vec<ChromeBookmark>) {
+    fn extract_from_node(
+        &self,
+        node: &BookmarkNode,
+        folder_path: &str,
+        bookmarks: &mut Vec<ChromeBookmark>,
+    ) {
         if node.node_type == "url" {
             if let (Some(url), Some(date_added)) = (&node.url, &node.date_added) {
                 let folder_path_str = folder_path.to_string();
@@ -100,32 +105,95 @@ impl ChromeBookmarks {
     }
 }
 
-/// 获取Chrome书签文件路径
+/// 获取受支持浏览器（Chromium系）书签文件路径
 pub fn get_chrome_bookmarks_path() -> Option<PathBuf> {
     dirs::home_dir().and_then(|home| get_chrome_bookmarks_path_from_home(&home))
 }
 
 fn get_chrome_bookmarks_path_from_home(home: &Path) -> Option<PathBuf> {
-    let mut candidates = Vec::new();
-
-    // macOS Chrome默认路径
-    let chrome_path = home.join("Library/Application Support/Google/Chrome/Default/Bookmarks");
-    if chrome_path.exists() {
-        candidates.push(chrome_path);
-    }
-
-    // 尝试其他Profile
-    for profile_num in 1..10 {
-        let profile_path = home.join(format!(
-            "Library/Application Support/Google/Chrome/Profile {}/Bookmarks",
-            profile_num
-        ));
-        if profile_path.exists() {
-            candidates.push(profile_path);
+    if let Ok(path) = std::env::var("ALFRED_CHROME_BOOKMARKS_PATH") {
+        let configured = PathBuf::from(path);
+        if configured.exists() {
+            return Some(configured);
         }
     }
 
+    let app_support_dir = home.join("Library/Application Support");
+    let browser_roots = [
+        "Google/Chrome",
+        "Google/Chrome Beta",
+        "Google/Chrome Dev",
+        "Google/Chrome Canary",
+        "BraveSoftware/Brave-Browser",
+        "BraveSoftware/Brave-Browser-Beta",
+        "BraveSoftware/Brave-Browser-Nightly",
+        "Microsoft Edge",
+        "Microsoft Edge Beta",
+        "Microsoft Edge Dev",
+        "Microsoft Edge Canary",
+        "Chromium",
+        "Vivaldi",
+        "Arc",
+        "The Browser Company/Arc",
+        "Dia",
+        "The Browser Company/Dia",
+        "Opera",
+        "com.operasoftware.Opera",
+        "com.operasoftware.OperaDeveloper",
+        "com.operasoftware.OperaNext",
+        "com.operasoftware.OperaGX",
+        "Sidekick",
+    ];
+
+    let mut candidates = Vec::new();
+    for browser_root in browser_roots {
+        collect_bookmarks_from_browser_root(&app_support_dir.join(browser_root), &mut candidates);
+    }
+
     select_latest_bookmarks(candidates)
+}
+
+fn collect_bookmarks_from_browser_root(root: &Path, candidates: &mut Vec<PathBuf>) {
+    if !root.exists() {
+        return;
+    }
+
+    let root_bookmarks = root.join("Bookmarks");
+    if root_bookmarks.exists() {
+        candidates.push(root_bookmarks);
+    }
+
+    let Ok(entries) = std::fs::read_dir(root) else {
+        return;
+    };
+
+    for entry in entries.flatten() {
+        let Ok(file_type) = entry.file_type() else {
+            continue;
+        };
+        if !file_type.is_dir() {
+            continue;
+        }
+
+        let profile_name = entry.file_name();
+        let profile_name = profile_name.to_string_lossy();
+        if !is_chromium_profile_dir(&profile_name) {
+            continue;
+        }
+
+        let profile_bookmarks = entry.path().join("Bookmarks");
+        if profile_bookmarks.exists() {
+            candidates.push(profile_bookmarks);
+        }
+    }
+}
+
+fn is_chromium_profile_dir(name: &str) -> bool {
+    name == "Default"
+        || name == "Guest Profile"
+        || name == "System Profile"
+        || name.starts_with("Profile ")
+        || name.starts_with("Person ")
 }
 
 fn select_latest_bookmarks(mut candidates: Vec<PathBuf>) -> Option<PathBuf> {
@@ -140,7 +208,9 @@ fn select_latest_bookmarks(mut candidates: Vec<PathBuf>) -> Option<PathBuf> {
             Ok(meta) => meta,
             Err(_) => continue,
         };
-        let modified = metadata.modified().unwrap_or(std::time::SystemTime::UNIX_EPOCH);
+        let modified = metadata
+            .modified()
+            .unwrap_or(std::time::SystemTime::UNIX_EPOCH);
         let size = metadata.len();
 
         match selected {
@@ -156,7 +226,9 @@ fn select_latest_bookmarks(mut candidates: Vec<PathBuf>) -> Option<PathBuf> {
     selected.map(|(_, _, path)| path)
 }
 
-pub fn compute_bookmarks_fingerprint(bookmarks_path: &Path) -> Result<String, Box<dyn std::error::Error>> {
+pub fn compute_bookmarks_fingerprint(
+    bookmarks_path: &Path,
+) -> Result<String, Box<dyn std::error::Error>> {
     let metadata = std::fs::metadata(bookmarks_path)?;
     let mtime_nanos = metadata
         .modified()?
@@ -194,7 +266,10 @@ impl BookmarkCache {
     }
 
     /// 加载书签，使用缓存（如果Chrome书签文件未变化）
-    pub fn load(&self, bookmarks_path: &PathBuf) -> Result<Vec<ChromeBookmark>, Box<dyn std::error::Error>> {
+    pub fn load(
+        &self,
+        bookmarks_path: &PathBuf,
+    ) -> Result<Vec<ChromeBookmark>, Box<dyn std::error::Error>> {
         let source_fingerprint = Self::fingerprint(bookmarks_path)?;
 
         // 检查缓存是否仍然有效
@@ -347,8 +422,14 @@ mod tests {
         assert_eq!(rust.url_lower, "https://rust-lang.org");
 
         let nested = bookmarks.iter().find(|b| b.id == "12").unwrap();
-        assert_eq!(nested.folder_path.as_deref(), Some("书签栏/Bookmark Bar/Sub"));
-        assert_eq!(nested.folder_path_lower.as_deref(), Some("书签栏/bookmark bar/sub"));
+        assert_eq!(
+            nested.folder_path.as_deref(),
+            Some("书签栏/Bookmark Bar/Sub")
+        );
+        assert_eq!(
+            nested.folder_path_lower.as_deref(),
+            Some("书签栏/bookmark bar/sub")
+        );
     }
 
     #[test]
@@ -370,6 +451,25 @@ mod tests {
         fs::remove_file(profile_path.join("Bookmarks")).expect("remove profile");
         let found_default = get_chrome_bookmarks_path_from_home(home).expect("find default");
         assert!(found_default.ends_with("Default/Bookmarks"));
+    }
+
+    #[test]
+    fn get_chrome_bookmarks_path_supports_arc_and_dia_roots() {
+        let dir = tempdir().expect("tempdir");
+        let home = dir.path();
+
+        let arc_profile = home.join("Library/Application Support/Arc/Default");
+        fs::create_dir_all(&arc_profile).expect("create arc default");
+        fs::write(arc_profile.join("Bookmarks"), "{}").expect("write arc bookmarks");
+
+        let dia_profile =
+            home.join("Library/Application Support/The Browser Company/Dia/Profile 2");
+        fs::create_dir_all(&dia_profile).expect("create dia profile");
+        fs::write(dia_profile.join("Bookmarks"), "{\"size\":1}").expect("write dia bookmarks");
+
+        let found = get_chrome_bookmarks_path_from_home(home).expect("find bookmarks");
+        let found_str = found.to_string_lossy();
+        assert!(found_str.contains("/Arc/") || found_str.contains("/Dia/"));
     }
 
     #[test]

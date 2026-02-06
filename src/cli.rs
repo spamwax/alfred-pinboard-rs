@@ -19,6 +19,10 @@ pub enum SubCommand {
         #[structopt(short = "t", long = "tags")]
         tags: Option<String>,
 
+        /// 按目录过滤（逗号分隔，支持多级目录，如 work/project）
+        #[structopt(short = "p", long = "folders")]
+        folders: Option<String>,
+
         /// 使用模糊搜索
         #[structopt(short = "f", long = "fuzzy")]
         fuzzy: bool,
@@ -72,7 +76,7 @@ pub enum SubCommand {
         new_tag: String,
     },
 
-    /// 刷新Chrome书签缓存
+    /// 刷新浏览器书签缓存
     #[structopt(name = "refresh", alias = "rf")]
     Refresh,
 

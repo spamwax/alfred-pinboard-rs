@@ -258,7 +258,8 @@ impl TagManager {
         );
 
         let mut stmt = self.conn.prepare(&query)?;
-        let params: Vec<&dyn rusqlite::ToSql> = tags.iter().map(|t| t as &dyn rusqlite::ToSql).collect();
+        let params: Vec<&dyn rusqlite::ToSql> =
+            tags.iter().map(|t| t as &dyn rusqlite::ToSql).collect();
 
         let bookmark_ids = stmt
             .query_map(params.as_slice(), |row| row.get(0))?
@@ -283,7 +284,10 @@ impl TagManager {
     }
 
     /// 批量获取指定书签的tags
-    pub fn get_tags_for_bookmarks(&self, bookmark_ids: &[String]) -> Result<HashMap<String, Vec<String>>> {
+    pub fn get_tags_for_bookmarks(
+        &self,
+        bookmark_ids: &[String],
+    ) -> Result<HashMap<String, Vec<String>>> {
         if bookmark_ids.is_empty() {
             return Ok(HashMap::new());
         }
@@ -298,10 +302,7 @@ impl TagManager {
         );
 
         let mut stmt = self.conn.prepare(&query)?;
-        let params: Vec<&dyn ToSql> = bookmark_ids
-            .iter()
-            .map(|id| id as &dyn ToSql)
-            .collect();
+        let params: Vec<&dyn ToSql> = bookmark_ids.iter().map(|id| id as &dyn ToSql).collect();
 
         let rows = stmt.query_map(params.as_slice(), |row| {
             Ok((row.get::<_, String>(0)?, row.get::<_, String>(1)?))
@@ -346,7 +347,8 @@ impl TagManager {
             if self.fts_enabled {
                 self.conn.execute("DELETE FROM bookmarks_fts", [])?;
             }
-            self.conn.execute("DELETE FROM meta WHERE key = 'bookmarks_fingerprint'", [])?;
+            self.conn
+                .execute("DELETE FROM meta WHERE key = 'bookmarks_fingerprint'", [])?;
             Ok(())
         })();
 
@@ -521,7 +523,11 @@ impl TagManager {
         rows.collect::<Result<Vec<_>>>()
     }
 
-    pub fn list_bookmarks_by_tags(&self, tags: &[String], limit: usize) -> Result<Vec<ChromeBookmark>> {
+    pub fn list_bookmarks_by_tags(
+        &self,
+        tags: &[String],
+        limit: usize,
+    ) -> Result<Vec<ChromeBookmark>> {
         let normalized = normalize_tags(tags);
         if normalized.is_empty() {
             return Ok(Vec::new());
@@ -544,10 +550,7 @@ impl TagManager {
         );
 
         let mut stmt = self.conn.prepare(&query)?;
-        let mut params: Vec<&dyn ToSql> = normalized
-            .iter()
-            .map(|t| t as &dyn ToSql)
-            .collect();
+        let mut params: Vec<&dyn ToSql> = normalized.iter().map(|t| t as &dyn ToSql).collect();
         let tag_count = normalized.len() as i64;
         params.push(&tag_count);
         let limit_param = limit as i64;
@@ -604,7 +607,8 @@ impl TagManager {
 
         let tag_count_storage;
         if !normalized_tags.is_empty() {
-            let placeholders: Vec<String> = normalized_tags.iter().map(|_| "?".to_string()).collect();
+            let placeholders: Vec<String> =
+                normalized_tags.iter().map(|_| "?".to_string()).collect();
             sql.push_str(" AND b.id IN (SELECT bookmark_id FROM bookmark_tags WHERE tag IN (");
             sql.push_str(&placeholders.join(","));
             sql.push_str(") GROUP BY bookmark_id HAVING COUNT(DISTINCT tag) = ?)");
@@ -647,21 +651,21 @@ impl TagManager {
 
     /// 获取数据库中的书签总数
     pub fn get_bookmark_count(&self) -> Result<usize> {
-        let count: usize = self
-            .conn
-            .query_row("SELECT COUNT(DISTINCT bookmark_id) FROM bookmark_tags", [], |row| {
-                row.get(0)
-            })?;
+        let count: usize = self.conn.query_row(
+            "SELECT COUNT(DISTINCT bookmark_id) FROM bookmark_tags",
+            [],
+            |row| row.get(0),
+        )?;
         Ok(count)
     }
 
     /// 获取数据库中的tag总数
     pub fn get_tag_count(&self) -> Result<usize> {
-        let count: usize = self
-            .conn
-            .query_row("SELECT COUNT(DISTINCT tag) FROM bookmark_tags", [], |row| {
-                row.get(0)
-            })?;
+        let count: usize =
+            self.conn
+                .query_row("SELECT COUNT(DISTINCT tag) FROM bookmark_tags", [], |row| {
+                    row.get(0)
+                })?;
         Ok(count)
     }
 }
@@ -809,7 +813,9 @@ mod tests {
             sample_bookmark("2", "Example", "https://example.com", None),
         ];
 
-        manager.replace_bookmarks(&bookmarks, "fp-1").expect("replace");
+        manager
+            .replace_bookmarks(&bookmarks, "fp-1")
+            .expect("replace");
         assert!(!manager.bookmarks_need_refresh("fp-1").expect("fingerprint"));
         assert_eq!(manager.get_total_bookmarks().expect("count"), 2);
 
