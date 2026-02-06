@@ -1,5 +1,6 @@
 # Alfred Chromium Bookmarks
 
+
 一个基于 Rust 的 Alfred Workflow，用于快速搜索 Chromium 系浏览器书签，并支持标签管理与目录过滤。
 
 ## 功能
