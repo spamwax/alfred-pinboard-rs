@@ -3,7 +3,7 @@ use chrono::prelude::*;
 use std::io::Write;
 
 #[allow(clippy::option_map_unit_fn)]
-impl<'api, 'pin> Runner<'api, 'pin> {
+impl Runner<'_, '_> {
     pub fn update_cache(&mut self, force: bool) {
         match self.update(force) {
             Ok(s) => io::stdout()

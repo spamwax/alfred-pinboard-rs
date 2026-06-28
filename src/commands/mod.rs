@@ -26,7 +26,7 @@ pub(super) struct Runner<'api, 'pin> {
     pub updater: Option<Updater<GithubReleaser>>,
 }
 
-impl<'api, 'pin> Runner<'api, 'pin> {
+impl Runner<'_, '_> {
     fn write_output_items<'a, 'b, I, J>(
         &self,
         items: I,
@@ -65,7 +65,7 @@ impl<'api, 'pin> Runner<'api, 'pin> {
         Ok(())
     }
 
-    fn get_upgrade_item(&self) -> Result<Option<alfred::Item>, Box<dyn std::error::Error>> {
+    fn get_upgrade_item(&self) -> Result<Option<alfred::Item<'_>>, Box<dyn std::error::Error>> {
         debug!("Starting in get_upgrade_item");
         self.updater
             .as_ref()

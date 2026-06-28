@@ -34,7 +34,7 @@ impl fmt::Debug for Config {
             .field("update_time", &self.update_time)
             .field("workflow_data_dir", &self.workflow_data_dir)
             .field("workflow_cache_dir", &self.workflow_cache_dir)
-            .finish()
+            .finish_non_exhaustive()
     }
 }
 

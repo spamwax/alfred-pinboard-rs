@@ -11,7 +11,7 @@ use std::io::Write;
 // only, this function will automatically grab browser's url and return an Alfred item containing
 // it while deleting the given tag as well. I believe these two options should be made exclusively
 // mutual.
-impl<'api, 'pin> Runner<'api, 'pin> {
+impl Runner<'_, '_> {
     pub fn delete(&mut self, cmd: SubCommand) {
         debug!("Starting in delete");
         let SubCommand::Delete { url, tag } = cmd else {

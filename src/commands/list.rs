@@ -5,7 +5,7 @@ use std::{thread, time};
 use alfred::{Item, ItemBuilder, Modifier};
 use alfred_rs::Data;
 
-impl<'api, 'pin> Runner<'api, 'pin> {
+impl Runner<'_, '_> {
     // pub fn list(&self, cmd: SubCommand) {
     pub fn list(&self, opt: Opt) {
         let cmd = opt.cmd;
@@ -251,17 +251,14 @@ fn is_page_bookmarked(pinboard: &Pinboard) -> bool {
         found = match tab_info {
             Ok(tab_info) => {
                 debug!("tab_info: {:?}", tab_info);
-                pinboard
-                    .find_url(&tab_info.url)
-                    .map(|op| {
-                        if let Some(vp) = op {
-                            assert!(!vp.is_empty());
-                            !vp.is_empty()
-                        } else {
-                            false
-                        }
-                    })
-                    .unwrap_or(false)
+                pinboard.find_url(&tab_info.url).is_ok_and(|op| {
+                    if let Some(vp) = op {
+                        assert!(!vp.is_empty());
+                        !vp.is_empty()
+                    } else {
+                        false
+                    }
+                })
             }
             Err(_) => false,
         };
@@ -289,7 +286,7 @@ fn suggest_tags() -> Vec<Tag> {
         if let Ok(pt) = r {
             let tx_result = tx.send(pt);
             match tx_result {
-                Ok(_) => warn!("Sent the popular tags from child thread"),
+                Ok(()) => warn!("Sent the popular tags from child thread"),
                 Err(e) => warn!("Failed to send popular tags: {:?}", e),
             }
         } else {
@@ -297,7 +294,7 @@ fn suggest_tags() -> Vec<Tag> {
         }
     });
     if exec_counter == 1 {
-        thread::sleep(time::Duration::from_millis(1000));
+        thread::sleep(time::Duration::from_secs(1));
     } else {
         thread_handle.join().expect("Child thread terminated");
     }

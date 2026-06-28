@@ -4,7 +4,7 @@ use std::io::Write;
 
 use super::browser_info;
 
-impl<'api, 'pin> Runner<'api, 'pin> {
+impl Runner<'_, '_> {
     pub fn post(&mut self, cmd: SubCommand) {
         match self.perform_post(cmd) {
             Ok(s) => {
