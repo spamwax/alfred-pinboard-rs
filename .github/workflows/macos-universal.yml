@@ -14,6 +14,7 @@ permissions:
 env:
   RELEASE_COMMIT: ${{ github.ref_type == 'tag' }}
   PINBOARD_TOKEN: ${{ secrets.PINBOARD_TOKEN }}
+  MACOSX_DEPLOYMENT_TARGET: "11.0"
 
 jobs:
   check_if_tagged:
